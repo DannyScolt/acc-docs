@@ -9,40 +9,38 @@
     * { box-sizing: border-box; }
     body {
       margin: 0;
-      background: #eef2f7;
-      color: #172033;
+      background: #f4f6f8;
+      color: #1f2937;
       font-family: "Segoe UI", Arial, sans-serif;
-      font-size: 10.2pt;
-      line-height: 1.55;
+      font-size: 10.5pt;
+      line-height: 1.6;
     }
     .doc {
-      max-width: 1120px;
-      margin: 0 auto;
+      max-width: 1040px;
+      margin: 24px auto;
       background: #fff;
-      padding: 38px 42px 56px;
-      box-shadow: 0 14px 40px rgba(15, 23, 42, 0.11);
+      padding: 40px 46px 52px;
+      border: 1px solid #e5e7eb;
     }
     h1, h2, h3, p, ul { margin-top: 0; }
     h1 {
-      font-size: 30pt;
-      line-height: 1.08;
-      letter-spacing: -0.8px;
-      color: #0f3ea8;
-      margin-bottom: 12px;
+      font-size: 28pt;
+      line-height: 1.12;
+      letter-spacing: -0.4px;
+      color: #1d4ed8;
+      margin-bottom: 10px;
     }
     h2 {
-      font-size: 16pt;
-      color: #0f3ea8;
+      font-size: 15pt;
+      color: #1d4ed8;
       margin: 30px 0 12px;
-      padding: 10px 14px;
-      background: #eff6ff;
-      border-left: 5px solid #2563eb;
-      border-radius: 10px;
+      padding: 0 0 8px;
+      border-bottom: 2px solid #dbeafe;
       page-break-after: avoid;
     }
     h3 {
-      font-size: 12pt;
-      color: #24324a;
+      font-size: 11.5pt;
+      color: #111827;
       margin: 18px 0 8px;
       page-break-after: avoid;
     }
@@ -53,86 +51,78 @@
       width: 100%;
       border-collapse: collapse;
       margin: 10px 0 16px;
-      font-size: 9.4pt;
+      font-size: 9.5pt;
       page-break-inside: avoid;
     }
     th {
-      background: #eff6ff;
-      color: #1e3a8a;
+      background: #f3f4f6;
+      color: #111827;
       text-align: left;
-      border: 1px solid #bfdbfe;
+      border: 1px solid #d1d5db;
       padding: 8px 9px;
       font-weight: 700;
     }
     td {
-      border: 1px solid #e2e8f0;
+      border: 1px solid #e5e7eb;
       padding: 8px 9px;
       vertical-align: top;
     }
-    tr:nth-child(even) td { background: #f8fafc; }
+    tr:nth-child(even) td { background: #fafafa; }
     .cover {
-      min-height: 720px;
+      min-height: 560px;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
       page-break-after: always;
-      background: linear-gradient(135deg, #eff6ff 0%, #ffffff 48%, #f5f3ff 100%);
-      border: 1px solid #dbeafe;
-      border-radius: 18px;
-      padding: 56px;
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      padding: 50px 44px;
     }
-    .cover .icon { font-size: 54pt; margin-bottom: 14px; }
+    .cover .icon { font-size: 42pt; margin-bottom: 12px; }
     .cover .subtitle {
-      font-size: 15pt;
-      color: #334155;
-      max-width: 780px;
-      margin-bottom: 16px;
+      font-size: 14pt;
+      color: #374151;
+      max-width: 760px;
+      margin-bottom: 14px;
     }
     .meta {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 10px;
       width: 100%;
-      margin-top: 28px;
+      margin-top: 26px;
     }
     .meta-card {
-      background: #fff;
-      border: 1px solid #dbeafe;
-      border-radius: 12px;
-      padding: 13px 12px;
-      box-shadow: 0 7px 16px rgba(30, 64, 175, 0.08);
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      padding: 12px;
     }
     .meta-card b {
       display: block;
-      color: #0f3ea8;
-      font-size: 18pt;
+      color: #1d4ed8;
+      font-size: 17pt;
       margin-bottom: 2px;
     }
-    .meta-card span { color: #64748b; font-size: 9pt; }
-    .notice {
-      border-left: 5px solid #f59e0b;
-      background: #fffbeb;
-      border-radius: 10px;
-      padding: 13px 15px;
-      margin: 14px 0 18px;
-    }
-    .notice strong { color: #92400e; }
+    .meta-card span { color: #6b7280; font-size: 9pt; }
+    .notice,
     .callout {
-      border-left: 5px solid #2563eb;
-      background: #eff6ff;
-      border-radius: 10px;
-      padding: 13px 15px;
+      border-left: 4px solid #2563eb;
+      background: #f8fafc;
+      padding: 12px 14px;
       margin: 14px 0 18px;
     }
+    .notice { border-left-color: #d97706; }
+    .notice strong { color: #92400e; }
     .flow {
-      background: #0f172a;
-      color: #e2e8f0;
-      border-radius: 14px;
-      padding: 18px 20px;
+      background: #f8fafc;
+      color: #1f2937;
+      border: 1px solid #dbeafe;
+      border-left: 4px solid #2563eb;
+      padding: 15px 16px;
       margin: 14px 0 18px;
-      font-size: 10.5pt;
+      font-size: 10.4pt;
       line-height: 1.75;
       text-align: center;
       page-break-inside: avoid;
@@ -144,36 +134,34 @@
       margin: 12px 0 18px;
     }
     .phase-card {
-      border: 1px solid #e2e8f0;
-      border-left: 5px solid #2563eb;
-      background: #f8fbff;
-      border-radius: 12px;
-      padding: 12px 13px;
+      border: 1px solid #e5e7eb;
+      background: #fff;
+      padding: 11px 12px;
       page-break-inside: avoid;
     }
-    .phase-card b { color: #0f3ea8; display: block; margin-bottom: 4px; }
-    .phase-card span { color: #475569; }
+    .phase-card b { color: #1d4ed8; display: block; margin-bottom: 4px; }
+    .phase-card span { color: #4b5563; }
     .mini-flow {
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
-      border-radius: 12px;
-      padding: 12px 14px;
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-left: 4px solid #60a5fa;
+      padding: 11px 13px;
       margin: 9px 0 14px;
-      color: #24324a;
+      color: #1f2937;
       font-weight: 600;
     }
     .section-break { page-break-before: always; }
     .footer {
       margin-top: 34px;
       padding-top: 14px;
-      border-top: 2px solid #e2e8f0;
+      border-top: 1px solid #e5e7eb;
       text-align: center;
-      color: #64748b;
+      color: #6b7280;
       font-size: 9pt;
     }
     @media print {
       body { background: #fff; }
-      .doc { box-shadow: none; max-width: none; padding: 0; }
+      .doc { border: 0; max-width: none; margin: 0; padding: 0; }
       .cover, table, .phase-card, .notice, .callout { page-break-inside: avoid; }
     }
   </style>
@@ -193,7 +181,7 @@
       <div class="meta-card"><b>14</b><span>bước quy trình kế toán lõi</span></div>
       <div class="meta-card"><b>TT99</b><span>định hướng hệ thống tài khoản & báo cáo</span></div>
     </div>
-    <p style="margin-top:30px;color:#94a3b8;">Ngày lập: 11/06/2026</p>
+    <p style="margin-top:30px;color:#94a3b8;">Ngày lập: 15/06/2026</p>
   </section>
 
   <section>
@@ -224,80 +212,413 @@
 
   <section class="section-break">
     <h2>2. Giai đoạn 1 — Nền tảng hệ thống, danh mục, tiền mặt & tiền gửi</h2>
-    <div class="callout">Sổ cái và hệ thống tài khoản là nền tảng cho mọi nghiệp vụ phát sinh, do đó được xây dựng ngay từ giai đoạn đầu tiên.</div>
+    <div class="callout">Giai đoạn 1 tập trung xây dựng nền tảng vận hành kế toán: quản trị hệ thống, danh mục dùng chung, dữ liệu đầu kỳ, quỹ tiền mặt, tiền gửi ngân hàng và sổ cái. Cách trình bày dưới đây liệt kê chức năng theo từng module để bộ phận kế toán dễ rà soát và đội phát triển dễ bóc tách phạm vi.</div>
 
     <h3>2.1. Quản trị hệ thống & người dùng</h3>
+    <p>Module này dùng để khởi tạo hệ thống, quản lý doanh nghiệp, người dùng, phân quyền và kiểm soát truy vết thao tác trong phần mềm.</p>
+
+    <h3>2.1.1. Quản lý doanh nghiệp</h3>
     <table>
-      <tr><th>Hạng mục</th><th>Nội dung</th></tr>
-      <tr><td>Khởi tạo doanh nghiệp</td><td>Thông tin công ty, năm tài chính, cơ cấu tổ chức</td></tr>
-      <tr><td>Người dùng & đăng nhập</td><td>Đăng nhập bảo mật, đổi / quên mật khẩu, quản lý phiên làm việc</td></tr>
-      <tr><td>Phân quyền</td><td>Phân quyền theo vai trò và theo từng chức năng (xem / tạo / sửa / xóa / duyệt)</td></tr>
-      <tr><td>Nhật ký truy vết</td><td>Ghi lại mọi thao tác quan trọng: người thực hiện, thời gian, nội dung thay đổi; không thể xóa</td></tr>
-      <tr><td>Cách ly dữ liệu</td><td>Dữ liệu giữa các doanh nghiệp được tách biệt hoàn toàn</td></tr>
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Khởi tạo doanh nghiệp</td><td>Tạo hồ sơ doanh nghiệp sử dụng phần mềm kế toán.</td></tr>
+      <tr><td>2</td><td>Cập nhật thông tin doanh nghiệp</td><td>Cập nhật tên công ty, mã số thuế, địa chỉ, điện thoại, email, người đại diện, logo.</td></tr>
+      <tr><td>3</td><td>Cấu hình năm tài chính</td><td>Khai báo năm tài chính, ngày bắt đầu, ngày kết thúc, kỳ kế toán theo tháng / quý / năm.</td></tr>
+      <tr><td>4</td><td>Cấu hình chế độ kế toán</td><td>Thiết lập chế độ kế toán áp dụng, hệ thống tài khoản và phương pháp ghi sổ.</td></tr>
+      <tr><td>5</td><td>Cấu hình tiền tệ</td><td>Khai báo đồng tiền hạch toán chính và ngoại tệ nếu có sử dụng.</td></tr>
+      <tr><td>6</td><td>Cấu hình phương pháp tính giá xuất kho</td><td>Thiết lập phương pháp tính giá vốn: bình quân, FIFO hoặc phương pháp khác theo nhu cầu.</td></tr>
+      <tr><td>7</td><td>Cấu hình phương pháp kê khai thuế</td><td>Khai báo phương pháp tính thuế GTGT và kỳ kê khai thuế tháng / quý.</td></tr>
+      <tr><td>8</td><td>Cấu hình chi nhánh / đơn vị phụ thuộc</td><td>Khai báo chi nhánh, văn phòng, đơn vị hạch toán phụ thuộc nếu có.</td></tr>
+      <tr><td>9</td><td>Cấu hình phòng ban / bộ phận</td><td>Khai báo cơ cấu tổ chức phục vụ phân quyền, tập hợp chi phí và báo cáo quản trị.</td></tr>
+      <tr><td>10</td><td>Cấu hình mẫu số chứng từ</td><td>Thiết lập quy tắc đánh số chứng từ theo loại chứng từ, năm, tháng, tiền tố.</td></tr>
+    </table>
+
+    <h3>2.1.2. Quản lý người dùng</h3>
+    <table>
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Tạo tài khoản người dùng</td><td>Admin tạo tài khoản cho kế toán, thủ quỹ, thủ kho, quản lý, giám đốc.</td></tr>
+      <tr><td>2</td><td>Cập nhật thông tin người dùng</td><td>Cập nhật họ tên, email, số điện thoại, phòng ban, chức vụ.</td></tr>
+      <tr><td>3</td><td>Đăng nhập hệ thống</td><td>Người dùng đăng nhập bằng tài khoản được cấp.</td></tr>
+      <tr><td>4</td><td>Đăng xuất hệ thống</td><td>Người dùng chủ động kết thúc phiên làm việc.</td></tr>
+      <tr><td>5</td><td>Đổi mật khẩu</td><td>Người dùng tự đổi mật khẩu khi cần.</td></tr>
+      <tr><td>6</td><td>Quên mật khẩu</td><td>Hệ thống hỗ trợ đặt lại mật khẩu qua email hoặc OTP.</td></tr>
+      <tr><td>7</td><td>Khóa tài khoản</td><td>Admin khóa tài khoản khi nhân sự nghỉ việc hoặc có rủi ro bảo mật.</td></tr>
+      <tr><td>8</td><td>Mở khóa tài khoản</td><td>Admin mở lại tài khoản đã bị khóa.</td></tr>
+      <tr><td>9</td><td>Vô hiệu hóa tài khoản</td><td>Ngừng sử dụng tài khoản nhưng vẫn giữ lịch sử thao tác.</td></tr>
+      <tr><td>10</td><td>Quản lý phiên đăng nhập</td><td>Theo dõi phiên đăng nhập, thời gian hoạt động, thiết bị, IP nếu cần.</td></tr>
+      <tr><td>11</td><td>Thiết lập thời gian hết phiên</td><td>Tự động đăng xuất khi người dùng không thao tác trong thời gian quy định.</td></tr>
+    </table>
+
+    <h3>2.1.3. Vai trò & phân quyền</h3>
+    <table>
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Khai báo vai trò</td><td>Tạo các vai trò như Admin, Kế toán trưởng, Kế toán tổng hợp, Kế toán bán hàng, Kế toán mua hàng, Thủ quỹ, Thủ kho, Giám đốc.</td></tr>
+      <tr><td>2</td><td>Cập nhật vai trò</td><td>Sửa tên, mô tả, phạm vi sử dụng của vai trò.</td></tr>
+      <tr><td>3</td><td>Gán vai trò cho người dùng</td><td>Một người dùng có thể được gán một hoặc nhiều vai trò.</td></tr>
+      <tr><td>4</td><td>Phân quyền theo chức năng</td><td>Cấp quyền xem, thêm, sửa, xóa, duyệt, xuất dữ liệu cho từng chức năng.</td></tr>
+      <tr><td>5</td><td>Phân quyền theo phân hệ</td><td>Cấp quyền truy cập từng phân hệ: Quỹ, Ngân hàng, Mua hàng, Bán hàng, Kho, Tổng hợp, Báo cáo.</td></tr>
+      <tr><td>6</td><td>Phân quyền theo dữ liệu</td><td>Giới hạn người dùng theo chi nhánh, phòng ban, kho, tài khoản ngân hàng hoặc nhóm dữ liệu.</td></tr>
+      <tr><td>7</td><td>Phân quyền duyệt chứng từ</td><td>Cấu hình ai có quyền duyệt phiếu thu, phiếu chi, chứng từ ngân hàng, chứng từ kế toán.</td></tr>
+      <tr><td>8</td><td>Xem ma trận phân quyền</td><td>Hiển thị tổng quan từng vai trò / người dùng đang có quyền gì.</td></tr>
+      <tr><td>9</td><td>Sao chép quyền từ vai trò khác</td><td>Tạo nhanh vai trò mới bằng cách sao chép quyền từ vai trò có sẵn.</td></tr>
+      <tr><td>10</td><td>Kiểm tra quyền trước thao tác</td><td>Hệ thống tự kiểm tra quyền trước khi cho phép xem, thêm, sửa, xóa, duyệt chứng từ.</td></tr>
+    </table>
+
+    <h3>2.1.4. Nhật ký truy vết</h3>
+    <table>
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Ghi nhật ký đăng nhập</td><td>Ghi nhận thời gian đăng nhập, đăng xuất, tài khoản, thiết bị, IP nếu có.</td></tr>
+      <tr><td>2</td><td>Ghi nhật ký thao tác dữ liệu</td><td>Ghi lại thao tác thêm, sửa, xóa, duyệt, hủy, khóa kỳ.</td></tr>
+      <tr><td>3</td><td>Ghi nhật ký thay đổi chứng từ</td><td>Lưu thông tin trước và sau khi thay đổi chứng từ.</td></tr>
+      <tr><td>4</td><td>Ghi nhật ký thay đổi danh mục</td><td>Theo dõi thay đổi tài khoản, khách hàng, nhà cung cấp, hàng hóa, kho, ngân hàng.</td></tr>
+      <tr><td>5</td><td>Tra cứu nhật ký</td><td>Tìm kiếm nhật ký theo người dùng, thời gian, phân hệ, loại thao tác.</td></tr>
+      <tr><td>6</td><td>Xem chi tiết thay đổi</td><td>Xem nội dung thay đổi cụ thể: dữ liệu cũ, dữ liệu mới.</td></tr>
+      <tr><td>7</td><td>Xuất nhật ký</td><td>Xuất nhật ký truy vết ra Excel / PDF khi cần kiểm tra.</td></tr>
+      <tr><td>8</td><td>Bảo vệ nhật ký</td><td>Nhật ký không cho phép sửa hoặc xóa thủ công.</td></tr>
+    </table>
+
+    <h3>2.1.5. Cách ly dữ liệu & bảo mật</h3>
+    <table>
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Cách ly dữ liệu theo doanh nghiệp</td><td>Dữ liệu của doanh nghiệp này không được truy cập bởi người dùng của doanh nghiệp khác.</td></tr>
+      <tr><td>2</td><td>Cách ly dữ liệu theo chi nhánh</td><td>Nếu doanh nghiệp có nhiều chi nhánh, người dùng chỉ xem dữ liệu trong phạm vi được cấp.</td></tr>
+      <tr><td>3</td><td>Kiểm soát quyền truy cập dữ liệu</td><td>Mọi truy cập dữ liệu phải kiểm tra theo quyền người dùng.</td></tr>
+      <tr><td>4</td><td>Bảo vệ dữ liệu đã khóa kỳ</td><td>Dữ liệu thuộc kỳ đã khóa không được sửa nếu không có quyền mở khóa kỳ.</td></tr>
+      <tr><td>5</td><td>Sao lưu dữ liệu</td><td>Hỗ trợ sao lưu dữ liệu định kỳ hoặc theo yêu cầu quản trị.</td></tr>
+      <tr><td>6</td><td>Khôi phục dữ liệu</td><td>Hỗ trợ khôi phục dữ liệu từ bản sao lưu khi cần.</td></tr>
     </table>
 
     <h3>2.2. Danh mục & dữ liệu đầu kỳ</h3>
-    <table>
-      <tr><th>Quy trình</th><th>Chức năng</th><th>Sổ / Báo cáo</th><th>Điều kiện xác nhận</th></tr>
-      <tr>
-        <td>Khai báo doanh nghiệp → Cấu hình năm tài chính → Khai báo tài khoản & danh mục → Nhập số dư đầu kỳ → Đối chiếu</td>
-        <td>Hệ thống tài khoản; khách hàng; nhà cung cấp; nhân viên; hàng hóa; kho; đơn vị tính; tài khoản ngân hàng; khoản mục chi phí; loại chứng từ; số dư tài khoản; công nợ đầu kỳ; tồn kho đầu kỳ; tài sản cố định / công cụ dụng cụ / chi phí trả trước đầu kỳ</td>
-        <td>Bảng đối chiếu số dư đầu kỳ; danh sách dữ liệu lỗi / trùng</td>
-        <td>Không trùng mã; danh mục đã phát sinh không được xóa; tổng chi tiết khớp số dư tài khoản</td>
-      </tr>
-    </table>
-    <p><strong>Quy tắc số chứng từ:</strong> số chứng từ tự sinh theo từng loại, liên tục, không trùng và không bỏ trống.</p>
-    <p><strong>Trạng thái chứng từ:</strong> Nháp → Chờ duyệt → Đã duyệt → Đã hủy. Chỉ chứng từ đã duyệt mới được ghi sổ. Chứng từ đã duyệt không được sửa trực tiếp — mọi điều chỉnh thực hiện qua chứng từ hủy / đảo / điều chỉnh.</p>
+    <p>Module này dùng để khai báo dữ liệu nền tảng trước khi phát sinh chứng từ kế toán. Các phân hệ Quỹ, Ngân hàng, Mua hàng, Bán hàng, Kho, Công nợ, Tài sản và Báo cáo đều sử dụng chung các danh mục này.</p>
 
-    <h3>2.3. Tiền mặt (Quỹ)</h3>
+    <h3>2.2.1. Hệ thống tài khoản</h3>
     <table>
-      <tr><th>Quy trình</th><th>Chứng từ / chức năng</th><th>Sổ / Báo cáo</th><th>Điều kiện xác nhận</th></tr>
-      <tr>
-        <td>Phát sinh thu / chi → Lập phiếu → Duyệt → Ghi sổ quỹ → Kiểm kê → Báo cáo</td>
-        <td>Phiếu thu; phiếu chi; nhập từ Excel; danh sách chứng từ; kiểm kê quỹ; dự báo dòng tiền</td>
-        <td>Sổ quỹ; bảng kê thu chi; tồn quỹ</td>
-        <td>Số dư sổ quỹ khớp sổ kế toán tiền mặt; phiếu đã duyệt không sửa trực tiếp; hủy phiếu phải có lý do</td>
-      </tr>
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Khai báo hệ thống tài khoản</td><td>Tạo danh mục tài khoản kế toán theo chế độ kế toán áp dụng.</td></tr>
+      <tr><td>2</td><td>Thêm tài khoản chi tiết</td><td>Cho phép doanh nghiệp tự mở tài khoản con theo nhu cầu quản lý.</td></tr>
+      <tr><td>3</td><td>Sửa thông tin tài khoản</td><td>Cập nhật tên tài khoản, tính chất, cấp tài khoản, tài khoản cha.</td></tr>
+      <tr><td>4</td><td>Ngừng sử dụng tài khoản</td><td>Không cho phát sinh mới với tài khoản không còn dùng.</td></tr>
+      <tr><td>5</td><td>Thiết lập tài khoản mặc định</td><td>Khai báo tài khoản mặc định cho tiền mặt, ngân hàng, công nợ, kho, doanh thu, chi phí.</td></tr>
+      <tr><td>6</td><td>Kiểm tra tài khoản đã phát sinh</td><td>Không cho xóa tài khoản đã có phát sinh chứng từ.</td></tr>
+      <tr><td>7</td><td>Import hệ thống tài khoản</td><td>Nhập danh sách tài khoản từ Excel.</td></tr>
+      <tr><td>8</td><td>Export hệ thống tài khoản</td><td>Xuất danh mục tài khoản ra Excel để kiểm tra hoặc lưu trữ.</td></tr>
+    </table>
+
+    <h3>2.2.2. Danh mục khách hàng</h3>
+    <table>
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Thêm khách hàng</td><td>Khai báo mã khách hàng, tên, mã số thuế, địa chỉ, người liên hệ.</td></tr>
+      <tr><td>2</td><td>Sửa khách hàng</td><td>Cập nhật thông tin khách hàng.</td></tr>
+      <tr><td>3</td><td>Ngừng theo dõi khách hàng</td><td>Không cho chọn khách hàng trong chứng từ mới nhưng vẫn giữ lịch sử.</td></tr>
+      <tr><td>4</td><td>Phân nhóm khách hàng</td><td>Phân loại khách hàng theo nhóm, khu vực, kênh bán hàng.</td></tr>
+      <tr><td>5</td><td>Thiết lập hạn mức công nợ</td><td>Khai báo hạn mức công nợ tối đa cho từng khách hàng.</td></tr>
+      <tr><td>6</td><td>Thiết lập điều khoản thanh toán</td><td>Khai báo số ngày được nợ, hạn thanh toán, phương thức thanh toán.</td></tr>
+      <tr><td>7</td><td>Kiểm tra trùng mã số thuế</td><td>Cảnh báo khi nhập khách hàng trùng mã số thuế.</td></tr>
+      <tr><td>8</td><td>Import khách hàng</td><td>Nhập danh sách khách hàng từ Excel.</td></tr>
+      <tr><td>9</td><td>Export khách hàng</td><td>Xuất danh sách khách hàng ra Excel.</td></tr>
+    </table>
+
+    <h3>2.2.3. Danh mục nhà cung cấp</h3>
+    <table>
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Thêm nhà cung cấp</td><td>Khai báo mã nhà cung cấp, tên, mã số thuế, địa chỉ, người liên hệ.</td></tr>
+      <tr><td>2</td><td>Sửa nhà cung cấp</td><td>Cập nhật thông tin nhà cung cấp.</td></tr>
+      <tr><td>3</td><td>Ngừng theo dõi nhà cung cấp</td><td>Không cho chọn nhà cung cấp trong chứng từ mới nhưng vẫn giữ lịch sử.</td></tr>
+      <tr><td>4</td><td>Phân nhóm nhà cung cấp</td><td>Phân loại theo nhóm hàng, khu vực, loại dịch vụ.</td></tr>
+      <tr><td>5</td><td>Thiết lập điều khoản thanh toán</td><td>Khai báo số ngày được nợ, hạn thanh toán, phương thức thanh toán.</td></tr>
+      <tr><td>6</td><td>Kiểm tra trùng mã số thuế</td><td>Cảnh báo khi nhập nhà cung cấp trùng mã số thuế.</td></tr>
+      <tr><td>7</td><td>Import nhà cung cấp</td><td>Nhập danh sách nhà cung cấp từ Excel.</td></tr>
+      <tr><td>8</td><td>Export nhà cung cấp</td><td>Xuất danh sách nhà cung cấp ra Excel.</td></tr>
+    </table>
+
+    <h3>2.2.4. Danh mục nhân viên</h3>
+    <table>
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Thêm nhân viên</td><td>Khai báo mã nhân viên, họ tên, phòng ban, chức vụ, thông tin liên hệ.</td></tr>
+      <tr><td>2</td><td>Sửa nhân viên</td><td>Cập nhật thông tin nhân viên.</td></tr>
+      <tr><td>3</td><td>Ngừng theo dõi nhân viên</td><td>Không sử dụng nhân viên trong chứng từ mới nhưng vẫn giữ lịch sử.</td></tr>
+      <tr><td>4</td><td>Phân nhóm nhân viên</td><td>Phân loại theo phòng ban, bộ phận, chức danh.</td></tr>
+      <tr><td>5</td><td>Liên kết nhân viên với người dùng</td><td>Gắn nhân viên với tài khoản đăng nhập nếu nhân viên có sử dụng phần mềm.</td></tr>
+      <tr><td>6</td><td>Import nhân viên</td><td>Nhập danh sách nhân viên từ Excel.</td></tr>
+      <tr><td>7</td><td>Export nhân viên</td><td>Xuất danh sách nhân viên ra Excel.</td></tr>
+    </table>
+
+    <h3>2.2.5. Danh mục hàng hóa, vật tư, dịch vụ</h3>
+    <table>
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Thêm hàng hóa / vật tư / dịch vụ</td><td>Khai báo mã, tên, loại, đơn vị tính, nhóm hàng, tài khoản kho / doanh thu / chi phí.</td></tr>
+      <tr><td>2</td><td>Sửa hàng hóa / vật tư / dịch vụ</td><td>Cập nhật thông tin mặt hàng.</td></tr>
+      <tr><td>3</td><td>Ngừng kinh doanh / ngừng sử dụng</td><td>Không cho chọn mặt hàng trong chứng từ mới nhưng giữ lịch sử.</td></tr>
+      <tr><td>4</td><td>Phân nhóm hàng hóa</td><td>Phân loại theo nhóm hàng, ngành hàng, thương hiệu, thuộc tính.</td></tr>
+      <tr><td>5</td><td>Khai báo đơn vị tính chính</td><td>Thiết lập đơn vị tính mặc định cho mặt hàng.</td></tr>
+      <tr><td>6</td><td>Khai báo nhiều đơn vị tính</td><td>Quy đổi giữa đơn vị tính chính và đơn vị tính phụ.</td></tr>
+      <tr><td>7</td><td>Thiết lập giá bán</td><td>Khai báo giá bán mặc định hoặc bảng giá.</td></tr>
+      <tr><td>8</td><td>Thiết lập định mức tồn kho</td><td>Khai báo tồn tối thiểu, tồn tối đa để cảnh báo.</td></tr>
+      <tr><td>9</td><td>Thiết lập tài khoản hạch toán mặc định</td><td>Gắn tài khoản kho, giá vốn, doanh thu, chi phí cho từng mặt hàng.</td></tr>
+      <tr><td>10</td><td>Import hàng hóa</td><td>Nhập danh mục hàng hóa từ Excel.</td></tr>
+      <tr><td>11</td><td>Export hàng hóa</td><td>Xuất danh mục hàng hóa ra Excel.</td></tr>
+    </table>
+
+    <h3>2.2.6. Danh mục kho</h3>
+    <table>
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Thêm kho</td><td>Khai báo mã kho, tên kho, địa chỉ kho, người phụ trách.</td></tr>
+      <tr><td>2</td><td>Sửa kho</td><td>Cập nhật thông tin kho.</td></tr>
+      <tr><td>3</td><td>Ngừng sử dụng kho</td><td>Không cho phát sinh chứng từ mới với kho đã ngừng dùng.</td></tr>
+      <tr><td>4</td><td>Phân quyền theo kho</td><td>Chỉ cho người dùng được xem / thao tác trên kho được phân quyền.</td></tr>
+      <tr><td>5</td><td>Thiết lập kho mặc định</td><td>Khai báo kho mặc định cho nhập / xuất hàng.</td></tr>
+    </table>
+
+    <h3>2.2.7. Danh mục tài khoản ngân hàng</h3>
+    <table>
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Thêm tài khoản ngân hàng</td><td>Khai báo số tài khoản, ngân hàng, chi nhánh, chủ tài khoản, loại tiền.</td></tr>
+      <tr><td>2</td><td>Sửa tài khoản ngân hàng</td><td>Cập nhật thông tin tài khoản ngân hàng.</td></tr>
+      <tr><td>3</td><td>Ngừng sử dụng tài khoản ngân hàng</td><td>Không cho chọn tài khoản trong chứng từ mới nhưng giữ lịch sử.</td></tr>
+      <tr><td>4</td><td>Thiết lập tài khoản hạch toán</td><td>Gắn tài khoản kế toán tương ứng cho từng tài khoản ngân hàng.</td></tr>
+      <tr><td>5</td><td>Thiết lập tài khoản ngân hàng mặc định</td><td>Chọn tài khoản ngân hàng mặc định khi thu / chi ngân hàng.</td></tr>
+    </table>
+
+    <h3>2.2.8. Danh mục khoản mục chi phí</h3>
+    <table>
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Thêm khoản mục chi phí</td><td>Khai báo khoản mục phục vụ tập hợp và phân tích chi phí.</td></tr>
+      <tr><td>2</td><td>Sửa khoản mục chi phí</td><td>Cập nhật tên, mã, nhóm chi phí.</td></tr>
+      <tr><td>3</td><td>Phân cấp khoản mục chi phí</td><td>Tổ chức khoản mục theo cha / con.</td></tr>
+      <tr><td>4</td><td>Ngừng sử dụng khoản mục chi phí</td><td>Không cho chọn trong chứng từ mới nhưng giữ lịch sử.</td></tr>
+    </table>
+
+    <h3>2.2.9. Danh mục loại chứng từ</h3>
+    <table>
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Khai báo loại chứng từ</td><td>Khai báo các loại chứng từ như phiếu thu, phiếu chi, thu ngân hàng, chi ngân hàng, nhập kho, xuất kho.</td></tr>
+      <tr><td>2</td><td>Thiết lập mẫu số chứng từ</td><td>Cấu hình tiền tố, độ dài số, tự tăng theo tháng / năm.</td></tr>
+      <tr><td>3</td><td>Thiết lập luồng trạng thái chứng từ</td><td>Cấu hình Nháp → Chờ duyệt → Đã duyệt → Đã hủy.</td></tr>
+      <tr><td>4</td><td>Thiết lập quyền duyệt theo loại chứng từ</td><td>Xác định ai được duyệt từng loại chứng từ.</td></tr>
+    </table>
+
+    <h3>2.2.10. Số dư đầu kỳ</h3>
+    <table>
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Nhập số dư tài khoản đầu kỳ</td><td>Nhập số dư Nợ / Có đầu kỳ cho từng tài khoản kế toán.</td></tr>
+      <tr><td>2</td><td>Nhập công nợ khách hàng đầu kỳ</td><td>Nhập số dư phải thu chi tiết theo từng khách hàng, hóa đơn, hạn thanh toán.</td></tr>
+      <tr><td>3</td><td>Nhập công nợ nhà cung cấp đầu kỳ</td><td>Nhập số dư phải trả chi tiết theo từng nhà cung cấp, hóa đơn, hạn thanh toán.</td></tr>
+      <tr><td>4</td><td>Nhập tồn kho đầu kỳ</td><td>Nhập số lượng, đơn giá, giá trị tồn đầu kỳ theo từng kho, từng mặt hàng.</td></tr>
+      <tr><td>5</td><td>Nhập tồn quỹ đầu kỳ</td><td>Nhập số dư tiền mặt đầu kỳ theo từng quỹ nếu có nhiều quỹ.</td></tr>
+      <tr><td>6</td><td>Nhập số dư ngân hàng đầu kỳ</td><td>Nhập số dư tiền gửi đầu kỳ theo từng tài khoản ngân hàng.</td></tr>
+      <tr><td>7</td><td>Nhập tài sản cố định đầu kỳ</td><td>Nhập nguyên giá, hao mòn lũy kế, giá trị còn lại của tài sản.</td></tr>
+      <tr><td>8</td><td>Nhập công cụ dụng cụ đầu kỳ</td><td>Nhập giá trị ban đầu, giá trị đã phân bổ, giá trị còn lại.</td></tr>
+      <tr><td>9</td><td>Nhập chi phí trả trước đầu kỳ</td><td>Nhập giá trị còn lại và thời gian phân bổ.</td></tr>
+      <tr><td>10</td><td>Import số dư đầu kỳ</td><td>Nhập số dư từ Excel theo mẫu.</td></tr>
+      <tr><td>11</td><td>Kiểm tra cân đối số dư</td><td>Kiểm tra tổng phát sinh Nợ / Có, tổng chi tiết công nợ / kho / quỹ / ngân hàng khớp tài khoản tổng hợp.</td></tr>
+      <tr><td>12</td><td>Khóa số dư đầu kỳ</td><td>Sau khi xác nhận đúng, khóa số dư đầu kỳ để tránh sửa nhầm.</td></tr>
+    </table>
+
+    <h3>2.3. Tiền mặt / Quỹ</h3>
+    <p>Module này dùng để quản lý toàn bộ nghiệp vụ thu chi tiền mặt, kiểm kê quỹ và báo cáo tồn quỹ.</p>
+
+    <h3>2.3.1. Phiếu thu</h3>
+    <table>
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Lập phiếu thu</td><td>Ghi nhận nghiệp vụ thu tiền mặt.</td></tr>
+      <tr><td>2</td><td>Lập phiếu thu từ công nợ khách hàng</td><td>Thu tiền khách hàng và tự động giảm công nợ phải thu.</td></tr>
+      <tr><td>3</td><td>Lập phiếu thu khác</td><td>Thu tiền không liên quan trực tiếp đến bán hàng / công nợ.</td></tr>
+      <tr><td>4</td><td>Đính kèm chứng từ</td><td>Đính kèm file hóa đơn, biên nhận, giấy tờ liên quan.</td></tr>
+      <tr><td>5</td><td>In phiếu thu</td><td>In phiếu thu theo mẫu.</td></tr>
+      <tr><td>6</td><td>Duyệt phiếu thu</td><td>Người có quyền duyệt xác nhận phiếu thu.</td></tr>
+      <tr><td>7</td><td>Hủy phiếu thu</td><td>Hủy phiếu thu khi sai, bắt buộc nhập lý do hủy.</td></tr>
+      <tr><td>8</td><td>Ghi sổ phiếu thu</td><td>Phiếu thu đã duyệt được ghi vào sổ quỹ và sổ cái.</td></tr>
+    </table>
+
+    <h3>2.3.2. Phiếu chi</h3>
+    <table>
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Lập phiếu chi</td><td>Ghi nhận nghiệp vụ chi tiền mặt.</td></tr>
+      <tr><td>2</td><td>Lập phiếu chi thanh toán nhà cung cấp</td><td>Chi tiền trả nhà cung cấp và tự động giảm công nợ phải trả.</td></tr>
+      <tr><td>3</td><td>Lập phiếu chi tạm ứng</td><td>Chi tiền tạm ứng cho nhân viên.</td></tr>
+      <tr><td>4</td><td>Lập phiếu chi khác</td><td>Chi tiền cho các khoản chi phí, nghiệp vụ khác.</td></tr>
+      <tr><td>5</td><td>Đính kèm chứng từ</td><td>Đính kèm hóa đơn, đề nghị thanh toán, giấy tờ liên quan.</td></tr>
+      <tr><td>6</td><td>In phiếu chi</td><td>In phiếu chi theo mẫu.</td></tr>
+      <tr><td>7</td><td>Duyệt phiếu chi</td><td>Người có quyền duyệt xác nhận phiếu chi.</td></tr>
+      <tr><td>8</td><td>Hủy phiếu chi</td><td>Hủy phiếu chi sai, bắt buộc nhập lý do.</td></tr>
+      <tr><td>9</td><td>Ghi sổ phiếu chi</td><td>Phiếu chi đã duyệt được ghi vào sổ quỹ và sổ cái.</td></tr>
+    </table>
+
+    <h3>2.3.3. Quản lý sổ quỹ</h3>
+    <table>
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Xem sổ quỹ tiền mặt</td><td>Theo dõi tồn đầu kỳ, phát sinh thu, phát sinh chi, tồn cuối kỳ.</td></tr>
+      <tr><td>2</td><td>Xem tồn quỹ tức thời</td><td>Xem số dư quỹ tại thời điểm hiện tại.</td></tr>
+      <tr><td>3</td><td>Lọc sổ quỹ theo thời gian</td><td>Tra cứu theo ngày, tháng, quý, năm.</td></tr>
+      <tr><td>4</td><td>Lọc sổ quỹ theo đối tượng</td><td>Tra cứu theo khách hàng, nhà cung cấp, nhân viên, khoản mục.</td></tr>
+      <tr><td>5</td><td>Đối chiếu sổ quỹ với sổ cái</td><td>Kiểm tra số dư quỹ khớp tài khoản tiền mặt trên sổ cái.</td></tr>
+      <tr><td>6</td><td>Xuất sổ quỹ</td><td>Xuất Excel / PDF sổ quỹ.</td></tr>
+    </table>
+
+    <h3>2.3.4. Kiểm kê quỹ</h3>
+    <table>
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Lập biên bản kiểm kê quỹ</td><td>Ghi nhận số tiền thực tế kiểm kê.</td></tr>
+      <tr><td>2</td><td>So sánh tồn thực tế với tồn sổ</td><td>Tự động xác định chênh lệch thừa / thiếu quỹ.</td></tr>
+      <tr><td>3</td><td>Xử lý chênh lệch quỹ</td><td>Lập chứng từ điều chỉnh khi có chênh lệch.</td></tr>
+      <tr><td>4</td><td>In biên bản kiểm kê quỹ</td><td>In biên bản kiểm kê theo mẫu.</td></tr>
+      <tr><td>5</td><td>Lưu lịch sử kiểm kê</td><td>Theo dõi các lần kiểm kê quỹ.</td></tr>
+    </table>
+
+    <h3>2.3.5. Báo cáo quỹ</h3>
+    <table>
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Sổ quỹ tiền mặt</td><td>Báo cáo chi tiết thu, chi, tồn quỹ.</td></tr>
+      <tr><td>2</td><td>Bảng kê phiếu thu</td><td>Danh sách phiếu thu theo kỳ.</td></tr>
+      <tr><td>3</td><td>Bảng kê phiếu chi</td><td>Danh sách phiếu chi theo kỳ.</td></tr>
+      <tr><td>4</td><td>Báo cáo tồn quỹ</td><td>Tổng hợp tồn quỹ theo ngày / kỳ.</td></tr>
+      <tr><td>5</td><td>Báo cáo dòng tiền tiền mặt</td><td>Theo dõi luồng tiền vào / ra bằng tiền mặt.</td></tr>
     </table>
 
     <h3>2.4. Tiền gửi ngân hàng</h3>
+    <p>Module này dùng để quản lý thu chi qua ngân hàng, tài khoản ngân hàng, sao kê, đối chiếu ngân hàng và báo cáo tiền gửi.</p>
+
+    <h3>2.4.1. Thu tiền gửi</h3>
     <table>
-      <tr><th>Quy trình</th><th>Chứng từ / chức năng</th><th>Sổ / Báo cáo</th><th>Điều kiện xác nhận</th></tr>
-      <tr>
-        <td>Thu / chi ngân hàng → Báo Có / Ủy nhiệm chi → Ghi sổ → Nhập sao kê → Đối chiếu ngân hàng → Báo cáo</td>
-        <td>Thu tiền; chi tiền; tài khoản ngân hàng; đối chiếu ngân hàng; khế ước vay / cho vay</td>
-        <td>Sổ tiền gửi; số dư ngân hàng; bảng kê chứng từ; báo cáo khế ước</td>
-        <td>Số dư từng tài khoản ngân hàng khớp sổ kế toán; sao kê thể hiện rõ giao dịch đã khớp / chưa khớp</td>
-      </tr>
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Lập chứng từ thu ngân hàng</td><td>Ghi nhận tiền vào tài khoản ngân hàng.</td></tr>
+      <tr><td>2</td><td>Thu tiền khách hàng qua ngân hàng</td><td>Thu tiền và tự động giảm công nợ phải thu.</td></tr>
+      <tr><td>3</td><td>Thu khác qua ngân hàng</td><td>Ghi nhận các khoản thu không liên quan công nợ.</td></tr>
+      <tr><td>4</td><td>Đính kèm chứng từ ngân hàng</td><td>Đính kèm giấy báo Có, sao kê, ủy nhiệm thu.</td></tr>
+      <tr><td>5</td><td>Duyệt chứng từ thu ngân hàng</td><td>Người có quyền duyệt xác nhận chứng từ.</td></tr>
+      <tr><td>6</td><td>Hủy chứng từ thu ngân hàng</td><td>Hủy chứng từ sai, bắt buộc nhập lý do.</td></tr>
+      <tr><td>7</td><td>Ghi sổ thu ngân hàng</td><td>Chứng từ đã duyệt được ghi vào sổ tiền gửi và sổ cái.</td></tr>
+    </table>
+
+    <h3>2.4.2. Chi tiền gửi</h3>
+    <table>
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Lập chứng từ chi ngân hàng</td><td>Ghi nhận tiền ra khỏi tài khoản ngân hàng.</td></tr>
+      <tr><td>2</td><td>Thanh toán nhà cung cấp qua ngân hàng</td><td>Chi tiền và tự động giảm công nợ phải trả.</td></tr>
+      <tr><td>3</td><td>Chi khác qua ngân hàng</td><td>Ghi nhận các khoản chi phí hoặc nghiệp vụ khác.</td></tr>
+      <tr><td>4</td><td>Đính kèm chứng từ ngân hàng</td><td>Đính kèm ủy nhiệm chi, giấy báo Nợ, sao kê.</td></tr>
+      <tr><td>5</td><td>Duyệt chứng từ chi ngân hàng</td><td>Người có quyền duyệt xác nhận chứng từ.</td></tr>
+      <tr><td>6</td><td>Hủy chứng từ chi ngân hàng</td><td>Hủy chứng từ sai, bắt buộc nhập lý do.</td></tr>
+      <tr><td>7</td><td>Ghi sổ chi ngân hàng</td><td>Chứng từ đã duyệt được ghi vào sổ tiền gửi và sổ cái.</td></tr>
+    </table>
+
+    <h3>2.4.3. Chuyển tiền nội bộ</h3>
+    <table>
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Chuyển tiền giữa các tài khoản ngân hàng</td><td>Ghi nhận chuyển tiền từ tài khoản ngân hàng này sang tài khoản ngân hàng khác.</td></tr>
+      <tr><td>2</td><td>Chuyển tiền từ quỹ ra ngân hàng</td><td>Ghi nhận nộp tiền mặt vào ngân hàng.</td></tr>
+      <tr><td>3</td><td>Rút tiền từ ngân hàng về quỹ</td><td>Ghi nhận rút tiền mặt từ ngân hàng nhập quỹ.</td></tr>
+      <tr><td>4</td><td>Theo dõi phí chuyển tiền</td><td>Ghi nhận phí ngân hàng nếu có.</td></tr>
+    </table>
+
+    <h3>2.4.4. Sao kê ngân hàng</h3>
+    <table>
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Nhập sao kê ngân hàng</td><td>Nhập sao kê từ file Excel / CSV của ngân hàng.</td></tr>
+      <tr><td>2</td><td>Kết nối lấy sao kê tự động</td><td>Nếu có tích hợp ngân hàng, hệ thống tự lấy sao kê.</td></tr>
+      <tr><td>3</td><td>Xem danh sách giao dịch sao kê</td><td>Hiển thị các giao dịch phát sinh theo tài khoản ngân hàng.</td></tr>
+      <tr><td>4</td><td>Tự động gợi ý đối chiếu</td><td>Gợi ý khớp giao dịch sao kê với chứng từ kế toán theo số tiền, ngày, nội dung.</td></tr>
+      <tr><td>5</td><td>Đánh dấu giao dịch đã khớp</td><td>Xác nhận giao dịch sao kê đã khớp với chứng từ.</td></tr>
+      <tr><td>6</td><td>Theo dõi giao dịch chưa khớp</td><td>Liệt kê giao dịch sao kê chưa có chứng từ tương ứng.</td></tr>
+    </table>
+
+    <h3>2.4.5. Đối chiếu ngân hàng</h3>
+    <table>
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Đối chiếu sổ tiền gửi với sao kê</td><td>So sánh số dư và giao dịch giữa sổ kế toán và sao kê ngân hàng.</td></tr>
+      <tr><td>2</td><td>Xử lý giao dịch lệch</td><td>Tạo chứng từ bổ sung hoặc điều chỉnh khi có chênh lệch.</td></tr>
+      <tr><td>3</td><td>Lập biên bản đối chiếu ngân hàng</td><td>Ghi nhận kết quả đối chiếu.</td></tr>
+      <tr><td>4</td><td>Khóa kỳ đối chiếu ngân hàng</td><td>Sau khi đối chiếu xong, khóa dữ liệu để tránh thay đổi.</td></tr>
+      <tr><td>5</td><td>Xem lịch sử đối chiếu</td><td>Theo dõi các lần đối chiếu theo tài khoản và kỳ.</td></tr>
+    </table>
+
+    <h3>2.4.6. Báo cáo tiền gửi ngân hàng</h3>
+    <table>
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Sổ tiền gửi ngân hàng</td><td>Theo dõi thu, chi, tồn theo từng tài khoản ngân hàng.</td></tr>
+      <tr><td>2</td><td>Bảng kê thu ngân hàng</td><td>Danh sách chứng từ thu ngân hàng theo kỳ.</td></tr>
+      <tr><td>3</td><td>Bảng kê chi ngân hàng</td><td>Danh sách chứng từ chi ngân hàng theo kỳ.</td></tr>
+      <tr><td>4</td><td>Báo cáo số dư ngân hàng</td><td>Tổng hợp số dư từng tài khoản ngân hàng.</td></tr>
+      <tr><td>5</td><td>Báo cáo giao dịch chưa đối chiếu</td><td>Liệt kê giao dịch còn lệch giữa sao kê và sổ kế toán.</td></tr>
     </table>
 
     <h3>2.5. Sổ cái & hệ thống tài khoản</h3>
+    <p>Module này là trung tâm ghi nhận toàn bộ bút toán kế toán phát sinh từ các phân hệ.</p>
+
+    <h3>2.5.1. Ghi sổ kế toán</h3>
     <table>
-      <tr><th>Hạng mục</th><th>Nội dung</th></tr>
-      <tr><td>Hệ thống tài khoản</td><td>Theo Thông tư 99/2025, doanh nghiệp tự bổ sung tài khoản chi tiết. Cấu hình linh hoạt, cập nhật được khi quy định thay đổi</td></tr>
-      <tr><td>Sổ cái</td><td>Ghi nhận mọi bút toán từ các phân hệ; bảo đảm cân đối Nợ / Có; truy vết được về chứng từ gốc</td></tr>
-      <tr><td>Sổ nhật ký chung</td><td>Liệt kê bút toán theo trình tự thời gian</td></tr>
-      <tr><td>Bảng cân đối phát sinh</td><td>Kiểm tra tính cân đối của các tài khoản</td></tr>
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Ghi sổ từ phiếu thu</td><td>Khi phiếu thu được duyệt, hệ thống sinh bút toán vào sổ cái.</td></tr>
+      <tr><td>2</td><td>Ghi sổ từ phiếu chi</td><td>Khi phiếu chi được duyệt, hệ thống sinh bút toán vào sổ cái.</td></tr>
+      <tr><td>3</td><td>Ghi sổ từ chứng từ ngân hàng</td><td>Khi chứng từ ngân hàng được duyệt, hệ thống sinh bút toán vào sổ cái.</td></tr>
+      <tr><td>4</td><td>Kiểm tra cân đối Nợ / Có</td><td>Mỗi bút toán phải có tổng Nợ bằng tổng Có.</td></tr>
+      <tr><td>5</td><td>Truy vết về chứng từ gốc</td><td>Từ bút toán trên sổ cái có thể mở lại chứng từ gốc.</td></tr>
+      <tr><td>6</td><td>Không cho sửa trực tiếp bút toán đã ghi sổ</td><td>Muốn điều chỉnh phải hủy, đảo hoặc lập chứng từ điều chỉnh.</td></tr>
+    </table>
+
+    <h3>2.5.2. Sổ cái</h3>
+    <table>
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Xem sổ cái theo tài khoản</td><td>Tra cứu phát sinh Nợ / Có theo từng tài khoản kế toán.</td></tr>
+      <tr><td>2</td><td>Xem sổ cái theo kỳ</td><td>Tra cứu sổ cái theo tháng / quý / năm.</td></tr>
+      <tr><td>3</td><td>Lọc sổ cái theo đối tượng</td><td>Lọc theo khách hàng, nhà cung cấp, nhân viên, tài khoản ngân hàng, kho, khoản mục chi phí.</td></tr>
+      <tr><td>4</td><td>Xem chi tiết bút toán</td><td>Xem ngày chứng từ, số chứng từ, diễn giải, tài khoản đối ứng, số tiền.</td></tr>
+      <tr><td>5</td><td>Drill-down về chứng từ gốc</td><td>Bấm từ dòng sổ cái để xem chứng từ phát sinh.</td></tr>
+      <tr><td>6</td><td>Xuất sổ cái</td><td>Xuất Excel / PDF.</td></tr>
+    </table>
+
+    <h3>2.5.3. Sổ nhật ký chung</h3>
+    <table>
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Xem nhật ký chung</td><td>Liệt kê toàn bộ bút toán theo trình tự thời gian.</td></tr>
+      <tr><td>2</td><td>Lọc theo ngày chứng từ</td><td>Tra cứu theo khoảng thời gian.</td></tr>
+      <tr><td>3</td><td>Lọc theo loại chứng từ</td><td>Tra cứu theo phiếu thu, phiếu chi, ngân hàng, chứng từ khác.</td></tr>
+      <tr><td>4</td><td>Lọc theo tài khoản</td><td>Tra cứu các bút toán liên quan một tài khoản.</td></tr>
+      <tr><td>5</td><td>Xuất nhật ký chung</td><td>Xuất Excel / PDF.</td></tr>
+    </table>
+
+    <h3>2.5.4. Bảng cân đối phát sinh</h3>
+    <table>
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Lập bảng cân đối phát sinh</td><td>Tổng hợp số dư đầu kỳ, phát sinh Nợ / Có, số dư cuối kỳ.</td></tr>
+      <tr><td>2</td><td>Kiểm tra cân đối phát sinh</td><td>Kiểm tra tổng Nợ bằng tổng Có.</td></tr>
+      <tr><td>3</td><td>Xem chi tiết theo tài khoản</td><td>Drill-down từ bảng cân đối vào sổ cái tài khoản.</td></tr>
+      <tr><td>4</td><td>Xuất bảng cân đối phát sinh</td><td>Xuất Excel / PDF.</td></tr>
+    </table>
+
+    <h3>Quy tắc nghiệp vụ chung của Giai đoạn 1</h3>
+    <table>
+      <tr><th>STT</th><th>Quy tắc</th><th>Nội dung</th></tr>
+      <tr><td>1</td><td>Số chứng từ tự động</td><td>Mỗi loại chứng từ có quy tắc đánh số riêng, không trùng, không bỏ trống.</td></tr>
+      <tr><td>2</td><td>Trạng thái chứng từ</td><td>Chứng từ có luồng: Nháp → Chờ duyệt → Đã duyệt → Đã hủy.</td></tr>
+      <tr><td>3</td><td>Ghi sổ sau duyệt</td><td>Chỉ chứng từ đã duyệt mới được ghi sổ kế toán.</td></tr>
+      <tr><td>4</td><td>Không sửa trực tiếp chứng từ đã duyệt</td><td>Chứng từ đã duyệt muốn sửa phải hủy / đảo / điều chỉnh.</td></tr>
+      <tr><td>5</td><td>Bắt buộc lý do hủy</td><td>Mọi chứng từ hủy phải có lý do và ghi nhật ký.</td></tr>
+      <tr><td>6</td><td>Dữ liệu đã phát sinh không được xóa</td><td>Danh mục / chứng từ đã có phát sinh chỉ được ngừng sử dụng hoặc hủy theo quy trình.</td></tr>
+      <tr><td>7</td><td>Audit log bắt buộc</td><td>Các thao tác thêm / sửa / xóa / duyệt / hủy / khóa kỳ đều phải ghi nhật ký.</td></tr>
+      <tr><td>8</td><td>Cách ly dữ liệu</td><td>Người dùng chỉ truy cập dữ liệu thuộc doanh nghiệp / chi nhánh / phạm vi được phân quyền.</td></tr>
+      <tr><td>9</td><td>Đối chiếu số dư</td><td>Số dư chi tiết phải khớp số dư tài khoản tổng hợp tương ứng.</td></tr>
+      <tr><td>10</td><td>Truy vết dữ liệu</td><td>Từ báo cáo / sổ sách phải truy ngược được về chứng từ gốc.</td></tr>
     </table>
 
     <h3>Kết quả bàn giao</h3>
     <ul>
-      <li>Người dùng đăng nhập và truy cập chức năng theo đúng quyền được cấp</li>
-      <li>Quản trị viên cấu hình được doanh nghiệp, vai trò, hệ thống tài khoản, số chứng từ</li>
-      <li>Danh mục và số dư đầu kỳ được nhập, đối chiếu khớp</li>
-      <li>Nghiệp vụ thu / chi tiền mặt và tiền gửi vận hành hoàn chỉnh</li>
-      <li>Sổ cái ghi nhận nghiệp vụ từ quỹ và ngân hàng</li>
-      <li>Nhật ký truy vết ghi nhận đầy đủ thao tác</li>
+      <li>Người dùng đăng nhập và truy cập chức năng theo đúng quyền được cấp.</li>
+      <li>Quản trị viên cấu hình được doanh nghiệp, vai trò, hệ thống tài khoản, số chứng từ.</li>
+      <li>Danh mục và số dư đầu kỳ được nhập, đối chiếu khớp.</li>
+      <li>Nghiệp vụ thu / chi tiền mặt và tiền gửi vận hành hoàn chỉnh.</li>
+      <li>Sổ cái ghi nhận nghiệp vụ từ quỹ và ngân hàng.</li>
+      <li>Nhật ký truy vết ghi nhận đầy đủ thao tác quan trọng.</li>
     </ul>
 
     <h3>Tiêu chí nghiệm thu</h3>
     <table>
       <tr><th>Tiêu chí</th><th>Nội dung kiểm tra</th></tr>
-      <tr><td>Phân quyền & cách ly dữ liệu</td><td>Người dùng của doanh nghiệp này không truy cập được dữ liệu doanh nghiệp khác; quyền xem / tạo / sửa / duyệt hoạt động đúng</td></tr>
-      <tr><td>Chứng từ quỹ / ngân hàng</td><td>Có số tự động, có trạng thái, không sửa được sau khi duyệt</td></tr>
-      <tr><td>Ghi sổ</td><td>Phiếu sau khi duyệt được ghi sổ và cập nhật sổ quỹ, sổ tiền gửi, sổ cái</td></tr>
-      <tr><td>Số dư đầu kỳ</td><td>Tổng chi tiết khớp số dư tài khoản tương ứng</td></tr>
-      <tr><td>Nhật ký truy vết</td><td>Mọi thao tác quan trọng được ghi nhận đầy đủ</td></tr>
+      <tr><td>Phân quyền & cách ly dữ liệu</td><td>Người dùng của doanh nghiệp này không truy cập được dữ liệu doanh nghiệp khác; quyền xem / tạo / sửa / duyệt hoạt động đúng.</td></tr>
+      <tr><td>Danh mục & số dư đầu kỳ</td><td>Không trùng mã; danh mục đã phát sinh không được xóa; tổng chi tiết khớp số dư tài khoản tương ứng.</td></tr>
+      <tr><td>Chứng từ quỹ / ngân hàng</td><td>Có số tự động, có trạng thái, không sửa được sau khi duyệt; hủy chứng từ bắt buộc có lý do.</td></tr>
+      <tr><td>Ghi sổ</td><td>Phiếu sau khi duyệt được ghi sổ và cập nhật sổ quỹ, sổ tiền gửi, sổ cái.</td></tr>
+      <tr><td>Đối chiếu ngân hàng</td><td>Sao kê thể hiện rõ giao dịch đã khớp / chưa khớp; số dư ngân hàng khớp sổ kế toán.</td></tr>
+      <tr><td>Nhật ký truy vết</td><td>Mọi thao tác quan trọng được ghi nhận đầy đủ và không thể xóa thủ công.</td></tr>
     </table>
   </section>
 
@@ -543,7 +864,7 @@
 
   <div class="footer">
     <p><strong>ACC — Phạm vi nghiệp vụ kế toán theo giai đoạn triển khai</strong></p>
-    <p>Ngày lập: 11/06/2026</p>
+    <p>Ngày lập: 15/06/2026</p>
   </div>
 
 </div>
