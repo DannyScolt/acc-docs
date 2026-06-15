@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ACC — Phạm vi nghiệp vụ kế toán theo giai đoạn triển khai</title>
+  <style>
+    @page { size: A4; margin: 14mm 12mm; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #eef2f7;
+      color: #172033;
+      font-family: "Segoe UI", Arial, sans-serif;
+      font-size: 10.2pt;
+      line-height: 1.55;
+    }
+    .doc {
+      max-width: 1120px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 38px 42px 56px;
+      box-shadow: 0 14px 40px rgba(15, 23, 42, 0.11);
+    }
+    h1, h2, h3, p, ul { margin-top: 0; }
+    h1 {
+      font-size: 30pt;
+      line-height: 1.08;
+      letter-spacing: -0.8px;
+      color: #0f3ea8;
+      margin-bottom: 12px;
+    }
+    h2 {
+      font-size: 16pt;
+      color: #0f3ea8;
+      margin: 30px 0 12px;
+      padding: 10px 14px;
+      background: #eff6ff;
+      border-left: 5px solid #2563eb;
+      border-radius: 10px;
+      page-break-after: avoid;
+    }
+    h3 {
+      font-size: 12pt;
+      color: #24324a;
+      margin: 18px 0 8px;
+      page-break-after: avoid;
+    }
+    p { margin-bottom: 9px; }
+    ul { margin: 6px 0 10px 20px; padding: 0; }
+    li { margin: 3px 0; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 10px 0 16px;
+      font-size: 9.4pt;
+      page-break-inside: avoid;
+    }
+    th {
+      background: #eff6ff;
+      color: #1e3a8a;
+      text-align: left;
+      border: 1px solid #bfdbfe;
+      padding: 8px 9px;
+      font-weight: 700;
+    }
+    td {
+      border: 1px solid #e2e8f0;
+      padding: 8px 9px;
+      vertical-align: top;
+    }
+    tr:nth-child(even) td { background: #f8fafc; }
+    .cover {
+      min-height: 720px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      page-break-after: always;
+      background: linear-gradient(135deg, #eff6ff 0%, #ffffff 48%, #f5f3ff 100%);
+      border: 1px solid #dbeafe;
+      border-radius: 18px;
+      padding: 56px;
+    }
+    .cover .icon { font-size: 54pt; margin-bottom: 14px; }
+    .cover .subtitle {
+      font-size: 15pt;
+      color: #334155;
+      max-width: 780px;
+      margin-bottom: 16px;
+    }
+    .meta {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      width: 100%;
+      margin-top: 28px;
+    }
+    .meta-card {
+      background: #fff;
+      border: 1px solid #dbeafe;
+      border-radius: 12px;
+      padding: 13px 12px;
+      box-shadow: 0 7px 16px rgba(30, 64, 175, 0.08);
+    }
+    .meta-card b {
+      display: block;
+      color: #0f3ea8;
+      font-size: 18pt;
+      margin-bottom: 2px;
+    }
+    .meta-card span { color: #64748b; font-size: 9pt; }
+    .notice {
+      border-left: 5px solid #f59e0b;
+      background: #fffbeb;
+      border-radius: 10px;
+      padding: 13px 15px;
+      margin: 14px 0 18px;
+    }
+    .notice strong { color: #92400e; }
+    .callout {
+      border-left: 5px solid #2563eb;
+      background: #eff6ff;
+      border-radius: 10px;
+      padding: 13px 15px;
+      margin: 14px 0 18px;
+    }
+    .flow {
+      background: #0f172a;
+      color: #e2e8f0;
+      border-radius: 14px;
+      padding: 18px 20px;
+      margin: 14px 0 18px;
+      font-size: 10.5pt;
+      line-height: 1.75;
+      text-align: center;
+      page-break-inside: avoid;
+    }
+    .phase-summary {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin: 12px 0 18px;
+    }
+    .phase-card {
+      border: 1px solid #e2e8f0;
+      border-left: 5px solid #2563eb;
+      background: #f8fbff;
+      border-radius: 12px;
+      padding: 12px 13px;
+      page-break-inside: avoid;
+    }
+    .phase-card b { color: #0f3ea8; display: block; margin-bottom: 4px; }
+    .phase-card span { color: #475569; }
+    .mini-flow {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin: 9px 0 14px;
+      color: #24324a;
+      font-weight: 600;
+    }
+    .section-break { page-break-before: always; }
+    .footer {
+      margin-top: 34px;
+      padding-top: 14px;
+      border-top: 2px solid #e2e8f0;
+      text-align: center;
+      color: #64748b;
+      font-size: 9pt;
+    }
+    @media print {
+      body { background: #fff; }
+      .doc { box-shadow: none; max-width: none; padding: 0; }
+      .cover, table, .phase-card, .notice, .callout { page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+<div class="doc">
+
+  <section class="cover">
+    <div class="icon">📊</div>
+    <h1>ACC</h1>
+    <p class="subtitle">Phạm vi nghiệp vụ kế toán theo giai đoạn triển khai</p>
+    <p style="color:#64748b;max-width:820px;font-size:11.5pt;">
+      Tài liệu mô tả phạm vi nghiệp vụ, quy trình, chứng từ, sổ sách và báo cáo của phần mềm kế toán ACC, được sắp xếp theo các giai đoạn triển khai bám sát quy trình kế toán thực tế của doanh nghiệp.
+    </p>
+    <div class="meta">
+      <div class="meta-card"><b>6</b><span>giai đoạn triển khai</span></div>
+      <div class="meta-card"><b>14</b><span>bước quy trình kế toán lõi</span></div>
+      <div class="meta-card"><b>TT99</b><span>định hướng hệ thống tài khoản & báo cáo</span></div>
+    </div>
+    <p style="margin-top:30px;color:#94a3b8;">Ngày lập: 11/06/2026</p>
+  </section>
+
+  <section>
+    <h2>1. Quy trình kế toán tổng thể</h2>
+    <p>Toàn bộ giai đoạn triển khai được thiết kế theo đúng vòng đời nghiệp vụ kế toán của doanh nghiệp:</p>
+    <div class="flow">
+      Khai báo danh mục → Nhập số dư đầu kỳ → Tiền mặt / tiền gửi<br />
+      → Mua hàng → Nhập kho → Nhận hóa đơn mua → Thanh toán nhà cung cấp<br />
+      → Bán hàng → Xuất kho → Xuất hóa đơn bán → Thu tiền khách hàng<br />
+      → Tính giá vốn → Kết chuyển → Khóa kỳ → Báo cáo tài chính
+    </div>
+    <p>Mỗi giai đoạn tạo ra một nhóm chức năng hoàn chỉnh, có thể vận hành và nghiệm thu độc lập.</p>
+    <div class="notice">
+      <strong>Lưu ý:</strong> Phần hạch toán chi tiết (định khoản Nợ / Có) và các nội dung chuyên sâu sẽ được hoàn thiện sau khi thống nhất với bộ phận kế toán. Tài liệu này tập trung vào phạm vi và quy trình nghiệp vụ.
+    </div>
+
+    <h3>Tổng quan các giai đoạn</h3>
+    <div class="phase-summary">
+      <div class="phase-card"><b>Giai đoạn 1</b><span>Nền tảng hệ thống, danh mục, tiền mặt & tiền gửi</span></div>
+      <div class="phase-card"><b>Giai đoạn 2</b><span>Mua hàng, nhập kho & công nợ phải trả</span></div>
+      <div class="phase-card"><b>Giai đoạn 3</b><span>Bán hàng, xuất kho, tính giá vốn & công nợ phải thu</span></div>
+      <div class="phase-card"><b>Giai đoạn 4</b><span>Tổng hợp, kết chuyển, khóa kỳ & báo cáo tài chính</span></div>
+      <div class="phase-card"><b>Giai đoạn 5</b><span>Thuế & hóa đơn điện tử</span></div>
+      <div class="phase-card"><b>Giai đoạn 6</b><span>Mở rộng nâng cao</span></div>
+    </div>
+
+  </section>
+
+  <section class="section-break">
+    <h2>2. Giai đoạn 1 — Nền tảng hệ thống, danh mục, tiền mặt & tiền gửi</h2>
+    <div class="callout">Sổ cái và hệ thống tài khoản là nền tảng cho mọi nghiệp vụ phát sinh, do đó được xây dựng ngay từ giai đoạn đầu tiên.</div>
+
+    <h3>2.1. Quản trị hệ thống & người dùng</h3>
+    <table>
+      <tr><th>Hạng mục</th><th>Nội dung</th></tr>
+      <tr><td>Khởi tạo doanh nghiệp</td><td>Thông tin công ty, năm tài chính, cơ cấu tổ chức</td></tr>
+      <tr><td>Người dùng & đăng nhập</td><td>Đăng nhập bảo mật, đổi / quên mật khẩu, quản lý phiên làm việc</td></tr>
+      <tr><td>Phân quyền</td><td>Phân quyền theo vai trò và theo từng chức năng (xem / tạo / sửa / xóa / duyệt)</td></tr>
+      <tr><td>Nhật ký truy vết</td><td>Ghi lại mọi thao tác quan trọng: người thực hiện, thời gian, nội dung thay đổi; không thể xóa</td></tr>
+      <tr><td>Cách ly dữ liệu</td><td>Dữ liệu giữa các doanh nghiệp được tách biệt hoàn toàn</td></tr>
+    </table>
+
+    <h3>2.2. Danh mục & dữ liệu đầu kỳ</h3>
+    <table>
+      <tr><th>Quy trình</th><th>Chức năng</th><th>Sổ / Báo cáo</th><th>Điều kiện xác nhận</th></tr>
+      <tr>
+        <td>Khai báo doanh nghiệp → Cấu hình năm tài chính → Khai báo tài khoản & danh mục → Nhập số dư đầu kỳ → Đối chiếu</td>
+        <td>Hệ thống tài khoản; khách hàng; nhà cung cấp; nhân viên; hàng hóa; kho; đơn vị tính; tài khoản ngân hàng; khoản mục chi phí; loại chứng từ; số dư tài khoản; công nợ đầu kỳ; tồn kho đầu kỳ; tài sản cố định / công cụ dụng cụ / chi phí trả trước đầu kỳ</td>
+        <td>Bảng đối chiếu số dư đầu kỳ; danh sách dữ liệu lỗi / trùng</td>
+        <td>Không trùng mã; danh mục đã phát sinh không được xóa; tổng chi tiết khớp số dư tài khoản</td>
+      </tr>
+    </table>
+    <p><strong>Quy tắc số chứng từ:</strong> số chứng từ tự sinh theo từng loại, liên tục, không trùng và không bỏ trống.</p>
+    <p><strong>Trạng thái chứng từ:</strong> Nháp → Chờ duyệt → Đã duyệt → Đã hủy. Chỉ chứng từ đã duyệt mới được ghi sổ. Chứng từ đã duyệt không được sửa trực tiếp — mọi điều chỉnh thực hiện qua chứng từ hủy / đảo / điều chỉnh.</p>
+
+    <h3>2.3. Tiền mặt (Quỹ)</h3>
+    <table>
+      <tr><th>Quy trình</th><th>Chứng từ / chức năng</th><th>Sổ / Báo cáo</th><th>Điều kiện xác nhận</th></tr>
+      <tr>
+        <td>Phát sinh thu / chi → Lập phiếu → Duyệt → Ghi sổ quỹ → Kiểm kê → Báo cáo</td>
+        <td>Phiếu thu; phiếu chi; nhập từ Excel; danh sách chứng từ; kiểm kê quỹ; dự báo dòng tiền</td>
+        <td>Sổ quỹ; bảng kê thu chi; tồn quỹ</td>
+        <td>Số dư sổ quỹ khớp sổ kế toán tiền mặt; phiếu đã duyệt không sửa trực tiếp; hủy phiếu phải có lý do</td>
+      </tr>
+    </table>
+
+    <h3>2.4. Tiền gửi ngân hàng</h3>
+    <table>
+      <tr><th>Quy trình</th><th>Chứng từ / chức năng</th><th>Sổ / Báo cáo</th><th>Điều kiện xác nhận</th></tr>
+      <tr>
+        <td>Thu / chi ngân hàng → Báo Có / Ủy nhiệm chi → Ghi sổ → Nhập sao kê → Đối chiếu ngân hàng → Báo cáo</td>
+        <td>Thu tiền; chi tiền; tài khoản ngân hàng; đối chiếu ngân hàng; khế ước vay / cho vay</td>
+        <td>Sổ tiền gửi; số dư ngân hàng; bảng kê chứng từ; báo cáo khế ước</td>
+        <td>Số dư từng tài khoản ngân hàng khớp sổ kế toán; sao kê thể hiện rõ giao dịch đã khớp / chưa khớp</td>
+      </tr>
+    </table>
+
+    <h3>2.5. Sổ cái & hệ thống tài khoản</h3>
+    <table>
+      <tr><th>Hạng mục</th><th>Nội dung</th></tr>
+      <tr><td>Hệ thống tài khoản</td><td>Theo Thông tư 99/2025, doanh nghiệp tự bổ sung tài khoản chi tiết. Cấu hình linh hoạt, cập nhật được khi quy định thay đổi</td></tr>
+      <tr><td>Sổ cái</td><td>Ghi nhận mọi bút toán từ các phân hệ; bảo đảm cân đối Nợ / Có; truy vết được về chứng từ gốc</td></tr>
+      <tr><td>Sổ nhật ký chung</td><td>Liệt kê bút toán theo trình tự thời gian</td></tr>
+      <tr><td>Bảng cân đối phát sinh</td><td>Kiểm tra tính cân đối của các tài khoản</td></tr>
+    </table>
+
+    <h3>Kết quả bàn giao</h3>
+    <ul>
+      <li>Người dùng đăng nhập và truy cập chức năng theo đúng quyền được cấp</li>
+      <li>Quản trị viên cấu hình được doanh nghiệp, vai trò, hệ thống tài khoản, số chứng từ</li>
+      <li>Danh mục và số dư đầu kỳ được nhập, đối chiếu khớp</li>
+      <li>Nghiệp vụ thu / chi tiền mặt và tiền gửi vận hành hoàn chỉnh</li>
+      <li>Sổ cái ghi nhận nghiệp vụ từ quỹ và ngân hàng</li>
+      <li>Nhật ký truy vết ghi nhận đầy đủ thao tác</li>
+    </ul>
+
+    <h3>Tiêu chí nghiệm thu</h3>
+    <table>
+      <tr><th>Tiêu chí</th><th>Nội dung kiểm tra</th></tr>
+      <tr><td>Phân quyền & cách ly dữ liệu</td><td>Người dùng của doanh nghiệp này không truy cập được dữ liệu doanh nghiệp khác; quyền xem / tạo / sửa / duyệt hoạt động đúng</td></tr>
+      <tr><td>Chứng từ quỹ / ngân hàng</td><td>Có số tự động, có trạng thái, không sửa được sau khi duyệt</td></tr>
+      <tr><td>Ghi sổ</td><td>Phiếu sau khi duyệt được ghi sổ và cập nhật sổ quỹ, sổ tiền gửi, sổ cái</td></tr>
+      <tr><td>Số dư đầu kỳ</td><td>Tổng chi tiết khớp số dư tài khoản tương ứng</td></tr>
+      <tr><td>Nhật ký truy vết</td><td>Mọi thao tác quan trọng được ghi nhận đầy đủ</td></tr>
+    </table>
+  </section>
+
+  <section class="section-break">
+    <h2>3. Giai đoạn 2 — Mua hàng, nhập kho & công nợ phải trả</h2>
+    <h3>3.1. Quy trình mua hàng & nhập kho</h3>
+    <div class="mini-flow">Đơn mua → Hợp đồng mua → Nhận hàng / dịch vụ → Nhập kho → Nhận hóa đơn → Ghi công nợ phải trả → Thanh toán → Đối chiếu công nợ → Trả lại / Giảm giá (nếu có)</div>
+
+    <h3>3.2. Mua hàng & công nợ phải trả</h3>
+    <table>
+      <tr><th>Chứng từ / chức năng</th><th>Sổ / Báo cáo</th><th>Điều kiện xác nhận</th></tr>
+      <tr>
+        <td>Đơn mua; hợp đồng mua; mua hàng hóa / dịch vụ; nhận hàng; nhận hóa đơn; thanh toán theo hóa đơn; trả lại hàng mua; giảm giá hàng mua; bù trừ công nợ; nhà cung cấp; điều khoản thanh toán</td>
+        <td>Sổ chi tiết mua hàng; công nợ phải trả nhà cung cấp; tổng hợp mua theo mặt hàng; biên bản đối chiếu công nợ</td>
+        <td>Công nợ chi tiết theo nhà cung cấp khớp sổ tổng hợp; hàng nhập làm tăng tồn kho; hóa đơn duyệt mới ghi sổ</td>
+      </tr>
+    </table>
+
+    <h3>3.3. Nhập kho & quản lý kho</h3>
+    <table>
+      <tr><th>Chứng từ / chức năng</th><th>Sổ / Báo cáo</th><th>Điều kiện xác nhận</th></tr>
+      <tr>
+        <td>Nhập kho; chuyển kho; kiểm kê; đơn vị tính; nhóm hàng; khai báo phương pháp tính giá xuất kho</td>
+        <td>Thẻ kho; sổ chi tiết vật tư hàng hóa; tổng hợp tồn kho; đối chiếu kho / sổ cái</td>
+        <td>Nhập - xuất - tồn khớp thẻ kho; giá trị tồn kho khớp sổ cái; không nhập trùng chứng từ</td>
+      </tr>
+    </table>
+    <p><em>Phương pháp tính giá xuất kho sẽ được cấu hình theo lựa chọn của bộ phận kế toán.</em></p>
+
+    <h3>Kết quả bàn giao</h3>
+    <ul>
+      <li>Hoàn thành chu trình: đơn mua → hóa đơn mua → nhập kho → công nợ nhà cung cấp</li>
+      <li>Thanh toán nhà cung cấp qua quỹ hoặc ngân hàng, giảm công nợ tương ứng</li>
+      <li>Trả lại hàng mua làm giảm công nợ và giảm tồn kho</li>
+      <li>Nghiệp vụ nhập kho, chuyển kho, kiểm kê vận hành; báo cáo nhập - xuất - tồn theo từng kho và mặt hàng</li>
+      <li>Sổ cái cập nhật đầy đủ nghiệp vụ mua hàng và nhập kho</li>
+    </ul>
+
+    <h3>Tiêu chí nghiệm thu</h3>
+    <table>
+      <tr><th>Tiêu chí</th><th>Nội dung kiểm tra</th></tr>
+      <tr><td>Mua hàng</td><td>Hóa đơn mua sau khi duyệt sinh nghiệp vụ nhập kho và công nợ nhà cung cấp</td></tr>
+      <tr><td>Công nợ</td><td>Công nợ chi tiết theo nhà cung cấp khớp sổ tổng hợp</td></tr>
+      <tr><td>Thanh toán</td><td>Chi tiền làm giảm công nợ đúng số</td></tr>
+      <tr><td>Tồn kho</td><td>Hàng nhập làm tăng tồn kho đúng số lượng và giá trị; nhập - xuất - tồn khớp thẻ kho</td></tr>
+      <tr><td>Kiểm kê</td><td>Sinh chứng từ xử lý chênh lệch đúng</td></tr>
+    </table>
+  </section>
+
+  <section class="section-break">
+    <h2>4. Giai đoạn 3 — Bán hàng, xuất kho, tính giá vốn & công nợ phải thu</h2>
+    <div class="callout">Nghiệp vụ xuất kho và tính giá vốn gắn liền với bán hàng hóa. Bán dịch vụ không phát sinh xuất kho.</div>
+
+    <h3>4.1. Quy trình bán hàng & xuất kho</h3>
+    <div class="mini-flow">Báo giá → Đơn đặt hàng → Hợp đồng bán → Bán hàng hóa / dịch vụ → Xuất kho → Xuất hóa đơn → Ghi doanh thu / công nợ / thuế → Tính giá vốn → Thu tiền → Trả lại / Giảm giá (nếu có)</div>
+
+    <h3>4.2. Bán hàng & công nợ phải thu</h3>
+    <table>
+      <tr><th>Chứng từ / chức năng</th><th>Sổ / Báo cáo</th><th>Điều kiện xác nhận</th></tr>
+      <tr>
+        <td>Báo giá; đơn đặt hàng; hợp đồng bán; chứng từ bán hàng / dịch vụ; hóa đơn; chính sách giá; tính giá bán; thu nợ; nhắc nợ; trả lại / giảm giá; lãi lỗ theo đơn hàng</td>
+        <td>Sổ chi tiết bán hàng; công nợ phải thu khách hàng; tổng hợp bán theo mặt hàng; lãi lỗ theo đơn hàng</td>
+        <td>Doanh thu ghi nhận đúng; công nợ chi tiết theo khách hàng khớp sổ tổng hợp; thuế đầu ra ghi nhận đầy đủ</td>
+      </tr>
+    </table>
+
+    <h3>4.3. Xuất kho & tính giá vốn</h3>
+    <table>
+      <tr><th>Chứng từ / chức năng</th><th>Sổ / Báo cáo</th><th>Điều kiện xác nhận</th></tr>
+      <tr>
+        <td>Xuất kho bán; xuất kho dùng nội bộ; tính giá xuất kho theo phương pháp đã khai báo; cập nhật giá vốn theo kỳ</td>
+        <td>Bảng tính giá vốn; thẻ kho; sổ chi tiết giá vốn; đối chiếu kho / sổ cái</td>
+        <td>Giá vốn khớp giá trị xuất kho; không xuất âm kho khi không được phép; tồn kho sau xuất khớp thẻ kho</td>
+      </tr>
+    </table>
+
+    <h3>Kết quả bàn giao</h3>
+    <ul>
+      <li>Hoàn thành chu trình: đơn bán → hóa đơn bán → xuất kho → doanh thu và công nợ khách hàng</li>
+      <li>Thu tiền khách hàng qua quỹ hoặc ngân hàng, giảm công nợ tương ứng</li>
+      <li>Giá vốn hàng bán được tính theo phương pháp đã chọn khi xuất kho</li>
+      <li>Trả lại hàng bán làm tăng tồn kho và giảm doanh thu</li>
+    </ul>
+
+    <h3>Tiêu chí nghiệm thu</h3>
+    <table>
+      <tr><th>Tiêu chí</th><th>Nội dung kiểm tra</th></tr>
+      <tr><td>Bán hàng</td><td>Hóa đơn bán sau khi duyệt sinh nghiệp vụ xuất kho, doanh thu, công nợ khách hàng, thuế đầu ra và giá vốn</td></tr>
+      <tr><td>Công nợ</td><td>Công nợ chi tiết theo khách hàng khớp sổ tổng hợp</td></tr>
+      <tr><td>Giá vốn</td><td>Giá vốn khớp giá trị xuất kho và tính đúng theo phương pháp đã chọn</td></tr>
+      <tr><td>Kiểm soát tồn kho</td><td>Hệ thống cảnh báo / chặn khi xuất quá tồn (theo cấu hình)</td></tr>
+      <tr><td>Sổ cái</td><td>Nghiệp vụ doanh thu, giá vốn, công nợ, thuế đều được ghi sổ đúng</td></tr>
+    </table>
+  </section>
+
+  <section class="section-break">
+    <h2>5. Giai đoạn 4 — Tổng hợp, kết chuyển, khóa kỳ & báo cáo tài chính</h2>
+    <h3>5.1. Quy trình tổng hợp cuối kỳ</h3>
+    <div class="mini-flow">Chứng từ nghiệp vụ khác / Quyết toán tạm ứng → Kiểm tra sổ cái → Kết chuyển doanh thu, chi phí → Kết chuyển lãi / lỗ → Khóa kỳ → Lập báo cáo tài chính</div>
+
+    <h3>5.2. Tổng hợp & kết chuyển</h3>
+    <table>
+      <tr><th>Chứng từ / chức năng</th><th>Sổ / Báo cáo</th><th>Điều kiện xác nhận</th></tr>
+      <tr>
+        <td>Chứng từ nghiệp vụ khác; quyết toán tạm ứng; kết chuyển cuối kỳ; khóa kỳ; khoản mục chi phí</td>
+        <td>Sổ chi tiết tài khoản; sổ nhật ký chung; sổ cái; bảng cân đối phát sinh; báo cáo tài chính; công nợ theo đối tượng</td>
+        <td>Sổ sách cân đối Nợ / Có; bảng cân đối phát sinh cân; sau khi khóa kỳ không sửa được chứng từ; báo cáo tra cứu được về chứng từ gốc</td>
+      </tr>
+    </table>
+
+    <h3>5.3. Báo cáo tài chính</h3>
+    <table>
+      <tr><th>Nhóm báo cáo</th><th>Nội dung</th></tr>
+      <tr><td>Báo cáo tài chính</td><td>Báo cáo tài chính theo mẫu quy định hiện hành; danh mục biểu mẫu cụ thể sẽ được thống nhất với bộ phận kế toán trước khi triển khai chi tiết</td></tr>
+      <tr><td>Bảng cân đối phát sinh</td><td>Bảng tổng hợp phục vụ kiểm tra số liệu trước khi lập báo cáo tài chính</td></tr>
+    </table>
+
+    <h3>Kết quả bàn giao</h3>
+    <ul>
+      <li>Hoàn thành các bút toán điều chỉnh và kết chuyển cuối kỳ</li>
+      <li>Lập được báo cáo tài chính theo mẫu đã thống nhất, xuất ra PDF / Excel</li>
+      <li>Khóa kỳ kế toán — sau khi khóa, không chỉnh sửa được chứng từ trong kỳ</li>
+      <li>Bảng cân đối phát sinh cân</li>
+    </ul>
+
+    <h3>Tiêu chí nghiệm thu</h3>
+    <table>
+      <tr><th>Tiêu chí</th><th>Nội dung kiểm tra</th></tr>
+      <tr><td>Kết chuyển</td><td>Doanh thu và chi phí được kết chuyển đúng, xác định kết quả kinh doanh</td></tr>
+      <tr><td>Báo cáo tài chính</td><td>Số liệu báo cáo khớp sổ cái và bảng cân đối phát sinh</td></tr>
+      <tr><td>Khóa kỳ</td><td>Sau khi khóa không tạo / sửa / xóa được chứng từ trong kỳ; mở lại kỳ phải có quyền cao và lưu nhật ký truy vết</td></tr>
+      <tr><td>Khả năng tra cứu</td><td>Từ báo cáo tài chính tra cứu ngược được về sổ cái và chứng từ gốc</td></tr>
+    </table>
+  </section>
+
+  <section class="section-break">
+    <h2>6. Giai đoạn 5 — Thuế & hóa đơn điện tử</h2>
+    <h3>6.1. Quản lý hóa đơn</h3>
+    <div class="callout">ACC không tự phát hành hóa đơn điện tử. Việc phát hành hóa đơn điện tử được thực hiện thông qua kết nối với nền tảng hóa đơn của MISA. ACC tiếp nhận, theo dõi và hạch toán hóa đơn phục vụ công tác kế toán và kê khai thuế.</div>
+    <table>
+      <tr><th>Quy trình</th><th>Chức năng</th><th>Sổ / Báo cáo</th><th>Điều kiện xác nhận</th></tr>
+      <tr>
+        <td>Kết nối nền tảng hóa đơn → Theo dõi hóa đơn đầu vào / đầu ra → Đối chiếu → Xử lý hóa đơn điều chỉnh / thay thế / hủy → Báo cáo</td>
+        <td>Theo dõi hóa đơn mua vào / bán ra; liên kết hóa đơn với chứng từ kế toán; xử lý hóa đơn lập sai; biên bản điều chỉnh / thay thế; lịch sử truyền nhận</td>
+        <td>Bảng kê hóa đơn mua vào / bán ra; thống kê hóa đơn; danh sách hóa đơn điều chỉnh / thay thế / hủy</td>
+        <td>Hóa đơn có trạng thái rõ ràng; hóa đơn sai được xử lý bằng điều chỉnh / thay thế / hủy, không sửa tùy tiện</td>
+      </tr>
+    </table>
+
+    <h3>6.2. Thuế</h3>
+    <table>
+      <tr><th>Quy trình</th><th>Chức năng / tờ khai</th><th>Báo cáo</th><th>Điều kiện xác nhận</th></tr>
+      <tr>
+        <td>Đăng ký tờ khai → Lập tờ khai → Đối chiếu dữ liệu → Giấy nộp tiền → Lưu báo cáo</td>
+        <td>Các tờ khai thuế và báo cáo thuế liên quan theo phạm vi đã thống nhất với bộ phận kế toán; danh sách nhà cung cấp rủi ro nếu có nhu cầu theo dõi</td>
+        <td>Bảng kê mua vào / bán ra; tờ khai thuế; giấy nộp tiền</td>
+        <td>Bảng kê hóa đơn khớp số liệu thuế; dữ liệu tờ khai tra cứu được về chứng từ</td>
+      </tr>
+    </table>
+    <p><em>Danh mục tờ khai cụ thể và kỳ kê khai sẽ được thống nhất với bộ phận kế toán.</em></p>
+
+    <h3>Kết quả bàn giao</h3>
+    <ul>
+      <li>Bảng kê hóa đơn mua vào / bán ra đầy đủ</li>
+      <li>Tờ khai thuế GTGT lấy đúng số liệu từ nghiệp vụ phát sinh</li>
+      <li>Xuất tờ khai định dạng phục vụ nộp qua hệ thống thuế điện tử</li>
+      <li>Kết nối nền tảng hóa đơn MISA cho phát hành hóa đơn điện tử</li>
+    </ul>
+  </section>
+
+  <section class="section-break">
+    <h2>7. Giai đoạn 6 — Mở rộng nâng cao</h2>
+    <div class="callout">Các phân hệ dưới đây mở rộng năng lực cho doanh nghiệp sản xuất, dịch vụ và quản trị tài chính chuyên sâu, triển khai sau khi các phân hệ cốt lõi đã ổn định.</div>
+
+    <h3>7.1. Tài sản cố định</h3>
+    <table>
+      <tr><th>Quy trình</th><th>Chức năng</th><th>Báo cáo</th><th>Điều kiện xác nhận</th></tr>
+      <tr><td>Ghi tăng → Tính khấu hao → Điều chuyển / Đánh giá lại → Ghi giảm → Kiểm kê → Báo cáo</td><td>Sổ tài sản; ghi tăng; khấu hao; điều chuyển; đánh giá lại; ghi giảm; kiểm kê; chuyển tài sản thuê tài chính thành tài sản sở hữu</td><td>Sổ tài sản cố định; thẻ tài sản; bảng khấu hao; đối chiếu tài sản / sổ cái</td><td>Nguyên giá và hao mòn khớp sổ kế toán; tài sản đã ghi giảm không tiếp tục khấu hao</td></tr>
+    </table>
+
+    <h3>7.2. Công cụ dụng cụ & chi phí trả trước</h3>
+    <table>
+      <tr><th>Quy trình</th><th>Chức năng</th><th>Báo cáo</th><th>Điều kiện xác nhận</th></tr>
+      <tr><td>Ghi tăng → Khai báo kỳ phân bổ → Phân bổ hàng tháng → Theo dõi giá trị còn lại → Báo cáo</td><td>Ghi tăng công cụ dụng cụ; phân bổ; ngừng phân bổ; chi phí trả trước</td><td>Bảng phân bổ; giá trị còn lại; danh sách công cụ đang sử dụng</td><td>Tổng đã phân bổ cộng giá trị còn lại bằng giá trị ban đầu; không phân bổ trùng kỳ</td></tr>
+    </table>
+
+    <h3>7.3. Tiền lương</h3>
+    <p>Phân hệ tiền lương được triển khai theo hai mức độ:</p>
+    <p><strong>a) Lương cơ bản</strong> — phục vụ hạch toán chi phí lương:</p>
+    <table>
+      <tr><th>Quy trình</th><th>Chức năng</th><th>Báo cáo</th><th>Điều kiện xác nhận</th></tr>
+      <tr><td>Nhập bảng lương → Hạch toán chi phí lương → Trả lương</td><td>Danh mục nhân viên; nhập bảng lương; hạch toán chi phí; trả lương</td><td>Bảng lương</td><td>Bảng lương khớp chi phí lương ghi nhận; trả lương đúng số</td></tr>
+    </table>
+    <p><strong>b) Quản lý lương đầy đủ</strong> — phạm vi chi tiết sẽ được xác định sau khi thống nhất với bộ phận kế toán / nhân sự:</p>
+    <table>
+      <tr><th>Nhóm nghiệp vụ</th><th>Định hướng triển khai</th></tr>
+      <tr><td>Quản lý lương nâng cao</td><td>Có thể bao gồm chấm công, tính lương, bảo hiểm, thuế thu nhập cá nhân, phiếu lương và các báo cáo liên quan. Phạm vi cụ thể sẽ được xác nhận theo nhu cầu vận hành thực tế của doanh nghiệp.</td></tr>
+    </table>
+
+    <h3>7.4. Giá thành sản xuất</h3>
+    <table>
+      <tr><th>Hạng mục</th><th>Nội dung</th></tr>
+      <tr><td>Đối tượng tập hợp chi phí</td><td>Theo sản phẩm / đơn hàng / công trình</td></tr>
+      <tr><td>Chi phí</td><td>Nguyên vật liệu (từ kho), nhân công (từ lương), chi phí chung (từ tổng hợp)</td></tr>
+      <tr><td>Phân bổ</td><td>Theo tiêu chí phân bổ chi phí chung</td></tr>
+      <tr><td>Kết chuyển</td><td>Kết chuyển thành phẩm / giá vốn</td></tr>
+      <tr><td>Báo cáo</td><td>Giá thành đơn vị, so sánh kế hoạch và thực tế</td></tr>
+    </table>
+    <p><em>Phân hệ giá thành có nhiều biến thể theo từng ngành (sản xuất, công trình, dịch vụ), được triển khai sau khi nghiệp vụ kho và sổ cái đã ổn định.</em></p>
+
+    <h3>7.5. Khế ước vay & hợp đồng</h3>
+    <table>
+      <tr><th>Hạng mục</th><th>Nội dung</th></tr>
+      <tr><td>Khế ước vay</td><td>Thông tin khoản vay, lịch trả nợ, lãi suất, ghi nhận thanh toán, dư nợ, chi phí lãi vay</td></tr>
+      <tr><td>Hợp đồng</td><td>Thông tin hợp đồng, mốc thanh toán, liên kết hóa đơn / thu chi, cảnh báo đến hạn</td></tr>
+    </table>
+
+    <h3>7.6. Các phân hệ mở rộng khác</h3>
+    <table>
+      <tr><th>Phân hệ</th><th>Định hướng triển khai</th></tr>
+      <tr><td>Ngân hàng điện tử</td><td>Tích hợp kết nối trực tiếp với từng ngân hàng, kèm kiểm thử bảo mật</td></tr>
+      <tr><td>Bảng điều khiển quản trị nâng cao</td><td>Triển khai khi dữ liệu kế toán đã ổn định</td></tr>
+      <tr><td>Phân tích tài chính / dự báo dòng tiền</td><td>Triển khai khi đã có dữ liệu vận hành thực tế</td></tr>
+      <tr><td>Ngân sách nâng cao</td><td>Triển khai khi sổ cái ổn định để so sánh kế hoạch và thực tế</td></tr>
+    </table>
+  </section>
+
+  <section class="section-break">
+    <h2>8. Bảng đối chiếu định kỳ</h2>
+    <table>
+      <tr><th>Đối chiếu</th><th>Mục tiêu</th><th>Tần suất</th></tr>
+      <tr><td>Quỹ tiền mặt</td><td>Sổ quỹ khớp sổ kế toán tiền mặt</td><td>Hằng tuần / cuối kỳ</td></tr>
+      <tr><td>Ngân hàng</td><td>Sổ tiền gửi khớp sao kê và sổ kế toán</td><td>Hằng tuần / cuối kỳ</td></tr>
+      <tr><td>Công nợ phải trả</td><td>Chi tiết theo nhà cung cấp khớp sổ tổng hợp</td><td>Cuối kỳ</td></tr>
+      <tr><td>Công nợ phải thu</td><td>Chi tiết theo khách hàng khớp sổ tổng hợp</td><td>Cuối kỳ</td></tr>
+      <tr><td>Tồn kho</td><td>Thẻ kho khớp giá trị tồn trên sổ kế toán</td><td>Cuối kỳ / kiểm kê</td></tr>
+      <tr><td>Thuế</td><td>Bảng kê hóa đơn khớp tờ khai thuế</td><td>Theo kỳ kê khai</td></tr>
+      <tr><td>Báo cáo tài chính</td><td>Bảng cân đối phát sinh, sổ cái và báo cáo tài chính không lệch</td><td>Cuối tháng / quý / năm</td></tr>
+    </table>
+  </section>
+
+
+
+  <div class="footer">
+    <p><strong>ACC — Phạm vi nghiệp vụ kế toán theo giai đoạn triển khai</strong></p>
+    <p>Ngày lập: 11/06/2026</p>
+  </div>
+
+</div>
+</body>
+</html>
