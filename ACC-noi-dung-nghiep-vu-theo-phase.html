@@ -1261,37 +1261,142 @@
 
   <section class="section-break">
     <h2>6. Giai đoạn 5 — Thuế & hóa đơn điện tử</h2>
-    <h3>6.1. Quản lý hóa đơn</h3>
-    <div class="callout">ACC không tự phát hành hóa đơn điện tử. Việc phát hành hóa đơn điện tử được thực hiện thông qua kết nối với nền tảng hóa đơn của MISA. ACC tiếp nhận, theo dõi và hạch toán hóa đơn phục vụ công tác kế toán và kê khai thuế.</div>
+    <div class="callout">Giai đoạn 5 tập trung hoàn thiện phần hóa đơn điện tử và thuế. ACC không tự phát hành hóa đơn điện tử mà kết nối với nền tảng hóa đơn điện tử MISA để tiếp nhận, theo dõi, liên kết hóa đơn với chứng từ kế toán và phục vụ kê khai thuế.</div>
+
+    <h3>6.1. Quy trình hóa đơn điện tử & thuế</h3>
+    <div class="mini-flow">Kết nối nền tảng hóa đơn → Đồng bộ hóa đơn đầu vào / đầu ra → Liên kết hóa đơn với chứng từ kế toán → Kiểm tra hợp lệ / đối chiếu → Xử lý sai sót hóa đơn → Lập bảng kê thuế → Lập tờ khai thuế → Giấy nộp tiền / lưu báo cáo</div>
+
+    <h3>6.2. Kết nối nền tảng hóa đơn điện tử</h3>
+    <p>Module này dùng để kết nối ACC với nền tảng hóa đơn điện tử MISA, phục vụ đồng bộ hóa đơn và theo dõi lịch sử truyền nhận.</p>
     <table>
-      <tr><th>Quy trình</th><th>Chức năng</th><th>Sổ / Báo cáo</th><th>Điều kiện xác nhận</th></tr>
-      <tr>
-        <td>Kết nối nền tảng hóa đơn → Theo dõi hóa đơn đầu vào / đầu ra → Đối chiếu → Xử lý hóa đơn điều chỉnh / thay thế / hủy → Báo cáo</td>
-        <td>Theo dõi hóa đơn mua vào / bán ra; liên kết hóa đơn với chứng từ kế toán; xử lý hóa đơn lập sai; biên bản điều chỉnh / thay thế; lịch sử truyền nhận</td>
-        <td>Bảng kê hóa đơn mua vào / bán ra; thống kê hóa đơn; danh sách hóa đơn điều chỉnh / thay thế / hủy</td>
-        <td>Hóa đơn có trạng thái rõ ràng; hóa đơn sai được xử lý bằng điều chỉnh / thay thế / hủy, không sửa tùy tiện</td>
-      </tr>
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Kết nối nền tảng hóa đơn MISA</td><td>Thiết lập kết nối giữa ACC và nền tảng hóa đơn điện tử MISA theo doanh nghiệp sử dụng.</td></tr>
+      <tr><td>2</td><td>Khai báo thông tin kết nối</td><td>Khai báo tài khoản, mã doanh nghiệp, môi trường kết nối và các thông số tích hợp cần thiết.</td></tr>
+      <tr><td>3</td><td>Kiểm tra trạng thái kết nối</td><td>Hiển thị trạng thái đang kết nối, mất kết nối, lỗi xác thực hoặc lỗi đồng bộ.</td></tr>
+      <tr><td>4</td><td>Đồng bộ danh sách hóa đơn</td><td>Nhận dữ liệu hóa đơn đầu vào / đầu ra từ nền tảng hóa đơn về ACC theo lô hoặc theo thời điểm.</td></tr>
+      <tr><td>5</td><td>Lịch sử truyền nhận</td><td>Lưu lịch sử đồng bộ, thời gian nhận, số lượng hóa đơn, trạng thái thành công / lỗi.</td></tr>
+      <tr><td>6</td><td>Đồng bộ lại dữ liệu</td><td>Cho phép đồng bộ lại khi có lỗi hoặc cần lấy lại dữ liệu hóa đơn bị thiếu.</td></tr>
+      <tr><td>7</td><td>Cảnh báo lỗi kết nối</td><td>Cảnh báo khi mất kết nối hoặc đồng bộ hóa đơn thất bại để kế toán xử lý kịp thời.</td></tr>
     </table>
 
-    <h3>6.2. Thuế</h3>
+    <h3>6.3. Quản lý hóa đơn đầu vào</h3>
+    <p>Module này dùng để tiếp nhận, tra cứu, lưu trữ và liên kết hóa đơn đầu vào với các chứng từ mua hàng / công nợ / thuế.</p>
     <table>
-      <tr><th>Quy trình</th><th>Chức năng / tờ khai</th><th>Báo cáo</th><th>Điều kiện xác nhận</th></tr>
-      <tr>
-        <td>Đăng ký tờ khai → Lập tờ khai → Đối chiếu dữ liệu → Giấy nộp tiền → Lưu báo cáo</td>
-        <td>Các tờ khai thuế và báo cáo thuế liên quan theo phạm vi đã thống nhất với bộ phận kế toán; danh sách nhà cung cấp rủi ro nếu có nhu cầu theo dõi</td>
-        <td>Bảng kê mua vào / bán ra; tờ khai thuế; giấy nộp tiền</td>
-        <td>Bảng kê hóa đơn khớp số liệu thuế; dữ liệu tờ khai tra cứu được về chứng từ</td>
-      </tr>
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Đồng bộ hóa đơn đầu vào</td><td>Nhận hóa đơn mua vào từ nền tảng hóa đơn điện tử hoặc nguồn tích hợp liên quan.</td></tr>
+      <tr><td>2</td><td>Tra cứu hóa đơn đầu vào</td><td>Tìm kiếm hóa đơn theo nhà cung cấp, mã số thuế, số hóa đơn, ngày hóa đơn, trạng thái.</td></tr>
+      <tr><td>3</td><td>Xem chi tiết hóa đơn đầu vào</td><td>Hiển thị thông tin hóa đơn, tiền hàng, thuế, file XML / PDF và dữ liệu liên quan.</td></tr>
+      <tr><td>4</td><td>Liên kết hóa đơn với chứng từ mua hàng</td><td>Gắn hóa đơn đầu vào với chứng từ mua hàng, nhập kho, công nợ hoặc thanh toán liên quan.</td></tr>
+      <tr><td>5</td><td>Theo dõi hóa đơn chưa hạch toán</td><td>Liệt kê hóa đơn đã đồng bộ nhưng chưa liên kết với chứng từ kế toán.</td></tr>
+      <tr><td>6</td><td>Kiểm tra trùng hóa đơn đầu vào</td><td>Cảnh báo khi có hóa đơn trùng số, ký hiệu, mã số thuế nhà cung cấp.</td></tr>
+      <tr><td>7</td><td>Lưu trữ XML / PDF hóa đơn đầu vào</td><td>Lưu file XML, PDF và tài liệu liên quan phục vụ kiểm tra, kê khai và kiểm toán.</td></tr>
+      <tr><td>8</td><td>Quản lý trạng thái hóa đơn đầu vào</td><td>Theo dõi trạng thái mới nhận, đã kiểm tra, đã hạch toán, điều chỉnh, thay thế hoặc hủy.</td></tr>
     </table>
-    <p><em>Danh mục tờ khai cụ thể và kỳ kê khai sẽ được thống nhất với bộ phận kế toán.</em></p>
+
+    <h3>6.4. Quản lý hóa đơn đầu ra</h3>
+    <p>Module này dùng để theo dõi hóa đơn bán ra đã phát hành từ nền tảng hóa đơn, liên kết với chứng từ bán hàng và kê khai thuế đầu ra.</p>
+    <table>
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Đồng bộ hóa đơn đầu ra</td><td>Nhận dữ liệu hóa đơn bán ra từ nền tảng hóa đơn điện tử về ACC.</td></tr>
+      <tr><td>2</td><td>Tra cứu hóa đơn đầu ra</td><td>Tìm kiếm theo khách hàng, số hóa đơn, ngày hóa đơn, giá trị, trạng thái.</td></tr>
+      <tr><td>3</td><td>Liên kết hóa đơn với chứng từ bán hàng</td><td>Gắn hóa đơn đầu ra với chứng từ bán hàng, doanh thu, công nợ và thuế đầu ra tương ứng.</td></tr>
+      <tr><td>4</td><td>Theo dõi chứng từ bán chưa có hóa đơn</td><td>Liệt kê chứng từ bán hàng đã ghi nhận nhưng chưa phát hành / đồng bộ hóa đơn.</td></tr>
+      <tr><td>5</td><td>Xem chi tiết hóa đơn đầu ra</td><td>Hiển thị hàng hóa / dịch vụ, tiền hàng, thuế, khách hàng và file XML / PDF.</td></tr>
+      <tr><td>6</td><td>Lưu trữ XML / PDF hóa đơn đầu ra</td><td>Lưu trữ hóa đơn điện tử phục vụ tra cứu và đối chiếu sau này.</td></tr>
+      <tr><td>7</td><td>Quản lý trạng thái hóa đơn đầu ra</td><td>Theo dõi mới lập, đã phát hành, điều chỉnh, thay thế, hủy và các trạng thái liên quan.</td></tr>
+    </table>
+
+    <h3>6.5. Kiểm tra hợp lệ hóa đơn & cảnh báo rủi ro</h3>
+    <p>Module này dùng để kiểm tra tính hợp lệ của hóa đơn, phát hiện sai lệch và hỗ trợ kiểm soát rủi ro thuế.</p>
+    <table>
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Kiểm tra tính hợp lệ hóa đơn</td><td>Kiểm tra sự đầy đủ thông tin hóa đơn, định dạng, trạng thái và dữ liệu bắt buộc.</td></tr>
+      <tr><td>2</td><td>Cảnh báo hóa đơn sai lệch</td><td>Cảnh báo khi hóa đơn lệch tiền hàng, tiền thuế, ngày hóa đơn hoặc đối tượng so với chứng từ kế toán.</td></tr>
+      <tr><td>3</td><td>Kiểm tra nhà cung cấp rủi ro</td><td>Theo dõi và cảnh báo nhà cung cấp có rủi ro nếu doanh nghiệp có nhu cầu kiểm soát.</td></tr>
+      <tr><td>4</td><td>Kiểm tra hóa đơn chưa liên kết chứng từ</td><td>Phát hiện hóa đơn đầu vào / đầu ra chưa được gắn với chứng từ kế toán tương ứng.</td></tr>
+      <tr><td>5</td><td>Cảnh báo sai lệch thuế</td><td>Cảnh báo khi số thuế trên hóa đơn không khớp số thuế hạch toán hoặc kê khai.</td></tr>
+      <tr><td>6</td><td>Báo cáo hóa đơn bất thường</td><td>Liệt kê hóa đơn điều chỉnh, thay thế, hủy, trùng hoặc có sai lệch cần rà soát.</td></tr>
+    </table>
+
+    <h3>6.6. Xử lý hóa đơn sai sót</h3>
+    <p>Module này dùng để theo dõi và xử lý hóa đơn sai sót theo các hình thức điều chỉnh, thay thế hoặc hủy.</p>
+    <table>
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Lập hồ sơ xử lý sai sót</td><td>Ghi nhận trường hợp hóa đơn sai sót, lý do và phương án xử lý.</td></tr>
+      <tr><td>2</td><td>Hóa đơn điều chỉnh</td><td>Theo dõi hóa đơn điều chỉnh cho hóa đơn gốc khi phát sinh sai lệch cần điều chỉnh.</td></tr>
+      <tr><td>3</td><td>Hóa đơn thay thế</td><td>Theo dõi hóa đơn thay thế cho hóa đơn gốc khi cần thay toàn bộ nội dung.</td></tr>
+      <tr><td>4</td><td>Hủy hóa đơn</td><td>Ghi nhận nghiệp vụ hủy hóa đơn và trạng thái hóa đơn bị hủy theo quy định.</td></tr>
+      <tr><td>5</td><td>Liên kết hóa đơn gốc và hóa đơn xử lý</td><td>Liên kết hóa đơn gốc với hóa đơn điều chỉnh / thay thế / hủy để truy vết đầy đủ.</td></tr>
+      <tr><td>6</td><td>Điều chỉnh chứng từ kế toán liên quan</td><td>Cập nhật hoặc cảnh báo điều chỉnh doanh thu, chi phí, thuế, công nợ tương ứng với hóa đơn sai sót.</td></tr>
+      <tr><td>7</td><td>Lưu biên bản xử lý hóa đơn</td><td>Lưu biên bản điều chỉnh, thay thế, hủy và tài liệu giải trình liên quan.</td></tr>
+    </table>
+
+    <h3>6.7. Bảng kê hóa đơn mua vào / bán ra</h3>
+    <p>Module này tổng hợp dữ liệu hóa đơn phục vụ kê khai thuế và đối chiếu với số liệu kế toán.</p>
+    <table>
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Lập bảng kê hóa đơn mua vào</td><td>Tổng hợp hóa đơn đầu vào theo kỳ kê khai thuế.</td></tr>
+      <tr><td>2</td><td>Lập bảng kê hóa đơn bán ra</td><td>Tổng hợp hóa đơn đầu ra theo kỳ kê khai thuế.</td></tr>
+      <tr><td>3</td><td>Đối chiếu bảng kê với chứng từ kế toán</td><td>Kiểm tra hóa đơn trên bảng kê khớp với chứng từ mua hàng, bán hàng và hạch toán thuế.</td></tr>
+      <tr><td>4</td><td>Đối chiếu hóa đơn thiếu / thừa</td><td>Phát hiện hóa đơn có trên nền tảng hóa đơn nhưng chưa có trên bảng kê hoặc ngược lại.</td></tr>
+      <tr><td>5</td><td>Lọc bảng kê theo kỳ / trạng thái</td><td>Tra cứu bảng kê theo tháng, quý, loại hóa đơn hoặc trạng thái xử lý.</td></tr>
+      <tr><td>6</td><td>Xuất bảng kê</td><td>Xuất Excel / PDF phục vụ kiểm tra hoặc lưu hồ sơ thuế.</td></tr>
+    </table>
+
+    <h3>6.8. Kê khai thuế & tờ khai thuế</h3>
+    <p>Module này dùng để đăng ký, lập, kiểm tra và lưu trữ các tờ khai thuế trong phạm vi đã thống nhất với bộ phận kế toán.</p>
+    <table>
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Đăng ký tờ khai thuế</td><td>Khai báo các loại tờ khai, kỳ kê khai tháng / quý và phạm vi áp dụng.</td></tr>
+      <tr><td>2</td><td>Lập tờ khai thuế GTGT</td><td>Tổng hợp dữ liệu đầu vào / đầu ra để lập tờ khai thuế GTGT theo kỳ.</td></tr>
+      <tr><td>3</td><td>Lập các báo cáo thuế liên quan</td><td>Lập các báo cáo và phụ lục thuế trong phạm vi được triển khai.</td></tr>
+      <tr><td>4</td><td>Kiểm tra số liệu tờ khai</td><td>Đối chiếu tờ khai với bảng kê hóa đơn và số phát sinh thuế trên sổ kế toán.</td></tr>
+      <tr><td>5</td><td>Lưu phiên bản tờ khai</td><td>Lưu các lần lập / điều chỉnh tờ khai để phục vụ đối chiếu lịch sử.</td></tr>
+      <tr><td>6</td><td>Xuất dữ liệu nộp thuế điện tử</td><td>Xuất file hoặc dữ liệu phục vụ nộp qua hệ thống thuế điện tử.</td></tr>
+      <tr><td>7</td><td>Tra cứu tờ khai đã lập</td><td>Tìm kiếm theo kỳ, loại tờ khai, trạng thái lập hoặc trạng thái nộp.</td></tr>
+    </table>
+
+    <h3>6.9. Giấy nộp tiền & báo cáo thuế</h3>
+    <p>Module này dùng để theo dõi nghĩa vụ thuế, giấy nộp tiền và các báo cáo phục vụ quản lý thuế nội bộ.</p>
+    <table>
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Lập giấy nộp tiền</td><td>Ghi nhận thông tin giấy nộp tiền thuế theo từng kỳ và từng sắc thuế.</td></tr>
+      <tr><td>2</td><td>Theo dõi trạng thái nộp thuế</td><td>Theo dõi đã lập, đã nộp, chờ nộp hoặc cần điều chỉnh giấy nộp tiền.</td></tr>
+      <tr><td>3</td><td>Báo cáo thuế theo kỳ</td><td>Tổng hợp tình hình kê khai, số thuế phải nộp, đã nộp và còn phải nộp.</td></tr>
+      <tr><td>4</td><td>Đối chiếu nghĩa vụ thuế</td><td>Kiểm tra số phát sinh thuế trên kế toán khớp số liệu tờ khai và giấy nộp tiền.</td></tr>
+      <tr><td>5</td><td>Xuất báo cáo thuế</td><td>Xuất báo cáo thuế và giấy nộp tiền ra Excel / PDF để lưu hồ sơ.</td></tr>
+    </table>
+
+    <h3>Quy tắc nghiệp vụ chung của Giai đoạn 5</h3>
+    <table>
+      <tr><th>STT</th><th>Quy tắc</th><th>Nội dung</th></tr>
+      <tr><td>1</td><td>Hóa đơn phải có trạng thái rõ ràng</td><td>Mọi hóa đơn đầu vào / đầu ra phải theo dõi được trạng thái đồng bộ, hạch toán, điều chỉnh, thay thế hoặc hủy.</td></tr>
+      <tr><td>2</td><td>Không sửa tùy tiện hóa đơn sai sót</td><td>Hóa đơn sai phải được xử lý theo nghiệp vụ điều chỉnh, thay thế hoặc hủy, không sửa trực tiếp dữ liệu gốc.</td></tr>
+      <tr><td>3</td><td>Hóa đơn phải liên kết chứng từ kế toán</td><td>Hóa đơn mua vào / bán ra phải gắn với chứng từ kế toán liên quan để phục vụ đối chiếu và kê khai.</td></tr>
+      <tr><td>4</td><td>Bảng kê thuế khớp dữ liệu kế toán</td><td>Bảng kê hóa đơn và tờ khai thuế phải khớp số phát sinh thuế trên sổ kế toán.</td></tr>
+      <tr><td>5</td><td>Lưu trữ đầy đủ hồ sơ điện tử</td><td>XML, PDF, lịch sử truyền nhận và hồ sơ xử lý sai sót phải được lưu đầy đủ để tra cứu.</td></tr>
+      <tr><td>6</td><td>Cảnh báo sai lệch trước khi kê khai</td><td>Hệ thống cần cảnh báo hóa đơn trùng, thiếu, sai lệch thuế hoặc chưa hạch toán trước khi lập tờ khai.</td></tr>
+    </table>
 
     <h3>Kết quả bàn giao</h3>
     <ul>
-      <li>Bảng kê hóa đơn mua vào / bán ra đầy đủ</li>
-      <li>Tờ khai thuế GTGT lấy đúng số liệu từ nghiệp vụ phát sinh</li>
-      <li>Xuất tờ khai định dạng phục vụ nộp qua hệ thống thuế điện tử</li>
-      <li>Kết nối nền tảng hóa đơn MISA cho phát hành hóa đơn điện tử</li>
+      <li>ACC kết nối được với nền tảng hóa đơn điện tử MISA để tiếp nhận và theo dõi hóa đơn đầu vào / đầu ra.</li>
+      <li>Hóa đơn được liên kết với chứng từ kế toán, công nợ, doanh thu, chi phí và dữ liệu thuế liên quan.</li>
+      <li>Quản lý được trạng thái hóa đơn, lịch sử truyền nhận và hồ sơ xử lý hóa đơn sai sót.</li>
+      <li>Lập được bảng kê hóa đơn mua vào / bán ra, tờ khai thuế GTGT và các báo cáo thuế trong phạm vi đã thống nhất.</li>
+      <li>Xuất được dữ liệu phục vụ nộp qua hệ thống thuế điện tử và lưu trữ hồ sơ thuế điện tử.</li>
     </ul>
+
+    <h3>Tiêu chí nghiệm thu</h3>
+    <table>
+      <tr><th>Tiêu chí</th><th>Nội dung kiểm tra</th></tr>
+      <tr><td>Kết nối hóa đơn điện tử</td><td>ACC nhận được dữ liệu hóa đơn từ nền tảng hóa đơn MISA, theo dõi được trạng thái đồng bộ và lịch sử truyền nhận.</td></tr>
+      <tr><td>Hóa đơn đầu vào / đầu ra</td><td>Hóa đơn được tra cứu, lưu trữ XML / PDF, liên kết đúng với chứng từ kế toán liên quan.</td></tr>
+      <tr><td>Hóa đơn sai sót</td><td>Hóa đơn điều chỉnh / thay thế / hủy được theo dõi đúng, có liên kết với hóa đơn gốc và hồ sơ xử lý.</td></tr>
+      <tr><td>Đối chiếu thuế</td><td>Bảng kê hóa đơn, tờ khai thuế và số liệu thuế trên kế toán đối chiếu khớp nhau.</td></tr>
+      <tr><td>Cảnh báo rủi ro</td><td>Hệ thống phát hiện được hóa đơn trùng, hóa đơn thiếu liên kết, sai lệch thuế hoặc nhà cung cấp rủi ro nếu có cấu hình theo dõi.</td></tr>
+      <tr><td>Xuất dữ liệu thuế</td><td>Tờ khai, bảng kê, giấy nộp tiền và báo cáo thuế xuất được ra định dạng phục vụ lưu trữ / nộp điện tử.</td></tr>
+    </table>
   </section>
 
   <section class="section-break">
