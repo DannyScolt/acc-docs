@@ -624,47 +624,254 @@
 
   <section class="section-break">
     <h2>3. Giai đoạn 2 — Mua hàng, nhập kho & công nợ phải trả</h2>
+    <div class="callout">Giai đoạn 2 tập trung hoàn thiện chu trình mua hàng: từ nhu cầu / đơn mua, hợp đồng, nhận hàng, nhập kho, nhận hóa đơn, ghi nhận công nợ phải trả, thanh toán nhà cung cấp, xử lý trả lại / giảm giá và đối chiếu công nợ. Phần chức năng được tổ chức theo các phân hệ Mua hàng, Kho và Công nợ, sau đó điều chỉnh theo phạm vi triển khai của ACC.</div>
+
     <h3>3.1. Quy trình mua hàng & nhập kho</h3>
-    <div class="mini-flow">Đơn mua → Hợp đồng mua → Nhận hàng / dịch vụ → Nhập kho → Nhận hóa đơn → Ghi công nợ phải trả → Thanh toán → Đối chiếu công nợ → Trả lại / Giảm giá (nếu có)</div>
+    <div class="mini-flow">Nhu cầu mua / Đơn mua → Duyệt mua → Hợp đồng mua → Nhận hàng / dịch vụ → Nhập kho → Nhận hóa đơn đầu vào → Ghi công nợ phải trả → Thanh toán → Đối chiếu công nợ → Trả lại / Giảm giá (nếu có)</div>
 
-    <h3>3.2. Mua hàng & công nợ phải trả</h3>
+    <h3>3.2. Đơn mua & yêu cầu mua hàng</h3>
+    <p>Module này dùng để ghi nhận nhu cầu mua hàng, lập đơn mua, theo dõi trạng thái duyệt và làm căn cứ cho hợp đồng / chứng từ mua hàng sau này.</p>
     <table>
-      <tr><th>Chứng từ / chức năng</th><th>Sổ / Báo cáo</th><th>Điều kiện xác nhận</th></tr>
-      <tr>
-        <td>Đơn mua; hợp đồng mua; mua hàng hóa / dịch vụ; nhận hàng; nhận hóa đơn; thanh toán theo hóa đơn; trả lại hàng mua; giảm giá hàng mua; bù trừ công nợ; nhà cung cấp; điều khoản thanh toán</td>
-        <td>Sổ chi tiết mua hàng; công nợ phải trả nhà cung cấp; tổng hợp mua theo mặt hàng; biên bản đối chiếu công nợ</td>
-        <td>Công nợ chi tiết theo nhà cung cấp khớp sổ tổng hợp; hàng nhập làm tăng tồn kho; hóa đơn duyệt mới ghi sổ</td>
-      </tr>
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Lập yêu cầu mua hàng</td><td>Ghi nhận nhu cầu mua vật tư, hàng hóa, dịch vụ từ phòng ban / bộ phận.</td></tr>
+      <tr><td>2</td><td>Lập đơn mua hàng</td><td>Tạo đơn mua với nhà cung cấp, mặt hàng, số lượng, đơn giá dự kiến, thời gian giao hàng.</td></tr>
+      <tr><td>3</td><td>Lập đơn mua từ nhu cầu mua</td><td>Chuyển yêu cầu mua đã duyệt thành đơn mua hàng.</td></tr>
+      <tr><td>4</td><td>Chọn nhà cung cấp cho đơn mua</td><td>Gắn nhà cung cấp, điều khoản thanh toán, địa điểm giao hàng cho đơn mua.</td></tr>
+      <tr><td>5</td><td>So sánh báo giá nhà cung cấp</td><td>Lưu và so sánh báo giá theo giá, thời gian giao, điều kiện thanh toán nếu có nhu cầu.</td></tr>
+      <tr><td>6</td><td>Duyệt đơn mua</td><td>Người có quyền duyệt xác nhận đơn mua trước khi thực hiện mua hàng.</td></tr>
+      <tr><td>7</td><td>Theo dõi trạng thái đơn mua</td><td>Theo dõi trạng thái: Nháp, Chờ duyệt, Đã duyệt, Đang nhận hàng, Hoàn thành, Đã hủy.</td></tr>
+      <tr><td>8</td><td>Theo dõi số lượng đã nhận</td><td>So sánh số lượng đặt mua với số lượng đã nhận / đã nhập kho.</td></tr>
+      <tr><td>9</td><td>Theo dõi số lượng chưa nhận</td><td>Liệt kê phần hàng còn thiếu so với đơn mua.</td></tr>
+      <tr><td>10</td><td>Hủy đơn mua</td><td>Hủy đơn mua không còn thực hiện, bắt buộc nhập lý do hủy.</td></tr>
+      <tr><td>11</td><td>In / xuất đơn mua</td><td>In đơn mua hoặc xuất PDF / Excel gửi nhà cung cấp.</td></tr>
     </table>
 
-    <h3>3.3. Nhập kho & quản lý kho</h3>
+    <h3>3.3. Hợp đồng mua</h3>
+    <p>Module này dùng để quản lý hợp đồng mua hàng / dịch vụ, theo dõi điều khoản, giá trị, tiến độ giao hàng và thanh toán.</p>
     <table>
-      <tr><th>Chứng từ / chức năng</th><th>Sổ / Báo cáo</th><th>Điều kiện xác nhận</th></tr>
-      <tr>
-        <td>Nhập kho; chuyển kho; kiểm kê; đơn vị tính; nhóm hàng; khai báo phương pháp tính giá xuất kho</td>
-        <td>Thẻ kho; sổ chi tiết vật tư hàng hóa; tổng hợp tồn kho; đối chiếu kho / sổ cái</td>
-        <td>Nhập - xuất - tồn khớp thẻ kho; giá trị tồn kho khớp sổ cái; không nhập trùng chứng từ</td>
-      </tr>
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Lập hợp đồng mua</td><td>Khai báo số hợp đồng, ngày ký, nhà cung cấp, giá trị hợp đồng, thời hạn hiệu lực.</td></tr>
+      <tr><td>2</td><td>Lập hợp đồng từ đơn mua</td><td>Chuyển thông tin đơn mua đã duyệt thành hợp đồng mua.</td></tr>
+      <tr><td>3</td><td>Khai báo điều khoản thanh toán</td><td>Theo dõi mốc thanh toán, tỷ lệ / số tiền thanh toán, hạn thanh toán.</td></tr>
+      <tr><td>4</td><td>Khai báo điều khoản giao hàng</td><td>Theo dõi thời gian giao hàng, địa điểm giao, người phụ trách nhận hàng.</td></tr>
+      <tr><td>5</td><td>Đính kèm file hợp đồng</td><td>Lưu file scan / PDF hợp đồng, phụ lục, báo giá, biên bản liên quan.</td></tr>
+      <tr><td>6</td><td>Theo dõi thực hiện hợp đồng</td><td>Theo dõi giá trị đã mua, đã nhận hàng, đã nhận hóa đơn, đã thanh toán.</td></tr>
+      <tr><td>7</td><td>Cảnh báo hợp đồng đến hạn</td><td>Cảnh báo hợp đồng sắp hết hạn hoặc đến hạn thanh toán / giao hàng.</td></tr>
+      <tr><td>8</td><td>Thanh lý / đóng hợp đồng</td><td>Đánh dấu hợp đồng đã hoàn thành, đã thanh lý hoặc không tiếp tục thực hiện.</td></tr>
     </table>
-    <p><em>Phương pháp tính giá xuất kho sẽ được cấu hình theo lựa chọn của bộ phận kế toán.</em></p>
+
+    <h3>3.4. Mua hàng hóa / dịch vụ</h3>
+    <p>Module này dùng để lập chứng từ mua hàng trong nước / mua dịch vụ, ghi nhận thông tin hàng hóa, chi phí, thuế và liên kết với nhập kho hoặc công nợ.</p>
+    <table>
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Lập chứng từ mua hàng hóa</td><td>Ghi nhận mua hàng hóa, vật tư từ nhà cung cấp.</td></tr>
+      <tr><td>2</td><td>Lập chứng từ mua dịch vụ</td><td>Ghi nhận mua dịch vụ không qua kho như vận chuyển, tư vấn, thuê ngoài.</td></tr>
+      <tr><td>3</td><td>Lập chứng từ mua từ đơn mua / hợp đồng</td><td>Kế thừa thông tin nhà cung cấp, mặt hàng, số lượng, đơn giá từ đơn mua / hợp đồng.</td></tr>
+      <tr><td>4</td><td>Mua hàng nhập kho</td><td>Ghi nhận nghiệp vụ mua hàng có nhập kho, làm căn cứ sinh phiếu nhập kho.</td></tr>
+      <tr><td>5</td><td>Mua hàng không qua kho</td><td>Ghi nhận mua hàng / dịch vụ đưa thẳng vào chi phí, công trình, bộ phận hoặc đối tượng sử dụng.</td></tr>
+      <tr><td>6</td><td>Mua hàng nhiều hóa đơn</td><td>Cho phép một chứng từ mua liên kết nhiều hóa đơn đầu vào nếu phát sinh.</td></tr>
+      <tr><td>7</td><td>Mua hàng chưa có hóa đơn</td><td>Ghi nhận hàng đã nhận / nhập kho nhưng chưa nhận hóa đơn để theo dõi chờ hóa đơn.</td></tr>
+      <tr><td>8</td><td>Mua hàng có hóa đơn ngay</td><td>Ghi nhận đồng thời thông tin hàng mua, hóa đơn và công nợ phải trả.</td></tr>
+      <tr><td>9</td><td>Phân bổ chi phí mua hàng</td><td>Phân bổ chi phí vận chuyển, bốc xếp, bảo hiểm vào giá trị hàng nhập kho theo tiêu thức phù hợp.</td></tr>
+      <tr><td>10</td><td>Khai báo thuế GTGT đầu vào</td><td>Nhập thuế suất, tiền thuế, thông tin hóa đơn để phục vụ kê khai thuế.</td></tr>
+      <tr><td>11</td><td>Đính kèm chứng từ mua hàng</td><td>Đính kèm báo giá, đơn mua, hợp đồng, phiếu giao hàng, hóa đơn, biên bản nhận hàng.</td></tr>
+      <tr><td>12</td><td>Duyệt chứng từ mua hàng</td><td>Người có quyền duyệt xác nhận chứng từ trước khi ghi sổ.</td></tr>
+      <tr><td>13</td><td>Ghi sổ chứng từ mua hàng</td><td>Chứng từ đã duyệt được ghi nhận vào công nợ, kho và sổ cái theo nghiệp vụ phát sinh.</td></tr>
+      <tr><td>14</td><td>Hủy chứng từ mua hàng</td><td>Hủy chứng từ sai, bắt buộc nhập lý do và lưu nhật ký truy vết.</td></tr>
+    </table>
+
+    <h3>3.5. Nhận hàng & nhập kho mua hàng</h3>
+    <p>Module này dùng để ghi nhận hàng thực nhận, lập phiếu nhập kho, cập nhật tồn kho và liên kết chứng từ mua hàng với kho.</p>
+    <table>
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Lập phiếu nhận hàng</td><td>Ghi nhận số lượng hàng thực tế nhận từ nhà cung cấp.</td></tr>
+      <tr><td>2</td><td>Lập phiếu nhập kho từ chứng từ mua hàng</td><td>Tự động tạo phiếu nhập kho từ chứng từ mua hàng đã ghi nhận.</td></tr>
+      <tr><td>3</td><td>Lập phiếu nhập kho thủ công</td><td>Tạo phiếu nhập kho độc lập khi cần ghi nhận nhập kho không phát sinh trực tiếp từ mua hàng.</td></tr>
+      <tr><td>4</td><td>Nhập kho theo đơn mua / hợp đồng</td><td>Đối chiếu số lượng nhập kho với số lượng đã đặt mua / đã ký hợp đồng.</td></tr>
+      <tr><td>5</td><td>Nhập kho nhiều lần</td><td>Cho phép một đơn mua / hợp đồng được nhập kho nhiều lần.</td></tr>
+      <tr><td>6</td><td>Kiểm tra số lượng nhận vượt đơn mua</td><td>Cảnh báo hoặc chặn khi số lượng nhập vượt số lượng đã đặt theo cấu hình.</td></tr>
+      <tr><td>7</td><td>Ghi nhận hàng thiếu / hàng lỗi</td><td>Theo dõi số lượng thiếu, lỗi, không đạt chất lượng để xử lý với nhà cung cấp.</td></tr>
+      <tr><td>8</td><td>Cập nhật tồn kho</td><td>Phiếu nhập kho đã duyệt làm tăng số lượng và giá trị tồn kho.</td></tr>
+      <tr><td>9</td><td>In phiếu nhập kho</td><td>In phiếu nhập kho theo mẫu để thủ kho / kế toán lưu chứng từ.</td></tr>
+      <tr><td>10</td><td>Duyệt phiếu nhập kho</td><td>Thủ kho hoặc người có quyền xác nhận nhập kho.</td></tr>
+      <tr><td>11</td><td>Hủy phiếu nhập kho</td><td>Hủy phiếu nhập sai khi chưa khóa kỳ, bắt buộc nhập lý do.</td></tr>
+    </table>
+
+    <h3>3.6. Hóa đơn mua vào</h3>
+    <p>Module này dùng để quản lý hóa đơn đầu vào, liên kết hóa đơn với chứng từ mua hàng / nhập kho và phục vụ kê khai thuế.</p>
+    <table>
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Nhập hóa đơn mua vào</td><td>Ghi nhận số hóa đơn, ngày hóa đơn, mẫu số, ký hiệu, nhà cung cấp, giá trị trước thuế, thuế GTGT.</td></tr>
+      <tr><td>2</td><td>Lập chứng từ mua hàng từ hóa đơn</td><td>Tạo nhanh chứng từ mua hàng dựa trên thông tin hóa đơn đầu vào.</td></tr>
+      <tr><td>3</td><td>Liên kết hóa đơn với chứng từ mua hàng</td><td>Gắn hóa đơn với đơn mua, hợp đồng, chứng từ mua hàng hoặc phiếu nhập kho.</td></tr>
+      <tr><td>4</td><td>Theo dõi hàng đã nhận chưa có hóa đơn</td><td>Liệt kê hàng đã nhập kho nhưng chưa nhận hóa đơn để kế toán xử lý.</td></tr>
+      <tr><td>5</td><td>Theo dõi hóa đơn chưa nhận hàng</td><td>Liệt kê hóa đơn đã nhận nhưng hàng chưa về kho hoặc chưa nghiệm thu dịch vụ.</td></tr>
+      <tr><td>6</td><td>Kiểm tra trùng hóa đơn</td><td>Cảnh báo khi nhập trùng số hóa đơn, ký hiệu, nhà cung cấp.</td></tr>
+      <tr><td>7</td><td>Kiểm tra thông tin nhà cung cấp</td><td>Gợi ý / kiểm tra thông tin nhà cung cấp theo mã số thuế, cảnh báo nhà cung cấp rủi ro nếu có tích hợp dữ liệu.</td></tr>
+      <tr><td>8</td><td>Quản lý trạng thái hóa đơn</td><td>Theo dõi hóa đơn hợp lệ, chờ kiểm tra, sai thông tin, điều chỉnh, thay thế hoặc hủy.</td></tr>
+      <tr><td>9</td><td>Đính kèm file hóa đơn</td><td>Lưu file XML / PDF / hình ảnh hóa đơn đầu vào.</td></tr>
+      <tr><td>10</td><td>Chuyển dữ liệu hóa đơn sang thuế</td><td>Cập nhật hóa đơn đầu vào vào bảng kê thuế GTGT khi đến kỳ kê khai.</td></tr>
+    </table>
+
+    <h3>3.7. Công nợ phải trả nhà cung cấp</h3>
+    <p>Module này dùng để theo dõi số tiền phải trả theo từng nhà cung cấp, hóa đơn, hợp đồng, hạn thanh toán và tình trạng thanh toán.</p>
+    <table>
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Ghi nhận công nợ phải trả</td><td>Chứng từ mua hàng / hóa đơn đã duyệt làm phát sinh công nợ phải trả nhà cung cấp.</td></tr>
+      <tr><td>2</td><td>Theo dõi công nợ theo nhà cung cấp</td><td>Xem số dư đầu kỳ, phát sinh tăng, phát sinh giảm, số dư cuối kỳ theo từng nhà cung cấp.</td></tr>
+      <tr><td>3</td><td>Theo dõi công nợ theo hóa đơn</td><td>Quản lý công nợ chi tiết đến từng hóa đơn mua vào.</td></tr>
+      <tr><td>4</td><td>Theo dõi công nợ theo hợp đồng</td><td>Đối chiếu giá trị phải trả, đã thanh toán, còn phải trả theo hợp đồng mua.</td></tr>
+      <tr><td>5</td><td>Theo dõi hạn thanh toán</td><td>Quản lý ngày đến hạn, số ngày quá hạn, công nợ đến hạn và quá hạn.</td></tr>
+      <tr><td>6</td><td>Cảnh báo công nợ đến hạn</td><td>Cảnh báo hóa đơn / khoản phải trả sắp đến hạn thanh toán.</td></tr>
+      <tr><td>7</td><td>Đối chiếu công nợ với nhà cung cấp</td><td>Lập bảng / biên bản đối chiếu công nợ theo kỳ.</td></tr>
+      <tr><td>8</td><td>Điều chỉnh công nợ</td><td>Lập chứng từ điều chỉnh khi có sai lệch, giảm trừ hoặc xử lý chênh lệch công nợ.</td></tr>
+      <tr><td>9</td><td>Theo dõi công nợ ngoại tệ</td><td>Quản lý công nợ theo nguyên tệ, tỷ giá và quy đổi nếu doanh nghiệp có giao dịch ngoại tệ.</td></tr>
+      <tr><td>10</td><td>Đối chiếu công nợ với sổ cái</td><td>Kiểm tra tổng công nợ chi tiết khớp tài khoản phải trả trên sổ cái.</td></tr>
+    </table>
+
+    <h3>3.8. Thanh toán nhà cung cấp</h3>
+    <p>Module này dùng để lập chứng từ thanh toán nhà cung cấp bằng tiền mặt, ngân hàng hoặc bù trừ, đồng thời tự động giảm công nợ phải trả.</p>
+    <table>
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Lập thanh toán nhà cung cấp</td><td>Chọn nhà cung cấp, hóa đơn / khoản nợ cần thanh toán và số tiền thanh toán.</td></tr>
+      <tr><td>2</td><td>Thanh toán bằng tiền mặt</td><td>Tạo phiếu chi và giảm công nợ phải trả tương ứng.</td></tr>
+      <tr><td>3</td><td>Thanh toán bằng ngân hàng</td><td>Tạo chứng từ chi ngân hàng / ủy nhiệm chi và giảm công nợ phải trả.</td></tr>
+      <tr><td>4</td><td>Thanh toán theo hóa đơn</td><td>Phân bổ tiền thanh toán cho từng hóa đơn mua vào.</td></tr>
+      <tr><td>5</td><td>Thanh toán một phần</td><td>Cho phép thanh toán một phần giá trị hóa đơn / công nợ.</td></tr>
+      <tr><td>6</td><td>Thanh toán nhiều hóa đơn</td><td>Một lần thanh toán có thể phân bổ cho nhiều hóa đơn của cùng nhà cung cấp.</td></tr>
+      <tr><td>7</td><td>Theo dõi chiết khấu thanh toán</td><td>Ghi nhận khoản chiết khấu được hưởng khi thanh toán sớm nếu có.</td></tr>
+      <tr><td>8</td><td>Theo dõi phí ngân hàng</td><td>Ghi nhận phí chuyển tiền / phí ngân hàng phát sinh trong quá trình thanh toán.</td></tr>
+      <tr><td>9</td><td>In phiếu chi / ủy nhiệm chi</td><td>In chứng từ thanh toán theo mẫu.</td></tr>
+      <tr><td>10</td><td>Hủy thanh toán</td><td>Hủy chứng từ thanh toán sai, khôi phục công nợ tương ứng và ghi nhật ký.</td></tr>
+    </table>
+
+    <h3>3.9. Trả lại hàng mua & giảm giá hàng mua</h3>
+    <p>Module này dùng để xử lý trường hợp hàng mua bị trả lại, nhà cung cấp giảm giá hoặc điều chỉnh hóa đơn / công nợ.</p>
+    <table>
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Lập chứng từ trả lại hàng mua</td><td>Ghi nhận hàng trả lại cho nhà cung cấp do lỗi, sai quy cách hoặc không đạt yêu cầu.</td></tr>
+      <tr><td>2</td><td>Lập phiếu xuất kho trả lại</td><td>Xuất kho hàng trả lại, làm giảm số lượng và giá trị tồn kho.</td></tr>
+      <tr><td>3</td><td>Trả lại theo chứng từ mua</td><td>Liên kết hàng trả lại với chứng từ mua / hóa đơn mua ban đầu.</td></tr>
+      <tr><td>4</td><td>Lập chứng từ giảm giá hàng mua</td><td>Ghi nhận khoản giảm giá được nhà cung cấp chấp thuận sau mua.</td></tr>
+      <tr><td>5</td><td>Điều chỉnh thuế GTGT đầu vào</td><td>Điều chỉnh tiền thuế đầu vào khi phát sinh trả lại / giảm giá.</td></tr>
+      <tr><td>6</td><td>Điều chỉnh công nợ phải trả</td><td>Trả lại / giảm giá làm giảm số tiền còn phải trả nhà cung cấp.</td></tr>
+      <tr><td>7</td><td>Theo dõi hóa đơn điều chỉnh / thay thế</td><td>Liên kết chứng từ trả lại / giảm giá với hóa đơn điều chỉnh hoặc hóa đơn thay thế nếu có.</td></tr>
+      <tr><td>8</td><td>In biên bản trả lại / giảm giá</td><td>In chứng từ hoặc biên bản phục vụ lưu hồ sơ.</td></tr>
+    </table>
+
+    <h3>3.10. Bù trừ & đối chiếu công nợ</h3>
+    <p>Module này dùng để xử lý bù trừ công nợ và đối chiếu số liệu giữa ACC với nhà cung cấp / sổ cái.</p>
+    <table>
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Bù trừ công nợ cùng đối tượng</td><td>Bù trừ phải trả và phải thu với cùng một đối tượng vừa là khách hàng vừa là nhà cung cấp.</td></tr>
+      <tr><td>2</td><td>Bù trừ công nợ theo hóa đơn</td><td>Chọn các hóa đơn / khoản nợ được bù trừ và xác định số tiền bù trừ.</td></tr>
+      <tr><td>3</td><td>Lập chứng từ bù trừ công nợ</td><td>Ghi nhận nghiệp vụ bù trừ và cập nhật công nợ chi tiết.</td></tr>
+      <tr><td>4</td><td>Lập biên bản đối chiếu công nợ</td><td>Tổng hợp số liệu công nợ gửi nhà cung cấp xác nhận.</td></tr>
+      <tr><td>5</td><td>Theo dõi xác nhận đối chiếu</td><td>Ghi nhận trạng thái đã gửi, đã xác nhận, còn lệch, cần xử lý.</td></tr>
+      <tr><td>6</td><td>Xử lý chênh lệch công nợ</td><td>Lập chứng từ điều chỉnh khi phát hiện lệch công nợ sau đối chiếu.</td></tr>
+      <tr><td>7</td><td>Đối chiếu công nợ với sổ cái</td><td>Kiểm tra công nợ chi tiết nhà cung cấp khớp tài khoản tổng hợp phải trả.</td></tr>
+    </table>
+
+    <h3>3.11. Quản lý kho</h3>
+    <p>Module này dùng để quản lý các nghiệp vụ kho phát sinh trong giai đoạn mua hàng: nhập kho, chuyển kho, kiểm kê, điều chỉnh tồn và theo dõi thẻ kho.</p>
+
+    <h3>3.11.1. Nhập kho</h3>
+    <table>
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Lập chứng từ nhập kho</td><td>Ghi nhận hàng hóa, vật tư nhập vào kho.</td></tr>
+      <tr><td>2</td><td>Nhập kho từ mua hàng</td><td>Tạo phiếu nhập kho từ chứng từ mua hàng / nhận hàng.</td></tr>
+      <tr><td>3</td><td>Nhập kho khác</td><td>Ghi nhận các nghiệp vụ nhập kho không phát sinh trực tiếp từ mua hàng.</td></tr>
+      <tr><td>4</td><td>Duyệt nhập kho</td><td>Thủ kho hoặc người có quyền xác nhận hàng đã nhập kho.</td></tr>
+      <tr><td>5</td><td>Cập nhật thẻ kho</td><td>Phiếu nhập kho đã duyệt tự động cập nhật thẻ kho và tồn kho.</td></tr>
+    </table>
+
+    <h3>3.11.2. Chuyển kho</h3>
+    <table>
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Lập phiếu chuyển kho</td><td>Ghi nhận chuyển hàng từ kho nguồn sang kho đích.</td></tr>
+      <tr><td>2</td><td>Kiểm tra tồn kho nguồn</td><td>Cảnh báo hoặc chặn nếu kho nguồn không đủ số lượng để chuyển.</td></tr>
+      <tr><td>3</td><td>Duyệt chuyển kho</td><td>Xác nhận hàng đã xuất khỏi kho nguồn và nhập vào kho đích.</td></tr>
+      <tr><td>4</td><td>Theo dõi hàng đang chuyển</td><td>Theo dõi trạng thái hàng đang đi đường giữa hai kho nếu quy trình cần tách xuất / nhập.</td></tr>
+      <tr><td>5</td><td>In phiếu chuyển kho</td><td>In phiếu chuyển kho phục vụ giao nhận nội bộ.</td></tr>
+    </table>
+
+    <h3>3.11.3. Kiểm kê & điều chỉnh tồn kho</h3>
+    <table>
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Lập biên bản kiểm kê kho</td><td>Ghi nhận số lượng kiểm kê thực tế theo kho, mặt hàng.</td></tr>
+      <tr><td>2</td><td>So sánh tồn thực tế với tồn sổ</td><td>Tự động xác định chênh lệch thừa / thiếu so với thẻ kho.</td></tr>
+      <tr><td>3</td><td>Xử lý chênh lệch kiểm kê</td><td>Sinh chứng từ nhập / xuất điều chỉnh khi có chênh lệch kiểm kê.</td></tr>
+      <tr><td>4</td><td>Điều chỉnh tồn kho</td><td>Lập chứng từ điều chỉnh số lượng hoặc giá trị tồn kho theo quyền được cấp.</td></tr>
+      <tr><td>5</td><td>Theo dõi lịch sử kiểm kê</td><td>Lưu các lần kiểm kê, người kiểm kê, thời gian và kết quả xử lý.</td></tr>
+      <tr><td>6</td><td>Kiểm soát tồn âm</td><td>Cảnh báo hoặc chặn phát sinh làm âm kho theo cấu hình.</td></tr>
+    </table>
+
+    <h3>3.11.4. Thẻ kho & tồn kho</h3>
+    <table>
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Xem thẻ kho</td><td>Theo dõi nhập, xuất, tồn theo từng mặt hàng, từng kho.</td></tr>
+      <tr><td>2</td><td>Xem sổ chi tiết vật tư hàng hóa</td><td>Tra cứu phát sinh số lượng, giá trị theo từng vật tư / hàng hóa.</td></tr>
+      <tr><td>3</td><td>Xem tồn kho tức thời</td><td>Hiển thị số lượng tồn hiện tại theo kho và mặt hàng.</td></tr>
+      <tr><td>4</td><td>Lọc tồn kho theo kho / nhóm hàng</td><td>Tra cứu tồn kho theo kho, nhóm hàng, mặt hàng, thời gian.</td></tr>
+      <tr><td>5</td><td>Đối chiếu kho với sổ cái</td><td>Kiểm tra giá trị tồn kho trên báo cáo kho khớp tài khoản hàng tồn kho trên sổ cái.</td></tr>
+      <tr><td>6</td><td>Xuất dữ liệu kho</td><td>Xuất thẻ kho, sổ chi tiết vật tư hàng hóa, báo cáo tồn kho ra Excel / PDF.</td></tr>
+    </table>
+
+    <h3>3.12. Báo cáo mua hàng, công nợ phải trả & kho</h3>
+    <p>Module báo cáo giúp kế toán và quản lý theo dõi tình hình mua hàng, công nợ nhà cung cấp, nhập xuất tồn và các chênh lệch cần xử lý.</p>
+    <table>
+      <tr><th>Nhóm báo cáo</th><th>Báo cáo / Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>Mua hàng</td><td>Sổ chi tiết mua hàng</td><td>Theo dõi chi tiết chứng từ mua hàng theo ngày, nhà cung cấp, mặt hàng.</td></tr>
+      <tr><td>Mua hàng</td><td>Tổng hợp mua hàng theo nhà cung cấp</td><td>Tổng hợp giá trị mua theo từng nhà cung cấp trong kỳ.</td></tr>
+      <tr><td>Mua hàng</td><td>Tổng hợp mua hàng theo mặt hàng</td><td>Tổng hợp số lượng, giá trị mua theo từng hàng hóa / vật tư.</td></tr>
+      <tr><td>Mua hàng</td><td>Báo cáo đơn mua chưa hoàn thành</td><td>Liệt kê đơn mua còn chưa nhận đủ hàng hoặc chưa hoàn tất.</td></tr>
+      <tr><td>Công nợ phải trả</td><td>Tổng hợp công nợ phải trả nhà cung cấp</td><td>Tổng hợp số dư đầu kỳ, phát sinh, thanh toán, số dư cuối kỳ theo nhà cung cấp.</td></tr>
+      <tr><td>Công nợ phải trả</td><td>Chi tiết công nợ phải trả theo hóa đơn</td><td>Theo dõi công nợ còn phải trả đến từng hóa đơn mua vào.</td></tr>
+      <tr><td>Công nợ phải trả</td><td>Báo cáo công nợ đến hạn / quá hạn</td><td>Liệt kê các khoản phải trả sắp đến hạn hoặc đã quá hạn thanh toán.</td></tr>
+      <tr><td>Công nợ phải trả</td><td>Biên bản đối chiếu công nợ</td><td>Xuất số liệu đối chiếu công nợ gửi nhà cung cấp xác nhận.</td></tr>
+      <tr><td>Kho</td><td>Thẻ kho</td><td>Theo dõi nhập, xuất, tồn theo từng mặt hàng tại từng kho.</td></tr>
+      <tr><td>Kho</td><td>Sổ chi tiết vật tư hàng hóa</td><td>Theo dõi số lượng và giá trị phát sinh của từng vật tư / hàng hóa.</td></tr>
+      <tr><td>Kho</td><td>Báo cáo tổng hợp tồn kho</td><td>Tổng hợp tồn đầu kỳ, nhập, xuất, tồn cuối kỳ theo kho và mặt hàng.</td></tr>
+      <tr><td>Kho</td><td>Báo cáo nhập - xuất - tồn</td><td>Theo dõi biến động nhập, xuất, tồn theo kỳ.</td></tr>
+      <tr><td>Kho</td><td>Báo cáo hàng tồn âm / lệch kho</td><td>Liệt kê mặt hàng âm kho hoặc lệch giữa kho và sổ cái để kiểm tra.</td></tr>
+    </table>
+
+    <h3>Quy tắc nghiệp vụ chung của Giai đoạn 2</h3>
+    <table>
+      <tr><th>STT</th><th>Quy tắc</th><th>Nội dung</th></tr>
+      <tr><td>1</td><td>Chứng từ mua hàng có trạng thái</td><td>Đơn mua, chứng từ mua, phiếu nhập kho, thanh toán đều có trạng thái Nháp → Chờ duyệt → Đã duyệt → Đã hủy.</td></tr>
+      <tr><td>2</td><td>Ghi sổ sau duyệt</td><td>Chỉ chứng từ đã duyệt mới được cập nhật kho, công nợ và sổ cái.</td></tr>
+      <tr><td>3</td><td>Không sửa trực tiếp chứng từ đã duyệt</td><td>Chứng từ đã duyệt muốn thay đổi phải hủy, điều chỉnh hoặc lập chứng từ bổ sung.</td></tr>
+      <tr><td>4</td><td>Hàng nhập làm tăng tồn kho</td><td>Phiếu nhập kho đã duyệt cập nhật số lượng và giá trị tồn kho.</td></tr>
+      <tr><td>5</td><td>Hóa đơn / chứng từ mua làm tăng công nợ</td><td>Chứng từ mua hàng được duyệt làm phát sinh công nợ phải trả nhà cung cấp.</td></tr>
+      <tr><td>6</td><td>Thanh toán làm giảm công nợ</td><td>Phiếu chi / chi ngân hàng / bù trừ được duyệt làm giảm công nợ phải trả.</td></tr>
+      <tr><td>7</td><td>Trả lại / giảm giá làm giảm công nợ và tồn kho</td><td>Trả lại hàng mua làm giảm tồn kho; giảm giá hàng mua làm giảm giá trị phải trả và điều chỉnh thuế nếu có.</td></tr>
+      <tr><td>8</td><td>Không xóa dữ liệu đã phát sinh</td><td>Nhà cung cấp, hàng hóa, kho, chứng từ đã phát sinh chỉ được ngừng sử dụng / hủy theo quy trình.</td></tr>
+      <tr><td>9</td><td>Công nợ chi tiết khớp sổ cái</td><td>Tổng công nợ theo nhà cung cấp phải khớp tài khoản phải trả trên sổ cái.</td></tr>
+      <tr><td>10</td><td>Tồn kho chi tiết khớp sổ cái</td><td>Giá trị tồn kho trên báo cáo kho phải khớp tài khoản hàng tồn kho trên sổ cái.</td></tr>
+    </table>
 
     <h3>Kết quả bàn giao</h3>
     <ul>
-      <li>Hoàn thành chu trình: đơn mua → hóa đơn mua → nhập kho → công nợ nhà cung cấp</li>
-      <li>Thanh toán nhà cung cấp qua quỹ hoặc ngân hàng, giảm công nợ tương ứng</li>
-      <li>Trả lại hàng mua làm giảm công nợ và giảm tồn kho</li>
-      <li>Nghiệp vụ nhập kho, chuyển kho, kiểm kê vận hành; báo cáo nhập - xuất - tồn theo từng kho và mặt hàng</li>
-      <li>Sổ cái cập nhật đầy đủ nghiệp vụ mua hàng và nhập kho</li>
+      <li>Hoàn thành chu trình: đơn mua → hợp đồng mua → chứng từ mua / nhận hàng → nhập kho → hóa đơn mua → công nợ nhà cung cấp.</li>
+      <li>Thanh toán nhà cung cấp qua quỹ hoặc ngân hàng, tự động giảm công nợ phải trả.</li>
+      <li>Trả lại hàng mua / giảm giá hàng mua làm giảm công nợ, điều chỉnh tồn kho và thuế đầu vào khi có phát sinh.</li>
+      <li>Nghiệp vụ nhập kho, chuyển kho, kiểm kê, điều chỉnh tồn kho vận hành đầy đủ.</li>
+      <li>Báo cáo mua hàng, công nợ phải trả và nhập - xuất - tồn kho tra cứu được theo kỳ, nhà cung cấp, mặt hàng và kho.</li>
+      <li>Sổ cái cập nhật đầy đủ nghiệp vụ mua hàng, nhập kho, công nợ và thanh toán.</li>
     </ul>
 
     <h3>Tiêu chí nghiệm thu</h3>
     <table>
       <tr><th>Tiêu chí</th><th>Nội dung kiểm tra</th></tr>
-      <tr><td>Mua hàng</td><td>Hóa đơn mua sau khi duyệt sinh nghiệp vụ nhập kho và công nợ nhà cung cấp</td></tr>
-      <tr><td>Công nợ</td><td>Công nợ chi tiết theo nhà cung cấp khớp sổ tổng hợp</td></tr>
-      <tr><td>Thanh toán</td><td>Chi tiền làm giảm công nợ đúng số</td></tr>
-      <tr><td>Tồn kho</td><td>Hàng nhập làm tăng tồn kho đúng số lượng và giá trị; nhập - xuất - tồn khớp thẻ kho</td></tr>
-      <tr><td>Kiểm kê</td><td>Sinh chứng từ xử lý chênh lệch đúng</td></tr>
+      <tr><td>Đơn mua / hợp đồng</td><td>Đơn mua và hợp đồng theo dõi được số lượng / giá trị đã nhận, đã lập hóa đơn, đã thanh toán và còn lại.</td></tr>
+      <tr><td>Mua hàng</td><td>Chứng từ mua hàng sau khi duyệt sinh đúng công nợ phải trả, thuế đầu vào và liên kết nhập kho nếu là hàng hóa.</td></tr>
+      <tr><td>Nhập kho</td><td>Hàng nhập làm tăng tồn kho đúng số lượng, giá trị; nhập - xuất - tồn khớp thẻ kho.</td></tr>
+      <tr><td>Công nợ</td><td>Công nợ chi tiết theo nhà cung cấp / hóa đơn khớp sổ tổng hợp phải trả.</td></tr>
+      <tr><td>Thanh toán</td><td>Chi tiền mặt / ngân hàng hoặc bù trừ làm giảm công nợ đúng số tiền, đúng hóa đơn.</td></tr>
+      <tr><td>Trả lại / giảm giá</td><td>Trả lại hàng mua làm giảm tồn kho và công nợ; giảm giá hàng mua điều chỉnh đúng công nợ và thuế.</td></tr>
+      <tr><td>Kiểm kê kho</td><td>Kiểm kê xác định được chênh lệch và sinh chứng từ xử lý chênh lệch đúng.</td></tr>
+      <tr><td>Đối chiếu</td><td>Báo cáo công nợ và báo cáo kho đối chiếu khớp với sổ cái.</td></tr>
     </table>
   </section>
 
