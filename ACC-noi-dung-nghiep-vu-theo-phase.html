@@ -1401,58 +1401,158 @@
 
   <section class="section-break">
     <h2>7. Giai đoạn 6 — Mở rộng nâng cao</h2>
-    <div class="callout">Các phân hệ dưới đây mở rộng năng lực cho doanh nghiệp sản xuất, dịch vụ và quản trị tài chính chuyên sâu, triển khai sau khi các phân hệ cốt lõi đã ổn định.</div>
+    <div class="callout">Giai đoạn 6 mở rộng năng lực cho doanh nghiệp có nhu cầu quản trị tài chính kế toán chuyên sâu hơn sau khi các phân hệ cốt lõi đã ổn định. Các module trong giai đoạn này được triển khai theo nhu cầu thực tế và có thể nghiệm thu theo từng phân hệ độc lập.</div>
 
     <h3>7.1. Tài sản cố định</h3>
+    <p>Module này dùng để quản lý vòng đời tài sản cố định từ ghi tăng, khấu hao, điều chuyển, đánh giá lại đến ghi giảm và kiểm kê.</p>
     <table>
-      <tr><th>Quy trình</th><th>Chức năng</th><th>Báo cáo</th><th>Điều kiện xác nhận</th></tr>
-      <tr><td>Ghi tăng → Tính khấu hao → Điều chuyển / Đánh giá lại → Ghi giảm → Kiểm kê → Báo cáo</td><td>Sổ tài sản; ghi tăng; khấu hao; điều chuyển; đánh giá lại; ghi giảm; kiểm kê; chuyển tài sản thuê tài chính thành tài sản sở hữu</td><td>Sổ tài sản cố định; thẻ tài sản; bảng khấu hao; đối chiếu tài sản / sổ cái</td><td>Nguyên giá và hao mòn khớp sổ kế toán; tài sản đã ghi giảm không tiếp tục khấu hao</td></tr>
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Khai báo danh mục tài sản cố định</td><td>Quản lý mã tài sản, tên tài sản, nhóm tài sản, bộ phận sử dụng, ngày ghi tăng, nguyên giá và thời gian khấu hao.</td></tr>
+      <tr><td>2</td><td>Ghi tăng tài sản cố định</td><td>Ghi nhận tài sản mua mới, đầu tư hoàn thành hoặc tiếp nhận bàn giao đưa vào sử dụng.</td></tr>
+      <tr><td>3</td><td>Điều chỉnh thông tin tài sản</td><td>Cập nhật bộ phận sử dụng, thời gian khấu hao, nguyên giá hoặc thông tin theo dõi khác theo quyền được cấp.</td></tr>
+      <tr><td>4</td><td>Tính khấu hao tài sản cố định</td><td>Tự động hoặc thủ công tính khấu hao định kỳ theo phương pháp đã khai báo.</td></tr>
+      <tr><td>5</td><td>Hạch toán chi phí khấu hao</td><td>Ghi nhận chi phí khấu hao vào các bộ phận / khoản mục chi phí tương ứng.</td></tr>
+      <tr><td>6</td><td>Điều chuyển tài sản</td><td>Chuyển tài sản giữa bộ phận, chi nhánh hoặc địa điểm sử dụng nhưng vẫn giữ lịch sử theo dõi.</td></tr>
+      <tr><td>7</td><td>Đánh giá lại tài sản</td><td>Điều chỉnh giá trị tài sản theo quyết định đánh giá lại hoặc xử lý chênh lệch.</td></tr>
+      <tr><td>8</td><td>Ghi giảm tài sản</td><td>Ghi nhận thanh lý, nhượng bán, mất mát hoặc ngừng sử dụng tài sản cố định.</td></tr>
+      <tr><td>9</td><td>Kiểm kê tài sản cố định</td><td>Đối chiếu tài sản thực tế với sổ theo dõi, phát hiện chênh lệch và lập hồ sơ xử lý.</td></tr>
+      <tr><td>10</td><td>Thẻ tài sản cố định</td><td>Tra cứu toàn bộ lịch sử tăng, giảm, khấu hao, điều chuyển và giá trị còn lại của từng tài sản.</td></tr>
+      <tr><td>11</td><td>Báo cáo tài sản cố định</td><td>Lập sổ tài sản, bảng khấu hao, báo cáo tăng giảm, báo cáo giá trị còn lại và đối chiếu với sổ cái.</td></tr>
     </table>
 
     <h3>7.2. Công cụ dụng cụ & chi phí trả trước</h3>
+    <p>Module này dùng để quản lý công cụ dụng cụ và chi phí trả trước theo dõi từ khi ghi tăng đến khi phân bổ hết giá trị.</p>
     <table>
-      <tr><th>Quy trình</th><th>Chức năng</th><th>Báo cáo</th><th>Điều kiện xác nhận</th></tr>
-      <tr><td>Ghi tăng → Khai báo kỳ phân bổ → Phân bổ hàng tháng → Theo dõi giá trị còn lại → Báo cáo</td><td>Ghi tăng công cụ dụng cụ; phân bổ; ngừng phân bổ; chi phí trả trước</td><td>Bảng phân bổ; giá trị còn lại; danh sách công cụ đang sử dụng</td><td>Tổng đã phân bổ cộng giá trị còn lại bằng giá trị ban đầu; không phân bổ trùng kỳ</td></tr>
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Khai báo danh mục công cụ dụng cụ</td><td>Quản lý mã, tên, bộ phận sử dụng, giá trị ban đầu, ngày đưa vào sử dụng và thời gian phân bổ.</td></tr>
+      <tr><td>2</td><td>Ghi tăng công cụ dụng cụ</td><td>Ghi nhận công cụ dụng cụ mới đưa vào sử dụng hoặc nhập đầu kỳ.</td></tr>
+      <tr><td>3</td><td>Ghi tăng chi phí trả trước</td><td>Ghi nhận các khoản chi phí trả trước cần theo dõi và phân bổ nhiều kỳ.</td></tr>
+      <tr><td>4</td><td>Khai báo kỳ phân bổ</td><td>Thiết lập thời gian phân bổ, số kỳ phân bổ và tài khoản chi phí nhận phân bổ.</td></tr>
+      <tr><td>5</td><td>Phân bổ công cụ dụng cụ</td><td>Lập bút toán phân bổ định kỳ cho công cụ dụng cụ theo phương án đã khai báo.</td></tr>
+      <tr><td>6</td><td>Phân bổ chi phí trả trước</td><td>Lập bút toán phân bổ định kỳ cho chi phí trả trước.</td></tr>
+      <tr><td>7</td><td>Ngừng phân bổ</td><td>Cho phép dừng phân bổ trong trường hợp công cụ / khoản chi phí không còn áp dụng.</td></tr>
+      <tr><td>8</td><td>Điều chỉnh giá trị phân bổ</td><td>Điều chỉnh giá trị còn lại, kỳ phân bổ hoặc tỷ lệ phân bổ theo quyết định kế toán.</td></tr>
+      <tr><td>9</td><td>Theo dõi giá trị còn lại</td><td>Hiển thị giá trị ban đầu, đã phân bổ, còn lại của từng công cụ dụng cụ hoặc khoản chi phí trả trước.</td></tr>
+      <tr><td>10</td><td>Kiểm kê công cụ dụng cụ</td><td>Đối chiếu tình trạng sử dụng thực tế với dữ liệu theo dõi trên hệ thống.</td></tr>
+      <tr><td>11</td><td>Báo cáo phân bổ</td><td>Lập bảng phân bổ, danh sách công cụ đang sử dụng, báo cáo giá trị còn lại và đối chiếu sổ cái.</td></tr>
     </table>
 
-    <h3>7.3. Tiền lương</h3>
-    <p>Phân hệ tiền lương được triển khai theo hai mức độ:</p>
-    <p><strong>a) Lương cơ bản</strong> — phục vụ hạch toán chi phí lương:</p>
+    <h3>7.3. Tiền lương cơ bản phục vụ hạch toán</h3>
+    <p>Module này phục vụ phạm vi lương cơ bản để hạch toán chi phí lương và thực hiện trả lương, chưa đi sâu vào toàn bộ nghiệp vụ HRM.</p>
     <table>
-      <tr><th>Quy trình</th><th>Chức năng</th><th>Báo cáo</th><th>Điều kiện xác nhận</th></tr>
-      <tr><td>Nhập bảng lương → Hạch toán chi phí lương → Trả lương</td><td>Danh mục nhân viên; nhập bảng lương; hạch toán chi phí; trả lương</td><td>Bảng lương</td><td>Bảng lương khớp chi phí lương ghi nhận; trả lương đúng số</td></tr>
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Danh mục nhân viên tính lương</td><td>Quản lý nhân viên, bộ phận, vị trí, hình thức trả lương và tài khoản hạch toán liên quan.</td></tr>
+      <tr><td>2</td><td>Nhập bảng lương</td><td>Nhập dữ liệu lương theo kỳ: lương cơ bản, phụ cấp, khấu trừ và số thực lĩnh.</td></tr>
+      <tr><td>3</td><td>Phân bổ lương theo bộ phận</td><td>Phân bổ chi phí lương cho phòng ban, bộ phận, công trình hoặc đối tượng chi phí.</td></tr>
+      <tr><td>4</td><td>Hạch toán chi phí lương</td><td>Ghi nhận bút toán chi phí lương phải trả theo kỳ kế toán.</td></tr>
+      <tr><td>5</td><td>Lập chứng từ trả lương</td><td>Ghi nhận thanh toán lương bằng tiền mặt hoặc ngân hàng cho nhân viên.</td></tr>
+      <tr><td>6</td><td>Theo dõi lương đã trả / chưa trả</td><td>Kiểm soát các khoản lương còn phải thanh toán hoặc đã thanh toán trong kỳ.</td></tr>
+      <tr><td>7</td><td>Báo cáo bảng lương</td><td>Lập bảng lương, bảng phân bổ lương và báo cáo đối chiếu chi phí lương với sổ cái.</td></tr>
     </table>
-    <p><strong>b) Quản lý lương đầy đủ</strong> — phạm vi chi tiết sẽ được xác định sau khi thống nhất với bộ phận kế toán / nhân sự:</p>
-    <table>
-      <tr><th>Nhóm nghiệp vụ</th><th>Định hướng triển khai</th></tr>
-      <tr><td>Quản lý lương nâng cao</td><td>Có thể bao gồm chấm công, tính lương, bảo hiểm, thuế thu nhập cá nhân, phiếu lương và các báo cáo liên quan. Phạm vi cụ thể sẽ được xác nhận theo nhu cầu vận hành thực tế của doanh nghiệp.</td></tr>
-    </table>
+    <p><em>Phạm vi tiền lương nâng cao như chấm công, bảo hiểm, thuế thu nhập cá nhân, phiếu lương điện tử sẽ được mở rộng khi thống nhất thêm với bộ phận kế toán / nhân sự.</em></p>
 
     <h3>7.4. Giá thành sản xuất</h3>
+    <p>Module này dùng để tập hợp chi phí và tính giá thành theo đặc thù doanh nghiệp sản xuất, công trình hoặc dịch vụ có yêu cầu tính giá thành riêng.</p>
     <table>
-      <tr><th>Hạng mục</th><th>Nội dung</th></tr>
-      <tr><td>Đối tượng tập hợp chi phí</td><td>Theo sản phẩm / đơn hàng / công trình</td></tr>
-      <tr><td>Chi phí</td><td>Nguyên vật liệu (từ kho), nhân công (từ lương), chi phí chung (từ tổng hợp)</td></tr>
-      <tr><td>Phân bổ</td><td>Theo tiêu chí phân bổ chi phí chung</td></tr>
-      <tr><td>Kết chuyển</td><td>Kết chuyển thành phẩm / giá vốn</td></tr>
-      <tr><td>Báo cáo</td><td>Giá thành đơn vị, so sánh kế hoạch và thực tế</td></tr>
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Khai báo đối tượng tập hợp chi phí</td><td>Thiết lập đối tượng giá thành theo sản phẩm, đơn hàng, công trình hoặc dịch vụ.</td></tr>
+      <tr><td>2</td><td>Tập hợp chi phí nguyên vật liệu</td><td>Ghi nhận chi phí nguyên vật liệu trực tiếp từ kho cho từng đối tượng giá thành.</td></tr>
+      <tr><td>3</td><td>Tập hợp chi phí nhân công</td><td>Phân bổ chi phí lương và nhân công trực tiếp vào đối tượng tính giá thành.</td></tr>
+      <tr><td>4</td><td>Tập hợp chi phí sản xuất chung</td><td>Ghi nhận và theo dõi các chi phí chung cần phân bổ cho các đối tượng giá thành.</td></tr>
+      <tr><td>5</td><td>Khai báo tiêu thức phân bổ</td><td>Thiết lập tiêu thức phân bổ chi phí chung theo số lượng, định mức, doanh thu, giờ công hoặc tiêu chí khác.</td></tr>
+      <tr><td>6</td><td>Phân bổ chi phí sản xuất chung</td><td>Phân bổ chi phí chung cho từng đối tượng tính giá thành theo tiêu thức đã chọn.</td></tr>
+      <tr><td>7</td><td>Tính giá thành</td><td>Tổng hợp chi phí để xác định giá thành sản phẩm / đơn hàng / công trình trong kỳ.</td></tr>
+      <tr><td>8</td><td>Kết chuyển giá thành</td><td>Kết chuyển thành phẩm, dở dang hoặc giá vốn theo kết quả tính giá thành.</td></tr>
+      <tr><td>9</td><td>Theo dõi chi phí dở dang</td><td>Quản lý chi phí chưa hoàn thành, chi phí dở dang cuối kỳ theo từng đối tượng.</td></tr>
+      <tr><td>10</td><td>Báo cáo giá thành</td><td>Lập bảng tính giá thành, báo cáo giá thành đơn vị, so sánh kế hoạch và thực tế.</td></tr>
     </table>
-    <p><em>Phân hệ giá thành có nhiều biến thể theo từng ngành (sản xuất, công trình, dịch vụ), được triển khai sau khi nghiệp vụ kho và sổ cái đã ổn định.</em></p>
+    <p><em>Phân hệ giá thành có thể được điều chỉnh sâu theo từng ngành như sản xuất, xây lắp, dịch vụ hoặc gia công.</em></p>
 
-    <h3>7.5. Khế ước vay & hợp đồng</h3>
+    <h3>7.5. Khế ước vay</h3>
+    <p>Module này dùng để theo dõi các khoản vay, lịch trả nợ, chi phí lãi vay và nghĩa vụ thanh toán liên quan.</p>
     <table>
-      <tr><th>Hạng mục</th><th>Nội dung</th></tr>
-      <tr><td>Khế ước vay</td><td>Thông tin khoản vay, lịch trả nợ, lãi suất, ghi nhận thanh toán, dư nợ, chi phí lãi vay</td></tr>
-      <tr><td>Hợp đồng</td><td>Thông tin hợp đồng, mốc thanh toán, liên kết hóa đơn / thu chi, cảnh báo đến hạn</td></tr>
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Khai báo khoản vay</td><td>Quản lý thông tin khoản vay: số hợp đồng vay, bên cho vay, ngày vay, số tiền vay, thời hạn vay.</td></tr>
+      <tr><td>2</td><td>Khai báo lãi suất vay</td><td>Thiết lập lãi suất, phương pháp tính lãi và chu kỳ tính lãi.</td></tr>
+      <tr><td>3</td><td>Lập lịch trả nợ</td><td>Theo dõi lịch trả gốc, trả lãi theo kỳ của từng khoản vay.</td></tr>
+      <tr><td>4</td><td>Ghi nhận giải ngân</td><td>Ghi nhận số tiền vay thực nhận và liên kết với tài khoản ngân hàng / tiền gửi.</td></tr>
+      <tr><td>5</td><td>Ghi nhận thanh toán gốc / lãi</td><td>Ghi nhận các khoản trả nợ gốc, lãi vay và tự động cập nhật dư nợ còn lại.</td></tr>
+      <tr><td>6</td><td>Theo dõi dư nợ</td><td>Hiển thị số dư nợ gốc, lãi phải trả, lãi đã trả và dư nợ còn lại theo thời điểm.</td></tr>
+      <tr><td>7</td><td>Hạch toán chi phí lãi vay</td><td>Ghi nhận chi phí lãi vay theo kỳ kế toán.</td></tr>
+      <tr><td>8</td><td>Cảnh báo đến hạn trả nợ</td><td>Cảnh báo các khoản vay sắp đến hạn trả gốc hoặc lãi.</td></tr>
+      <tr><td>9</td><td>Báo cáo khế ước vay</td><td>Lập báo cáo dư nợ, lịch trả nợ, lãi vay và đối chiếu với sổ cái.</td></tr>
     </table>
 
-    <h3>7.6. Các phân hệ mở rộng khác</h3>
+    <h3>7.6. Hợp đồng</h3>
+    <p>Module này mở rộng quản lý hợp đồng theo góc độ tài chính: mốc thanh toán, liên kết hóa đơn, thu chi và cảnh báo đến hạn.</p>
     <table>
-      <tr><th>Phân hệ</th><th>Định hướng triển khai</th></tr>
-      <tr><td>Ngân hàng điện tử</td><td>Tích hợp kết nối trực tiếp với từng ngân hàng, kèm kiểm thử bảo mật</td></tr>
-      <tr><td>Bảng điều khiển quản trị nâng cao</td><td>Triển khai khi dữ liệu kế toán đã ổn định</td></tr>
-      <tr><td>Phân tích tài chính / dự báo dòng tiền</td><td>Triển khai khi đã có dữ liệu vận hành thực tế</td></tr>
-      <tr><td>Ngân sách nâng cao</td><td>Triển khai khi sổ cái ổn định để so sánh kế hoạch và thực tế</td></tr>
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Khai báo hợp đồng</td><td>Quản lý số hợp đồng, đối tác, giá trị hợp đồng, ngày ký, ngày hiệu lực, ngày hết hạn.</td></tr>
+      <tr><td>2</td><td>Khai báo mốc thanh toán</td><td>Thiết lập các đợt thanh toán, số tiền / tỷ lệ, ngày đến hạn theo hợp đồng.</td></tr>
+      <tr><td>3</td><td>Liên kết hóa đơn với hợp đồng</td><td>Gắn hóa đơn đầu vào / đầu ra với hợp đồng tương ứng.</td></tr>
+      <tr><td>4</td><td>Liên kết thu / chi với hợp đồng</td><td>Gắn các khoản thu tiền, thanh toán, tạm ứng hoặc quyết toán với hợp đồng.</td></tr>
+      <tr><td>5</td><td>Theo dõi thực hiện hợp đồng</td><td>Theo dõi giá trị đã thực hiện, đã xuất hóa đơn, đã thu / chi và giá trị còn lại.</td></tr>
+      <tr><td>6</td><td>Cảnh báo hợp đồng đến hạn</td><td>Cảnh báo sắp đến hạn thanh toán, sắp hết hiệu lực hoặc quá hạn thực hiện.</td></tr>
+      <tr><td>7</td><td>Báo cáo hợp đồng</td><td>Lập báo cáo tiến độ thực hiện, công nợ và dòng tiền theo hợp đồng.</td></tr>
+    </table>
+
+    <h3>7.7. Ngân hàng điện tử</h3>
+    <p>Module này mở rộng khả năng làm việc trực tiếp với ngân hàng điện tử để giảm thao tác thủ công trong nghiệp vụ tiền gửi.</p>
+    <table>
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Chuyển tiền trực tuyến</td><td>Hỗ trợ khởi tạo giao dịch chuyển tiền trực tiếp từ hệ thống theo phạm vi kết nối được phê duyệt.</td></tr>
+      <tr><td>2</td><td>Tra cứu số dư tài khoản</td><td>Xem số dư ngân hàng theo thời gian thực hoặc gần thời gian thực nếu có tích hợp.</td></tr>
+      <tr><td>3</td><td>Tra cứu lịch sử giao dịch</td><td>Nhận danh sách giao dịch phát sinh từ tài khoản ngân hàng tích hợp.</td></tr>
+      <tr><td>4</td><td>Tự động hạch toán tiền gửi</td><td>Gợi ý hoặc tự động tạo chứng từ ngân hàng từ dữ liệu giao dịch nhận được.</td></tr>
+      <tr><td>5</td><td>Tự động đối chiếu sổ phụ</td><td>So khớp dữ liệu sao kê / sổ phụ ngân hàng với chứng từ kế toán trong ACC.</td></tr>
+      <tr><td>6</td><td>Cảnh báo giao dịch lệch</td><td>Cảnh báo giao dịch chưa khớp, khớp sai hoặc cần xử lý bổ sung.</td></tr>
+    </table>
+    <p><em>Phân hệ này cần triển khai kèm kiểm soát bảo mật, phân quyền và xác nhận nghiệp vụ ngân hàng điện tử phù hợp thực tế vận hành.</em></p>
+
+    <h3>7.8. Dashboard quản trị, phân tích tài chính, dự báo dòng tiền & ngân sách</h3>
+    <p>Nhóm module này hỗ trợ quản trị tài chính nâng cao sau khi dữ liệu kế toán lõi đã ổn định và đủ sạch để phân tích.</p>
+    <table>
+      <tr><th>STT</th><th>Module / Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Bảng điều khiển quản trị nâng cao</td><td>Hiển thị các chỉ số tổng quan về doanh thu, chi phí, lợi nhuận, công nợ, dòng tiền, tồn kho theo kỳ.</td></tr>
+      <tr><td>2</td><td>Dashboard theo vai trò</td><td>Tùy biến góc nhìn theo giám đốc, kế toán trưởng, quản trị tài chính hoặc quản lý bộ phận.</td></tr>
+      <tr><td>3</td><td>Phân tích tài chính</td><td>Phân tích các chỉ tiêu tài chính, xu hướng biến động và hiệu quả hoạt động theo thời gian.</td></tr>
+      <tr><td>4</td><td>So sánh kỳ / năm</td><td>So sánh số liệu giữa các tháng, quý, năm hoặc giữa kế hoạch và thực tế.</td></tr>
+      <tr><td>5</td><td>Dự báo dòng tiền</td><td>Dự báo dòng tiền vào / ra dựa trên công nợ, lịch thanh toán, kế hoạch thu chi và dữ liệu lịch sử.</td></tr>
+      <tr><td>6</td><td>Khai báo ngân sách</td><td>Lập ngân sách theo năm / kỳ, theo phòng ban, khoản mục, dự án hoặc đối tượng chi phí.</td></tr>
+      <tr><td>7</td><td>Theo dõi thực hiện ngân sách</td><td>So sánh số thực tế phát sinh với ngân sách đã phê duyệt.</td></tr>
+      <tr><td>8</td><td>Cảnh báo vượt ngân sách</td><td>Cảnh báo khi chi phí hoặc khoản mục vượt hạn mức ngân sách được cấp.</td></tr>
+      <tr><td>9</td><td>Báo cáo quản trị nâng cao</td><td>Xuất báo cáo dashboard, phân tích tài chính, dòng tiền và ngân sách ra Excel / PDF.</td></tr>
+    </table>
+
+    <h3>Quy tắc nghiệp vụ chung của Giai đoạn 6</h3>
+    <table>
+      <tr><th>STT</th><th>Quy tắc</th><th>Nội dung</th></tr>
+      <tr><td>1</td><td>Triển khai theo nhu cầu thực tế</td><td>Các module mở rộng được triển khai sau khi các phân hệ cốt lõi đã ổn định và được nghiệm thu.</td></tr>
+      <tr><td>2</td><td>Dữ liệu mở rộng phải khớp sổ cái</td><td>Tài sản, công cụ dụng cụ, lương, giá thành, khoản vay và các module mở rộng phải đối chiếu được với sổ cái.</td></tr>
+      <tr><td>3</td><td>Bút toán phân bổ / khấu hao / giá thành phải truy vết được</td><td>Mọi bút toán tự động phát sinh từ phân bổ, khấu hao, giá thành hoặc lãi vay phải truy được về dữ liệu nguồn.</td></tr>
+      <tr><td>4</td><td>Module quản trị nâng cao phụ thuộc dữ liệu lõi</td><td>Dashboard, dự báo dòng tiền, ngân sách và phân tích tài chính chỉ có ý nghĩa khi dữ liệu kế toán lõi đầy đủ và chính xác.</td></tr>
+      <tr><td>5</td><td>Phân quyền chặt chẽ</td><td>Các module như ngân hàng điện tử, lương, tài sản, giá thành và ngân sách cần phân quyền riêng theo vai trò.</td></tr>
+    </table>
+
+    <h3>Kết quả bàn giao</h3>
+    <ul>
+      <li>Quản lý được tài sản cố định, khấu hao, điều chuyển, đánh giá lại, ghi giảm và kiểm kê.</li>
+      <li>Quản lý được công cụ dụng cụ, chi phí trả trước và phân bổ nhiều kỳ.</li>
+      <li>Hạch toán được lương cơ bản, trả lương và đối chiếu chi phí lương.</li>
+      <li>Tính được giá thành theo đối tượng tập hợp chi phí trong phạm vi nghiệp vụ đã thống nhất.</li>
+      <li>Theo dõi được khế ước vay, lịch trả nợ, lãi vay và hợp đồng theo mốc thanh toán.</li>
+      <li>Có nền tảng triển khai ngân hàng điện tử, dashboard quản trị, phân tích tài chính, dự báo dòng tiền và ngân sách nâng cao.</li>
+    </ul>
+
+    <h3>Tiêu chí nghiệm thu</h3>
+    <table>
+      <tr><th>Tiêu chí</th><th>Nội dung kiểm tra</th></tr>
+      <tr><td>Tài sản cố định</td><td>Nguyên giá, khấu hao lũy kế, giá trị còn lại và các nghiệp vụ tăng / giảm / điều chuyển / đánh giá lại khớp số liệu kế toán.</td></tr>
+      <tr><td>Công cụ dụng cụ & chi phí trả trước</td><td>Tổng giá trị đã phân bổ cộng giá trị còn lại bằng giá trị ban đầu; không phân bổ trùng kỳ.</td></tr>
+      <tr><td>Tiền lương</td><td>Bảng lương, chi phí lương, khoản phải trả nhân viên và chứng từ trả lương khớp nhau.</td></tr>
+      <tr><td>Giá thành sản xuất</td><td>Chi phí được tập hợp đúng đối tượng, phân bổ hợp lý và tính ra giá thành theo phương pháp đã thống nhất.</td></tr>
+      <tr><td>Khế ước vay / hợp đồng</td><td>Dư nợ, lãi vay, lịch trả nợ, mốc thanh toán và liên kết thu chi / hóa đơn được theo dõi đầy đủ.</td></tr>
+      <tr><td>Quản trị nâng cao</td><td>Dashboard, phân tích tài chính, dự báo dòng tiền và ngân sách phản ánh đúng dữ liệu kế toán nguồn trong phạm vi được triển khai.</td></tr>
     </table>
   </section>
 
