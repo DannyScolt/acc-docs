@@ -344,12 +344,110 @@
       .cover, .report-page, .phase-chapter, .phase-card, .notice, .callout, .phase-intro-card, .summary-card, .toc-card, .intro-panel { page-break-inside: avoid; break-inside: avoid; }
       a { color: inherit; text-decoration: none; }
     }
+
+
+    /* TAB NAVIGATION */
+    .app-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: #ffffff;
+      border-bottom: 1px solid #cbd5e1;
+      padding: 16px 46px 0;
+      margin: 0;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
+    }
+    .app-title {
+      font-size: 14pt;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .app-title span {
+      background: #1d4ed8;
+      color: #ffffff;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 9.5pt;
+      letter-spacing: 0.05em;
+    }
+    .tab-nav {
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      gap: 4px;
+      padding-bottom: 0;
+      border-bottom: 0;
+      margin: 0;
+    }
+    .tab-nav::-webkit-scrollbar { display: none; }
+    .tab-btn {
+      background: #f8fafc;
+      color: #64748b;
+      border: 1px solid #cbd5e1;
+      border-bottom: none;
+      padding: 12px 20px;
+      font-size: 10.5pt;
+      font-weight: 600;
+      cursor: pointer;
+      border-radius: 6px 6px 0 0;
+      transition: all 0.2s;
+      white-space: nowrap;
+      position: relative;
+      top: 1px;
+    }
+    .tab-btn:hover { background: #f1f5f9; color: #334155; }
+    .tab-btn.active {
+      background: #ffffff;
+      color: #1d4ed8;
+      border-top: 3px solid #1d4ed8;
+      border-left: 1px solid #cbd5e1;
+      border-right: 1px solid #cbd5e1;
+      border-bottom: 1px solid #ffffff;
+      z-index: 2;
+    }
+    
+    
+    /* HIDE COVER IN WEB VIEW */
+    @media screen {
+      .cover, #doc-cover { display: none \!important; opacity: 0; visibility: hidden; position: absolute; }
+      body { background: #f1f5f9; }
+      .doc { margin: 0 auto; min-height: 100vh; max-width: 1140px; border-radius: 0; border-top: 0; box-shadow: 0 0 20px rgba(0,0,0,0.05); }
+      .tab-panel { padding-top: 30px; }
+      .phase-header { margin: -30px -46px 24px; border-radius: 0; }
+    }
+
+
+    /* TAB PANELS */
+    .tab-panel {
+      display: none;
+      animation: fadeIn 0.2s ease-out;
+    }
+    .tab-panel.active {
+      display: block;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media print {
+      .app-header { display: none \!important; }
+      .cover { display: flex \!important; }
+      .tab-nav { display: none \!important; }
+      .tab-panel { display: block \!important; page-break-before: always; break-before: page; padding-top: 0 \!important; }
+      .phase-header { margin: 0 0 24px \!important; }
+      .doc { box-shadow: none; border: 0; max-width: none; margin: 0; }
+    }
   </style>
 </head>
 <body>
 <div class="doc">
 
-  <section class="cover">
+  <section class="cover" id="doc-cover">
     <div class="cover-topline">
       <div>
         <strong>Tài liệu phạm vi nghiệp vụ</strong><br />
@@ -383,7 +481,23 @@
     </div>
   </section>
 
-  <section class="report-page exec-summary page-break" id="executive-summary">
+  <!-- APP HEADER (WEB VIEW ONLY) -->
+  <div class="app-header">
+    <div class="app-title">ACC Scope Document <span>v1.0</span></div>
+    <div class="tab-nav" id="tab-nav">
+      <button class="tab-btn active" data-tab="tab-overview">Tổng quan</button>
+      <button class="tab-btn" data-tab="tab-phase-1">Phase 1</button>
+      <button class="tab-btn" data-tab="tab-phase-2">Phase 2</button>
+      <button class="tab-btn" data-tab="tab-phase-3">Phase 3</button>
+      <button class="tab-btn" data-tab="tab-phase-4">Phase 4</button>
+      <button class="tab-btn" data-tab="tab-phase-5">Phase 5</button>
+      <button class="tab-btn" data-tab="tab-phase-6">Phase 6</button>
+      <button class="tab-btn" data-tab="tab-reconciliation">Đối chiếu</button>
+    </div>
+  </div>
+
+  <div class="tab-panel active" id="tab-overview">
+  <section class="report-page exec-summary" id="executive-summary">
     <h2>Tóm tắt điều hành</h2>
     <p class="summary-lead">
       Tài liệu này chia phạm vi phần mềm kế toán ACC thành 6 giai đoạn triển khai độc lập, đi từ nền tảng hệ thống và dữ liệu kế toán ban đầu đến các phân hệ mua hàng, bán hàng, tổng hợp, thuế - hóa đơn điện tử và các module nâng cao.
@@ -442,7 +556,10 @@
 
   </section>
 
-  <section class="phase-chapter page-break" id="phase-1">
+  </div>
+
+  <div class="tab-panel" id="tab-phase-1">
+  <section class="phase-chapter" id="phase-1">
     <div class="phase-header">
       <div class="chapter-label">Phase 1 / Chương nền tảng</div>
       <h2>2. Giai đoạn 1 — Nền tảng hệ thống, danh mục, tiền mặt & tiền gửi</h2>
@@ -880,7 +997,11 @@
     </table>
   </section>
 
-  <section class="phase-chapter page-break" id="phase-2">
+  </section>
+  </div>
+
+  <div class="tab-panel" id="tab-phase-2">
+  <section class="phase-chapter" id="phase-2">
     <div class="phase-header">
       <div class="chapter-label">Phase 2 / Chương mua hàng & kho</div>
       <h2>3. Giai đoạn 2 — Mua hàng, nhập kho & công nợ phải trả</h2>
@@ -1143,7 +1264,11 @@
     </table>
   </section>
 
-  <section class="phase-chapter page-break" id="phase-3">
+  </section>
+  </div>
+
+  <div class="tab-panel" id="tab-phase-3">
+  <section class="phase-chapter" id="phase-3">
     <div class="phase-header">
       <div class="chapter-label">Phase 3 / Chương bán hàng & doanh thu</div>
       <h2>4. Giai đoạn 3 — Bán hàng, xuất kho, tính giá vốn & công nợ phải thu</h2>
@@ -1380,7 +1505,11 @@
     </table>
   </section>
 
-  <section class="phase-chapter page-break" id="phase-4">
+  </section>
+  </div>
+
+  <div class="tab-panel" id="tab-phase-4">
+  <section class="phase-chapter" id="phase-4">
     <div class="phase-header">
       <div class="chapter-label">Phase 4 / Chương kế toán tổng hợp</div>
       <h2>5. Giai đoạn 4 — Tổng hợp, kết chuyển, khóa kỳ & báo cáo tài chính</h2>
@@ -1547,7 +1676,11 @@
     </table>
   </section>
 
-  <section class="phase-chapter page-break" id="phase-5">
+  </section>
+  </div>
+
+  <div class="tab-panel" id="tab-phase-5">
+  <section class="phase-chapter" id="phase-5">
     <div class="phase-header">
       <div class="chapter-label">Phase 5 / Chương thuế & hóa đơn điện tử</div>
       <h2>6. Giai đoạn 5 — Thuế & hóa đơn điện tử</h2>
@@ -1697,7 +1830,11 @@
     </table>
   </section>
 
-  <section class="phase-chapter page-break" id="phase-6">
+  </section>
+  </div>
+
+  <div class="tab-panel" id="tab-phase-6">
+  <section class="phase-chapter" id="phase-6">
     <div class="phase-header">
       <div class="chapter-label">Phase 6 / Chương mở rộng nâng cao</div>
       <h2>7. Giai đoạn 6 — Mở rộng nâng cao</h2>
@@ -1864,7 +2001,11 @@
     </table>
   </section>
 
-  <section class="report-page page-break" id="reconciliation">
+  </section>
+  </div>
+
+  <div class="tab-panel" id="tab-reconciliation">
+  <section class="report-page" id="reconciliation">
     <h2>8. Bảng đối chiếu định kỳ</h2>
     <p>Bảng này dùng như phụ lục kiểm soát số liệu định kỳ sau khi các phase được đưa vào vận hành.</p>
     <table>
@@ -1881,11 +2022,37 @@
 
 
 
+  </section>
+  </div>
+
   <div class="footer">
     <p><strong>ACC — Phạm vi nghiệp vụ kế toán theo giai đoạn triển khai</strong></p>
     <p>Ngày lập: 15/06/2026</p>
   </div>
 
 </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const buttons = document.querySelectorAll(".tab-btn");
+    const panels = document.querySelectorAll(".tab-panel");
+
+    buttons.forEach(button => {
+      button.addEventListener("click", () => {
+        // Remove active class from all
+        buttons.forEach(btn => btn.classList.remove("active"));
+        panels.forEach(p => p.classList.remove("active"));
+
+        // Add active to clicked
+        button.classList.add("active");
+        const targetId = button.getAttribute("data-tab");
+        document.getElementById(targetId).classList.add("active");
+        
+        // Optional: scroll to top of doc
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
+  });
+</script>
 </body>
 </html>
