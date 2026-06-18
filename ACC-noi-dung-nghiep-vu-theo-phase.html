@@ -7,42 +7,59 @@
   <style>
     @page { size: A4; margin: 14mm 12mm; }
     * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
       margin: 0;
-      background: #f4f6f8;
+      background: #e5e7eb;
       color: #1f2937;
       font-family: "Segoe UI", Arial, sans-serif;
       font-size: 10.5pt;
-      line-height: 1.6;
+      line-height: 1.62;
     }
     .doc {
       max-width: 1040px;
       margin: 24px auto;
-      background: #fff;
-      padding: 40px 46px 52px;
-      border: 1px solid #e5e7eb;
+      background: #ffffff;
+      border: 1px solid #d1d5db;
+      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
     }
-    h1, h2, h3, p, ul { margin-top: 0; }
+    .report-page,
+    .phase-chapter {
+      padding: 40px 46px 48px;
+      background: #ffffff;
+    }
+    .page-break,
+    .section-break { page-break-before: always; break-before: page; }
+    h1, h2, h3, h4, p, ul { margin-top: 0; }
     h1 {
-      font-size: 28pt;
-      line-height: 1.12;
-      letter-spacing: -0.4px;
-      color: #1d4ed8;
-      margin-bottom: 10px;
+      font-size: 34pt;
+      line-height: 1.05;
+      letter-spacing: 2px;
+      color: #0f172a;
+      margin-bottom: 12px;
     }
     h2 {
-      font-size: 15pt;
+      font-size: 15.5pt;
       color: #1d4ed8;
       margin: 30px 0 12px;
       padding: 0 0 8px;
       border-bottom: 2px solid #dbeafe;
       page-break-after: avoid;
+      break-after: avoid;
     }
     h3 {
-      font-size: 11.5pt;
+      font-size: 11.7pt;
       color: #111827;
       margin: 18px 0 8px;
       page-break-after: avoid;
+      break-after: avoid;
+    }
+    h4 {
+      font-size: 10.4pt;
+      color: #0f172a;
+      margin: 0 0 5px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
     }
     p { margin-bottom: 9px; }
     ul { margin: 6px 0 10px 20px; padding: 0; }
@@ -51,67 +68,177 @@
       width: 100%;
       border-collapse: collapse;
       margin: 10px 0 16px;
-      font-size: 9.5pt;
+      font-size: 9.45pt;
       page-break-inside: avoid;
+      break-inside: avoid;
     }
     th {
-      background: #f3f4f6;
+      background: #eef2ff;
       color: #111827;
       text-align: left;
-      border: 1px solid #d1d5db;
+      border: 1px solid #cbd5e1;
       padding: 8px 9px;
       font-weight: 700;
     }
     td {
-      border: 1px solid #e5e7eb;
+      border: 1px solid #e2e8f0;
       padding: 8px 9px;
       vertical-align: top;
     }
-    tr:nth-child(even) td { background: #fafafa; }
+    tr { page-break-inside: avoid; break-inside: avoid; }
+    tr:nth-child(even) td { background: #f8fafc; }
+
     .cover {
-      min-height: 560px;
+      min-height: 297mm;
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
+      justify-content: space-between;
       page-break-after: always;
-      background: #fff;
-      border: 1px solid #e5e7eb;
-      padding: 50px 44px;
+      break-after: page;
+      background:
+        linear-gradient(135deg, rgba(29, 78, 216, 0.08), rgba(14, 165, 233, 0.03) 46%, #ffffff 46%),
+        #ffffff;
+      padding: 54px 54px 48px;
+      border: 0;
     }
-    .cover .icon { font-size: 42pt; margin-bottom: 12px; }
-    .cover .subtitle {
-      font-size: 14pt;
-      color: #374151;
-      max-width: 760px;
-      margin-bottom: 14px;
+    .cover-topline {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 24px;
+      color: #475569;
+      font-size: 9.4pt;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
     }
-    .meta {
+    .brand-mark {
+      width: 70px;
+      height: 70px;
+      border: 2px solid #1d4ed8;
+      color: #1d4ed8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 18pt;
+      letter-spacing: 0.04em;
+    }
+    .cover-main { max-width: 840px; margin: 78px 0 44px; }
+    .cover-kicker {
+      color: #1d4ed8;
+      font-size: 10pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      margin-bottom: 18px;
+    }
+    .cover-title {
+      font-size: 29pt;
+      line-height: 1.18;
+      color: #0f172a;
+      margin-bottom: 18px;
+      letter-spacing: -0.02em;
+      max-width: 780px;
+    }
+    .cover-subtitle {
+      color: #475569;
+      font-size: 12.2pt;
+      max-width: 790px;
+      margin-bottom: 28px;
+    }
+    .cover-rule {
+      width: 135px;
+      height: 4px;
+      background: #1d4ed8;
+      margin: 24px 0 0;
+    }
+    .meta,
+    .summary-grid,
+    .toc-grid,
+    .intro-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      width: 100%;
-      margin-top: 26px;
+      gap: 12px;
     }
-    .meta-card {
-      background: #f9fafb;
-      border: 1px solid #e5e7eb;
-      padding: 12px;
+    .meta { grid-template-columns: repeat(4, 1fr); margin-top: 34px; }
+    .meta-card,
+    .summary-card,
+    .toc-card,
+    .intro-panel {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      padding: 13px 14px;
+      page-break-inside: avoid;
+      break-inside: avoid;
     }
-    .meta-card b {
+    .meta-card b,
+    .summary-card b,
+    .toc-card b,
+    .intro-panel b {
       display: block;
       color: #1d4ed8;
-      font-size: 17pt;
-      margin-bottom: 2px;
+      font-size: 16pt;
+      line-height: 1.1;
+      margin-bottom: 5px;
     }
-    .meta-card span { color: #6b7280; font-size: 9pt; }
+    .meta-card span,
+    .summary-card span,
+    .toc-card span,
+    .intro-panel span { color: #475569; font-size: 9.2pt; }
+    .cover-footer {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      border-top: 1px solid #cbd5e1;
+      padding-top: 18px;
+      color: #475569;
+      font-size: 9.7pt;
+    }
+    .cover-footer strong { color: #0f172a; }
+
+    .exec-summary h2,
+    .toc-page h2,
+    .overview-page h2 {
+      margin-top: 0;
+    }
+    .summary-lead {
+      font-size: 11.2pt;
+      color: #334155;
+      border-left: 4px solid #1d4ed8;
+      padding: 10px 0 10px 14px;
+      margin-bottom: 18px;
+    }
+    .summary-grid { grid-template-columns: repeat(3, 1fr); margin: 16px 0 20px; }
+    .report-note {
+      background: #fff7ed;
+      border: 1px solid #fed7aa;
+      border-left: 4px solid #f97316;
+      padding: 12px 14px;
+      margin: 14px 0 18px;
+      color: #7c2d12;
+    }
+    .toc-grid { grid-template-columns: repeat(2, 1fr); margin-top: 14px; }
+    .toc-card {
+      text-decoration: none;
+      color: inherit;
+      min-height: 92px;
+      border-left: 4px solid #1d4ed8;
+    }
+    .toc-card:hover { background: #eff6ff; }
+    .toc-card small {
+      display: block;
+      color: #64748b;
+      margin-top: 6px;
+      line-height: 1.45;
+    }
+
     .notice,
     .callout {
       border-left: 4px solid #2563eb;
       background: #f8fafc;
       padding: 12px 14px;
       margin: 14px 0 18px;
+      page-break-inside: avoid;
+      break-inside: avoid;
     }
     .notice { border-left-color: #d97706; }
     .notice strong { color: #92400e; }
@@ -126,6 +253,7 @@
       line-height: 1.75;
       text-align: center;
       page-break-inside: avoid;
+      break-inside: avoid;
     }
     .phase-summary {
       display: grid;
@@ -135,9 +263,10 @@
     }
     .phase-card {
       border: 1px solid #e5e7eb;
-      background: #fff;
+      background: #ffffff;
       padding: 11px 12px;
       page-break-inside: avoid;
+      break-inside: avoid;
     }
     .phase-card b { color: #1d4ed8; display: block; margin-bottom: 4px; }
     .phase-card span { color: #4b5563; }
@@ -149,20 +278,71 @@
       margin: 9px 0 14px;
       color: #1f2937;
       font-weight: 600;
+      page-break-inside: avoid;
+      break-inside: avoid;
     }
-    .section-break { page-break-before: always; }
+
+    .phase-chapter { min-height: 260mm; }
+    .phase-header {
+      background: linear-gradient(135deg, #0f172a, #1d4ed8);
+      color: #ffffff;
+      padding: 26px 28px;
+      margin: -40px -46px 24px;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+    .chapter-label {
+      font-size: 9pt;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: #bfdbfe;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .phase-header h2 {
+      color: #ffffff;
+      border-bottom: 0;
+      padding: 0;
+      margin: 0 0 10px;
+      font-size: 19pt;
+      line-height: 1.25;
+    }
+    .phase-header p {
+      color: #dbeafe;
+      max-width: 860px;
+      margin: 0;
+      font-size: 10.5pt;
+    }
+    .phase-intro-card {
+      border: 1px solid #cbd5e1;
+      border-top: 4px solid #1d4ed8;
+      background: #ffffff;
+      padding: 16px 18px;
+      margin: 0 0 20px;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+    .intro-grid { grid-template-columns: 1fr 1fr 1.2fr; }
+    .intro-panel { background: #f8fafc; }
+    .intro-panel ul { margin-bottom: 0; }
+
     .footer {
-      margin-top: 34px;
-      padding-top: 14px;
+      padding: 18px 46px 24px;
       border-top: 1px solid #e5e7eb;
       text-align: center;
       color: #6b7280;
       font-size: 9pt;
+      background: #ffffff;
     }
     @media print {
-      body { background: #fff; }
-      .doc { border: 0; max-width: none; margin: 0; padding: 0; }
-      .cover, table, .phase-card, .notice, .callout { page-break-inside: avoid; }
+      body { background: #ffffff; }
+      .doc { border: 0; box-shadow: none; max-width: none; margin: 0; }
+      .report-page,
+      .phase-chapter { padding: 0; }
+      .cover { min-height: auto; padding: 0; }
+      .phase-header { margin: 0 0 18px; }
+      .cover, .report-page, .phase-chapter, .phase-card, .notice, .callout, .phase-intro-card, .summary-card, .toc-card, .intro-panel { page-break-inside: avoid; break-inside: avoid; }
+      a { color: inherit; text-decoration: none; }
     }
   </style>
 </head>
@@ -170,21 +350,73 @@
 <div class="doc">
 
   <section class="cover">
-    <div class="icon">📊</div>
-    <h1>ACC</h1>
-    <p class="subtitle">Phạm vi nghiệp vụ kế toán theo giai đoạn triển khai</p>
-    <p style="color:#64748b;max-width:820px;font-size:11.5pt;">
-      Tài liệu mô tả phạm vi nghiệp vụ, quy trình, chứng từ, sổ sách và báo cáo của phần mềm kế toán ACC, được sắp xếp theo các giai đoạn triển khai bám sát quy trình kế toán thực tế của doanh nghiệp.
-    </p>
-    <div class="meta">
-      <div class="meta-card"><b>6</b><span>giai đoạn triển khai</span></div>
-      <div class="meta-card"><b>14</b><span>bước quy trình kế toán lõi</span></div>
-      <div class="meta-card"><b>TT99</b><span>định hướng hệ thống tài khoản & báo cáo</span></div>
+    <div class="cover-topline">
+      <div>
+        <strong>Tài liệu phạm vi nghiệp vụ</strong><br />
+        Hệ thống kế toán ACC
+      </div>
+      <div class="brand-mark">ACC</div>
     </div>
-    <p style="margin-top:30px;color:#94a3b8;">Ngày lập: 15/06/2026</p>
+
+    <div class="cover-main">
+      <p class="cover-kicker">Accounting Software Scope Report</p>
+      <h1>ACC</h1>
+      <h2 class="cover-title">Phạm vi nghiệp vụ kế toán theo giai đoạn triển khai</h2>
+      <p class="cover-subtitle">
+        Tài liệu mô tả phạm vi chức năng, quy trình nghiệp vụ, chứng từ, sổ sách và báo cáo của phần mềm kế toán ACC; được tổ chức theo từng giai đoạn để phục vụ review nghiệp vụ, lập kế hoạch triển khai và nghiệm thu.
+      </p>
+      <div class="cover-rule"></div>
+
+      <div class="meta">
+        <div class="meta-card"><b>6</b><span>giai đoạn triển khai</span></div>
+        <div class="meta-card"><b>14</b><span>bước quy trình kế toán lõi</span></div>
+        <div class="meta-card"><b>93+</b><span>bảng chức năng & tiêu chí</span></div>
+        <div class="meta-card"><b>TT99</b><span>định hướng tài khoản & báo cáo</span></div>
+      </div>
+    </div>
+
+    <div class="cover-footer">
+      <div><strong>Phiên bản:</strong> Report layout / PDF-ready</div>
+      <div><strong>Ngày lập:</strong> 15/06/2026</div>
+      <div><strong>Đối tượng đọc:</strong> Kế toán, PM, BA, đội phát triển, khách hàng</div>
+      <div><strong>Phạm vi:</strong> Chức năng nghiệp vụ theo phase</div>
+    </div>
   </section>
 
-  <section>
+  <section class="report-page exec-summary page-break" id="executive-summary">
+    <h2>Tóm tắt điều hành</h2>
+    <p class="summary-lead">
+      Tài liệu này chia phạm vi phần mềm kế toán ACC thành 6 giai đoạn triển khai độc lập, đi từ nền tảng hệ thống và dữ liệu kế toán ban đầu đến các phân hệ mua hàng, bán hàng, tổng hợp, thuế - hóa đơn điện tử và các module nâng cao.
+    </p>
+    <div class="summary-grid">
+      <div class="summary-card"><b>Phase 1</b><span>Xây nền tảng vận hành kế toán: người dùng, phân quyền, danh mục, số dư đầu kỳ, quỹ, ngân hàng và sổ cái.</span></div>
+      <div class="summary-card"><b>Phase 2</b><span>Hoàn thiện chu trình mua hàng, nhập kho, hóa đơn đầu vào, công nợ phải trả và thanh toán nhà cung cấp.</span></div>
+      <div class="summary-card"><b>Phase 3</b><span>Hoàn thiện chu trình bán hàng, xuất kho, hóa đơn đầu ra, giá vốn, công nợ phải thu và thu tiền.</span></div>
+      <div class="summary-card"><b>Phase 4</b><span>Xử lý kế toán tổng hợp, đối chiếu, kết chuyển, khóa kỳ và lập báo cáo tài chính.</span></div>
+      <div class="summary-card"><b>Phase 5</b><span>Kết nối hóa đơn điện tử, quản lý hóa đơn đầu vào / đầu ra, kiểm tra rủi ro và lập báo cáo thuế.</span></div>
+      <div class="summary-card"><b>Phase 6</b><span>Mở rộng các phân hệ nâng cao như tài sản cố định, CCDC, lương, giá thành, vay, hợp đồng và dashboard.</span></div>
+    </div>
+    <div class="report-note">
+      <strong>Cách đọc đề xuất:</strong> đọc phần quy trình tổng thể để nắm dòng chảy nghiệp vụ, sau đó đọc từng phase như một chương riêng. Mỗi phase có phần mục tiêu, phạm vi và module chính trước khi đi vào bảng chức năng chi tiết.
+    </div>
+  </section>
+
+  <section class="report-page toc-page page-break" id="toc">
+    <h2>Mục lục nhanh</h2>
+    <p>Toàn bộ nội dung vẫn nằm trong một file HTML duy nhất. Các liên kết dưới đây giúp đọc nhanh trên trình duyệt; khi in ra PDF, mỗi phase bắt đầu ở một trang/chương riêng.</p>
+    <div class="toc-grid">
+      <a class="toc-card" href="#overview"><b>01</b><span>Quy trình kế toán tổng thể</span><small>Dòng chảy nghiệp vụ lõi và tổng quan 6 giai đoạn.</small></a>
+      <a class="toc-card" href="#phase-1"><b>Phase 1</b><span>Nền tảng, danh mục, tiền mặt & tiền gửi</span><small>Quản trị hệ thống, dữ liệu đầu kỳ, quỹ, ngân hàng, sổ cái.</small></a>
+      <a class="toc-card" href="#phase-2"><b>Phase 2</b><span>Mua hàng, nhập kho & công nợ phải trả</span><small>Đơn mua, hợp đồng, nhập kho, hóa đơn mua vào, thanh toán NCC.</small></a>
+      <a class="toc-card" href="#phase-3"><b>Phase 3</b><span>Bán hàng, xuất kho, giá vốn & công nợ phải thu</span><small>Báo giá, đơn bán, xuất kho, hóa đơn bán ra, thu tiền, giá vốn.</small></a>
+      <a class="toc-card" href="#phase-4"><b>Phase 4</b><span>Tổng hợp, kết chuyển, khóa kỳ & BCTC</span><small>Bút toán tổng hợp, đối chiếu, kết chuyển, khóa kỳ, báo cáo tài chính.</small></a>
+      <a class="toc-card" href="#phase-5"><b>Phase 5</b><span>Thuế & hóa đơn điện tử</span><small>Kết nối MISA, hóa đơn đầu vào/đầu ra, kê khai và báo cáo thuế.</small></a>
+      <a class="toc-card" href="#phase-6"><b>Phase 6</b><span>Mở rộng nâng cao</span><small>TSCĐ, CCDC, lương, giá thành, vay, hợp đồng, dashboard quản trị.</small></a>
+      <a class="toc-card" href="#reconciliation"><b>Appendix</b><span>Bảng đối chiếu định kỳ</span><small>Các điểm đối chiếu số liệu theo tuần, kỳ, tháng, quý và năm.</small></a>
+    </div>
+  </section>
+
+  <section class="report-page overview-page" id="overview">
     <h2>1. Quy trình kế toán tổng thể</h2>
     <p>Toàn bộ giai đoạn triển khai được thiết kế theo đúng vòng đời nghiệp vụ kế toán của doanh nghiệp:</p>
     <div class="flow">
@@ -210,9 +442,19 @@
 
   </section>
 
-  <section class="section-break">
-    <h2>2. Giai đoạn 1 — Nền tảng hệ thống, danh mục, tiền mặt & tiền gửi</h2>
-    <div class="callout">Giai đoạn 1 tập trung xây dựng nền tảng vận hành kế toán: quản trị hệ thống, danh mục dùng chung, dữ liệu đầu kỳ, quỹ tiền mặt, tiền gửi ngân hàng và sổ cái. Cách trình bày dưới đây liệt kê chức năng theo từng module để bộ phận kế toán dễ rà soát và đội phát triển dễ bóc tách phạm vi.</div>
+  <section class="phase-chapter page-break" id="phase-1">
+    <div class="phase-header">
+      <div class="chapter-label">Phase 1 / Chương nền tảng</div>
+      <h2>2. Giai đoạn 1 — Nền tảng hệ thống, danh mục, tiền mặt & tiền gửi</h2>
+      <p>Thiết lập nền móng vận hành kế toán trước khi mở rộng sang mua hàng, bán hàng và báo cáo.</p>
+    </div>
+    <div class="phase-intro-card">
+      <div class="intro-grid">
+        <div class="intro-panel"><h4>Mục tiêu</h4><span>Xây dựng hệ thống quản trị, danh mục dùng chung, dữ liệu đầu kỳ, quỹ, ngân hàng và sổ cái có thể vận hành độc lập.</span></div>
+        <div class="intro-panel"><h4>Phạm vi</h4><span>Quản trị hệ thống, người dùng, phân quyền, audit log, số dư đầu kỳ, tiền mặt, tiền gửi và hệ thống tài khoản.</span></div>
+        <div class="intro-panel"><h4>Module chính</h4><ul><li>Quản trị hệ thống & người dùng</li><li>Danh mục & dữ liệu đầu kỳ</li><li>Tiền mặt, ngân hàng, sổ cái</li></ul></div>
+      </div>
+    </div>
 
     <h3>2.1. Quản trị hệ thống & người dùng</h3>
     <p>Module này dùng để khởi tạo hệ thống, quản lý doanh nghiệp, người dùng, phân quyền và kiểm soát truy vết thao tác trong phần mềm.</p>
@@ -638,9 +880,19 @@
     </table>
   </section>
 
-  <section class="section-break">
-    <h2>3. Giai đoạn 2 — Mua hàng, nhập kho & công nợ phải trả</h2>
-    <div class="callout">Giai đoạn 2 tập trung hoàn thiện chu trình mua hàng: từ nhu cầu / đơn mua, hợp đồng, nhận hàng, nhập kho, nhận hóa đơn, ghi nhận công nợ phải trả, thanh toán nhà cung cấp, xử lý trả lại / giảm giá và đối chiếu công nợ. Phần chức năng được tổ chức theo các phân hệ Mua hàng, Kho và Công nợ, sau đó điều chỉnh theo phạm vi triển khai của ACC.</div>
+  <section class="phase-chapter page-break" id="phase-2">
+    <div class="phase-header">
+      <div class="chapter-label">Phase 2 / Chương mua hàng & kho</div>
+      <h2>3. Giai đoạn 2 — Mua hàng, nhập kho & công nợ phải trả</h2>
+      <p>Hoàn thiện chu trình mua hàng từ nhu cầu mua đến nhập kho, hóa đơn đầu vào, công nợ và thanh toán nhà cung cấp.</p>
+    </div>
+    <div class="phase-intro-card">
+      <div class="intro-grid">
+        <div class="intro-panel"><h4>Mục tiêu</h4><span>Kiểm soát đầy đủ vòng đời mua hàng và đảm bảo số liệu kho, hóa đơn, công nợ phải trả khớp nhau.</span></div>
+        <div class="intro-panel"><h4>Phạm vi</h4><span>Đơn mua, hợp đồng mua, nhận hàng, nhập kho, hóa đơn mua vào, thanh toán, trả lại/giảm giá và đối chiếu công nợ.</span></div>
+        <div class="intro-panel"><h4>Module chính</h4><ul><li>Mua hàng & hợp đồng mua</li><li>Nhập kho & quản lý tồn</li><li>Công nợ phải trả & thanh toán NCC</li></ul></div>
+      </div>
+    </div>
 
     <h3>3.1. Quy trình mua hàng & nhập kho</h3>
     <div class="mini-flow">Nhu cầu mua / Đơn mua → Duyệt mua → Hợp đồng mua → Nhận hàng / dịch vụ → Nhập kho → Nhận hóa đơn đầu vào → Ghi công nợ phải trả → Thanh toán → Đối chiếu công nợ → Trả lại / Giảm giá (nếu có)</div>
@@ -891,9 +1143,19 @@
     </table>
   </section>
 
-  <section class="section-break">
-    <h2>4. Giai đoạn 3 — Bán hàng, xuất kho, tính giá vốn & công nợ phải thu</h2>
-    <div class="callout">Giai đoạn 3 hoàn thiện chu trình bán hàng: từ báo giá, đơn đặt hàng, hợp đồng bán, chứng từ bán hàng, xuất kho, hóa đơn bán ra, ghi nhận doanh thu / thuế / công nợ, tính giá vốn, thu tiền khách hàng, xử lý trả lại / giảm giá và lập báo cáo. Bán dịch vụ không phát sinh xuất kho và không tính giá vốn kho.</div>
+  <section class="phase-chapter page-break" id="phase-3">
+    <div class="phase-header">
+      <div class="chapter-label">Phase 3 / Chương bán hàng & doanh thu</div>
+      <h2>4. Giai đoạn 3 — Bán hàng, xuất kho, tính giá vốn & công nợ phải thu</h2>
+      <p>Hoàn thiện chu trình bán hàng từ báo giá đến xuất kho, hóa đơn, doanh thu, giá vốn, công nợ phải thu và thu tiền.</p>
+    </div>
+    <div class="phase-intro-card">
+      <div class="intro-grid">
+        <div class="intro-panel"><h4>Mục tiêu</h4><span>Quản lý đầy đủ doanh thu, công nợ khách hàng, xuất kho bán hàng và tính giá vốn theo dữ liệu kho.</span></div>
+        <div class="intro-panel"><h4>Phạm vi</h4><span>Báo giá, đơn bán, hợp đồng bán, chính sách giá, hóa đơn bán ra, xuất kho, giá vốn, thu tiền và xử lý sau bán.</span></div>
+        <div class="intro-panel"><h4>Module chính</h4><ul><li>Bán hàng & chính sách giá</li><li>Xuất kho & tính giá vốn</li><li>Công nợ phải thu & thu tiền</li></ul></div>
+      </div>
+    </div>
 
     <h3>4.1. Quy trình bán hàng & xuất kho</h3>
     <div class="mini-flow">Báo giá → Đơn đặt hàng → Hợp đồng bán → Bán hàng hóa / dịch vụ → Xuất kho → Xuất hóa đơn → Ghi doanh thu / thuế / công nợ → Tính giá vốn → Thu tiền → Đối chiếu công nợ → Trả lại / Giảm giá / Chiết khấu (nếu có)</div>
@@ -1118,9 +1380,19 @@
     </table>
   </section>
 
-  <section class="section-break">
-    <h2>5. Giai đoạn 4 — Tổng hợp, kết chuyển, khóa kỳ & báo cáo tài chính</h2>
-    <div class="callout">Giai đoạn 4 hoàn thiện phần tổng hợp kế toán cuối kỳ: ghi nhận chứng từ nghiệp vụ khác, xử lý tạm ứng / phân bổ / điều chỉnh, kết chuyển doanh thu - chi phí, xác định kết quả kinh doanh, kiểm tra đối chiếu, khóa kỳ và lập báo cáo tài chính.</div>
+  <section class="phase-chapter page-break" id="phase-4">
+    <div class="phase-header">
+      <div class="chapter-label">Phase 4 / Chương kế toán tổng hợp</div>
+      <h2>5. Giai đoạn 4 — Tổng hợp, kết chuyển, khóa kỳ & báo cáo tài chính</h2>
+      <p>Tập trung vào nghiệp vụ tổng hợp cuối kỳ: kiểm tra số liệu, kết chuyển, khóa kỳ và lập báo cáo tài chính.</p>
+    </div>
+    <div class="phase-intro-card">
+      <div class="intro-grid">
+        <div class="intro-panel"><h4>Mục tiêu</h4><span>Đảm bảo dữ liệu từ các phân hệ được tổng hợp, đối chiếu và kết chuyển đúng để lập báo cáo tài chính.</span></div>
+        <div class="intro-panel"><h4>Phạm vi</h4><span>Bút toán tổng hợp, tạm ứng, phân bổ, điều chỉnh, kiểm tra đối chiếu, kết chuyển, khóa kỳ và báo cáo tài chính.</span></div>
+        <div class="intro-panel"><h4>Module chính</h4><ul><li>Chứng từ nghiệp vụ khác</li><li>Kết chuyển & khóa kỳ</li><li>Sổ sách & báo cáo tài chính</li></ul></div>
+      </div>
+    </div>
 
     <h3>5.1. Quy trình tổng hợp cuối kỳ</h3>
     <div class="mini-flow">Chứng từ nghiệp vụ khác → Quyết toán tạm ứng / Phân bổ / Điều chỉnh → Kiểm tra đối chiếu → Kết chuyển doanh thu, chi phí → Xác định lãi / lỗ → Khóa kỳ → Lập báo cáo tài chính → Tra cứu / xuất báo cáo</div>
@@ -1275,9 +1547,19 @@
     </table>
   </section>
 
-  <section class="section-break">
-    <h2>6. Giai đoạn 5 — Thuế & hóa đơn điện tử</h2>
-    <div class="callout">Giai đoạn 5 tập trung hoàn thiện phần hóa đơn điện tử và thuế. ACC không tự phát hành hóa đơn điện tử mà kết nối với nền tảng hóa đơn điện tử MISA để tiếp nhận, theo dõi, liên kết hóa đơn với chứng từ kế toán và phục vụ kê khai thuế.</div>
+  <section class="phase-chapter page-break" id="phase-5">
+    <div class="phase-header">
+      <div class="chapter-label">Phase 5 / Chương thuế & hóa đơn điện tử</div>
+      <h2>6. Giai đoạn 5 — Thuế & hóa đơn điện tử</h2>
+      <p>Hoàn thiện lớp nghiệp vụ hóa đơn điện tử và thuế, tập trung vào đồng bộ, đối chiếu, kiểm tra rủi ro và lập dữ liệu kê khai.</p>
+    </div>
+    <div class="phase-intro-card">
+      <div class="intro-grid">
+        <div class="intro-panel"><h4>Mục tiêu</h4><span>Kết nối dữ liệu hóa đơn với chứng từ kế toán, hỗ trợ kiểm tra hợp lệ và phục vụ kê khai thuế.</span></div>
+        <div class="intro-panel"><h4>Phạm vi</h4><span>Kết nối MISA, hóa đơn đầu vào/đầu ra, kiểm tra hóa đơn, xử lý sai sót, bảng kê, tờ khai và báo cáo thuế.</span></div>
+        <div class="intro-panel"><h4>Module chính</h4><ul><li>Kết nối hóa đơn điện tử</li><li>Quản lý hóa đơn & rủi ro</li><li>Kê khai và báo cáo thuế</li></ul></div>
+      </div>
+    </div>
 
     <h3>6.1. Quy trình hóa đơn điện tử & thuế</h3>
     <div class="mini-flow">Kết nối nền tảng hóa đơn → Đồng bộ hóa đơn đầu vào / đầu ra → Liên kết hóa đơn với chứng từ kế toán → Kiểm tra hợp lệ / đối chiếu → Xử lý sai sót hóa đơn → Lập bảng kê thuế → Lập tờ khai thuế → Giấy nộp tiền / lưu báo cáo</div>
@@ -1415,9 +1697,19 @@
     </table>
   </section>
 
-  <section class="section-break">
-    <h2>7. Giai đoạn 6 — Mở rộng nâng cao</h2>
-    <div class="callout">Giai đoạn 6 mở rộng năng lực cho doanh nghiệp có nhu cầu quản trị tài chính kế toán chuyên sâu hơn sau khi các phân hệ cốt lõi đã ổn định. Các module trong giai đoạn này được triển khai theo nhu cầu thực tế và có thể nghiệm thu theo từng phân hệ độc lập.</div>
+  <section class="phase-chapter page-break" id="phase-6">
+    <div class="phase-header">
+      <div class="chapter-label">Phase 6 / Chương mở rộng nâng cao</div>
+      <h2>7. Giai đoạn 6 — Mở rộng nâng cao</h2>
+      <p>Mở rộng hệ thống sau khi các phân hệ lõi ổn định, triển khai theo nhu cầu thực tế và nghiệm thu độc lập theo từng module.</p>
+    </div>
+    <div class="phase-intro-card">
+      <div class="intro-grid">
+        <div class="intro-panel"><h4>Mục tiêu</h4><span>Bổ sung năng lực quản trị tài chính kế toán chuyên sâu cho doanh nghiệp có quy mô hoặc nghiệp vụ phức tạp hơn.</span></div>
+        <div class="intro-panel"><h4>Phạm vi</h4><span>TSCĐ, CCDC, chi phí trả trước, lương, giá thành, khế ước vay, hợp đồng, ngân hàng điện tử, dashboard và phân tích.</span></div>
+        <div class="intro-panel"><h4>Module chính</h4><ul><li>Tài sản, CCDC, lương, giá thành</li><li>Vay, hợp đồng, ngân hàng điện tử</li><li>Dashboard, ngân sách, dòng tiền</li></ul></div>
+      </div>
+    </div>
 
     <h3>7.1. Tài sản cố định</h3>
     <p>Module này dùng để quản lý vòng đời tài sản cố định từ ghi tăng, khấu hao, điều chuyển, đánh giá lại đến ghi giảm và kiểm kê.</p>
@@ -1572,8 +1864,9 @@
     </table>
   </section>
 
-  <section class="section-break">
+  <section class="report-page page-break" id="reconciliation">
     <h2>8. Bảng đối chiếu định kỳ</h2>
+    <p>Bảng này dùng như phụ lục kiểm soát số liệu định kỳ sau khi các phase được đưa vào vận hành.</p>
     <table>
       <tr><th>Đối chiếu</th><th>Mục tiêu</th><th>Tần suất</th></tr>
       <tr><td>Quỹ tiền mặt</td><td>Sổ quỹ khớp sổ kế toán tiền mặt</td><td>Hằng tuần / cuối kỳ</td></tr>
