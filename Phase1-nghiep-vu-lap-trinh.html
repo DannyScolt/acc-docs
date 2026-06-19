@@ -1,0 +1,2312 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Phase 1 — Đặc tả kỹ thuật lập trình (ACC)</title>
+  <style>
+    @page { size: A4; margin: 14mm 12mm; }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: #e5e7eb;
+      color: #1f2937;
+      font-family: "Segoe UI", Arial, sans-serif;
+      font-size: 10.5pt;
+      line-height: 1.62;
+    }
+    .doc {
+      max-width: 1040px;
+      margin: 24px auto;
+      background: #ffffff;
+      border: 1px solid #d1d5db;
+      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
+    }
+    .report-page,
+    .phase-chapter {
+      padding: 40px 46px 48px;
+      background: #ffffff;
+    }
+    .page-break,
+    .section-break { page-break-before: always; break-before: page; }
+    h1, h2, h3, h4, p, ul { margin-top: 0; }
+    h1 {
+      font-size: 34pt;
+      line-height: 1.05;
+      letter-spacing: 2px;
+      color: #0f172a;
+      margin-bottom: 12px;
+    }
+    h2 {
+      font-size: 15.5pt;
+      color: #1d4ed8;
+      margin: 30px 0 12px;
+      padding: 0 0 8px;
+      border-bottom: 2px solid #dbeafe;
+      page-break-after: avoid;
+      break-after: avoid;
+    }
+    h3 {
+      font-size: 11.7pt;
+      color: #111827;
+      margin: 18px 0 8px;
+      page-break-after: avoid;
+      break-after: avoid;
+    }
+    h4 {
+      font-size: 10.4pt;
+      color: #0f172a;
+      margin: 0 0 5px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    p { margin-bottom: 9px; }
+    ul { margin: 6px 0 10px 20px; padding: 0; }
+    li { margin: 3px 0; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 10px 0 16px;
+      font-size: 9.45pt;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+    th {
+      background: #eef2ff;
+      color: #111827;
+      text-align: left;
+      border: 1px solid #cbd5e1;
+      padding: 8px 9px;
+      font-weight: 700;
+    }
+    td {
+      border: 1px solid #e2e8f0;
+      padding: 8px 9px;
+      vertical-align: top;
+    }
+    tr { page-break-inside: avoid; break-inside: avoid; }
+    tr:nth-child(even) td { background: #f8fafc; }
+
+    .meta,
+    .summary-grid,
+    .toc-grid,
+    .intro-grid {
+      display: grid;
+      gap: 12px;
+    }
+    .meta { grid-template-columns: repeat(4, 1fr); margin-top: 34px; }
+    .meta-card,
+    .summary-card,
+    .toc-card,
+    .intro-panel {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      padding: 13px 14px;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+    .meta-card b,
+    .summary-card b,
+    .toc-card b,
+    .intro-panel b {
+      display: block;
+      color: #1d4ed8;
+      font-size: 16pt;
+      line-height: 1.1;
+      margin-bottom: 5px;
+    }
+    .meta-card span,
+    .summary-card span,
+    .toc-card span,
+    .intro-panel span { color: #475569; font-size: 9.2pt; }
+
+    .notice,
+    .callout {
+      border-left: 4px solid #2563eb;
+      background: #f8fafc;
+      padding: 12px 14px;
+      margin: 14px 0 18px;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+    .notice { border-left-color: #d97706; background: #fffbeb; }
+    .notice strong { color: #92400e; }
+    .flow {
+      background: #f8fafc;
+      color: #1f2937;
+      border: 1px solid #dbeafe;
+      border-left: 4px solid #2563eb;
+      padding: 15px 16px;
+      margin: 14px 0 18px;
+      font-size: 10.4pt;
+      line-height: 1.75;
+      text-align: center;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+    .phase-summary {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin: 12px 0 18px;
+    }
+    .phase-card {
+      border: 1px solid #e5e7eb;
+      background: #ffffff;
+      padding: 11px 12px;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+    .phase-card b { color: #1d4ed8; display: block; margin-bottom: 4px; }
+    .phase-card span { color: #4b5563; }
+    .mini-flow {
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-left: 4px solid #60a5fa;
+      padding: 11px 13px;
+      margin: 9px 0 14px;
+      color: #1f2937;
+      font-weight: 600;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    .phase-chapter { min-height: 260mm; }
+    .phase-header {
+      background: linear-gradient(135deg, #0f172a, #1d4ed8);
+      color: #ffffff;
+      padding: 26px 28px;
+      margin: -40px -46px 24px;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+    .chapter-label {
+      font-size: 9pt;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: #bfdbfe;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .phase-header h2 {
+      color: #ffffff;
+      border-bottom: 0;
+      padding: 0;
+      margin: 0 0 10px;
+      font-size: 19pt;
+      line-height: 1.25;
+    }
+    .phase-header p {
+      color: #dbeafe;
+      max-width: 860px;
+      margin: 0;
+      font-size: 10.5pt;
+    }
+    .phase-intro-card {
+      border: 1px solid #cbd5e1;
+      border-top: 4px solid #1d4ed8;
+      background: #ffffff;
+      padding: 16px 18px;
+      margin: 0 0 20px;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+    .intro-grid { grid-template-columns: 1fr 1fr 1.2fr; }
+    .intro-panel { background: #f8fafc; }
+    .intro-panel ul { margin-bottom: 0; }
+
+    .footer {
+      padding: 18px 46px 24px;
+      border-top: 1px solid #e5e7eb;
+      text-align: center;
+      color: #6b7280;
+      font-size: 9pt;
+      background: #ffffff;
+    }
+    @media print {
+      body { background: #ffffff; }
+      .doc { border: 0; box-shadow: none; max-width: none; margin: 0; }
+      .report-page,
+      .phase-chapter { padding: 0; }
+      .phase-header { margin: 0 0 18px; }
+      .phase-chapter, .phase-card, .notice, .callout, .phase-intro-card, .summary-card, .toc-card, .intro-panel { page-break-inside: avoid; break-inside: avoid; }
+      a { color: inherit; text-decoration: none; }
+    }
+
+    /* TAB NAVIGATION */
+    .app-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: #ffffff;
+      border-bottom: 1px solid #cbd5e1;
+      padding: 16px 46px 0;
+      margin: 0;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
+    }
+    .app-title {
+      font-size: 14pt;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .app-title span {
+      background: #1d4ed8;
+      color: #ffffff;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 9.5pt;
+      letter-spacing: 0.05em;
+    }
+    .tab-nav {
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      gap: 4px;
+      padding-bottom: 0;
+      border-bottom: 0;
+      margin: 0;
+    }
+    .tab-nav::-webkit-scrollbar { display: none; }
+    .tab-btn {
+      background: #f8fafc;
+      color: #64748b;
+      border: 1px solid #cbd5e1;
+      border-bottom: none;
+      padding: 12px 20px;
+      font-size: 10.5pt;
+      font-weight: 600;
+      cursor: pointer;
+      border-radius: 6px 6px 0 0;
+      transition: all 0.2s;
+      white-space: nowrap;
+      position: relative;
+      top: 1px;
+    }
+    .tab-btn:hover { background: #f1f5f9; color: #334155; }
+    .tab-btn.active {
+      background: #ffffff;
+      color: #1d4ed8;
+      border-top: 3px solid #1d4ed8;
+      border-left: 1px solid #cbd5e1;
+      border-right: 1px solid #cbd5e1;
+      border-bottom: 1px solid #ffffff;
+      z-index: 2;
+    }
+
+    /* HIDE COVER IN WEB VIEW */
+    @media screen {
+      body { background: #f1f5f9; }
+      .doc { margin: 0 auto; min-height: 100vh; max-width: 1140px; border-radius: 0; border-top: 0; box-shadow: 0 0 20px rgba(0,0,0,0.05); }
+      .tab-panel { padding-top: 30px; }
+      .phase-header { margin: -30px -46px 24px; border-radius: 0; }
+    }
+
+    /* TAB PANELS */
+    .tab-panel {
+      display: none;
+      animation: fadeIn 0.2s ease-out;
+    }
+    .tab-panel.active {
+      display: block;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media print {
+      .app-header { display: none !important; }
+      .tab-nav { display: none !important; }
+      .tab-panel { display: block !important; page-break-before: always; break-before: page; padding-top: 0 !important; }
+      .phase-header { margin: 0 0 24px !important; }
+      .doc { box-shadow: none; border: 0; max-width: none; margin: 0; }
+    }
+
+    /* SUMMARY / OVERVIEW EXTRAS */
+    .summary-grid { grid-template-columns: repeat(4, 1fr); margin: 16px 0 20px; }
+    .toc-grid { grid-template-columns: repeat(2, 1fr); margin-top: 14px; }
+    .toc-card {
+      border: 1px solid #e2e8f0;
+      border-left: 4px solid #1d4ed8;
+      background: #f8fafc;
+      padding: 13px 14px;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+    .toc-card small {
+      display: block;
+      color: #64748b;
+      margin-top: 6px;
+      line-height: 1.45;
+    }
+    .design-decision {
+      border: 1px solid #e5e7eb;
+      border-left: 4px solid #7c3aed;
+      background: #faf5ff;
+      padding: 12px 14px;
+      margin: 8px 0;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+    .design-decision strong { color: #5b21b6; }
+    code {
+      background: #f1f5f9;
+      border: 1px solid #e2e8f0;
+      border-radius: 3px;
+      padding: 1px 5px;
+      font-family: "Consolas", "Courier New", monospace;
+      font-size: 9pt;
+      color: #be123c;
+    }
+    .required-mark { color: #16a34a; font-weight: 700; }
+    .entity-section {
+      margin-bottom: 32px;
+    }
+    .entity-title {
+      font-size: 12pt;
+      font-weight: 700;
+      color: #1d4ed8;
+      margin: 22px 0 6px;
+      padding: 6px 0 6px 12px;
+      border-left: 4px solid #1d4ed8;
+      background: #eff6ff;
+    }
+    .func-spec {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-top: 3px solid #0f172a;
+      padding: 14px 16px;
+      margin: 10px 0 18px;
+    }
+    .func-spec h4 { color: #0f172a; margin-bottom: 8px; }
+    .rule-list { margin: 0; padding-left: 20px; }
+    .rule-list li { margin: 5px 0; }
+    .rule-keyword { color: #0369a1; font-weight: 700; font-style: italic; }
+  </style>
+</head>
+<body>
+<div class="doc">
+
+  <!-- ===== APP HEADER & TAB NAV ===== -->
+  <div class="app-header">
+    <div class="app-title">
+      ACC — Phần mềm kế toán
+      <span>PHASE 1 — ĐẶC TẢ KỸ THUẬT</span>
+    </div>
+    <nav class="tab-nav">
+      <button class="tab-btn active" data-tab="tab-overview">Tổng quan</button>
+      <button class="tab-btn" data-tab="tab-system-admin">Chương 1: Quản trị HT</button>
+      <button class="tab-btn" data-tab="tab-master-data">Chương 2: Danh mục</button>
+      <button class="tab-btn" data-tab="tab-opening-balance">Chương 3: Số dư đầu kỳ</button>
+      <button class="tab-btn" data-tab="tab-cash">Chương 4: Quỹ tiền mặt</button>
+      <button class="tab-btn" data-tab="tab-bank">Chương 5: Tiền gửi NH</button>
+      <button class="tab-btn" data-tab="tab-ledger">Chương 6: Sổ cái</button>
+      <button class="tab-btn" data-tab="tab-reports">Chương 7: Báo cáo</button>
+    </nav>
+  </div>
+
+  <!-- ===== TAB: TỔNG QUAN ===== -->
+  <div class="tab-panel active phase-chapter" id="tab-overview">
+
+    <div class="phase-header">
+      <div class="chapter-label">Tài liệu đặc tả kỹ thuật — Phase 1</div>
+      <h2>Phase 1 — Đặc tả kỹ thuật lập trình</h2>
+      <p>Tài liệu này dành cho lập trình viên backend/frontend, DBA và QA. Chuyển đổi từ mô tả nghiệp vụ kế toán sang đặc tả kỹ thuật đầy đủ bao gồm data model, state machine, functional spec, định khoản và báo cáo.</p>
+    </div>
+
+    <!-- Metadata -->
+    <div class="meta">
+      <div class="meta-card">
+        <b>Phase 1</b>
+        <span>Phiên bản</span>
+      </div>
+      <div class="meta-card">
+        <b>19/06/2026</b>
+        <span>Ngày tạo</span>
+      </div>
+      <div class="meta-card">
+        <b style="font-size:11pt;">Lập trình viên, DBA, QA</b>
+        <span>Đối tượng</span>
+      </div>
+      <div class="meta-card">
+        <b style="font-size:13pt; color:#d97706;">Draft</b>
+        <span>Trạng thái</span>
+      </div>
+    </div>
+
+    <!-- Summary counts -->
+    <div class="summary-grid" style="margin-top: 20px;">
+      <div class="meta-card">
+        <b>~46</b>
+        <span>Entities (bảng dữ liệu)</span>
+      </div>
+      <div class="meta-card">
+        <b>7</b>
+        <span>Modules chức năng</span>
+      </div>
+      <div class="meta-card">
+        <b>~26</b>
+        <span>Nghiệp vụ định khoản</span>
+      </div>
+      <div class="meta-card">
+        <b>12</b>
+        <span>Báo cáo kế toán</span>
+      </div>
+    </div>
+
+    <div class="notice">
+      <strong>⚠️ Lưu ý quan trọng:</strong> Các mục đánh dấu <strong>[CẦN KẾ TOÁN XÁC NHẬN]</strong> cần kế toán chốt trước khi dev triển khai. Xem tổng hợp ở Chương 7.
+    </div>
+
+    <!-- Chapter index table -->
+    <h2>Danh sách các chương</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Chương</th>
+          <th>Module</th>
+          <th>Số entities</th>
+          <th>Tính năng chính</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Chương 1</strong></td>
+          <td>Quản trị hệ thống</td>
+          <td>12</td>
+          <td>Công ty, năm tài chính, chi nhánh, phòng ban, người dùng, phân quyền RBAC, quy tắc đánh số, audit log</td>
+        </tr>
+        <tr>
+          <td><strong>Chương 2</strong></td>
+          <td>Danh mục hệ thống</td>
+          <td>~8</td>
+          <td>Hệ thống tài khoản kế toán, đối tác (khách hàng/nhà cung cấp), nhân viên, kho hàng, nhóm hàng, hàng hoá/dịch vụ</td>
+        </tr>
+        <tr>
+          <td><strong>Chương 3</strong></td>
+          <td>Số dư đầu kỳ</td>
+          <td>~4</td>
+          <td>Nhập số dư đầu kỳ tài khoản, công nợ khách hàng/nhà cung cấp, tồn kho đầu kỳ; kiểm tra cân đối</td>
+        </tr>
+        <tr>
+          <td><strong>Chương 4</strong></td>
+          <td>Quỹ tiền mặt</td>
+          <td>~5</td>
+          <td>Phiếu thu, phiếu chi tiền mặt; state machine duyệt; sổ quỹ; kiểm tra tồn quỹ âm</td>
+        </tr>
+        <tr>
+          <td><strong>Chương 5</strong></td>
+          <td>Tiền gửi ngân hàng</td>
+          <td>~5</td>
+          <td>Tài khoản ngân hàng, giấy báo nợ/có, chuyển khoản nội bộ; đối chiếu sao kê; state machine duyệt</td>
+        </tr>
+        <tr>
+          <td><strong>Chương 6</strong></td>
+          <td>Sổ cái tổng hợp</td>
+          <td>~4</td>
+          <td>Bút toán kế toán (journal entry), bút toán kết chuyển cuối kỳ, khoá kỳ kế toán</td>
+        </tr>
+        <tr>
+          <td><strong>Chương 7</strong></td>
+          <td>Báo cáo tài chính</td>
+          <td>—</td>
+          <td>Bảng cân đối kế toán, kết quả hoạt động kinh doanh, lưu chuyển tiền tệ, sổ cái, sổ quỹ, công nợ, tổng hợp [CẦN XÁC NHẬN]</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Design decisions -->
+    <h2>Quyết định thiết kế hệ thống</h2>
+
+    <div class="design-decision">
+      <strong>DD-01 — Multi-tenant theo company_id:</strong> Toàn bộ entity đều có cột <code>company_id</code>. Mọi query phải auto-filter theo <code>company_id</code> của session hiện tại. Tuyệt đối không được trả về dữ liệu chéo công ty.
+    </div>
+    <div class="design-decision">
+      <strong>DD-02 — UUID làm Primary Key:</strong> Tất cả bảng dùng <code>UUID v4</code> làm PK thay vì auto-increment integer, trừ <code>audit_log</code> dùng <code>BIGSERIAL</code> để tối ưu insert hiệu suất cao.
+    </div>
+    <div class="design-decision">
+      <strong>DD-03 — ENUM thay vì bảng lookup:</strong> Các giá trị cố định theo nghiệp vụ (chế độ kế toán, phương pháp tính giá, loại kỳ…) dùng PostgreSQL <code>ENUM</code> type. Các giá trị nghiệp vụ thay đổi theo công ty dùng bảng riêng.
+    </div>
+    <div class="design-decision">
+      <strong>DD-04 — Audit log bất biến (INSERT-ONLY):</strong> Bảng <code>audit_log</code> không được phép UPDATE hay DELETE dưới mọi hình thức, kể cả admin. Đây là yêu cầu bắt buộc của kiểm toán.
+    </div>
+    <div class="design-decision">
+      <strong>DD-05 — JSONB cho old_value/new_value:</strong> Sử dụng JSONB để lưu snapshot trạng thái trước/sau thay đổi trong audit_log. Giúp truy vết mọi biến động mà không cần schema riêng cho từng entity.
+    </div>
+    <div class="design-decision">
+      <strong>DD-06 — Đánh số chứng từ tự động theo rule:</strong> Format: <code>{prefix}{sep}{YYYY}{sep}{MM}{sep}{SEQ}</code>. Sequence auto-increment, reset theo <code>reset_period</code>. Không tái sử dụng số đã dùng dù chứng từ bị huỷ.
+    </div>
+
+  </div><!-- end tab-overview -->
+
+  <!-- ===== TAB: CHƯƠNG 1 — QUẢN TRỊ HỆ THỐNG ===== -->
+  <div class="tab-panel phase-chapter" id="tab-system-admin">
+
+    <div class="phase-header">
+      <div class="chapter-label">Chương 1 — Data Model &amp; Functional Spec</div>
+      <h2>Quản trị hệ thống</h2>
+      <p>Bao gồm toàn bộ data model cho cấu hình công ty, năm tài chính, chi nhánh/phòng ban, quản lý người dùng, phân quyền RBAC, quy tắc đánh số chứng từ và audit log bất biến.</p>
+    </div>
+
+    <!-- ======================== SECTION 1: DATA MODEL ======================== -->
+    <h2>1. Data Model</h2>
+
+    <!-- 1.1 company -->
+    <div class="entity-section">
+      <div class="entity-title">1.1 Bảng <code>company</code> — Thông tin công ty</div>
+      <table>
+        <thead>
+          <tr>
+            <th>Field</th>
+            <th>Type</th>
+            <th>Required</th>
+            <th>FK</th>
+            <th>Ghi chú</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>id</code></td><td>UUID</td><td class="required-mark">✓</td><td>—</td><td>Primary Key, tự sinh UUID v4</td></tr>
+          <tr><td><code>name</code></td><td>VARCHAR(255)</td><td class="required-mark">✓</td><td>—</td><td>Tên công ty</td></tr>
+          <tr><td><code>tax_code</code></td><td>VARCHAR(20)</td><td class="required-mark">✓</td><td>—</td><td>Mã số thuế, UNIQUE toàn hệ thống</td></tr>
+          <tr><td><code>address</code></td><td>TEXT</td><td></td><td>—</td><td>Địa chỉ trụ sở</td></tr>
+          <tr><td><code>phone</code></td><td>VARCHAR(20)</td><td></td><td>—</td><td>Số điện thoại</td></tr>
+          <tr><td><code>email</code></td><td>VARCHAR(100)</td><td></td><td>—</td><td>Email liên hệ</td></tr>
+          <tr><td><code>representative</code></td><td>VARCHAR(100)</td><td></td><td>—</td><td>Người đại diện pháp luật</td></tr>
+          <tr><td><code>logo_url</code></td><td>VARCHAR(500)</td><td></td><td>—</td><td>URL logo công ty</td></tr>
+          <tr><td><code>accounting_regime</code></td><td>ENUM(<code>tt200</code>|<code>tt133</code>)</td><td class="required-mark">✓</td><td>—</td><td>Chế độ kế toán áp dụng (TT 200 hoặc TT 133)</td></tr>
+          <tr><td><code>costing_method</code></td><td>ENUM(<code>weighted_avg</code>|<code>fifo</code>)</td><td class="required-mark">✓</td><td>—</td><td>Phương pháp tính giá xuất kho</td></tr>
+          <tr><td><code>tax_method</code></td><td>ENUM(<code>deduction</code>|<code>direct</code>)</td><td class="required-mark">✓</td><td>—</td><td>Phương pháp tính thuế GTGT (khấu trừ / trực tiếp)</td></tr>
+          <tr><td><code>tax_period</code></td><td>ENUM(<code>monthly</code>|<code>quarterly</code>)</td><td class="required-mark">✓</td><td>—</td><td>Kỳ kê khai thuế</td></tr>
+          <tr><td><code>base_currency</code></td><td>VARCHAR(3)</td><td class="required-mark">✓</td><td>—</td><td>Đồng tiền hạch toán, mặc định <code>VND</code></td></tr>
+          <tr><td><code>is_active</code></td><td>BOOLEAN</td><td class="required-mark">✓</td><td>—</td><td>Mặc định <code>true</code></td></tr>
+          <tr><td><code>created_at</code></td><td>TIMESTAMP</td><td class="required-mark">✓</td><td>—</td><td>Tự động ghi khi tạo</td></tr>
+          <tr><td><code>updated_at</code></td><td>TIMESTAMP</td><td class="required-mark">✓</td><td>—</td><td>Tự động cập nhật khi sửa</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 1.2 fiscal_year -->
+    <div class="entity-section">
+      <div class="entity-title">1.2 Bảng <code>fiscal_year</code> — Năm tài chính</div>
+      <table>
+        <thead>
+          <tr>
+            <th>Field</th>
+            <th>Type</th>
+            <th>Required</th>
+            <th>FK</th>
+            <th>Ghi chú</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>id</code></td><td>UUID</td><td class="required-mark">✓</td><td>—</td><td>Primary Key</td></tr>
+          <tr><td><code>company_id</code></td><td>UUID</td><td class="required-mark">✓</td><td>→ <code>company</code></td><td>Multi-tenant key</td></tr>
+          <tr><td><code>year</code></td><td>INTEGER</td><td class="required-mark">✓</td><td>—</td><td>Năm dương lịch, ví dụ 2026</td></tr>
+          <tr><td><code>start_date</code></td><td>DATE</td><td class="required-mark">✓</td><td>—</td><td>Ngày bắt đầu năm tài chính</td></tr>
+          <tr><td><code>end_date</code></td><td>DATE</td><td class="required-mark">✓</td><td>—</td><td>Ngày kết thúc; phải sau <code>start_date</code></td></tr>
+          <tr><td><code>period_type</code></td><td>ENUM(<code>monthly</code>|<code>quarterly</code>|<code>yearly</code>)</td><td class="required-mark">✓</td><td>—</td><td>Loại kỳ kế toán; xác định cách sinh sub-periods</td></tr>
+          <tr><td><code>is_closed</code></td><td>BOOLEAN</td><td class="required-mark">✓</td><td>—</td><td>Mặc định <code>false</code>. Khi <code>true</code> — khoá toàn bộ kỳ</td></tr>
+          <tr><td><code>closed_at</code></td><td>TIMESTAMP</td><td></td><td>—</td><td>Thời điểm khoá kỳ, null nếu chưa khoá</td></tr>
+          <tr><td><code>closed_by</code></td><td>UUID</td><td></td><td>→ <code>user</code></td><td>Người khoá kỳ</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 1.3 branch -->
+    <div class="entity-section">
+      <div class="entity-title">1.3 Bảng <code>branch</code> — Chi nhánh</div>
+      <table>
+        <thead>
+          <tr>
+            <th>Field</th>
+            <th>Type</th>
+            <th>Required</th>
+            <th>FK</th>
+            <th>Ghi chú</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>id</code></td><td>UUID</td><td class="required-mark">✓</td><td>—</td><td>Primary Key</td></tr>
+          <tr><td><code>company_id</code></td><td>UUID</td><td class="required-mark">✓</td><td>→ <code>company</code></td><td>Multi-tenant key</td></tr>
+          <tr><td><code>code</code></td><td>VARCHAR(20)</td><td class="required-mark">✓</td><td>—</td><td>Mã chi nhánh, UNIQUE trong phạm vi <code>company_id</code></td></tr>
+          <tr><td><code>name</code></td><td>VARCHAR(255)</td><td class="required-mark">✓</td><td>—</td><td>Tên chi nhánh</td></tr>
+          <tr><td><code>address</code></td><td>TEXT</td><td></td><td>—</td><td>Địa chỉ chi nhánh</td></tr>
+          <tr><td><code>is_active</code></td><td>BOOLEAN</td><td class="required-mark">✓</td><td>—</td><td>Mặc định <code>true</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 1.4 department -->
+    <div class="entity-section">
+      <div class="entity-title">1.4 Bảng <code>department</code> — Phòng ban</div>
+      <table>
+        <thead>
+          <tr>
+            <th>Field</th>
+            <th>Type</th>
+            <th>Required</th>
+            <th>FK</th>
+            <th>Ghi chú</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>id</code></td><td>UUID</td><td class="required-mark">✓</td><td>—</td><td>Primary Key</td></tr>
+          <tr><td><code>company_id</code></td><td>UUID</td><td class="required-mark">✓</td><td>→ <code>company</code></td><td>Multi-tenant key</td></tr>
+          <tr><td><code>branch_id</code></td><td>UUID</td><td></td><td>→ <code>branch</code> (optional)</td><td>Phòng ban thuộc chi nhánh nào (có thể null)</td></tr>
+          <tr><td><code>code</code></td><td>VARCHAR(20)</td><td class="required-mark">✓</td><td>—</td><td>Mã phòng ban, UNIQUE trong phạm vi <code>company_id</code></td></tr>
+          <tr><td><code>name</code></td><td>VARCHAR(255)</td><td class="required-mark">✓</td><td>—</td><td>Tên phòng ban</td></tr>
+          <tr><td><code>is_active</code></td><td>BOOLEAN</td><td class="required-mark">✓</td><td>—</td><td>Mặc định <code>true</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 1.5 user -->
+    <div class="entity-section">
+      <div class="entity-title">1.5 Bảng <code>user</code> — Người dùng hệ thống</div>
+      <table>
+        <thead>
+          <tr>
+            <th>Field</th>
+            <th>Type</th>
+            <th>Required</th>
+            <th>FK</th>
+            <th>Ghi chú</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>id</code></td><td>UUID</td><td class="required-mark">✓</td><td>—</td><td>Primary Key</td></tr>
+          <tr><td><code>company_id</code></td><td>UUID</td><td class="required-mark">✓</td><td>→ <code>company</code></td><td>Multi-tenant key</td></tr>
+          <tr><td><code>username</code></td><td>VARCHAR(50)</td><td class="required-mark">✓</td><td>—</td><td>Tên đăng nhập, UNIQUE trong phạm vi <code>company_id</code></td></tr>
+          <tr><td><code>email</code></td><td>VARCHAR(100)</td><td class="required-mark">✓</td><td>—</td><td>Email đăng nhập / nhận thông báo</td></tr>
+          <tr><td><code>password_hash</code></td><td>VARCHAR(255)</td><td class="required-mark">✓</td><td>—</td><td>Bcrypt hash, không lưu plain text</td></tr>
+          <tr><td><code>full_name</code></td><td>VARCHAR(100)</td><td class="required-mark">✓</td><td>—</td><td>Họ tên đầy đủ</td></tr>
+          <tr><td><code>phone</code></td><td>VARCHAR(20)</td><td></td><td>—</td><td>Số điện thoại liên hệ</td></tr>
+          <tr><td><code>department_id</code></td><td>UUID</td><td></td><td>→ <code>department</code> (optional)</td><td>Phòng ban của nhân viên (có thể null)</td></tr>
+          <tr><td><code>employee_id</code></td><td>UUID</td><td></td><td>→ <code>employee</code> (optional)</td><td>Liên kết hồ sơ nhân viên (có thể null)</td></tr>
+          <tr><td><code>status</code></td><td>ENUM(<code>active</code>|<code>locked</code>|<code>disabled</code>)</td><td class="required-mark">✓</td><td>—</td><td>Trạng thái tài khoản</td></tr>
+          <tr><td><code>last_login_at</code></td><td>TIMESTAMP</td><td></td><td>—</td><td>Thời điểm đăng nhập gần nhất</td></tr>
+          <tr><td><code>session_timeout_minutes</code></td><td>INTEGER</td><td class="required-mark">✓</td><td>—</td><td>Thời gian timeout phiên, mặc định <code>30</code> phút</td></tr>
+          <tr><td><code>created_at</code></td><td>TIMESTAMP</td><td class="required-mark">✓</td><td>—</td><td>Tự động ghi khi tạo</td></tr>
+          <tr><td><code>updated_at</code></td><td>TIMESTAMP</td><td class="required-mark">✓</td><td>—</td><td>Tự động cập nhật khi sửa</td></tr>
+        </tbody>
+      </table>
+
+      <div class="flow">
+        <strong>State machine — trạng thái user:</strong><br>
+        Tạo mới → <strong>active</strong> &nbsp;→&nbsp; [Admin khoá] &nbsp;→&nbsp; <strong>locked</strong> &nbsp;→&nbsp; [Admin mở khoá] &nbsp;→&nbsp; <strong>active</strong><br>
+        <strong>active</strong> / <strong>locked</strong> &nbsp;→&nbsp; [Admin vô hiệu hoá] &nbsp;→&nbsp; <strong>disabled</strong> (không thể đảo ngược)
+      </div>
+    </div>
+
+    <!-- 1.6 role -->
+    <div class="entity-section">
+      <div class="entity-title">1.6 Bảng <code>role</code> — Vai trò (RBAC)</div>
+      <table>
+        <thead>
+          <tr>
+            <th>Field</th>
+            <th>Type</th>
+            <th>Required</th>
+            <th>FK</th>
+            <th>Ghi chú</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>id</code></td><td>UUID</td><td class="required-mark">✓</td><td>—</td><td>Primary Key</td></tr>
+          <tr><td><code>company_id</code></td><td>UUID</td><td class="required-mark">✓</td><td>→ <code>company</code></td><td>Multi-tenant key</td></tr>
+          <tr><td><code>name</code></td><td>VARCHAR(100)</td><td class="required-mark">✓</td><td>—</td><td>Tên vai trò (ví dụ: Kế toán trưởng, Thu ngân)</td></tr>
+          <tr><td><code>description</code></td><td>TEXT</td><td></td><td>—</td><td>Mô tả quyền hạn của vai trò</td></tr>
+          <tr><td><code>is_system</code></td><td>BOOLEAN</td><td class="required-mark">✓</td><td>—</td><td>Mặc định <code>false</code>. Nếu <code>true</code> — không được xoá</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 1.7 permission -->
+    <div class="entity-section">
+      <div class="entity-title">1.7 Bảng <code>permission</code> — Quyền hạn chi tiết</div>
+      <table>
+        <thead>
+          <tr>
+            <th>Field</th>
+            <th>Type</th>
+            <th>Required</th>
+            <th>FK</th>
+            <th>Ghi chú</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>id</code></td><td>UUID</td><td class="required-mark">✓</td><td>—</td><td>Primary Key</td></tr>
+          <tr><td><code>role_id</code></td><td>UUID</td><td class="required-mark">✓</td><td>→ <code>role</code></td><td>Vai trò sở hữu quyền này</td></tr>
+          <tr><td><code>module</code></td><td>VARCHAR(50)</td><td class="required-mark">✓</td><td>—</td><td>Module chức năng (ví dụ: <code>cash</code>, <code>bank</code>, <code>ledger</code>)</td></tr>
+          <tr><td><code>feature</code></td><td>VARCHAR(50)</td><td class="required-mark">✓</td><td>—</td><td>Tính năng trong module (ví dụ: <code>receipt</code>, <code>payment</code>)</td></tr>
+          <tr><td><code>action</code></td><td>ENUM(<code>view</code>|<code>create</code>|<code>edit</code>|<code>delete</code>|<code>approve</code>|<code>export</code>)</td><td class="required-mark">✓</td><td>—</td><td>Hành động được phép thực hiện</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 1.8 user_role -->
+    <div class="entity-section">
+      <div class="entity-title">1.8 Bảng <code>user_role</code> — Gán vai trò cho người dùng</div>
+      <table>
+        <thead>
+          <tr>
+            <th>Field</th>
+            <th>Type</th>
+            <th>Required</th>
+            <th>FK</th>
+            <th>Ghi chú</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>user_id</code></td><td>UUID</td><td class="required-mark">✓</td><td>→ <code>user</code></td><td>Composite Primary Key (user_id + role_id)</td></tr>
+          <tr><td><code>role_id</code></td><td>UUID</td><td class="required-mark">✓</td><td>→ <code>role</code></td><td>Composite Primary Key (user_id + role_id)</td></tr>
+        </tbody>
+      </table>
+      <div class="callout">
+        Một người dùng có thể được gán nhiều vai trò. Quyền cuối cùng là hợp (UNION) của tất cả quyền từ tất cả vai trò của người dùng đó.
+      </div>
+    </div>
+
+    <!-- 1.9 data_permission -->
+    <div class="entity-section">
+      <div class="entity-title">1.9 Bảng <code>data_permission</code> — Phân quyền theo phạm vi dữ liệu</div>
+      <table>
+        <thead>
+          <tr>
+            <th>Field</th>
+            <th>Type</th>
+            <th>Required</th>
+            <th>FK</th>
+            <th>Ghi chú</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>id</code></td><td>UUID</td><td class="required-mark">✓</td><td>—</td><td>Primary Key</td></tr>
+          <tr><td><code>role_id</code></td><td>UUID</td><td class="required-mark">✓</td><td>→ <code>role</code></td><td>Vai trò áp dụng phân quyền dữ liệu này</td></tr>
+          <tr><td><code>scope_type</code></td><td>ENUM(<code>branch</code>|<code>department</code>|<code>warehouse</code>|<code>bank_account</code>)</td><td class="required-mark">✓</td><td>—</td><td>Loại phạm vi dữ liệu bị giới hạn</td></tr>
+          <tr><td><code>scope_id</code></td><td>UUID</td><td class="required-mark">✓</td><td>—</td><td>ID của entity tương ứng với <code>scope_type</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 1.10 document_type -->
+    <div class="entity-section">
+      <div class="entity-title">1.10 Bảng <code>document_type</code> — Loại chứng từ</div>
+      <table>
+        <thead>
+          <tr>
+            <th>Field</th>
+            <th>Type</th>
+            <th>Required</th>
+            <th>FK</th>
+            <th>Ghi chú</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>id</code></td><td>UUID</td><td class="required-mark">✓</td><td>—</td><td>Primary Key</td></tr>
+          <tr><td><code>company_id</code></td><td>UUID</td><td class="required-mark">✓</td><td>→ <code>company</code></td><td>Multi-tenant key</td></tr>
+          <tr><td><code>code</code></td><td>VARCHAR(20)</td><td class="required-mark">✓</td><td>—</td><td>Mã loại chứng từ: <code>CASH_RECEIPT</code>, <code>CASH_PAYMENT</code>, <code>BANK_RECEIPT</code>, <code>BANK_PAYMENT</code>, <code>BANK_TRANSFER</code></td></tr>
+          <tr><td><code>name</code></td><td>VARCHAR(100)</td><td class="required-mark">✓</td><td>—</td><td>Tên hiển thị loại chứng từ</td></tr>
+          <tr><td><code>status_flow</code></td><td>JSONB</td><td class="required-mark">✓</td><td>—</td><td>Mảng trạng thái hợp lệ, ví dụ: <code>["draft","pending_approval","approved","cancelled"]</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 1.11 numbering_rule -->
+    <div class="entity-section">
+      <div class="entity-title">1.11 Bảng <code>numbering_rule</code> — Quy tắc đánh số chứng từ</div>
+      <table>
+        <thead>
+          <tr>
+            <th>Field</th>
+            <th>Type</th>
+            <th>Required</th>
+            <th>FK</th>
+            <th>Ghi chú</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>id</code></td><td>UUID</td><td class="required-mark">✓</td><td>—</td><td>Primary Key</td></tr>
+          <tr><td><code>company_id</code></td><td>UUID</td><td class="required-mark">✓</td><td>→ <code>company</code></td><td>Multi-tenant key</td></tr>
+          <tr><td><code>document_type_id</code></td><td>UUID</td><td class="required-mark">✓</td><td>→ <code>document_type</code></td><td>Áp dụng cho loại chứng từ nào</td></tr>
+          <tr><td><code>prefix</code></td><td>VARCHAR(10)</td><td class="required-mark">✓</td><td>—</td><td>Tiền tố: <code>PT</code>, <code>PC</code>, <code>TNH</code>, <code>CNH</code></td></tr>
+          <tr><td><code>separator</code></td><td>VARCHAR(2)</td><td class="required-mark">✓</td><td>—</td><td>Ký tự phân cách, mặc định <code>-</code></td></tr>
+          <tr><td><code>include_year</code></td><td>BOOLEAN</td><td class="required-mark">✓</td><td>—</td><td>Có chèn năm vào số không? Mặc định <code>true</code></td></tr>
+          <tr><td><code>include_month</code></td><td>BOOLEAN</td><td class="required-mark">✓</td><td>—</td><td>Có chèn tháng vào số không? Mặc định <code>true</code></td></tr>
+          <tr><td><code>sequence_length</code></td><td>INTEGER</td><td class="required-mark">✓</td><td>—</td><td>Độ dài chuỗi số thứ tự (zero-padded), mặc định <code>4</code></td></tr>
+          <tr><td><code>reset_period</code></td><td>ENUM(<code>monthly</code>|<code>yearly</code>|<code>never</code>)</td><td class="required-mark">✓</td><td>—</td><td>Chu kỳ reset sequence về 0</td></tr>
+          <tr><td><code>current_sequence</code></td><td>INTEGER</td><td class="required-mark">✓</td><td>—</td><td>Số thứ tự hiện tại, mặc định <code>0</code>. Tăng dần khi tạo chứng từ mới</td></tr>
+        </tbody>
+      </table>
+
+      <div class="callout">
+        <strong>Ví dụ format số chứng từ:</strong> <code>PT-2026-01-0001</code> (prefix=PT, sep=-, include_year=true, include_month=true, sequence_length=4, sequence=1).<br>
+        Số đã cấp không được tái sử dụng dù chứng từ bị huỷ.
+      </div>
+    </div>
+
+    <!-- 1.12 audit_log -->
+    <div class="entity-section">
+      <div class="entity-title">1.12 Bảng <code>audit_log</code> — Nhật ký kiểm toán (bất biến)</div>
+      <table>
+        <thead>
+          <tr>
+            <th>Field</th>
+            <th>Type</th>
+            <th>Required</th>
+            <th>FK</th>
+            <th>Ghi chú</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>id</code></td><td>BIGSERIAL</td><td class="required-mark">✓</td><td>—</td><td>Primary Key, tự tăng (dùng BIGSERIAL để tối ưu insert hiệu suất cao)</td></tr>
+          <tr><td><code>company_id</code></td><td>UUID</td><td class="required-mark">✓</td><td>→ <code>company</code></td><td>Multi-tenant key</td></tr>
+          <tr><td><code>user_id</code></td><td>UUID</td><td class="required-mark">✓</td><td>→ <code>user</code></td><td>Người thực hiện hành động</td></tr>
+          <tr><td><code>action</code></td><td>ENUM(<code>create</code>|<code>update</code>|<code>delete</code>|<code>approve</code>|<code>cancel</code>|<code>lock</code>|<code>unlock</code>|<code>login</code>|<code>logout</code>)</td><td class="required-mark">✓</td><td>—</td><td>Loại hành động được ghi nhận</td></tr>
+          <tr><td><code>entity_type</code></td><td>VARCHAR(50)</td><td class="required-mark">✓</td><td>—</td><td>Tên bảng/entity bị tác động (ví dụ: <code>cash_receipt</code>)</td></tr>
+          <tr><td><code>entity_id</code></td><td>UUID</td><td class="required-mark">✓</td><td>—</td><td>ID của record bị tác động</td></tr>
+          <tr><td><code>old_value</code></td><td>JSONB</td><td></td><td>—</td><td>Snapshot trạng thái trước thay đổi (null nếu action=create)</td></tr>
+          <tr><td><code>new_value</code></td><td>JSONB</td><td></td><td>—</td><td>Snapshot trạng thái sau thay đổi (null nếu action=delete)</td></tr>
+          <tr><td><code>ip_address</code></td><td>VARCHAR(45)</td><td></td><td>—</td><td>IP của người dùng (hỗ trợ IPv6)</td></tr>
+          <tr><td><code>user_agent</code></td><td>VARCHAR(500)</td><td></td><td>—</td><td>Thông tin trình duyệt / client</td></tr>
+          <tr><td><code>created_at</code></td><td>TIMESTAMP</td><td class="required-mark">✓</td><td>—</td><td>Thời điểm ghi log, bất biến — không được phép sửa</td></tr>
+        </tbody>
+      </table>
+
+      <div class="notice">
+        <strong>⚠️ Quy tắc bất biến:</strong> Bảng <code>audit_log</code> là INSERT-ONLY. Không được phép thực hiện UPDATE hay DELETE dưới bất kỳ hình thức nào, kể cả tài khoản admin hay DBA. Nên cài đặt rule-level hoặc trigger-level tại database để enforce.
+      </div>
+    </div>
+
+    <!-- ======================== SECTION 2: FUNCTIONAL SPEC ======================== -->
+    <h2>2. Functional Spec</h2>
+
+    <!-- 2.5 -->
+    <h3>2.5 Khởi tạo doanh nghiệp &amp; cấu hình năm tài chính</h3>
+
+    <div class="func-spec">
+      <h4>Quy tắc nghiệp vụ</h4>
+      <ul class="rule-list">
+        <li><span class="rule-keyword">WHEN</span> admin nhập đầy đủ các trường bắt buộc (<code>name</code>, <code>tax_code</code>, <code>accounting_regime</code>, <code>costing_method</code>, <code>tax_method</code>, <code>tax_period</code>, <code>base_currency</code>) <span class="rule-keyword">THEN</span> tạo bản ghi <code>company</code>; tự động khởi tạo hệ thống tài khoản kế toán mặc định theo <code>accounting_regime</code> (TT200 hoặc TT133).</li>
+        <li><span class="rule-keyword">WHEN</span> <code>tax_code</code> đã tồn tại trong hệ thống <span class="rule-keyword">THEN</span> từ chối lưu, trả về lỗi: <strong>"Mã số thuế đã tồn tại"</strong>.</li>
+        <li><span class="rule-keyword">WHEN</span> tạo <code>fiscal_year</code> với <code>start_date</code> và <code>end_date</code> hợp lệ, không chồng lấn với năm tài chính khác của cùng công ty <span class="rule-keyword">THEN</span> lưu bản ghi; tự động sinh các sub-periods theo <code>period_type</code> (monthly → 12 kỳ; quarterly → 4 kỳ; yearly → 1 kỳ).</li>
+        <li><span class="rule-keyword">WHEN</span> kỳ kế toán bị khoá (<code>is_closed = true</code>) <span class="rule-keyword">THEN</span> chặn toàn bộ thao tác tạo mới / sửa / duyệt / huỷ chứng từ thuộc kỳ đó; trả về lỗi: <strong>"Kỳ kế toán đã bị khoá"</strong> — trừ người dùng có quyền <code>unlock_period</code>.</li>
+        <li><span class="rule-keyword">WHEN</span> tạo <code>branch</code> với <code>code</code> duy nhất trong phạm vi <code>company_id</code> <span class="rule-keyword">THEN</span> lưu thành công; dữ liệu thuộc chi nhánh có thể được kiểm soát truy cập theo <code>data_permission</code> với <code>scope_type = branch</code>.</li>
+        <li><span class="rule-keyword">WHEN</span> tạo <code>department</code> <span class="rule-keyword">THEN</span> trường <code>branch_id</code> là tuỳ chọn; phòng ban có thể thuộc chi nhánh cụ thể hoặc không gán chi nhánh (phòng ban toàn công ty).</li>
+      </ul>
+    </div>
+
+    <!-- 2.6 -->
+    <h3>2.6 Quản lý người dùng</h3>
+
+    <div class="func-spec">
+      <h4>Quy tắc nghiệp vụ</h4>
+      <ul class="rule-list">
+        <li><span class="rule-keyword">Tạo user:</span> <code>username</code> phải duy nhất trong <code>company_id</code>; <code>email</code> phải hợp lệ theo định dạng RFC 5321; password tối thiểu 8 ký tự, có ít nhất 1 chữ hoa và 1 chữ số → lưu <code>password_hash</code> (Bcrypt) → <code>status = active</code> → ghi <code>audit_log</code> action=<code>create</code>.</li>
+        <li><span class="rule-keyword">Khoá user:</span> <code>status</code> chuyển sang <code>locked</code> → terminate toàn bộ phiên đang hoạt động của user đó → ghi <code>audit_log</code> action=<code>lock</code>. User bị khoá không thể đăng nhập.</li>
+        <li><span class="rule-keyword">Mở khoá user:</span> <code>status</code> chuyển sang <code>active</code> → ghi <code>audit_log</code> action=<code>unlock</code>.</li>
+        <li><span class="rule-keyword">Auto-logout:</span> Khi phiên không có hoạt động trong vòng <code>session_timeout_minutes</code> phút → tự động vô hiệu hoá phiên → người dùng phải đăng nhập lại.</li>
+        <li><span class="rule-keyword">Đăng nhập:</span> Kiểm tra <code>username</code> + <code>password</code> → tạo phiên mới → cập nhật <code>last_login_at</code> → ghi <code>audit_log</code> action=<code>login</code> với <code>ip_address</code> và <code>user_agent</code>.</li>
+        <li><span class="rule-keyword">Đăng xuất:</span> Terminate phiên hiện tại → ghi <code>audit_log</code> action=<code>logout</code>.</li>
+      </ul>
+    </div>
+
+    <div class="flow">
+      <strong>Luồng xác thực người dùng:</strong><br>
+      Nhập username + password → Kiểm tra <code>status = active</code> → Verify Bcrypt hash → Tạo session token → Ghi <code>last_login_at</code> → Ghi audit_log(login)<br>
+      <br>
+      <strong>Idle timeout:</strong> Mỗi request → reset timer → Nếu không có request trong <code>session_timeout_minutes</code> phút → Invalidate session → Redirect login
+    </div>
+
+    <!-- 2.7 -->
+    <h3>2.7 Phân quyền (RBAC)</h3>
+
+    <div class="func-spec">
+      <h4>Quy tắc nghiệp vụ</h4>
+      <ul class="rule-list">
+        <li>Mọi action đều phải kiểm tra quyền: tra cứu <code>user_role</code> → lấy tất cả <code>role_id</code> của user → tra <code>permission</code> theo (module + feature + action). Nếu không có permission nào khớp → chặn, trả về lỗi: <strong>"Bạn không có quyền thực hiện thao tác này"</strong>.</li>
+        <li>Quyền cuối cùng là hợp (UNION) của tất cả role được gán. Không có cơ chế deny riêng — thiếu permission đồng nghĩa bị từ chối.</li>
+        <li><strong>data_permission:</strong> Nếu role có <code>data_permission</code> với <code>scope_type = warehouse</code> và <code>scope_id = X</code> → user chỉ được xem và thao tác trên dữ liệu thuộc kho X; mọi query liên quan phải auto-filter theo scope_id tương ứng.</li>
+        <li><strong>Sao chép role:</strong> Clone toàn bộ bản ghi <code>permission</code> và <code>data_permission</code> liên kết với role gốc sang role mới; gán tên mới cho role copy.</li>
+        <li>Role có <code>is_system = true</code> không được phép xoá dưới bất kỳ hình thức nào; có thể sửa permission nhưng không xoá role.</li>
+      </ul>
+    </div>
+
+    <div class="flow">
+      <strong>Luồng kiểm tra quyền (mỗi API request):</strong><br>
+      Request đến → Xác thực session → Lấy <code>user_id</code> → Query <code>user_role</code> → Lấy danh sách <code>role_id</code> → Query <code>permission</code>(module, feature, action) → Nếu tìm thấy → Cho phép → Nếu không → 403 Forbidden<br>
+      <br>
+      <strong>Kiểm tra data scope:</strong> Sau khi có quyền hành động → Kiểm tra <code>data_permission</code> → Auto-filter query theo scope
+    </div>
+
+    <!-- 2.8 -->
+    <h3>2.8 Audit log &amp; quy tắc hệ thống</h3>
+
+    <div class="func-spec">
+      <h4>Quy tắc nghiệp vụ</h4>
+      <ul class="rule-list">
+        <li>Mọi thao tác create / update / delete / approve / cancel trên bất kỳ entity nào phải ghi <code>audit_log</code> với <code>old_value</code> (JSONB snapshot trước) và <code>new_value</code> (JSONB snapshot sau). Không được bỏ qua bước này dù thao tác do hệ thống tự động thực hiện.</li>
+        <li>Bảng <code>audit_log</code> là <strong>INSERT-ONLY</strong> — không có nghiệp vụ nào được phép thực hiện UPDATE hay DELETE lên bảng này, kể cả tài khoản admin hay DBA. Nên enforce bằng database-level rule/trigger.</li>
+        <li><strong>Multi-tenant isolation:</strong> Mọi query đến bất kỳ bảng nào phải tự động thêm điều kiện <code>WHERE company_id = :current_company_id</code>. Không bao giờ trả về dữ liệu chéo công ty. Kiểm tra bằng integration test riêng cho từng endpoint.</li>
+        <li><strong>Quy tắc đánh số chứng từ:</strong> Format = <code>{prefix}{separator}{YYYY}{separator}{MM}{separator}{SEQ}</code> trong đó SEQ được zero-pad đến <code>sequence_length</code> ký tự. Ví dụ: <code>PT-2026-01-0001</code>. Sequence tự động tăng 1 mỗi khi tạo chứng từ mới; reset về 0 theo <code>reset_period</code> (monthly / yearly / never). Số đã cấp không tái sử dụng dù chứng từ bị huỷ.</li>
+        <li>Khi <code>reset_period = monthly</code> → sequence reset vào ngày đầu tiên của tháng mới. Khi <code>reset_period = yearly</code> → reset ngày đầu năm tài chính mới. Việc reset phải atomic (dùng transaction hoặc database sequence).</li>
+      </ul>
+    </div>
+
+    <div class="notice">
+      <strong>⚠️ [CẦN KẾ TOÁN XÁC NHẬN]:</strong> Xác nhận format số chứng từ (có cần include_month không?) và quy tắc reset sequence (reset theo năm dương lịch hay năm tài chính?) cần kế toán chốt trước khi dev triển khai bảng <code>numbering_rule</code>.
+    </div>
+
+  </div><!-- end tab-system-admin -->
+
+  <script>
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById(btn.dataset.tab).classList.add('active');
+      });
+    });
+  </script>
+<div class="tab-panel" id="tab-master-data">
+  <div class="phase-header">
+    <div class="chapter-label">Chương 2</div>
+    <h2>Danh mục dùng chung</h2>
+    <p>Quản lý hệ thống tài khoản kế toán, khách hàng, nhà cung cấp, nhân viên, hàng hóa, kho, tài khoản ngân hàng và khoản mục chi phí. Áp dụng COMPACT spec — liệt kê fields, validation rules chính và quyền.</p>
+  </div>
+
+  <h3>2.1 Entity: <code>account</code> — Tài khoản kế toán (cây cha-con)</h3>
+  <div style="overflow-x:auto;">
+    <table>
+      <thead>
+        <tr><th>Field</th><th>Type</th><th>Bắt buộc</th><th>Ghi chú</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>id</code></td><td>UUID</td><td>✓</td><td>PK</td></tr>
+        <tr><td><code>company_id</code></td><td>UUID (FK→company)</td><td>✓</td><td></td></tr>
+        <tr><td><code>code</code></td><td>VARCHAR(20)</td><td>✓</td><td>Unique trong company, vd: 111, 1111</td></tr>
+        <tr><td><code>name</code></td><td>VARCHAR(255)</td><td>✓</td><td></td></tr>
+        <tr><td><code>parent_id</code></td><td>UUID (FK→account)</td><td></td><td>Tài khoản cha (null = cấp 1)</td></tr>
+        <tr><td><code>level</code></td><td>INTEGER</td><td>✓</td><td>1 = tổng hợp, 2+ = chi tiết; <code>level = parent.level + 1</code></td></tr>
+        <tr><td><code>nature</code></td><td>ENUM</td><td>✓</td><td><code>debit</code> | <code>credit</code> | <code>both</code></td></tr>
+        <tr><td><code>account_type</code></td><td>ENUM</td><td>✓</td><td><code>asset</code> | <code>liability</code> | <code>equity</code> | <code>revenue</code> | <code>expense</code></td></tr>
+        <tr><td><code>is_detail</code></td><td>BOOLEAN</td><td>✓</td><td><code>true</code> = cho phép ghi sổ; <code>false</code> = chỉ tổng hợp</td></tr>
+        <tr><td><code>is_active</code></td><td>BOOLEAN</td><td>✓</td><td>default <code>true</code></td></tr>
+        <tr><td><code>has_transactions</code></td><td>BOOLEAN</td><td>✓</td><td>default <code>false</code>; auto-update khi có phát sinh</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>2.2 Entity: <code>customer_group</code> — Nhóm khách hàng</h3>
+  <div style="overflow-x:auto;">
+    <table>
+      <thead>
+        <tr><th>Field</th><th>Type</th><th>Bắt buộc</th><th>Ghi chú</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>id</code></td><td>UUID</td><td>✓</td><td>PK</td></tr>
+        <tr><td><code>company_id</code></td><td>UUID (FK→company)</td><td>✓</td><td></td></tr>
+        <tr><td><code>code</code></td><td>VARCHAR(20)</td><td>✓</td><td></td></tr>
+        <tr><td><code>name</code></td><td>VARCHAR(100)</td><td>✓</td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>2.3 Entity: <code>customer</code> — Khách hàng</h3>
+  <div style="overflow-x:auto;">
+    <table>
+      <thead>
+        <tr><th>Field</th><th>Type</th><th>Bắt buộc</th><th>Ghi chú</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>id</code></td><td>UUID</td><td>✓</td><td>PK</td></tr>
+        <tr><td><code>company_id</code></td><td>UUID (FK→company)</td><td>✓</td><td></td></tr>
+        <tr><td><code>code</code></td><td>VARCHAR(20)</td><td>✓</td><td>Unique trong company</td></tr>
+        <tr><td><code>name</code></td><td>VARCHAR(255)</td><td>✓</td><td></td></tr>
+        <tr><td><code>tax_code</code></td><td>VARCHAR(20)</td><td></td><td></td></tr>
+        <tr><td><code>address</code></td><td>TEXT</td><td></td><td></td></tr>
+        <tr><td><code>contact_person</code></td><td>VARCHAR(100)</td><td></td><td></td></tr>
+        <tr><td><code>phone</code></td><td>VARCHAR(20)</td><td></td><td></td></tr>
+        <tr><td><code>email</code></td><td>VARCHAR(100)</td><td></td><td></td></tr>
+        <tr><td><code>group_id</code></td><td>UUID (FK→customer_group)</td><td></td><td></td></tr>
+        <tr><td><code>region</code></td><td>VARCHAR(100)</td><td></td><td></td></tr>
+        <tr><td><code>credit_limit</code></td><td>DECIMAL(18,2)</td><td></td><td>Hạn mức công nợ tối đa</td></tr>
+        <tr><td><code>payment_term_days</code></td><td>INTEGER</td><td></td><td>Số ngày được nợ</td></tr>
+        <tr><td><code>payment_method</code></td><td>ENUM</td><td></td><td><code>cash</code> | <code>bank_transfer</code> | <code>both</code></td></tr>
+        <tr><td><code>default_account_id</code></td><td>UUID (FK→account)</td><td></td><td>Mặc định TK 131</td></tr>
+        <tr><td><code>is_active</code></td><td>BOOLEAN</td><td>✓</td><td>default <code>true</code></td></tr>
+        <tr><td><code>created_at</code></td><td>TIMESTAMP</td><td>✓</td><td></td></tr>
+        <tr><td><code>updated_at</code></td><td>TIMESTAMP</td><td>✓</td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>2.4 Entity: <code>supplier_group</code> — Nhóm nhà cung cấp</h3>
+  <div style="overflow-x:auto;">
+    <table>
+      <thead>
+        <tr><th>Field</th><th>Type</th><th>Bắt buộc</th><th>Ghi chú</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>id</code></td><td>UUID</td><td>✓</td><td>PK</td></tr>
+        <tr><td><code>company_id</code></td><td>UUID (FK→company)</td><td>✓</td><td></td></tr>
+        <tr><td><code>code</code></td><td>VARCHAR(20)</td><td>✓</td><td></td></tr>
+        <tr><td><code>name</code></td><td>VARCHAR(100)</td><td>✓</td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>2.5 Entity: <code>supplier</code> — Nhà cung cấp</h3>
+  <div style="overflow-x:auto;">
+    <table>
+      <thead>
+        <tr><th>Field</th><th>Type</th><th>Bắt buộc</th><th>Ghi chú</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>id</code></td><td>UUID</td><td>✓</td><td>PK</td></tr>
+        <tr><td><code>company_id</code></td><td>UUID (FK→company)</td><td>✓</td><td></td></tr>
+        <tr><td><code>code</code></td><td>VARCHAR(20)</td><td>✓</td><td>Unique trong company</td></tr>
+        <tr><td><code>name</code></td><td>VARCHAR(255)</td><td>✓</td><td></td></tr>
+        <tr><td><code>tax_code</code></td><td>VARCHAR(20)</td><td></td><td></td></tr>
+        <tr><td><code>address</code></td><td>TEXT</td><td></td><td></td></tr>
+        <tr><td><code>contact_person</code></td><td>VARCHAR(100)</td><td></td><td></td></tr>
+        <tr><td><code>phone</code></td><td>VARCHAR(20)</td><td></td><td></td></tr>
+        <tr><td><code>email</code></td><td>VARCHAR(100)</td><td></td><td></td></tr>
+        <tr><td><code>group_id</code></td><td>UUID (FK→supplier_group)</td><td></td><td></td></tr>
+        <tr><td><code>payment_term_days</code></td><td>INTEGER</td><td></td><td></td></tr>
+        <tr><td><code>payment_method</code></td><td>ENUM</td><td></td><td><code>cash</code> | <code>bank_transfer</code> | <code>both</code></td></tr>
+        <tr><td><code>default_account_id</code></td><td>UUID (FK→account)</td><td></td><td>Mặc định TK 331</td></tr>
+        <tr><td><code>is_active</code></td><td>BOOLEAN</td><td>✓</td><td></td></tr>
+        <tr><td><code>created_at</code></td><td>TIMESTAMP</td><td>✓</td><td></td></tr>
+        <tr><td><code>updated_at</code></td><td>TIMESTAMP</td><td>✓</td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>2.6 Entity: <code>employee</code> — Nhân viên</h3>
+  <div style="overflow-x:auto;">
+    <table>
+      <thead>
+        <tr><th>Field</th><th>Type</th><th>Bắt buộc</th><th>Ghi chú</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>id</code></td><td>UUID</td><td>✓</td><td>PK</td></tr>
+        <tr><td><code>company_id</code></td><td>UUID (FK→company)</td><td>✓</td><td></td></tr>
+        <tr><td><code>code</code></td><td>VARCHAR(20)</td><td>✓</td><td>Unique trong company</td></tr>
+        <tr><td><code>full_name</code></td><td>VARCHAR(100)</td><td>✓</td><td></td></tr>
+        <tr><td><code>department_id</code></td><td>UUID (FK→department)</td><td></td><td></td></tr>
+        <tr><td><code>position</code></td><td>VARCHAR(100)</td><td></td><td></td></tr>
+        <tr><td><code>phone</code></td><td>VARCHAR(20)</td><td></td><td></td></tr>
+        <tr><td><code>email</code></td><td>VARCHAR(100)</td><td></td><td></td></tr>
+        <tr><td><code>is_active</code></td><td>BOOLEAN</td><td>✓</td><td>default <code>true</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>2.7 Entity: <code>product_group</code> — Nhóm hàng hóa (cây)</h3>
+  <div style="overflow-x:auto;">
+    <table>
+      <thead>
+        <tr><th>Field</th><th>Type</th><th>Bắt buộc</th><th>Ghi chú</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>id</code></td><td>UUID</td><td>✓</td><td>PK</td></tr>
+        <tr><td><code>company_id</code></td><td>UUID (FK→company)</td><td>✓</td><td></td></tr>
+        <tr><td><code>code</code></td><td>VARCHAR(20)</td><td>✓</td><td></td></tr>
+        <tr><td><code>name</code></td><td>VARCHAR(100)</td><td>✓</td><td></td></tr>
+        <tr><td><code>parent_id</code></td><td>UUID (FK→product_group)</td><td></td><td>Cấu trúc cây</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>2.8 Entity: <code>product</code> — Hàng hóa / Vật tư / Dịch vụ</h3>
+  <div style="overflow-x:auto;">
+    <table>
+      <thead>
+        <tr><th>Field</th><th>Type</th><th>Bắt buộc</th><th>Ghi chú</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>id</code></td><td>UUID</td><td>✓</td><td>PK</td></tr>
+        <tr><td><code>company_id</code></td><td>UUID (FK→company)</td><td>✓</td><td></td></tr>
+        <tr><td><code>code</code></td><td>VARCHAR(30)</td><td>✓</td><td>Unique trong company</td></tr>
+        <tr><td><code>name</code></td><td>VARCHAR(255)</td><td>✓</td><td></td></tr>
+        <tr><td><code>product_type</code></td><td>ENUM</td><td>✓</td><td><code>goods</code> | <code>material</code> | <code>service</code></td></tr>
+        <tr><td><code>group_id</code></td><td>UUID (FK→product_group)</td><td></td><td></td></tr>
+        <tr><td><code>primary_unit</code></td><td>VARCHAR(20)</td><td>✓</td><td></td></tr>
+        <tr><td><code>default_price</code></td><td>DECIMAL(18,2)</td><td></td><td></td></tr>
+        <tr><td><code>min_stock</code></td><td>DECIMAL(18,4)</td><td></td><td></td></tr>
+        <tr><td><code>max_stock</code></td><td>DECIMAL(18,4)</td><td></td><td></td></tr>
+        <tr><td><code>inventory_account_id</code></td><td>UUID (FK→account)</td><td></td><td>TK 156 / 152</td></tr>
+        <tr><td><code>cogs_account_id</code></td><td>UUID (FK→account)</td><td></td><td>TK 632</td></tr>
+        <tr><td><code>revenue_account_id</code></td><td>UUID (FK→account)</td><td></td><td>TK 511</td></tr>
+        <tr><td><code>expense_account_id</code></td><td>UUID (FK→account)</td><td></td><td>TK 641 / 642</td></tr>
+        <tr><td><code>is_active</code></td><td>BOOLEAN</td><td>✓</td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>2.9 Entity: <code>product_unit</code> — Đơn vị tính quy đổi</h3>
+  <div style="overflow-x:auto;">
+    <table>
+      <thead>
+        <tr><th>Field</th><th>Type</th><th>Bắt buộc</th><th>Ghi chú</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>id</code></td><td>UUID</td><td>✓</td><td>PK</td></tr>
+        <tr><td><code>product_id</code></td><td>UUID (FK→product)</td><td>✓</td><td></td></tr>
+        <tr><td><code>unit_name</code></td><td>VARCHAR(20)</td><td>✓</td><td>Vd: thùng, hộp</td></tr>
+        <tr><td><code>conversion_rate</code></td><td>DECIMAL(18,6)</td><td>✓</td><td>1 đơn vị này = ? <code>primary_unit</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>2.10 Entity: <code>warehouse</code> — Kho</h3>
+  <div style="overflow-x:auto;">
+    <table>
+      <thead>
+        <tr><th>Field</th><th>Type</th><th>Bắt buộc</th><th>Ghi chú</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>id</code></td><td>UUID</td><td>✓</td><td>PK</td></tr>
+        <tr><td><code>company_id</code></td><td>UUID (FK→company)</td><td>✓</td><td></td></tr>
+        <tr><td><code>code</code></td><td>VARCHAR(20)</td><td>✓</td><td>Unique trong company</td></tr>
+        <tr><td><code>name</code></td><td>VARCHAR(100)</td><td>✓</td><td></td></tr>
+        <tr><td><code>address</code></td><td>TEXT</td><td></td><td></td></tr>
+        <tr><td><code>manager_employee_id</code></td><td>UUID (FK→employee)</td><td></td><td></td></tr>
+        <tr><td><code>is_default</code></td><td>BOOLEAN</td><td>✓</td><td>default <code>false</code></td></tr>
+        <tr><td><code>is_active</code></td><td>BOOLEAN</td><td>✓</td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>2.11 Entity: <code>bank_account</code> — Tài khoản ngân hàng doanh nghiệp</h3>
+  <div style="overflow-x:auto;">
+    <table>
+      <thead>
+        <tr><th>Field</th><th>Type</th><th>Bắt buộc</th><th>Ghi chú</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>id</code></td><td>UUID</td><td>✓</td><td>PK</td></tr>
+        <tr><td><code>company_id</code></td><td>UUID (FK→company)</td><td>✓</td><td></td></tr>
+        <tr><td><code>account_number</code></td><td>VARCHAR(30)</td><td>✓</td><td></td></tr>
+        <tr><td><code>bank_name</code></td><td>VARCHAR(100)</td><td>✓</td><td></td></tr>
+        <tr><td><code>branch_name</code></td><td>VARCHAR(100)</td><td></td><td></td></tr>
+        <tr><td><code>account_holder</code></td><td>VARCHAR(100)</td><td>✓</td><td></td></tr>
+        <tr><td><code>currency</code></td><td>VARCHAR(3)</td><td>✓</td><td>default <code>VND</code></td></tr>
+        <tr><td><code>accounting_account_id</code></td><td>UUID (FK→account)</td><td>✓</td><td>TK 112x</td></tr>
+        <tr><td><code>is_default</code></td><td>BOOLEAN</td><td>✓</td><td></td></tr>
+        <tr><td><code>is_active</code></td><td>BOOLEAN</td><td>✓</td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>2.12 Entity: <code>expense_category</code> — Khoản mục chi phí (cây)</h3>
+  <div style="overflow-x:auto;">
+    <table>
+      <thead>
+        <tr><th>Field</th><th>Type</th><th>Bắt buộc</th><th>Ghi chú</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>id</code></td><td>UUID</td><td>✓</td><td>PK</td></tr>
+        <tr><td><code>company_id</code></td><td>UUID (FK→company)</td><td>✓</td><td></td></tr>
+        <tr><td><code>code</code></td><td>VARCHAR(20)</td><td>✓</td><td>Unique trong company</td></tr>
+        <tr><td><code>name</code></td><td>VARCHAR(100)</td><td>✓</td><td></td></tr>
+        <tr><td><code>parent_id</code></td><td>UUID (FK→expense_category)</td><td></td><td>Cấu trúc cây</td></tr>
+        <tr><td><code>is_active</code></td><td>BOOLEAN</td><td>✓</td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>3.4 CRUD Tài khoản kế toán</h3>
+  <ul>
+    <li>Thêm TK con: <code>code</code> PHẢI bắt đầu bằng <code>parent.code</code>; <code>level = parent.level + 1</code>.</li>
+    <li>Không xóa TK có <code>has_transactions = true</code> — chỉ cho phép ngừng hoạt động (<code>is_active = false</code>).</li>
+    <li>Không ghi sổ vào TK có <code>is_detail = false</code> (tài khoản chỉ tổng hợp).</li>
+    <li>Import Excel: validate trùng <code>code</code>, parent không tồn tại → báo lỗi theo dòng; import atomic (all-or-nothing).</li>
+    <li>Export: xuất toàn bộ cây tài khoản ra Excel theo mẫu import.</li>
+  </ul>
+
+  <h3>3.5 CRUD Khách hàng</h3>
+  <ul>
+    <li>Thêm KH với <code>tax_code</code> đã tồn tại → cảnh báo "Trùng MST với [tên KH]"; cho phép tiếp tục nếu người dùng xác nhận.</li>
+    <li><code>is_active = false</code>: KH không xuất hiện trong dropdown chứng từ mới; công nợ cũ vẫn hiển thị.</li>
+    <li>Kiểm tra hạn mức: tổng công nợ + số tiền mới ≤ <code>credit_limit</code> <em>(Phase 3 — ghi chú trong spec)</em>.</li>
+    <li>Import/Export Excel theo mẫu chuẩn.</li>
+  </ul>
+
+  <h3>3.6 CRUD Nhà cung cấp &amp; Nhân viên</h3>
+  <ul>
+    <li>Nhà cung cấp: tương tự KH; cảnh báo trùng <code>tax_code</code>; import/export Excel.</li>
+    <li>Nhân viên: liên kết <code>employee</code> → <code>user</code> qua <code>user.employee_id</code>; khi user tạo phiếu tạm ứng, hệ thống tự gắn <code>employee</code>.</li>
+  </ul>
+
+  <h3>3.7 CRUD Hàng hóa</h3>
+  <ul>
+    <li>Nhiều đơn vị tính: <code>primary_unit</code> + <code>product_unit</code> (<code>conversion_rate</code>); khi chọn đơn vị phụ → tự động quy đổi về <code>primary_unit</code>.</li>
+    <li>Cảnh báo tồn kho: tồn &lt; <code>min_stock</code> hoặc &gt; <code>max_stock</code> → cảnh báo hiển thị trên dashboard.</li>
+  </ul>
+
+  <h3>3.8 CRUD Kho, Tài khoản ngân hàng, Khoản mục chi phí</h3>
+  <ul>
+    <li>Kho: <code>is_default</code> duy nhất — khi set <code>true</code>, các kho khác tự động set <code>false</code>.</li>
+    <li>Tài khoản ngân hàng: <code>accounting_account_id</code> được dùng cho mọi chứng từ ngân hàng liên quan tài khoản đó.</li>
+    <li>Khoản mục chi phí: cấu trúc cây, <code>code</code> unique trong company.</li>
+  </ul>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- TAB 3: Chương 3 — Số dư đầu kỳ                            -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+
+<div class="tab-panel" id="tab-opening-balance">
+  <div class="phase-header">
+    <div class="chapter-label">Chương 3</div>
+    <h2>Số dư đầu kỳ</h2>
+    <p>Nhập và quản lý số dư đầu kỳ cho toàn bộ hệ thống tài khoản và các entity chi tiết: công nợ phải thu/trả, tồn kho, TSCĐ, CCDC, chi phí trả trước. Skeleton entity — ghi rõ mở rộng Phase nào.</p>
+  </div>
+
+  <h3>3.1 Entity: <code>opening_balance</code> — Số dư TK đầu kỳ tổng hợp</h3>
+  <div style="overflow-x:auto;">
+    <table>
+      <thead>
+        <tr><th>Field</th><th>Type</th><th>Bắt buộc</th><th>Ghi chú</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>id</code></td><td>UUID</td><td>✓</td><td>PK</td></tr>
+        <tr><td><code>company_id</code></td><td>UUID (FK→company)</td><td>✓</td><td></td></tr>
+        <tr><td><code>fiscal_year_id</code></td><td>UUID (FK→fiscal_year)</td><td>✓</td><td></td></tr>
+        <tr><td><code>account_id</code></td><td>UUID (FK→account)</td><td>✓</td><td></td></tr>
+        <tr><td><code>debit_amount</code></td><td>DECIMAL(18,2)</td><td>✓</td><td>default 0</td></tr>
+        <tr><td><code>credit_amount</code></td><td>DECIMAL(18,2)</td><td>✓</td><td>default 0</td></tr>
+        <tr><td><code>is_locked</code></td><td>BOOLEAN</td><td>✓</td><td>default <code>false</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="callout">
+    <strong>Unique constraint:</strong> <code>(company_id, fiscal_year_id, account_id)</code><br>
+    <strong>Validation theo nature:</strong>
+    <code>nature=debit</code> → <code>credit_amount = 0</code> &nbsp;|&nbsp;
+    <code>nature=credit</code> → <code>debit_amount = 0</code> &nbsp;|&nbsp;
+    <code>nature=both</code> → cả hai đều OK
+  </div>
+
+  <h3>3.2 Entity: <code>ar_invoice_opening</code> — Công nợ phải thu đầu kỳ <em>(skeleton, mở rộng Phase 3)</em></h3>
+  <div style="overflow-x:auto;">
+    <table>
+      <thead>
+        <tr><th>Field</th><th>Phase 1</th><th>Mở rộng ở</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>id</code> UUID</td><td>✓</td><td>—</td></tr>
+        <tr><td><code>company_id</code> UUID (FK→company)</td><td>✓</td><td>—</td></tr>
+        <tr><td><code>fiscal_year_id</code> UUID (FK→fiscal_year)</td><td>✓</td><td>—</td></tr>
+        <tr><td><code>customer_id</code> UUID (FK→customer)</td><td>✓</td><td>—</td></tr>
+        <tr><td><code>invoice_number</code> VARCHAR(50)</td><td>✓</td><td>—</td></tr>
+        <tr><td><code>invoice_date</code> DATE</td><td>✓</td><td>—</td></tr>
+        <tr><td><code>due_date</code> DATE</td><td>—</td><td>Phase 3: tính tuổi nợ</td></tr>
+        <tr><td><code>original_amount</code> DECIMAL(18,2)</td><td>✓</td><td>—</td></tr>
+        <tr><td><code>paid_amount</code> DECIMAL(18,2)</td><td>✓ (default 0)</td><td>Phase 3: auto-update khi thu tiền</td></tr>
+        <tr><td><code>remaining_amount</code> DECIMAL(18,2)</td><td>✓ (= original − paid)</td><td>Phase 3: auto-calc</td></tr>
+        <tr><td><code>account_id</code> UUID (FK→account)</td><td>✓ (default TK 131)</td><td>—</td></tr>
+        <tr><td><code>currency</code> VARCHAR(3)</td><td>✓ (default VND)</td><td>Phase 3: ngoại tệ</td></tr>
+        <tr><td><code>description</code> TEXT</td><td>—</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>3.3 Entity: <code>ap_invoice_opening</code> — Công nợ phải trả đầu kỳ <em>(skeleton, mở rộng Phase 2)</em></h3>
+  <div style="overflow-x:auto;">
+    <table>
+      <thead>
+        <tr><th>Field</th><th>Phase 1</th><th>Mở rộng ở</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>id</code> UUID</td><td>✓</td><td>—</td></tr>
+        <tr><td><code>company_id</code> UUID (FK→company)</td><td>✓</td><td>—</td></tr>
+        <tr><td><code>fiscal_year_id</code> UUID (FK→fiscal_year)</td><td>✓</td><td>—</td></tr>
+        <tr><td><code>supplier_id</code> UUID (FK→supplier)</td><td>✓</td><td>—</td></tr>
+        <tr><td><code>invoice_number</code> VARCHAR(50)</td><td>✓</td><td>—</td></tr>
+        <tr><td><code>invoice_date</code> DATE</td><td>✓</td><td>—</td></tr>
+        <tr><td><code>due_date</code> DATE</td><td>—</td><td>Phase 2: tính tuổi nợ</td></tr>
+        <tr><td><code>original_amount</code> DECIMAL(18,2)</td><td>✓</td><td>—</td></tr>
+        <tr><td><code>paid_amount</code> DECIMAL(18,2)</td><td>✓ (default 0)</td><td>Phase 2: auto-update khi thanh toán</td></tr>
+        <tr><td><code>remaining_amount</code> DECIMAL(18,2)</td><td>✓ (= original − paid)</td><td>Phase 2: auto-calc</td></tr>
+        <tr><td><code>account_id</code> UUID (FK→account)</td><td>✓ (default TK 331)</td><td>—</td></tr>
+        <tr><td><code>currency</code> VARCHAR(3)</td><td>✓ (default VND)</td><td>Phase 2: ngoại tệ</td></tr>
+        <tr><td><code>description</code> TEXT</td><td>—</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>3.4 Entity: <code>inventory_opening</code> — Tồn kho đầu kỳ <em>(skeleton, mở rộng Phase 2)</em></h3>
+  <div style="overflow-x:auto;">
+    <table>
+      <thead>
+        <tr><th>Field</th><th>Phase 1</th><th>Mở rộng ở</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>id</code> UUID</td><td>✓</td><td>—</td></tr>
+        <tr><td><code>company_id</code> UUID (FK→company)</td><td>✓</td><td>—</td></tr>
+        <tr><td><code>fiscal_year_id</code> UUID (FK→fiscal_year)</td><td>✓</td><td>—</td></tr>
+        <tr><td><code>warehouse_id</code> UUID (FK→warehouse)</td><td>✓</td><td>—</td></tr>
+        <tr><td><code>product_id</code> UUID (FK→product)</td><td>✓</td><td>—</td></tr>
+        <tr><td><code>quantity</code> DECIMAL(18,4)</td><td>✓</td><td>Phase 2: auto-update nhập/xuất</td></tr>
+        <tr><td><code>unit_cost</code> DECIMAL(18,4)</td><td>✓</td><td>Phase 2: recalc theo costing_method</td></tr>
+        <tr><td><code>total_value</code> DECIMAL(18,2)</td><td>✓ (= qty × unit_cost)</td><td>—</td></tr>
+        <tr><td><code>account_id</code> UUID (FK→account)</td><td>✓ (TK 156 / 152)</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="callout">
+    <strong>Kiểm tra cân đối:</strong> <code>SUM(total_value)</code> = <code>opening_balance</code> WHERE <code>account IN (152, 156)</code>
+  </div>
+
+  <h3>3.5 Entity: <code>fixed_asset_opening</code> — TSCĐ đầu kỳ <em>(skeleton, mở rộng Phase 6)</em></h3>
+  <div style="overflow-x:auto;">
+    <table>
+      <thead>
+        <tr><th>Field</th><th>Type</th><th>Bắt buộc</th><th>Ghi chú / Phase mở rộng</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>id</code></td><td>UUID</td><td>✓</td><td>PK</td></tr>
+        <tr><td><code>company_id</code></td><td>UUID (FK→company)</td><td>✓</td><td></td></tr>
+        <tr><td><code>fiscal_year_id</code></td><td>UUID (FK→fiscal_year)</td><td>✓</td><td></td></tr>
+        <tr><td><code>asset_code</code></td><td>VARCHAR(30)</td><td>✓</td><td></td></tr>
+        <tr><td><code>asset_name</code></td><td>VARCHAR(255)</td><td>✓</td><td></td></tr>
+        <tr><td><code>category</code></td><td>VARCHAR(100)</td><td></td><td>Phase 6: danh mục TSCĐ chi tiết</td></tr>
+        <tr><td><code>department_id</code></td><td>UUID (FK→department)</td><td></td><td>Phase 6: điều chuyển</td></tr>
+        <tr><td><code>purchase_date</code></td><td>DATE</td><td></td><td>Phase 6: tính khấu hao</td></tr>
+        <tr><td><code>start_depreciation_date</code></td><td>DATE</td><td></td><td>Phase 6</td></tr>
+        <tr><td><code>useful_life_months</code></td><td>INTEGER</td><td></td><td>Phase 6</td></tr>
+        <tr><td><code>original_cost</code></td><td>DECIMAL(18,2)</td><td>✓</td><td></td></tr>
+        <tr><td><code>accumulated_depreciation</code></td><td>DECIMAL(18,2)</td><td>✓</td><td>Phase 6: auto-update</td></tr>
+        <tr><td><code>net_book_value</code></td><td>DECIMAL(18,2)</td><td>✓</td><td>= original_cost − accumulated_depreciation; Phase 6: auto-calc</td></tr>
+        <tr><td><code>asset_account_id</code></td><td>UUID (FK→account)</td><td>✓</td><td>TK 211</td></tr>
+        <tr><td><code>depreciation_account_id</code></td><td>UUID (FK→account)</td><td>✓</td><td>TK 2141</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>3.6 Entity: <code>tool_opening</code> — CCDC đầu kỳ <em>(skeleton, mở rộng Phase 6)</em></h3>
+  <div style="overflow-x:auto;">
+    <table>
+      <thead>
+        <tr><th>Field</th><th>Type</th><th>Bắt buộc</th><th>Ghi chú / Phase mở rộng</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>id</code></td><td>UUID</td><td>✓</td><td>PK</td></tr>
+        <tr><td><code>company_id</code></td><td>UUID (FK→company)</td><td>✓</td><td></td></tr>
+        <tr><td><code>fiscal_year_id</code></td><td>UUID (FK→fiscal_year)</td><td>✓</td><td></td></tr>
+        <tr><td><code>tool_code</code></td><td>VARCHAR(30)</td><td>✓</td><td></td></tr>
+        <tr><td><code>tool_name</code></td><td>VARCHAR(255)</td><td>✓</td><td></td></tr>
+        <tr><td><code>department_id</code></td><td>UUID (FK→department)</td><td></td><td></td></tr>
+        <tr><td><code>original_value</code></td><td>DECIMAL(18,2)</td><td>✓</td><td></td></tr>
+        <tr><td><code>allocated_value</code></td><td>DECIMAL(18,2)</td><td>✓</td><td>Phase 6: auto-update</td></tr>
+        <tr><td><code>remaining_value</code></td><td>DECIMAL(18,2)</td><td>✓</td><td>= original_value − allocated_value</td></tr>
+        <tr><td><code>allocation_months</code></td><td>INTEGER</td><td></td><td>Phase 6: phân bổ định kỳ</td></tr>
+        <tr><td><code>account_id</code></td><td>UUID (FK→account)</td><td>✓</td><td>TK 153 / 242</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>3.7 Entity: <code>prepaid_opening</code> — Chi phí trả trước đầu kỳ <em>(skeleton, mở rộng Phase 6)</em></h3>
+  <div style="overflow-x:auto;">
+    <table>
+      <thead>
+        <tr><th>Field</th><th>Type</th><th>Bắt buộc</th><th>Ghi chú / Phase mở rộng</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>id</code></td><td>UUID</td><td>✓</td><td>PK</td></tr>
+        <tr><td><code>company_id</code></td><td>UUID (FK→company)</td><td>✓</td><td></td></tr>
+        <tr><td><code>fiscal_year_id</code></td><td>UUID (FK→fiscal_year)</td><td>✓</td><td></td></tr>
+        <tr><td><code>code</code></td><td>VARCHAR(30)</td><td>✓</td><td></td></tr>
+        <tr><td><code>name</code></td><td>VARCHAR(255)</td><td>✓</td><td></td></tr>
+        <tr><td><code>original_value</code></td><td>DECIMAL(18,2)</td><td>✓</td><td></td></tr>
+        <tr><td><code>allocated_value</code></td><td>DECIMAL(18,2)</td><td>✓</td><td>Phase 6: auto-update</td></tr>
+        <tr><td><code>remaining_value</code></td><td>DECIMAL(18,2)</td><td>✓</td><td>= original_value − allocated_value</td></tr>
+        <tr><td><code>remaining_months</code></td><td>INTEGER</td><td></td><td>Phase 6: phân bổ định kỳ</td></tr>
+        <tr><td><code>expense_account_id</code></td><td>UUID (FK→account)</td><td></td><td>Phase 6: TK chi phí đích</td></tr>
+        <tr><td><code>account_id</code></td><td>UUID (FK→account)</td><td>✓</td><td>TK 242</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>4.5 Nhập số dư đầu kỳ (FULL spec)</h3>
+  <ul>
+    <li><strong>Số dư TK tổng hợp:</strong> form danh sách TK, nhập <code>debit_amount</code> / <code>credit_amount</code>; tự kiểm tra theo <code>nature</code>.</li>
+    <li><strong>Công nợ KH chi tiết:</strong> nhập từng hóa đơn (<code>customer</code>, <code>invoice_number</code>, <code>invoice_date</code>, <code>due_date</code>, <code>original_amount</code>); <code>remaining = original − paid</code>.</li>
+    <li><strong>Công nợ NCC chi tiết:</strong> tương tự AR nhưng cho <code>supplier</code>.</li>
+    <li><strong>Tồn kho:</strong> nhập từng kho × mặt hàng (<code>warehouse</code>, <code>product</code>, <code>quantity</code>, <code>unit_cost</code>); <code>total = qty × cost</code>.</li>
+    <li><strong>TSCĐ:</strong> nhập từng tài sản (<code>asset_code</code>, <code>asset_name</code>, <code>original_cost</code>, <code>accumulated_depreciation</code>); <code>net_book_value = original − accumulated</code>.</li>
+    <li><strong>CCDC:</strong> nhập từng công cụ (<code>tool_code</code>, <code>tool_name</code>, <code>original_value</code>, <code>allocated_value</code>); <code>remaining = original − allocated</code>.</li>
+    <li><strong>Chi phí trả trước:</strong> nhập từng khoản (<code>code</code>, <code>name</code>, <code>original_value</code>, <code>allocated_value</code>, <code>remaining_months</code>).</li>
+  </ul>
+
+  <h3>4.6 Import, kiểm tra cân đối và khóa</h3>
+  <ul>
+    <li><strong>Import Excel tổng hợp:</strong> hệ thống phân tách theo loại (mỗi loại một sheet), validate từng dòng, import atomic (all-or-nothing).</li>
+    <li><strong>Cân đối TK tổng hợp:</strong> <code>SUM(debit_amount) = SUM(credit_amount)</code> — hiển thị chênh lệch nếu lệch.</li>
+    <li><strong>Cân đối AR:</strong> <code>SUM(remaining_amount)</code> theo customer = <code>opening_balance</code> TK 131 chi tiết theo customer.</li>
+    <li><strong>Cân đối AP:</strong> <code>SUM(remaining_amount)</code> theo supplier = <code>opening_balance</code> TK 331 chi tiết theo supplier.</li>
+    <li><strong>Cân đối tồn kho:</strong> <code>SUM(total_value)</code> theo account = <code>opening_balance</code> TK 152 / 156.</li>
+    <li><strong>Cân đối TSCĐ:</strong> <code>SUM(original_cost)</code> = <code>opening_balance</code> TK 211; <code>SUM(accumulated_depreciation)</code> = TK 2141.</li>
+  </ul>
+  <div class="notice">
+    <strong>Khóa số dư đầu kỳ:</strong> Kế toán trưởng xác nhận → <code>is_locked = true</code> cho tất cả <code>opening_balance</code> của <code>fiscal_year</code> đó. Không cho phép sửa sau khi khóa — chỉ admin với quyền <code>unlock_opening</code> mới có thể mở lại.
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- TAB 4: Chương 4 — Quỹ tiền mặt                            -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+
+<div class="tab-panel" id="tab-cash">
+  <div class="phase-header">
+    <div class="chapter-label">Chương 4</div>
+    <h2>Quỹ tiền mặt (Cash Management)</h2>
+    <p>Phiếu thu, phiếu chi tiền mặt với state machine, side effects sinh bút toán sổ cái, kiểm kê quỹ và sổ quỹ.</p>
+  </div>
+
+  <h3>4.1 State Machine — Phiếu thu &amp; Phiếu chi</h3>
+  <div class="flow">
+    <pre>Draft ──submit()──► Pending Approval ──approve()──► Approved ──cancel()──► Cancelled
+                          │
+                       reject()
+                          │
+                          ▼
+                        Draft</pre>
+    <ul style="margin-top:0.75rem;">
+      <li><strong>Điều kiện submit:</strong> ≥ 1 dòng chi tiết, <code>total_amount &gt; 0</code>, ngày chứng từ thuộc kỳ chưa khóa.</li>
+      <li><strong>Điều kiện approve:</strong> user có quyền approve (<code>module=cash</code>, <code>action=approve</code>).</li>
+      <li><strong>Điều kiện cancel:</strong> <code>status = approved</code>, kỳ chưa khóa, phải nhập <code>cancelled_reason</code>.</li>
+      <li><strong>Lưu ý:</strong> Chỉ chứng từ có <code>status = approved</code> mới sinh <code>journal_entry</code>.</li>
+    </ul>
+  </div>
+
+  <h3>4.2 Entity: <code>cash_receipt</code> — Phiếu thu (header)</h3>
+  <div style="overflow-x:auto;">
+    <table>
+      <thead>
+        <tr><th>Field</th><th>Type</th><th>Bắt buộc</th><th>Ghi chú</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>id</code></td><td>UUID</td><td>✓</td><td>PK</td></tr>
+        <tr><td><code>company_id</code></td><td>UUID (FK→company)</td><td>✓</td><td></td></tr>
+        <tr><td><code>branch_id</code></td><td>UUID (FK→branch)</td><td></td><td></td></tr>
+        <tr><td><code>receipt_number</code></td><td>VARCHAR(30)</td><td>✓</td><td>Auto-gen theo numbering_rule, prefix <code>PT</code></td></tr>
+        <tr><td><code>receipt_date</code></td><td>DATE</td><td>✓</td><td>≥ <code>fiscal_year.start_date</code>, ≤ hôm nay, kỳ chưa khóa</td></tr>
+        <tr><td><code>receipt_type</code></td><td>ENUM</td><td>✓</td><td><code>customer_payment</code> | <code>advance_return</code> | <code>interest</code> | <code>sale</code> | <code>other</code></td></tr>
+        <tr><td><code>customer_id</code></td><td>UUID (FK→customer)</td><td></td><td>Khi <code>receipt_type = customer_payment</code></td></tr>
+        <tr><td><code>employee_id</code></td><td>UUID (FK→employee)</td><td></td><td>Khi <code>receipt_type = advance_return</code></td></tr>
+        <tr><td><code>total_amount</code></td><td>DECIMAL(18,2)</td><td>✓</td><td>= SUM(lines.amount), readonly</td></tr>
+        <tr><td><code>description</code></td><td>TEXT</td><td></td><td></td></tr>
+        <tr><td><code>status</code></td><td>ENUM</td><td>✓</td><td><code>draft</code> | <code>pending_approval</code> | <code>approved</code> | <code>cancelled</code></td></tr>
+        <tr><td><code>approved_by</code></td><td>UUID (FK→user)</td><td></td><td></td></tr>
+        <tr><td><code>approved_at</code></td><td>TIMESTAMP</td><td></td><td></td></tr>
+        <tr><td><code>cancelled_reason</code></td><td>TEXT</td><td></td><td>Bắt buộc khi <code>status = cancelled</code></td></tr>
+        <tr><td><code>created_by</code></td><td>UUID (FK→user)</td><td>✓</td><td></td></tr>
+        <tr><td><code>created_at</code></td><td>TIMESTAMP</td><td>✓</td><td></td></tr>
+        <tr><td><code>updated_at</code></td><td>TIMESTAMP</td><td>✓</td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>4.3 Entity: <code>cash_receipt_line</code> — Phiếu thu (chi tiết)</h3>
+  <div style="overflow-x:auto;">
+    <table>
+      <thead>
+        <tr><th>Field</th><th>Type</th><th>Bắt buộc</th><th>Ghi chú</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>id</code></td><td>UUID</td><td>✓</td><td>PK</td></tr>
+        <tr><td><code>cash_receipt_id</code></td><td>UUID (FK→cash_receipt)</td><td>✓</td><td></td></tr>
+        <tr><td><code>debit_account_id</code></td><td>UUID (FK→account)</td><td>✓</td><td>TK 111</td></tr>
+        <tr><td><code>credit_account_id</code></td><td>UUID (FK→account)</td><td>✓</td><td>TK 131 / 141 / 511 / 515 / 711...</td></tr>
+        <tr><td><code>amount</code></td><td>DECIMAL(18,2)</td><td>✓</td><td>&gt; 0</td></tr>
+        <tr><td><code>description</code></td><td>TEXT</td><td></td><td></td></tr>
+        <tr><td><code>ar_invoice_opening_id</code></td><td>UUID (FK→ar_invoice_opening)</td><td></td><td>Khi thu công nợ</td></tr>
+        <tr><td><code>expense_category_id</code></td><td>UUID (FK→expense_category)</td><td></td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>4.4 Entity: <code>cash_payment</code> — Phiếu chi (header)</h3>
+  <div style="overflow-x:auto;">
+    <table>
+      <thead>
+        <tr><th>Field</th><th>Type</th><th>Bắt buộc</th><th>Ghi chú</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>id</code></td><td>UUID</td><td>✓</td><td>PK</td></tr>
+        <tr><td><code>company_id</code></td><td>UUID (FK→company)</td><td>✓</td><td></td></tr>
+        <tr><td><code>branch_id</code></td><td>UUID (FK→branch)</td><td></td><td></td></tr>
+        <tr><td><code>payment_number</code></td><td>VARCHAR(30)</td><td>✓</td><td>Auto-gen, prefix <code>PC</code></td></tr>
+        <tr><td><code>payment_date</code></td><td>DATE</td><td>✓</td><td>Kỳ chưa khóa</td></tr>
+        <tr><td><code>payment_type</code></td><td>ENUM</td><td>✓</td><td><code>supplier_payment</code> | <code>advance</code> | <code>purchase</code> | <code>expense</code> | <code>other</code></td></tr>
+        <tr><td><code>supplier_id</code></td><td>UUID (FK→supplier)</td><td></td><td>Khi <code>payment_type = supplier_payment</code></td></tr>
+        <tr><td><code>employee_id</code></td><td>UUID (FK→employee)</td><td></td><td>Khi <code>payment_type = advance</code></td></tr>
+        <tr><td><code>total_amount</code></td><td>DECIMAL(18,2)</td><td>✓</td><td>= SUM(lines.amount), readonly</td></tr>
+        <tr><td><code>description</code></td><td>TEXT</td><td></td><td></td></tr>
+        <tr><td><code>status</code></td><td>ENUM</td><td>✓</td><td><code>draft</code> | <code>pending_approval</code> | <code>approved</code> | <code>cancelled</code></td></tr>
+        <tr><td><code>approved_by</code></td><td>UUID (FK→user)</td><td></td><td></td></tr>
+        <tr><td><code>approved_at</code></td><td>TIMESTAMP</td><td></td><td></td></tr>
+        <tr><td><code>cancelled_reason</code></td><td>TEXT</td><td></td><td>Bắt buộc khi <code>status = cancelled</code></td></tr>
+        <tr><td><code>created_by</code></td><td>UUID (FK→user)</td><td>✓</td><td></td></tr>
+        <tr><td><code>created_at</code></td><td>TIMESTAMP</td><td>✓</td><td></td></tr>
+        <tr><td><code>updated_at</code></td><td>TIMESTAMP</td><td>✓</td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>4.5 Entity: <code>cash_payment_line</code> — Phiếu chi (chi tiết)</h3>
+  <div style="overflow-x:auto;">
+    <table>
+      <thead>
+        <tr><th>Field</th><th>Type</th><th>Bắt buộc</th><th>Ghi chú</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>id</code></td><td>UUID</td><td>✓</td><td>PK</td></tr>
+        <tr><td><code>cash_payment_id</code></td><td>UUID (FK→cash_payment)</td><td>✓</td><td></td></tr>
+        <tr><td><code>debit_account_id</code></td><td>UUID (FK→account)</td><td>✓</td><td>TK 331 / 141 / 156 / 641 / 642 / 627...</td></tr>
+        <tr><td><code>credit_account_id</code></td><td>UUID (FK→account)</td><td>✓</td><td>TK 111</td></tr>
+        <tr><td><code>amount</code></td><td>DECIMAL(18,2)</td><td>✓</td><td>&gt; 0</td></tr>
+        <tr><td><code>description</code></td><td>TEXT</td><td></td><td></td></tr>
+        <tr><td><code>ap_invoice_opening_id</code></td><td>UUID (FK→ap_invoice_opening)</td><td></td><td>Khi thanh toán NCC</td></tr>
+        <tr><td><code>expense_category_id</code></td><td>UUID (FK→expense_category)</td><td></td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>4.6 Entity: <code>cash_inventory</code> — Kiểm kê quỹ</h3>
+  <div style="overflow-x:auto;">
+    <table>
+      <thead>
+        <tr><th>Field</th><th>Type</th><th>Bắt buộc</th><th>Ghi chú</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>id</code></td><td>UUID</td><td>✓</td><td>PK</td></tr>
+        <tr><td><code>company_id</code></td><td>UUID (FK→company)</td><td>✓</td><td></td></tr>
+        <tr><td><code>inventory_date</code></td><td>DATE</td><td>✓</td><td></td></tr>
+        <tr><td><code>book_balance</code></td><td>DECIMAL(18,2)</td><td>✓</td><td>Auto-calc từ cash_book</td></tr>
+        <tr><td><code>actual_balance</code></td><td>DECIMAL(18,2)</td><td>✓</td><td>Thủ quỹ nhập thực tế</td></tr>
+        <tr><td><code>difference</code></td><td>DECIMAL(18,2)</td><td>✓</td><td>= actual − book</td></tr>
+        <tr><td><code>status</code></td><td>ENUM</td><td>✓</td><td><code>draft</code> | <code>confirmed</code></td></tr>
+        <tr><td><code>adjustment_receipt_id</code></td><td>UUID (FK→cash_receipt)</td><td></td><td>Khi thừa quỹ</td></tr>
+        <tr><td><code>adjustment_payment_id</code></td><td>UUID (FK→cash_payment)</td><td></td><td>Khi thiếu quỹ</td></tr>
+        <tr><td><code>confirmed_by</code></td><td>UUID (FK→user)</td><td></td><td></td></tr>
+        <tr><td><code>notes</code></td><td>TEXT</td><td></td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>5.5 Lập phiếu thu (5 loại)</h3>
+  <ul>
+    <li><strong>customer_payment:</strong> chọn customer, thêm lines với <code>ar_invoice_opening_id</code>; <code>line.amount ≤ ar_invoice_opening.remaining_amount</code>.</li>
+    <li><strong>advance_return:</strong> chọn employee, <code>credit_account = 141</code>; ghi nhận hoàn tạm ứng.</li>
+    <li><strong>interest:</strong> <code>credit_account = 515</code>.</li>
+    <li><strong>sale:</strong> <code>credit_account = 511</code>.</li>
+    <li><strong>other:</strong> <code>credit_account = 711</code>.</li>
+  </ul>
+
+  <h4>Duyệt phiếu thu — side effects (theo thứ tự)</h4>
+  <ol>
+    <li><code>status → approved</code>; ghi <code>approved_by</code> + <code>approved_at</code>.</li>
+    <li>Sinh <code>journal_entry</code> (<code>source_type = cash_receipt</code>): Nợ TK 111 / Có <code>credit_account</code> cho mỗi dòng.</li>
+    <li>Tăng tồn quỹ tiền mặt (<code>cash_book</code>).</li>
+    <li>Nếu <code>customer_payment</code>: giảm <code>ar_invoice_opening.remaining_amount</code>, tăng <code>paid_amount</code> cho các dòng có <code>ar_invoice_opening_id</code>.</li>
+    <li>Ghi <code>audit_log</code> (<code>action = approve</code>, <code>entity_type = cash_receipt</code>).</li>
+  </ol>
+
+  <h4>Hủy phiếu thu đã duyệt — reverse side effects</h4>
+  <ol>
+    <li><code>status → cancelled</code>; ghi <code>cancelled_reason</code>.</li>
+    <li>Sinh <code>journal_entry</code> đảo (<code>is_reversal = true</code>): Nợ <code>credit_account</code> / Có TK 111.</li>
+    <li>Giảm tồn quỹ.</li>
+    <li>Hoàn lại <code>ar_invoice_opening.remaining_amount</code> nếu có.</li>
+    <li>Ghi <code>audit_log</code>.</li>
+  </ol>
+
+  <div class="notice">
+    Chặn khi kỳ đã khóa: lỗi "Kỳ kế toán [tháng/năm] đã khóa".
+  </div>
+
+  <h3>5.6 Lập phiếu chi (5 loại)</h3>
+  <ul>
+    <li><strong>supplier_payment:</strong> chọn supplier, thêm lines với <code>ap_invoice_opening_id</code>; <code>line.amount ≤ ap_invoice_opening.remaining_amount</code>.</li>
+    <li><strong>advance:</strong> chọn employee, <code>debit_account</code> PHẢI = TK 141; ghi nhận tạm ứng.</li>
+    <li><strong>purchase:</strong> <code>debit_account = 156</code> (mua hàng nhập kho).</li>
+    <li><strong>expense:</strong> <code>debit_account = 641 / 642 / 627</code> tùy <code>expense_category</code> hoặc department.</li>
+    <li><strong>other:</strong> <code>debit_account = 811</code>.</li>
+  </ul>
+
+  <h4>Duyệt phiếu chi — side effects</h4>
+  <ol>
+    <li><code>status → approved</code>.</li>
+    <li>Sinh <code>journal_entry</code>: Nợ <code>debit_account</code> / Có TK 111 cho mỗi dòng.</li>
+    <li>Giảm tồn quỹ tiền mặt.</li>
+    <li>Nếu <code>supplier_payment</code>: giảm <code>ap_invoice_opening.remaining_amount</code>.</li>
+    <li>Ghi <code>audit_log</code>.</li>
+  </ol>
+
+  <h4>Hủy phiếu chi — đảo ngược toàn bộ side effects, sinh journal đảo.</h4>
+
+  <h3>5.7 Kiểm kê quỹ</h3>
+  <div class="flow">
+    <strong>Công thức số dư sổ:</strong><br>
+    <code>book_balance = opening_balance(TK 111) + SUM(approved receipts đến ngày KK) − SUM(approved payments đến ngày KK)</code>
+  </div>
+  <ul>
+    <li><code>actual_balance</code>: thủ quỹ nhập thực tế.</li>
+    <li><code>difference = actual − book</code>.</li>
+    <li>Nếu <code>difference &gt; 0</code> (thừa): gợi ý tạo phiếu thu điều chỉnh Nợ TK 111 / Có <code>[CẦN KẾ TOÁN XÁC NHẬN: 3381 hay 711?]</code>.</li>
+    <li>Nếu <code>difference &lt; 0</code> (thiếu): gợi ý tạo phiếu chi điều chỉnh Nợ <code>[CẦN KẾ TOÁN XÁC NHẬN: 1381 hay 1388?]</code> / Có TK 111.</li>
+    <li>Khi confirmed: <code>adjustment_receipt_id</code> hoặc <code>adjustment_payment_id</code> gắn với chứng từ điều chỉnh.</li>
+  </ul>
+
+  <h3>5.8 Sổ quỹ</h3>
+  <div class="flow">
+    <strong>Công thức tồn quỹ:</strong><br>
+    <code>Tồn cuối = Opening(TK 111) + SUM(cash_receipt.approved in period) − SUM(cash_payment.approved in period)</code>
+  </div>
+  <ul>
+    <li>Xem theo kỳ: tồn đầu kỳ, thu trong kỳ, chi trong kỳ, tồn cuối kỳ.</li>
+    <li>Đối chiếu với sổ cái: tồn quỹ = số dư TK 111 trên <code>journal_entry_line</code>.</li>
+    <li>In phiếu thu/chi: preview mẫu phiếu chuẩn kế toán (tên chứng từ, ngày, người nộp/nhận, nội dung, số tiền bằng số và bằng chữ, chữ ký thủ quỹ/kế toán).</li>
+  </ul>
+</div>
+<div class="tab-panel" id="tab-bank">
+  <div class="phase-header">
+    <div class="chapter-label">CHƯƠNG 5</div>
+    <h2>Tiền gửi ngân hàng (Bank Management)</h2>
+    <p>Thu/chi ngân hàng, chuyển tiền nội bộ (bank↔bank, cash→bank, bank→cash), nhập sao kê và đối chiếu ngân hàng.</p>
+  </div>
+
+  <h3>5.1 Entity: <code>bank_receipt</code> — Phiếu thu ngân hàng (Header)</h3>
+  <table>
+    <thead>
+      <tr><th>Field</th><th>Type</th><th>Required</th><th>Ghi chú</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>id</code></td><td>UUID</td><td>✓</td><td>Primary key</td></tr>
+      <tr><td><code>company_id</code></td><td>UUID (FK→company)</td><td>✓</td><td></td></tr>
+      <tr><td><code>branch_id</code></td><td>UUID (FK→branch)</td><td></td><td></td></tr>
+      <tr><td><code>receipt_number</code></td><td>VARCHAR(30)</td><td>✓</td><td>Tự động sinh, prefix <code>TNH</code></td></tr>
+      <tr><td><code>receipt_date</code></td><td>DATE</td><td>✓</td><td>Kỳ chưa khóa</td></tr>
+      <tr><td><code>receipt_type</code></td><td>ENUM</td><td>✓</td><td><code>customer_payment</code> | <code>interest</code> | <code>other</code></td></tr>
+      <tr><td><code>bank_account_id</code></td><td>UUID (FK→bank_account)</td><td>✓</td><td></td></tr>
+      <tr><td><code>customer_id</code></td><td>UUID (FK→customer)</td><td></td><td></td></tr>
+      <tr><td><code>total_amount</code></td><td>DECIMAL(18,2)</td><td>✓</td><td>=SUM(lines), readonly</td></tr>
+      <tr><td><code>description</code></td><td>TEXT</td><td></td><td></td></tr>
+      <tr><td><code>status</code></td><td>ENUM</td><td>✓</td><td><code>draft</code> | <code>pending_approval</code> | <code>approved</code> | <code>cancelled</code></td></tr>
+      <tr><td><code>approved_by</code></td><td>UUID (FK→user)</td><td></td><td></td></tr>
+      <tr><td><code>approved_at</code></td><td>TIMESTAMP</td><td></td><td></td></tr>
+      <tr><td><code>cancelled_reason</code></td><td>TEXT</td><td></td><td></td></tr>
+      <tr><td><code>created_by</code></td><td>UUID (FK→user)</td><td>✓</td><td></td></tr>
+      <tr><td><code>created_at</code></td><td>TIMESTAMP</td><td>✓</td><td></td></tr>
+      <tr><td><code>updated_at</code></td><td>TIMESTAMP</td><td>✓</td><td></td></tr>
+    </tbody>
+  </table>
+
+  <h3>5.2 Entity: <code>bank_receipt_line</code> — Chi tiết phiếu thu ngân hàng</h3>
+  <table>
+    <thead>
+      <tr><th>Field</th><th>Type</th><th>Required</th><th>Ghi chú</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>id</code></td><td>UUID</td><td>✓</td><td>Primary key</td></tr>
+      <tr><td><code>bank_receipt_id</code></td><td>UUID (FK→bank_receipt)</td><td>✓</td><td></td></tr>
+      <tr><td><code>debit_account_id</code></td><td>UUID (FK→account)</td><td>✓</td><td>TK 112x — lấy từ <code>bank_account.accounting_account_id</code></td></tr>
+      <tr><td><code>credit_account_id</code></td><td>UUID (FK→account)</td><td>✓</td><td>TK 131 / 515 / 711</td></tr>
+      <tr><td><code>amount</code></td><td>DECIMAL(18,2)</td><td>✓</td><td>&gt; 0</td></tr>
+      <tr><td><code>description</code></td><td>TEXT</td><td></td><td></td></tr>
+      <tr><td><code>ar_invoice_opening_id</code></td><td>UUID (FK→ar_invoice_opening)</td><td></td><td></td></tr>
+    </tbody>
+  </table>
+
+  <h3>5.3 Entity: <code>bank_payment</code> — Phiếu chi ngân hàng (Header)</h3>
+  <table>
+    <thead>
+      <tr><th>Field</th><th>Type</th><th>Required</th><th>Ghi chú</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>id</code></td><td>UUID</td><td>✓</td><td>Primary key</td></tr>
+      <tr><td><code>company_id</code></td><td>UUID (FK→company)</td><td>✓</td><td></td></tr>
+      <tr><td><code>branch_id</code></td><td>UUID (FK→branch)</td><td></td><td></td></tr>
+      <tr><td><code>payment_number</code></td><td>VARCHAR(30)</td><td>✓</td><td>Tự động sinh, prefix <code>CNH</code></td></tr>
+      <tr><td><code>payment_date</code></td><td>DATE</td><td>✓</td><td>Kỳ chưa khóa</td></tr>
+      <tr><td><code>payment_type</code></td><td>ENUM</td><td>✓</td><td><code>supplier_payment</code> | <code>bank_fee</code> | <code>expense</code> | <code>other</code></td></tr>
+      <tr><td><code>bank_account_id</code></td><td>UUID (FK→bank_account)</td><td>✓</td><td></td></tr>
+      <tr><td><code>supplier_id</code></td><td>UUID (FK→supplier)</td><td></td><td></td></tr>
+      <tr><td><code>total_amount</code></td><td>DECIMAL(18,2)</td><td>✓</td><td></td></tr>
+      <tr><td><code>description</code></td><td>TEXT</td><td></td><td></td></tr>
+      <tr><td><code>status</code></td><td>ENUM</td><td>✓</td><td><code>draft</code> | <code>pending_approval</code> | <code>approved</code> | <code>cancelled</code></td></tr>
+      <tr><td><code>approved_by</code></td><td>UUID (FK→user)</td><td></td><td></td></tr>
+      <tr><td><code>approved_at</code></td><td>TIMESTAMP</td><td></td><td></td></tr>
+      <tr><td><code>cancelled_reason</code></td><td>TEXT</td><td></td><td></td></tr>
+      <tr><td><code>created_by</code></td><td>UUID (FK→user)</td><td>✓</td><td></td></tr>
+      <tr><td><code>created_at</code></td><td>TIMESTAMP</td><td>✓</td><td></td></tr>
+      <tr><td><code>updated_at</code></td><td>TIMESTAMP</td><td>✓</td><td></td></tr>
+    </tbody>
+  </table>
+
+  <h3>5.4 Entity: <code>bank_payment_line</code> — Chi tiết phiếu chi ngân hàng</h3>
+  <table>
+    <thead>
+      <tr><th>Field</th><th>Type</th><th>Required</th><th>Ghi chú</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>id</code></td><td>UUID</td><td>✓</td><td>Primary key</td></tr>
+      <tr><td><code>bank_payment_id</code></td><td>UUID (FK→bank_payment)</td><td>✓</td><td></td></tr>
+      <tr><td><code>debit_account_id</code></td><td>UUID (FK→account)</td><td>✓</td><td>TK 331 / 641 / 642 / 6427...</td></tr>
+      <tr><td><code>credit_account_id</code></td><td>UUID (FK→account)</td><td>✓</td><td>TK 112x</td></tr>
+      <tr><td><code>amount</code></td><td>DECIMAL(18,2)</td><td>✓</td><td>&gt; 0</td></tr>
+      <tr><td><code>description</code></td><td>TEXT</td><td></td><td></td></tr>
+      <tr><td><code>ap_invoice_opening_id</code></td><td>UUID (FK→ap_invoice_opening)</td><td></td><td></td></tr>
+      <tr><td><code>expense_category_id</code></td><td>UUID (FK→expense_category)</td><td></td><td></td></tr>
+    </tbody>
+  </table>
+
+  <h3>5.5 Entity: <code>bank_transfer</code> — Chuyển tiền nội bộ</h3>
+  <table>
+    <thead>
+      <tr><th>Field</th><th>Type</th><th>Required</th><th>Ghi chú</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>id</code></td><td>UUID</td><td>✓</td><td>Primary key</td></tr>
+      <tr><td><code>company_id</code></td><td>UUID (FK→company)</td><td>✓</td><td></td></tr>
+      <tr><td><code>transfer_number</code></td><td>VARCHAR(30)</td><td>✓</td><td>Tự động sinh</td></tr>
+      <tr><td><code>transfer_date</code></td><td>DATE</td><td>✓</td><td>Kỳ chưa khóa</td></tr>
+      <tr><td><code>transfer_type</code></td><td>ENUM</td><td>✓</td><td><code>bank_to_bank</code> | <code>cash_to_bank</code> | <code>bank_to_cash</code></td></tr>
+      <tr><td><code>from_bank_account_id</code></td><td>UUID (FK→bank_account)</td><td></td><td>Khi chiều từ = bank</td></tr>
+      <tr><td><code>to_bank_account_id</code></td><td>UUID (FK→bank_account)</td><td></td><td>Khi chiều đến = bank</td></tr>
+      <tr><td><code>amount</code></td><td>DECIMAL(18,2)</td><td>✓</td><td>&gt; 0</td></tr>
+      <tr><td><code>fee_amount</code></td><td>DECIMAL(18,2)</td><td></td><td>Phí chuyển khoản, default 0</td></tr>
+      <tr><td><code>description</code></td><td>TEXT</td><td></td><td></td></tr>
+      <tr><td><code>status</code></td><td>ENUM</td><td>✓</td><td><code>draft</code> | <code>pending_approval</code> | <code>approved</code> | <code>cancelled</code></td></tr>
+      <tr><td><code>approved_by</code></td><td>UUID (FK→user)</td><td></td><td></td></tr>
+      <tr><td><code>approved_at</code></td><td>TIMESTAMP</td><td></td><td></td></tr>
+      <tr><td><code>cancelled_reason</code></td><td>TEXT</td><td></td><td></td></tr>
+      <tr><td><code>created_by</code></td><td>UUID (FK→user)</td><td>✓</td><td></td></tr>
+    </tbody>
+  </table>
+
+  <h3>5.6 Entity: <code>bank_statement</code> — Sao kê ngân hàng (Header)</h3>
+  <table>
+    <thead>
+      <tr><th>Field</th><th>Type</th><th>Required</th><th>Ghi chú</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>id</code></td><td>UUID</td><td>✓</td><td>Primary key</td></tr>
+      <tr><td><code>company_id</code></td><td>UUID (FK→company)</td><td>✓</td><td></td></tr>
+      <tr><td><code>bank_account_id</code></td><td>UUID (FK→bank_account)</td><td>✓</td><td></td></tr>
+      <tr><td><code>statement_date</code></td><td>DATE</td><td>✓</td><td></td></tr>
+      <tr><td><code>opening_balance</code></td><td>DECIMAL(18,2)</td><td>✓</td><td></td></tr>
+      <tr><td><code>closing_balance</code></td><td>DECIMAL(18,2)</td><td>✓</td><td></td></tr>
+      <tr><td><code>imported_at</code></td><td>TIMESTAMP</td><td>✓</td><td></td></tr>
+      <tr><td><code>imported_by</code></td><td>UUID (FK→user)</td><td>✓</td><td></td></tr>
+    </tbody>
+  </table>
+
+  <h3>5.7 Entity: <code>bank_statement_line</code> — Dòng sao kê</h3>
+  <table>
+    <thead>
+      <tr><th>Field</th><th>Type</th><th>Required</th><th>Ghi chú</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>id</code></td><td>UUID</td><td>✓</td><td>Primary key</td></tr>
+      <tr><td><code>bank_statement_id</code></td><td>UUID (FK→bank_statement)</td><td>✓</td><td></td></tr>
+      <tr><td><code>transaction_date</code></td><td>DATE</td><td>✓</td><td></td></tr>
+      <tr><td><code>description</code></td><td>TEXT</td><td></td><td>Nội dung giao dịch</td></tr>
+      <tr><td><code>debit_amount</code></td><td>DECIMAL(18,2)</td><td></td><td>Tiền ra</td></tr>
+      <tr><td><code>credit_amount</code></td><td>DECIMAL(18,2)</td><td></td><td>Tiền vào</td></tr>
+      <tr><td><code>running_balance</code></td><td>DECIMAL(18,2)</td><td></td><td>Số dư lũy kế</td></tr>
+      <tr><td><code>reference_number</code></td><td>VARCHAR(50)</td><td></td><td></td></tr>
+      <tr><td><code>is_matched</code></td><td>BOOLEAN</td><td>✓</td><td>Default <code>false</code></td></tr>
+      <tr><td><code>matched_entity_type</code></td><td>VARCHAR(50)</td><td></td><td><code>bank_receipt</code> | <code>bank_payment</code> | <code>bank_transfer</code></td></tr>
+      <tr><td><code>matched_entity_id</code></td><td>UUID</td><td></td><td>ID chứng từ đã khớp</td></tr>
+    </tbody>
+  </table>
+
+  <h3>5.8 Entity: <code>bank_reconciliation</code> — Đối chiếu ngân hàng</h3>
+  <table>
+    <thead>
+      <tr><th>Field</th><th>Type</th><th>Required</th><th>Ghi chú</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>id</code></td><td>UUID</td><td>✓</td><td>Primary key</td></tr>
+      <tr><td><code>company_id</code></td><td>UUID (FK→company)</td><td>✓</td><td></td></tr>
+      <tr><td><code>bank_account_id</code></td><td>UUID (FK→bank_account)</td><td>✓</td><td></td></tr>
+      <tr><td><code>reconciliation_date</code></td><td>DATE</td><td>✓</td><td></td></tr>
+      <tr><td><code>book_balance</code></td><td>DECIMAL(18,2)</td><td>✓</td><td>Số dư sổ kế toán</td></tr>
+      <tr><td><code>statement_balance</code></td><td>DECIMAL(18,2)</td><td>✓</td><td>Số dư sao kê</td></tr>
+      <tr><td><code>difference</code></td><td>DECIMAL(18,2)</td><td>✓</td><td>= statement_balance − book_balance</td></tr>
+      <tr><td><code>unmatched_book_count</code></td><td>INTEGER</td><td>✓</td><td>Chứng từ chưa khớp trên sổ</td></tr>
+      <tr><td><code>unmatched_statement_count</code></td><td>INTEGER</td><td>✓</td><td>GD sao kê chưa khớp chứng từ</td></tr>
+      <tr><td><code>status</code></td><td>ENUM</td><td>✓</td><td><code>draft</code> | <code>confirmed</code> | <code>locked</code></td></tr>
+      <tr><td><code>confirmed_by</code></td><td>UUID (FK→user)</td><td></td><td></td></tr>
+      <tr><td><code>confirmed_at</code></td><td>TIMESTAMP</td><td></td><td></td></tr>
+    </tbody>
+  </table>
+
+  <h3>5.9 Đặc tả chức năng</h3>
+
+  <h4>6.3 Thu / Chi ngân hàng</h4>
+  <p><strong>Duyệt thu NH</strong> — side effects khi <code>status → approved</code>:</p>
+  <div class="flow">
+    1. <code>status</code> → <code>approved</code><br>
+    2. Sinh <code>journal_entry</code> (<code>source_type = bank_receipt</code>): <strong>Nợ 112x / Có credit_account</strong> cho mỗi line<br>
+    3. Tăng số dư TK NH (<code>bank_book</code>)<br>
+    4. Nếu <code>receipt_type = customer_payment</code>: giảm <code>ar_invoice_opening.remaining_amount</code><br>
+    5. Ghi <code>audit_log</code>
+  </div>
+
+  <p><strong>Duyệt chi NH</strong> — side effects khi <code>status → approved</code>:</p>
+  <div class="flow">
+    1. <code>status</code> → <code>approved</code><br>
+    2. Sinh <code>journal_entry</code>: <strong>Nợ debit_account / Có 112x</strong><br>
+    3. Giảm số dư TK NH<br>
+    4. Nếu <code>payment_type = supplier_payment</code>: giảm <code>ap_invoice_opening.remaining_amount</code><br>
+    5. Ghi <code>audit_log</code>
+  </div>
+
+  <div class="notice">
+    <strong>Phí ngân hàng:</strong> Khi <code>payment_type = bank_fee</code>, tài khoản nợ cần xác nhận:<br>
+    <code>[CẦN KẾ TOÁN XÁC NHẬN: 6427 (Chi phí QLDN — phí NH) hay 635 (Chi phí tài chính)?]</code>
+  </div>
+
+  <h4>6.4 Chuyển tiền nội bộ (3 loại)</h4>
+  <div class="flow">
+    <strong>bank_to_bank</strong> (from ≠ to): Khi duyệt → <strong>Nợ 112b / Có 112a</strong>; giảm bank A, tăng bank B.<br>
+    Nếu <code>fee_amount &gt; 0</code> → thêm bút toán <strong>Nợ [XÁC NHẬN: 6427/635] / Có 112a</strong><br><br>
+    <strong>cash_to_bank</strong>: Khi duyệt → <strong>Nợ 112 / Có 111</strong>; tăng bank, giảm quỹ<br><br>
+    <strong>bank_to_cash</strong>: Khi duyệt → <strong>Nợ 111 / Có 112</strong>; tăng quỹ, giảm bank
+  </div>
+
+  <h4>6.5 Nhập sao kê & gợi ý đối chiếu</h4>
+  <div class="callout">
+    <ul>
+      <li>Upload Excel/CSV → parse → tạo <code>bank_statement</code> + <code>bank_statement_line</code></li>
+      <li>Gợi ý match tự động: tìm chứng từ khớp theo <strong>amount ± tolerance</strong>, <strong>date ± 3 ngày</strong>, <strong>description contains reference_number</strong></li>
+      <li>User xác nhận: <code>is_matched = true</code>, gắn <code>matched_entity_type</code> + <code>matched_entity_id</code></li>
+      <li>Chứng từ nhiều <code>statement_line</code>: cho phép partial match</li>
+    </ul>
+  </div>
+
+  <h4>6.6 Đối chiếu ngân hàng</h4>
+  <div class="callout">
+    <ul>
+      <li><strong>book_balance</strong>: số dư TK 112x từ <code>journal_entry_line</code> đến <code>reconciliation_date</code></li>
+      <li><strong>statement_balance</strong>: <code>bank_statement.closing_balance</code> gần nhất</li>
+      <li>Liệt kê 2 phía: chứng từ kế toán chưa khớp sao kê / GD sao kê chưa khớp chứng từ</li>
+      <li>Xử lý chênh lệch: tạo chứng từ bổ sung hoặc ghi nhận "chờ kỳ sau"</li>
+      <li>Khóa kỳ: <code>status = locked</code>, không cho thay đổi match trong kỳ đã khóa</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<!-- TAB 6: SỔ CÁI & ĐỊNH KHOẢN                                           -->
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+
+<div class="tab-panel" id="tab-ledger">
+  <div class="phase-header">
+    <div class="chapter-label">CHƯƠNG 6</div>
+    <h2>Sổ cái & Định khoản (General Ledger)</h2>
+    <p>Bút toán sổ cái sinh tự động từ chứng từ, không cho sửa trực tiếp. Bảng định khoản đầy đủ Phase 1 với 26 nghiệp vụ. Sổ cái, nhật ký chung, bảng cân đối phát sinh.</p>
+  </div>
+
+  <h3>6.1 Entity: <code>journal_entry</code> — Bút toán (Header)</h3>
+  <table>
+    <thead>
+      <tr><th>Field</th><th>Type</th><th>Required</th><th>Ghi chú</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>id</code></td><td>UUID</td><td>✓</td><td>Primary key</td></tr>
+      <tr><td><code>company_id</code></td><td>UUID (FK→company)</td><td>✓</td><td></td></tr>
+      <tr><td><code>entry_number</code></td><td>VARCHAR(30)</td><td>✓</td><td>Tự động sinh</td></tr>
+      <tr><td><code>entry_date</code></td><td>DATE</td><td>✓</td><td>= Ngày chứng từ gốc</td></tr>
+      <tr><td><code>source_type</code></td><td>ENUM</td><td>✓</td><td><code>cash_receipt</code> | <code>cash_payment</code> | <code>bank_receipt</code> | <code>bank_payment</code> | <code>bank_transfer</code> | <code>adjustment</code></td></tr>
+      <tr><td><code>source_id</code></td><td>UUID</td><td>✓</td><td>ID chứng từ gốc</td></tr>
+      <tr><td><code>description</code></td><td>TEXT</td><td></td><td></td></tr>
+      <tr><td><code>total_debit</code></td><td>DECIMAL(18,2)</td><td>✓</td><td>=SUM(lines WHERE side=debit)</td></tr>
+      <tr><td><code>total_credit</code></td><td>DECIMAL(18,2)</td><td>✓</td><td>=SUM(lines WHERE side=credit)</td></tr>
+      <tr><td><code>is_reversal</code></td><td>BOOLEAN</td><td>✓</td><td>Default <code>false</code>; <code>true</code> khi đảo chứng từ hủy</td></tr>
+      <tr><td><code>reversed_entry_id</code></td><td>UUID (FK→journal_entry)</td><td></td><td>Entry gốc bị đảo</td></tr>
+      <tr><td><code>created_at</code></td><td>TIMESTAMP</td><td>✓</td><td></td></tr>
+    </tbody>
+  </table>
+  <div class="notice">
+    <strong>Ràng buộc:</strong> <code>total_debit</code> MUST = <code>total_credit</code>. Không cho sửa / xóa trực tiếp — chỉ đảo bút toán thông qua hủy chứng từ gốc.
+  </div>
+
+  <h3>6.2 Entity: <code>journal_entry_line</code> — Bút toán (Chi tiết)</h3>
+  <table>
+    <thead>
+      <tr><th>Field</th><th>Type</th><th>Required</th><th>Ghi chú</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>id</code></td><td>UUID</td><td>✓</td><td>Primary key</td></tr>
+      <tr><td><code>journal_entry_id</code></td><td>UUID (FK→journal_entry)</td><td>✓</td><td></td></tr>
+      <tr><td><code>account_id</code></td><td>UUID (FK→account)</td><td>✓</td><td></td></tr>
+      <tr><td><code>side</code></td><td>ENUM</td><td>✓</td><td><code>debit</code> | <code>credit</code></td></tr>
+      <tr><td><code>amount</code></td><td>DECIMAL(18,2)</td><td>✓</td><td>&gt; 0</td></tr>
+      <tr><td><code>counterpart_account_id</code></td><td>UUID (FK→account)</td><td></td><td>TK đối ứng — dùng cho tra cứu</td></tr>
+      <tr><td><code>customer_id</code></td><td>UUID (FK→customer)</td><td></td><td>Khi liên quan công nợ khách hàng</td></tr>
+      <tr><td><code>supplier_id</code></td><td>UUID (FK→supplier)</td><td></td><td>Khi liên quan công nợ nhà cung cấp</td></tr>
+      <tr><td><code>employee_id</code></td><td>UUID (FK→employee)</td><td></td><td></td></tr>
+      <tr><td><code>bank_account_id</code></td><td>UUID (FK→bank_account)</td><td></td><td></td></tr>
+      <tr><td><code>expense_category_id</code></td><td>UUID (FK→expense_category)</td><td></td><td></td></tr>
+      <tr><td><code>description</code></td><td>TEXT</td><td></td><td></td></tr>
+    </tbody>
+  </table>
+
+  <h3>6.3 Bảng định khoản đầy đủ Phase 1 — 26 nghiệp vụ</h3>
+  <table>
+    <thead>
+      <tr><th>STT</th><th>Nghiệp vụ</th><th>Nợ (TK)</th><th>Có (TK)</th><th>Điều kiện</th><th>Ghi chú</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>Thu tiền mặt bán hàng thu ngay</td><td>111</td><td>511</td><td><code>receipt_type=sale</code></td><td></td></tr>
+      <tr><td>2</td><td>Thu tiền mặt từ công nợ KH</td><td>111</td><td>131</td><td><code>receipt_type=customer_payment</code></td><td>Giảm AR</td></tr>
+      <tr><td>3</td><td>Thu hoàn ứng nhân viên</td><td>111</td><td>141</td><td><code>receipt_type=advance_return</code></td><td></td></tr>
+      <tr><td>4</td><td>Thu tiền lãi (tiền mặt)</td><td>111</td><td>515</td><td><code>receipt_type=interest</code></td><td></td></tr>
+      <tr><td>5</td><td>Thu khác bằng tiền mặt</td><td>111</td><td>711</td><td><code>receipt_type=other</code></td><td></td></tr>
+      <tr><td>6</td><td>Chi mua hàng trả ngay</td><td>156</td><td>111</td><td><code>payment_type=purchase</code></td><td></td></tr>
+      <tr><td>7</td><td>Chi thanh toán NCC (tiền mặt)</td><td>331</td><td>111</td><td><code>payment_type=supplier_payment</code></td><td>Giảm AP</td></tr>
+      <tr><td>8</td><td>Chi tạm ứng nhân viên</td><td>141</td><td>111</td><td><code>payment_type=advance</code></td><td></td></tr>
+      <tr><td>9</td><td>Chi phí bán hàng (tiền mặt)</td><td>641</td><td>111</td><td><code>payment_type=expense, dept=sales</code></td><td><code>[CẦN KẾ TOÁN XÁC NHẬN: phân biệt 641/642/627 theo dept hay theo expense_category?]</code></td></tr>
+      <tr><td>10</td><td>Chi phí quản lý (tiền mặt)</td><td>642</td><td>111</td><td><code>payment_type=expense, dept=admin</code></td><td></td></tr>
+      <tr><td>11</td><td>Chi phí sản xuất (tiền mặt)</td><td>627</td><td>111</td><td><code>payment_type=expense, dept=mfg</code></td><td></td></tr>
+      <tr><td>12</td><td>Chi khác bằng tiền mặt</td><td>811</td><td>111</td><td><code>payment_type=other</code></td><td><code>[CẦN XÁC NHẬN: 811 hay TK khác?]</code></td></tr>
+      <tr><td>13</td><td>Thu KH qua ngân hàng</td><td>112</td><td>131</td><td><code>bank_receipt, customer_payment</code></td><td>Giảm AR</td></tr>
+      <tr><td>14</td><td>Thu lãi ngân hàng</td><td>112</td><td>515</td><td><code>bank_receipt, interest</code></td><td></td></tr>
+      <tr><td>15</td><td>Thu khác qua ngân hàng</td><td>112</td><td>711</td><td><code>bank_receipt, other</code></td><td></td></tr>
+      <tr><td>16</td><td>Chi thanh toán NCC qua NH</td><td>331</td><td>112</td><td><code>bank_payment, supplier_payment</code></td><td>Giảm AP</td></tr>
+      <tr><td>17</td><td>Phí ngân hàng</td><td><code>[XÁC NHẬN: 6427 hay 635?]</code></td><td>112</td><td><code>bank_payment, bank_fee</code></td><td><code>[CẦN KẾ TOÁN XÁC NHẬN]</code></td></tr>
+      <tr><td>18</td><td>Chi phí qua ngân hàng</td><td>641/642</td><td>112</td><td><code>bank_payment, expense</code></td><td></td></tr>
+      <tr><td>19</td><td>Nộp tiền mặt vào NH</td><td>112</td><td>111</td><td><code>bank_transfer, cash_to_bank</code></td><td></td></tr>
+      <tr><td>20</td><td>Rút tiền NH về quỹ</td><td>111</td><td>112</td><td><code>bank_transfer, bank_to_cash</code></td><td></td></tr>
+      <tr><td>21</td><td>Chuyển giữa 2 TK NH</td><td>112b</td><td>112a</td><td><code>bank_transfer, bank_to_bank</code></td><td>a ≠ b</td></tr>
+      <tr><td>22</td><td>Phí chuyển khoản NH</td><td><code>[XÁC NHẬN: 6427 hay 635?]</code></td><td>112</td><td><code>bank_transfer, fee_amount&gt;0</code></td><td><code>[CẦN XÁC NHẬN]</code></td></tr>
+      <tr><td>23</td><td>Kiểm kê quỹ thừa</td><td>111</td><td><code>[XÁC NHẬN: 3381 hay 711?]</code></td><td><code>cash_inventory, difference&gt;0</code></td><td><code>[CẦN XÁC NHẬN]</code></td></tr>
+      <tr><td>24</td><td>Kiểm kê quỹ thiếu</td><td><code>[XÁC NHẬN: 1381 hay 1388?]</code></td><td>111</td><td><code>cash_inventory, difference&lt;0</code></td><td><code>[CẦN XÁC NHẬN]</code></td></tr>
+      <tr><td>25</td><td>Chênh lệch tỷ giá (lãi)</td><td>112</td><td>515</td><td>Ngoại tệ, lãi</td><td><code>[CẦN XÁC NHẬN: Phase 1 có ngoại tệ không?]</code></td></tr>
+      <tr><td>26</td><td>Chênh lệch tỷ giá (lỗ)</td><td>635</td><td>112</td><td>Ngoại tệ, lỗ</td><td><code>[CẦN XÁC NHẬN: như trên]</code></td></tr>
+    </tbody>
+  </table>
+
+  <h3>6.4 Đặc tả chức năng</h3>
+
+  <h4>7.2 Ghi sổ tự động</h4>
+  <div class="flow">
+    <strong>Phiếu thu approved</strong> → <code>journal_entry</code> (<code>source_type=cash_receipt</code>): <strong>Nợ 111 / Có credit_account</strong> mỗi line<br>
+    <strong>Phiếu chi approved</strong> → <strong>Nợ debit_account / Có 111</strong><br>
+    <strong>Thu NH approved</strong> → <strong>Nợ 112x / Có credit_account</strong><br>
+    <strong>Chi NH approved</strong> → <strong>Nợ debit_account / Có 112x</strong><br><br>
+    <strong>Chuyển nội bộ:</strong><br>
+    &nbsp;&nbsp;cash_to_bank → <strong>Nợ 112 / Có 111</strong><br>
+    &nbsp;&nbsp;bank_to_cash → <strong>Nợ 111 / Có 112</strong><br>
+    &nbsp;&nbsp;bank_to_bank → <strong>Nợ 112b / Có 112a</strong><br>
+    &nbsp;&nbsp;fee → <strong>Nợ 6427/635 / Có 112</strong>
+  </div>
+
+  <h4>7.3 Đảo bút toán & kiểm tra cân đối</h4>
+  <div class="callout">
+    <ul>
+      <li>Khi chứng từ bị hủy: sinh <code>journal_entry</code> mới (<code>is_reversal=true</code>, <code>reversed_entry_id</code> = entry gốc), đảo ngược Nợ↔Có</li>
+      <li>MUST verify <code>total_debit = total_credit</code> trước khi commit; nếu lệch → <strong>rollback + lỗi</strong></li>
+      <li>Truy vết: từ bất kỳ dòng sổ cái → click → mở chứng từ gốc (<code>source_type + source_id</code>)</li>
+    </ul>
+  </div>
+
+  <h4>7.5 Sổ cái, Nhật ký chung, Cân đối phát sinh</h4>
+  <div class="callout">
+    <ul>
+      <li><strong>Sổ cái theo TK:</strong> Số dư đầu kỳ → danh sách bút toán (ngày, số CT, diễn giải, TK đối ứng, Nợ, Có) → cộng phát sinh → số dư cuối kỳ. Lọc theo đối tượng: customer / supplier / employee / bank_account / expense_category.</li>
+      <li><strong>Nhật ký chung:</strong> Tất cả <code>journal_entry</code> + lines theo <code>entry_date</code>; lọc theo <code>source_type</code> hoặc account.</li>
+      <li><strong>Bảng cân đối phát sinh:</strong> Từng TK — Dư đầu kỳ N/C, Phát sinh N/C, Dư cuối kỳ N/C; Tổng N = Tổng C mỗi cột.</li>
+      <li><strong>Drill-down:</strong> Từ cân đối → sổ cái TK đó.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<!-- TAB 7: BÁO CÁO PHASE 1                                               -->
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+
+<div class="tab-panel" id="tab-reports">
+  <div class="phase-header">
+    <div class="chapter-label">CHƯƠNG 7</div>
+    <h2>Báo cáo Phase 1 (Reports)</h2>
+    <p>Báo cáo quỹ tiền mặt, tiền gửi ngân hàng, sổ cái kế toán. Nguồn dữ liệu, bộ lọc, công thức, drill-down, xuất Excel/PDF. Tổng hợp danh sách <code>[CẦN KẾ TOÁN XÁC NHẬN]</code>.</p>
+  </div>
+
+  <h3>7.1 Báo cáo quỹ tiền mặt</h3>
+  <table>
+    <thead>
+      <tr><th>Báo cáo</th><th>Nguồn dữ liệu</th><th>Bộ lọc</th><th>Drill-down</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Sổ quỹ tiền mặt</td><td><code>cash_receipt</code> + <code>cash_payment</code> (approved)</td><td>Ngày, KH/NCC, nhân viên</td><td>→ Phiếu thu/chi</td></tr>
+      <tr><td>Bảng kê phiếu thu</td><td><code>cash_receipt</code></td><td>Kỳ, trạng thái, receipt_type</td><td>→ Phiếu thu</td></tr>
+      <tr><td>Bảng kê phiếu chi</td><td><code>cash_payment</code></td><td>Kỳ, trạng thái, payment_type</td><td>→ Phiếu chi</td></tr>
+      <tr><td>Tồn quỹ tức thời</td><td>opening_balance(111) + receipts − payments</td><td>Ngày</td><td>—</td></tr>
+      <tr><td>Dòng tiền tiền mặt</td><td><code>cash_receipt</code> + <code>cash_payment</code> grouped by type</td><td>Kỳ</td><td>→ Bảng kê</td></tr>
+    </tbody>
+  </table>
+
+  <h4>Công thức tồn quỹ tiền mặt</h4>
+  <div class="flow">
+    <strong>Tồn cuối</strong> = Opening(TK 111) + SUM(approved cash_receipt in period) − SUM(approved cash_payment in period)
+  </div>
+
+  <div class="callout">
+    <strong>Xuất sổ quỹ (Excel/PDF):</strong> Tồn đầu kỳ → Danh sách (ngày, số CT, diễn giải, thu, chi, tồn lũy kế) → Tồn cuối kỳ
+  </div>
+
+  <h3>7.2 Báo cáo tiền gửi ngân hàng</h3>
+  <table>
+    <thead>
+      <tr><th>Báo cáo</th><th>Nguồn dữ liệu</th><th>Bộ lọc</th><th>Drill-down</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Sổ tiền gửi NH</td><td><code>bank_receipt</code> + <code>bank_payment</code> + <code>bank_transfer</code> (approved)</td><td>TK NH, ngày</td><td>→ Chứng từ NH</td></tr>
+      <tr><td>Bảng kê thu NH</td><td><code>bank_receipt</code></td><td>Kỳ, TK NH, trạng thái</td><td>→ Chứng từ</td></tr>
+      <tr><td>Bảng kê chi NH</td><td><code>bank_payment</code></td><td>Kỳ, TK NH, trạng thái</td><td>→ Chứng từ</td></tr>
+      <tr><td>Số dư NH</td><td>opening_balance(112x) + receipts − payments ± transfers</td><td>TK NH</td><td>—</td></tr>
+      <tr><td>GD chưa đối chiếu</td><td><code>bank_statement_line WHERE is_matched=false</code></td><td>TK NH, kỳ</td><td>→ Sao kê</td></tr>
+    </tbody>
+  </table>
+
+  <h4>Công thức số dư ngân hàng</h4>
+  <div class="flow">
+    <strong>Số dư cuối</strong> = Opening(112x) + SUM(bank_receipt approved) − SUM(bank_payment approved) ± SUM(bank_transfer approved)
+  </div>
+
+  <h3>7.3 Báo cáo sổ cái & cân đối phát sinh</h3>
+  <table>
+    <thead>
+      <tr><th>Báo cáo</th><th>Nguồn dữ liệu</th><th>Bộ lọc</th><th>Drill-down</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Sổ cái</td><td><code>journal_entry_line</code></td><td>TK, kỳ, đối tượng</td><td>→ Chứng từ gốc</td></tr>
+      <tr><td>Nhật ký chung</td><td><code>journal_entry</code> + lines</td><td>Ngày, loại CT, TK</td><td>→ Chứng từ gốc</td></tr>
+      <tr><td>Cân đối phát sinh</td><td><code>journal_entry_line</code> (aggregated)</td><td>Kỳ</td><td>→ Sổ cái TK</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <strong>Xuất sổ cái:</strong> Tên TK, số dư đầu kỳ, bảng bút toán (ngày, số CT, diễn giải, TK đối ứng, Nợ, Có), cộng phát sinh, số dư cuối kỳ.<br><br>
+    <strong>Xuất cân đối phát sinh:</strong> Bảng tất cả TK với cột Dư ĐK N/C, PS N/C, Dư CK N/C; dòng tổng cộng (N = C bắt buộc).
+  </div>
+
+  <h3>7.4 In phiếu thu / chi</h3>
+  <div class="callout">
+    <ul>
+      <li>Preview mẫu chuẩn kế toán Việt Nam: Tên CT, ngày, người nộp/nhận, nội dung, số tiền (số và chữ), chữ ký Thủ quỹ / Kế toán / Kế toán trưởng</li>
+      <li>Xuất PDF A4</li>
+    </ul>
+  </div>
+
+  <h3>7.5 Tổng hợp các điểm <code>[CẦN KẾ TOÁN XÁC NHẬN]</code></h3>
+  <div class="notice">
+    <strong>Lưu ý quan trọng:</strong> Các vấn đề định khoản dưới đây chưa được chốt. Kế toán trưởng cần xác nhận từng phương án trước khi lập trình viên bắt đầu triển khai module liên quan.
+  </div>
+  <table>
+    <thead>
+      <tr><th>STT</th><th>Vị trí</th><th>Vấn đề</th><th>Phương án A</th><th>Phương án B</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>Phí ngân hàng (NV 17, 22)</td>
+        <td>TK chi phí cho phí NH và phí chuyển khoản</td>
+        <td>6427 (Chi phí QLDN — phí NH)</td>
+        <td>635 (Chi phí tài chính)</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Kiểm kê quỹ thừa (NV 23)</td>
+        <td>TK đối ứng khi quỹ thừa</td>
+        <td>3381 (Tài sản thừa chờ xử lý)</td>
+        <td>711 (Thu nhập khác)</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Kiểm kê quỹ thiếu (NV 24)</td>
+        <td>TK đối ứng khi quỹ thiếu</td>
+        <td>1381 (Tài sản thiếu chờ xử lý)</td>
+        <td>1388 (Phải thu khác)</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>Chi phí theo phòng ban (NV 9–11)</td>
+        <td>Phân biệt 641/642/627 theo dept hay expense_category</td>
+        <td>Theo department của người tạo CT</td>
+        <td>Theo expense_category chọn trong line</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td>Chi tiền mặt khác (NV 12)</td>
+        <td>TK đối ứng chi khác</td>
+        <td>811 (Chi phí khác)</td>
+        <td>Tùy expense_category</td>
+      </tr>
+      <tr>
+        <td>6</td>
+        <td>Ngoại tệ Phase 1 (NV 25–26)</td>
+        <td>Phase 1 có phát sinh nghiệp vụ ngoại tệ không?</td>
+        <td>Không — bỏ qua Phase 1</td>
+        <td>Có — cần thêm TK 007, xử lý chênh lệch tỷ giá</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>7.6 ERD Tổng hợp Phase 1 — ~46 Entities</h3>
+  <pre>
+┌─────────────────────────────────────────────────────────────────────────┐
+│  HỆ THỐNG & PHÂN QUYỀN                                                 │
+├─────────────────────────────────────────────────────────────────────────┤
+│  [company] 1──< [fiscal_year]                                           │
+│  [company] 1──< [branch]                                                │
+│  [company] 1──< [department]                                            │
+│  [branch]  1──< [department]                                            │
+│  [company] 1──< [user]                                                  │
+│  [department] 1──< [user]                                               │
+│  [employee] 0..1──< [user]                                              │
+│  [company] 1──< [role]                                                  │
+│  [role] >──< [user]              (via user_role)                        │
+│  [role] 1──< [permission]                                               │
+│  [role] 1──< [data_permission]                                          │
+│  [company] 1──< [document_type]                                         │
+│  [document_type] 1──< [numbering_rule]                                  │
+│  [company] 1──< [audit_log]                                             │
+│  [user]    1──< [audit_log]                                             │
+└─────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│  DANH MỤC (Masters)                                                     │
+├─────────────────────────────────────────────────────────────────────────┤
+│  [company] 1──< [account]        (cây: account→account self-ref)        │
+│  [company] 1──< [customer_group]                                        │
+│  [customer_group] 1──< [customer]                                       │
+│  [account]  1──< [customer]      (default_account)                      │
+│  [company] 1──< [supplier_group]                                        │
+│  [supplier_group] 1──< [supplier]                                       │
+│  [company] 1──< [employee]                                              │
+│  [department] 1──< [employee]                                           │
+│  [company] 1──< [product_group]  (cây: product_group→product_group)    │
+│  [product_group] 1──< [product]                                         │
+│  [product]  1──< [product_unit]                                         │
+│  [company] 1──< [warehouse]                                             │
+│  [company] 1──< [bank_account]   (master)                               │
+│  [account]  1──< [bank_account]  (accounting_account_id)                │
+│  [company] 1──< [expense_category] (cây: expense_category self-ref)     │
+└─────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│  SỐ DƯ ĐẦU KỲ (Opening Balances)                                       │
+├─────────────────────────────────────────────────────────────────────────┤
+│  [company]     1──< [opening_balance]                                   │
+│  [fiscal_year] 1──< [opening_balance]                                   │
+│  [account]     1──< [opening_balance]                                   │
+│                                                                         │
+│  [fiscal_year] 1──< [ar_invoice_opening]                                │
+│  [customer]    1──< [ar_invoice_opening]                                │
+│                                                                         │
+│  [fiscal_year] 1──< [ap_invoice_opening]                                │
+│  [supplier]    1──< [ap_invoice_opening]                                │
+│                                                                         │
+│  [fiscal_year] 1──< [inventory_opening]                                 │
+│  [warehouse]   1──< [inventory_opening]                                 │
+│  [product]     1──< [inventory_opening]                                 │
+│                                                                         │
+│  [fiscal_year] 1──< [fixed_asset_opening]                               │
+│  [fiscal_year] 1──< [tool_opening]                                      │
+│  [fiscal_year] 1──< [prepaid_opening]                                   │
+└─────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│  NGHIỆP VỤ QUỸ TIỀN MẶT (Cash Operations)                              │
+├─────────────────────────────────────────────────────────────────────────┤
+│  [company]  1──< [cash_receipt]                                         │
+│  [customer] 1──< [cash_receipt]                                         │
+│  [cash_receipt] 1──< [cash_receipt_line]                                │
+│  [account]  1──< [cash_receipt_line]   (debit_account)                  │
+│  [account]  1──< [cash_receipt_line]   (credit_account)                 │
+│  [ar_invoice_opening] 1──< [cash_receipt_line]                          │
+│                                                                         │
+│  [company]  1──< [cash_payment]                                         │
+│  [supplier] 1──< [cash_payment]                                         │
+│  [cash_payment] 1──< [cash_payment_line]                                │
+│  [account]  1──< [cash_payment_line]   (debit_account)                  │
+│  [account]  1──< [cash_payment_line]   (credit_account)                 │
+│  [ap_invoice_opening] 1──< [cash_payment_line]                          │
+│  [expense_category]   1──< [cash_payment_line]                          │
+│                                                                         │
+│  [company]  1──< [cash_inventory]                                       │
+└─────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│  NGHIỆP VỤ NGÂN HÀNG (Bank Operations)                                 │
+├─────────────────────────────────────────────────────────────────────────┤
+│  [company]      1──< [bank_receipt]                                     │
+│  [bank_account] 1──< [bank_receipt]                                     │
+│  [customer]     1──< [bank_receipt]                                     │
+│  [bank_receipt] 1──< [bank_receipt_line]                                │
+│  [account]      1──< [bank_receipt_line]   (debit_account)              │
+│  [account]      1──< [bank_receipt_line]   (credit_account)             │
+│  [ar_invoice_opening] 1──< [bank_receipt_line]                          │
+│                                                                         │
+│  [company]      1──< [bank_payment]                                     │
+│  [bank_account] 1──< [bank_payment]                                     │
+│  [supplier]     1──< [bank_payment]                                     │
+│  [bank_payment] 1──< [bank_payment_line]                                │
+│  [account]      1──< [bank_payment_line]   (debit_account)              │
+│  [account]      1──< [bank_payment_line]   (credit_account)             │
+│  [ap_invoice_opening] 1──< [bank_payment_line]                          │
+│  [expense_category]   1──< [bank_payment_line]                          │
+│                                                                         │
+│  [company]      1──< [bank_transfer]                                    │
+│  [bank_account] 1──< [bank_transfer]  (from_bank_account_id)           │
+│  [bank_account] 1──< [bank_transfer]  (to_bank_account_id)             │
+│                                                                         │
+│  [company]      1──< [bank_statement]                                   │
+│  [bank_account] 1──< [bank_statement]                                   │
+│  [bank_statement] 1──< [bank_statement_line]                            │
+│                                                                         │
+│  [company]      1──< [bank_reconciliation]                              │
+│  [bank_account] 1──< [bank_reconciliation]                              │
+└─────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│  SỔ CÁI (General Ledger)                                                │
+├─────────────────────────────────────────────────────────────────────────┤
+│  [company]      1──< [journal_entry]                                    │
+│  [cash_receipt]   ──► [journal_entry]  (source_type=cash_receipt)       │
+│  [cash_payment]   ──► [journal_entry]  (source_type=cash_payment)       │
+│  [bank_receipt]   ──► [journal_entry]  (source_type=bank_receipt)       │
+│  [bank_payment]   ──► [journal_entry]  (source_type=bank_payment)       │
+│  [bank_transfer]  ──► [journal_entry]  (source_type=bank_transfer)      │
+│  [journal_entry]  1──< [journal_entry_line]                             │
+│  [account]        1──< [journal_entry_line]                             │
+│  [account]        1──< [journal_entry_line]  (counterpart_account_id)   │
+│  [customer]       1──< [journal_entry_line]                             │
+│  [supplier]       1──< [journal_entry_line]                             │
+│  [employee]       1──< [journal_entry_line]                             │
+│  [bank_account]   1──< [journal_entry_line]                             │
+│  [expense_category] 1──< [journal_entry_line]                           │
+└─────────────────────────────────────────────────────────────────────────┘
+  </pre>
+
+  <div class="footer">
+    <p>Phase 1 — Đặc tả kỹ thuật lập trình | Tài liệu nội bộ | Ngày tạo: 19/06/2026 | Phiên bản: Draft</p>
+    <p>Các mục [CẦN KẾ TOÁN XÁC NHẬN] cần được kế toán chốt trước khi lập trình viên triển khai.</p>
+  </div>
+</div></body></html>
