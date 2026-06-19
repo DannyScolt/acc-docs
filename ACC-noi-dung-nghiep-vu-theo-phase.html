@@ -540,8 +540,8 @@
       → Tính giá vốn → Kết chuyển → Khóa kỳ → Báo cáo tài chính
     </div>
     <p>Mỗi giai đoạn tạo ra một nhóm chức năng hoàn chỉnh, có thể vận hành và nghiệm thu độc lập.</p>
-    <div class="notice">
-      <strong>Lưu ý:</strong> Phần hạch toán chi tiết (định khoản Nợ / Có) và các nội dung chuyên sâu sẽ được hoàn thiện sau khi thống nhất với bộ phận kế toán. Tài liệu này tập trung vào phạm vi và quy trình nghiệp vụ.
+    <div class="report-note">
+      <strong>Yêu cầu phản hồi từ bộ phận kế toán:</strong> Phần hạch toán chi tiết (định khoản Nợ / Có) cho từng nghiệp vụ là phần <strong>cốt lõi</strong> cần bộ phận kế toán xác nhận. Cuối mỗi giai đoạn có <strong>bảng định khoản mẫu</strong> — kế toán vui lòng kiểm tra, bổ sung hoặc điều chỉnh tài khoản và nội dung hạch toán cho phù hợp thực tế doanh nghiệp.
     </div>
 
     <h3>Tổng quan các giai đoạn</h3>
@@ -775,14 +775,14 @@
     <table>
       <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Nhập số dư tài khoản đầu kỳ</td><td>Nhập số dư Nợ / Có đầu kỳ cho từng tài khoản kế toán.</td></tr>
-      <tr><td>2</td><td>Nhập công nợ khách hàng đầu kỳ</td><td>Nhập số dư phải thu chi tiết theo từng khách hàng, hóa đơn, hạn thanh toán.</td></tr>
-      <tr><td>3</td><td>Nhập công nợ nhà cung cấp đầu kỳ</td><td>Nhập số dư phải trả chi tiết theo từng nhà cung cấp, hóa đơn, hạn thanh toán.</td></tr>
-      <tr><td>4</td><td>Nhập tồn kho đầu kỳ</td><td>Nhập số lượng, đơn giá, giá trị tồn đầu kỳ theo từng kho, từng mặt hàng.</td></tr>
+      <tr><td>2</td><td>Nhập công nợ khách hàng đầu kỳ</td><td>Nhập số dư phải thu chi tiết theo từng khách hàng, hóa đơn, hạn thanh toán. Quản lý công nợ phải thu đầy đủ (đối chiếu, thu tiền, tuổi nợ) ở Giai đoạn 3.</td></tr>
+      <tr><td>3</td><td>Nhập công nợ nhà cung cấp đầu kỳ</td><td>Nhập số dư phải trả chi tiết theo từng nhà cung cấp, hóa đơn, hạn thanh toán. Quản lý công nợ phải trả đầy đủ (đối chiếu, thanh toán, tuổi nợ) ở Giai đoạn 2.</td></tr>
+      <tr><td>4</td><td>Nhập tồn kho đầu kỳ</td><td>Nhập số lượng, đơn giá, giá trị tồn đầu kỳ theo từng kho, từng mặt hàng. Nghiệp vụ kho đầy đủ (nhập, xuất, chuyển kho, kiểm kê) ở Giai đoạn 2.</td></tr>
       <tr><td>5</td><td>Nhập tồn quỹ đầu kỳ</td><td>Nhập số dư tiền mặt đầu kỳ theo từng quỹ nếu có nhiều quỹ.</td></tr>
       <tr><td>6</td><td>Nhập số dư ngân hàng đầu kỳ</td><td>Nhập số dư tiền gửi đầu kỳ theo từng tài khoản ngân hàng.</td></tr>
-      <tr><td>7</td><td>Nhập tài sản cố định đầu kỳ</td><td>Nhập nguyên giá, hao mòn lũy kế, giá trị còn lại của tài sản.</td></tr>
-      <tr><td>8</td><td>Nhập công cụ dụng cụ đầu kỳ</td><td>Nhập giá trị ban đầu, giá trị đã phân bổ, giá trị còn lại.</td></tr>
-      <tr><td>9</td><td>Nhập chi phí trả trước đầu kỳ</td><td>Nhập giá trị còn lại và thời gian phân bổ.</td></tr>
+      <tr><td>7</td><td>Nhập tài sản cố định đầu kỳ</td><td>Nhập nguyên giá, hao mòn lũy kế, giá trị còn lại của tài sản. Quản lý chi tiết TSCĐ (khấu hao, điều chuyển, thanh lý) ở Giai đoạn 6.</td></tr>
+      <tr><td>8</td><td>Nhập công cụ dụng cụ đầu kỳ</td><td>Nhập giá trị ban đầu, giá trị đã phân bổ, giá trị còn lại. Quản lý chi tiết CCDC (phân bổ, xuất dùng, thu hồi) ở Giai đoạn 6.</td></tr>
+      <tr><td>9</td><td>Nhập chi phí trả trước đầu kỳ</td><td>Nhập giá trị còn lại và thời gian phân bổ. Quản lý chi tiết chi phí trả trước (phân bổ định kỳ, theo dõi giá trị) ở Giai đoạn 6.</td></tr>
       <tr><td>10</td><td>Import số dư đầu kỳ</td><td>Nhập số dư từ Excel theo mẫu.</td></tr>
       <tr><td>11</td><td>Kiểm tra cân đối số dư</td><td>Kiểm tra tổng phát sinh Nợ / Có, tổng chi tiết công nợ / kho / quỹ / ngân hàng khớp tài khoản tổng hợp.</td></tr>
       <tr><td>12</td><td>Khóa số dư đầu kỳ</td><td>Sau khi xác nhận đúng, khóa số dư đầu kỳ để tránh sửa nhầm.</td></tr>
@@ -959,6 +959,18 @@
       <tr><td>3</td><td>Xem chi tiết theo tài khoản</td><td>Drill-down từ bảng cân đối vào sổ cái tài khoản.</td></tr>
       <tr><td>4</td><td>Xuất bảng cân đối phát sinh</td><td>Xuất Excel / PDF.</td></tr>
     </table>
+
+    <h3>Bảng định khoản mẫu — Giai đoạn 1</h3>
+    <table>
+      <tr><th>STT</th><th>Nghiệp vụ</th><th>Nợ (TK)</th><th>Có (TK)</th><th>Ghi chú</th></tr>
+      <tr><td>1</td><td>Thu tiền mặt bán hàng</td><td>111</td><td>511</td><td></td></tr>
+      <tr><td>2</td><td>Thu tiền mặt từ công nợ khách hàng</td><td>111</td><td>131</td><td></td></tr>
+      <tr><td>3</td><td>Chi tiền mặt mua hàng hóa / dịch vụ</td><td>152, 156, 641, 642</td><td>111</td><td></td></tr>
+      <tr><td>4</td><td>Thu tiền gửi ngân hàng từ khách hàng</td><td>112</td><td>131</td><td></td></tr>
+      <tr><td>5</td><td>Chi tiền gửi ngân hàng thanh toán nhà cung cấp</td><td>331</td><td>112</td><td></td></tr>
+      <tr><td>6</td><td>Rút tiền gửi ngân hàng về quỹ tiền mặt</td><td>111</td><td>112</td><td></td></tr>
+    </table>
+    <p><em>Kế toán vui lòng kiểm tra, bổ sung hoặc điều chỉnh tài khoản và nội dung hạch toán cho phù hợp thực tế doanh nghiệp.</em></p>
 
     <h3>Quy tắc nghiệp vụ chung của Giai đoạn 1</h3>
     <table>
@@ -1225,6 +1237,18 @@
       <tr><td>Kho</td><td>Báo cáo hàng tồn âm / lệch kho</td><td>Liệt kê mặt hàng âm kho hoặc lệch giữa kho và sổ cái để kiểm tra.</td></tr>
     </table>
 
+    <h3>Bảng định khoản mẫu — Giai đoạn 2</h3>
+    <table>
+      <tr><th>STT</th><th>Nghiệp vụ</th><th>Nợ (TK)</th><th>Có (TK)</th><th>Ghi chú</th></tr>
+      <tr><td>1</td><td>Mua hàng hóa nhập kho</td><td>152, 156</td><td>331</td><td></td></tr>
+      <tr><td>2</td><td>Thuế GTGT đầu vào được khấu trừ</td><td>133</td><td>331</td><td></td></tr>
+      <tr><td>3</td><td>Thanh toán tiền mặt cho nhà cung cấp</td><td>331</td><td>111</td><td></td></tr>
+      <tr><td>4</td><td>Thanh toán ngân hàng cho nhà cung cấp</td><td>331</td><td>112</td><td></td></tr>
+      <tr><td>5</td><td>Trả lại hàng mua cho nhà cung cấp</td><td>331</td><td>152, 156</td><td></td></tr>
+      <tr><td>6</td><td>Chuyển kho nội bộ</td><td>152 (kho nhận)</td><td>152 (kho xuất)</td><td></td></tr>
+    </table>
+    <p><em>Kế toán vui lòng kiểm tra, bổ sung hoặc điều chỉnh tài khoản và nội dung hạch toán cho phù hợp thực tế doanh nghiệp.</em></p>
+
     <h3>Quy tắc nghiệp vụ chung của Giai đoạn 2</h3>
     <table>
       <tr><th>STT</th><th>Quy tắc</th><th>Nội dung</th></tr>
@@ -1466,6 +1490,18 @@
       <tr><td>Kho</td><td>Báo cáo hàng chưa tính giá vốn</td><td>Liệt kê phiếu xuất bán chưa có giá vốn hoặc cần tính lại giá vốn.</td></tr>
     </table>
 
+    <h3>Bảng định khoản mẫu — Giai đoạn 3</h3>
+    <table>
+      <tr><th>STT</th><th>Nghiệp vụ</th><th>Nợ (TK)</th><th>Có (TK)</th><th>Ghi chú</th></tr>
+      <tr><td>1</td><td>Bán hàng ghi nhận doanh thu</td><td>131</td><td>511</td><td></td></tr>
+      <tr><td>2</td><td>Thuế GTGT đầu ra</td><td>131</td><td>3331</td><td></td></tr>
+      <tr><td>3</td><td>Thu tiền mặt từ khách hàng</td><td>111</td><td>131</td><td></td></tr>
+      <tr><td>4</td><td>Thu tiền gửi ngân hàng từ khách hàng</td><td>112</td><td>131</td><td></td></tr>
+      <tr><td>5</td><td>Xuất kho bán hàng — ghi nhận giá vốn</td><td>632</td><td>152, 156</td><td></td></tr>
+      <tr><td>6</td><td>Trả lại hàng bán — giảm doanh thu</td><td>531</td><td>131</td><td></td></tr>
+    </table>
+    <p><em>Kế toán vui lòng kiểm tra, bổ sung hoặc điều chỉnh tài khoản và nội dung hạch toán cho phù hợp thực tế doanh nghiệp.</em></p>
+
     <h3>Quy tắc nghiệp vụ chung của Giai đoạn 3</h3>
     <table>
       <tr><th>STT</th><th>Quy tắc</th><th>Nội dung</th></tr>
@@ -1640,6 +1676,18 @@
       <tr><td>9</td><td>Lưu phiên bản báo cáo</td><td>Lưu lại phiên bản báo cáo đã lập theo kỳ để đối chiếu khi có điều chỉnh.</td></tr>
     </table>
 
+    <h3>Bảng định khoản mẫu — Giai đoạn 4</h3>
+    <table>
+      <tr><th>STT</th><th>Nghiệp vụ</th><th>Nợ (TK)</th><th>Có (TK)</th><th>Ghi chú</th></tr>
+      <tr><td>1</td><td>Kết chuyển doanh thu bán hàng</td><td>511</td><td>911</td><td></td></tr>
+      <tr><td>2</td><td>Kết chuyển giá vốn hàng bán</td><td>911</td><td>632</td><td></td></tr>
+      <tr><td>3</td><td>Kết chuyển chi phí bán hàng</td><td>911</td><td>641</td><td></td></tr>
+      <tr><td>4</td><td>Kết chuyển chi phí quản lý doanh nghiệp</td><td>911</td><td>642</td><td></td></tr>
+      <tr><td>5</td><td>Kết chuyển lãi (911 dư Có)</td><td>911</td><td>421</td><td></td></tr>
+      <tr><td>6</td><td>Kết chuyển lỗ (911 dư Nợ)</td><td>421</td><td>911</td><td></td></tr>
+    </table>
+    <p><em>Kế toán vui lòng kiểm tra, bổ sung hoặc điều chỉnh tài khoản và nội dung hạch toán cho phù hợp thực tế doanh nghiệp.</em></p>
+
     <h3>Quy tắc nghiệp vụ chung của Giai đoạn 4</h3>
     <table>
       <tr><th>STT</th><th>Quy tắc</th><th>Nội dung</th></tr>
@@ -1797,6 +1845,16 @@
       <tr><td>4</td><td>Đối chiếu nghĩa vụ thuế</td><td>Kiểm tra số phát sinh thuế trên kế toán khớp số liệu tờ khai và giấy nộp tiền.</td></tr>
       <tr><td>5</td><td>Xuất báo cáo thuế</td><td>Xuất báo cáo thuế và giấy nộp tiền ra Excel / PDF để lưu hồ sơ.</td></tr>
     </table>
+
+    <h3>Bảng định khoản mẫu — Giai đoạn 5</h3>
+    <table>
+      <tr><th>STT</th><th>Nghiệp vụ</th><th>Nợ (TK)</th><th>Có (TK)</th><th>Ghi chú</th></tr>
+      <tr><td>1</td><td>Thuế GTGT đầu vào được khấu trừ (khi mua hàng)</td><td>133</td><td>111, 112, 331</td><td></td></tr>
+      <tr><td>2</td><td>Thuế GTGT đầu ra (khi bán hàng)</td><td>131</td><td>3331</td><td></td></tr>
+      <tr><td>3</td><td>Khấu trừ thuế GTGT cuối kỳ</td><td>3331</td><td>133</td><td></td></tr>
+      <tr><td>4</td><td>Nộp thuế GTGT vào ngân sách</td><td>3331</td><td>111, 112</td><td></td></tr>
+    </table>
+    <p><em>Kế toán vui lòng kiểm tra, bổ sung hoặc điều chỉnh tài khoản và nội dung hạch toán cho phù hợp thực tế doanh nghiệp.</em></p>
 
     <h3>Quy tắc nghiệp vụ chung của Giai đoạn 5</h3>
     <table>
@@ -1968,6 +2026,18 @@
       <tr><td>8</td><td>Cảnh báo vượt ngân sách</td><td>Cảnh báo khi chi phí hoặc khoản mục vượt hạn mức ngân sách được cấp.</td></tr>
       <tr><td>9</td><td>Báo cáo quản trị nâng cao</td><td>Xuất báo cáo dashboard, phân tích tài chính, dòng tiền và ngân sách ra Excel / PDF.</td></tr>
     </table>
+
+    <h3>Bảng định khoản mẫu — Giai đoạn 6</h3>
+    <table>
+      <tr><th>STT</th><th>Nghiệp vụ</th><th>Nợ (TK)</th><th>Có (TK)</th><th>Ghi chú</th></tr>
+      <tr><td>1</td><td>Trích khấu hao tài sản cố định</td><td>641, 642</td><td>214</td><td></td></tr>
+      <tr><td>2</td><td>Phân bổ công cụ dụng cụ</td><td>641, 642</td><td>242</td><td></td></tr>
+      <tr><td>3</td><td>Phân bổ chi phí trả trước</td><td>641, 642</td><td>242</td><td></td></tr>
+      <tr><td>4</td><td>Chi phí lương phải trả nhân viên</td><td>641, 642, 622</td><td>334</td><td></td></tr>
+      <tr><td>5</td><td>Trả lương qua ngân hàng</td><td>334</td><td>112</td><td></td></tr>
+      <tr><td>6</td><td>Chi phí lãi vay</td><td>635</td><td>112, 341</td><td></td></tr>
+    </table>
+    <p><em>Kế toán vui lòng kiểm tra, bổ sung hoặc điều chỉnh tài khoản và nội dung hạch toán cho phù hợp thực tế doanh nghiệp.</em></p>
 
     <h3>Quy tắc nghiệp vụ chung của Giai đoạn 6</h3>
     <table>
