@@ -774,18 +774,74 @@
     <h3>2.2.10. Số dư đầu kỳ</h3>
     <table>
       <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
-      <tr><td>1</td><td>Nhập số dư tài khoản đầu kỳ</td><td>Nhập số dư Nợ / Có đầu kỳ cho từng tài khoản kế toán.</td></tr>
-      <tr><td>2</td><td>Nhập công nợ khách hàng đầu kỳ</td><td>Nhập số dư phải thu chi tiết theo từng khách hàng, hóa đơn, hạn thanh toán. Quản lý công nợ phải thu đầy đủ (đối chiếu, thu tiền, tuổi nợ) ở Giai đoạn 3.</td></tr>
-      <tr><td>3</td><td>Nhập công nợ nhà cung cấp đầu kỳ</td><td>Nhập số dư phải trả chi tiết theo từng nhà cung cấp, hóa đơn, hạn thanh toán. Quản lý công nợ phải trả đầy đủ (đối chiếu, thanh toán, tuổi nợ) ở Giai đoạn 2.</td></tr>
-      <tr><td>4</td><td>Nhập tồn kho đầu kỳ</td><td>Nhập số lượng, đơn giá, giá trị tồn đầu kỳ theo từng kho, từng mặt hàng. Nghiệp vụ kho đầy đủ (nhập, xuất, chuyển kho, kiểm kê) ở Giai đoạn 2.</td></tr>
-      <tr><td>5</td><td>Nhập tồn quỹ đầu kỳ</td><td>Nhập số dư tiền mặt đầu kỳ theo từng quỹ nếu có nhiều quỹ.</td></tr>
-      <tr><td>6</td><td>Nhập số dư ngân hàng đầu kỳ</td><td>Nhập số dư tiền gửi đầu kỳ theo từng tài khoản ngân hàng.</td></tr>
-      <tr><td>7</td><td>Nhập tài sản cố định đầu kỳ</td><td>Nhập nguyên giá, hao mòn lũy kế, giá trị còn lại của tài sản. Quản lý chi tiết TSCĐ (khấu hao, điều chuyển, thanh lý) ở Giai đoạn 6.</td></tr>
-      <tr><td>8</td><td>Nhập công cụ dụng cụ đầu kỳ</td><td>Nhập giá trị ban đầu, giá trị đã phân bổ, giá trị còn lại. Quản lý chi tiết CCDC (phân bổ, xuất dùng, thu hồi) ở Giai đoạn 6.</td></tr>
-      <tr><td>9</td><td>Nhập chi phí trả trước đầu kỳ</td><td>Nhập giá trị còn lại và thời gian phân bổ. Quản lý chi tiết chi phí trả trước (phân bổ định kỳ, theo dõi giá trị) ở Giai đoạn 6.</td></tr>
-      <tr><td>10</td><td>Import số dư đầu kỳ</td><td>Nhập số dư từ Excel theo mẫu.</td></tr>
-      <tr><td>11</td><td>Kiểm tra cân đối số dư</td><td>Kiểm tra tổng phát sinh Nợ / Có, tổng chi tiết công nợ / kho / quỹ / ngân hàng khớp tài khoản tổng hợp.</td></tr>
-      <tr><td>12</td><td>Khóa số dư đầu kỳ</td><td>Sau khi xác nhận đúng, khóa số dư đầu kỳ để tránh sửa nhầm.</td></tr>
+      <tr><td>1</td><td>Xem danh sách số dư đầu kỳ</td><td>Xem dữ liệu số dư đầu kỳ theo năm tài chính, trạng thái khóa và loại dữ liệu.</td></tr>
+      <tr><td>2</td><td>Lọc / tìm kiếm dữ liệu đầu kỳ</td><td>Lọc theo tài khoản, khách hàng, nhà cung cấp, kho, tài khoản ngân hàng, loại dữ liệu hoặc trạng thái khóa.</td></tr>
+      <tr><td>3</td><td>Nhập số dư tài khoản đầu kỳ</td><td>Nhập số dư Nợ / Có đầu kỳ cho từng tài khoản kế toán.</td></tr>
+      <tr><td>4</td><td>Nhập công nợ khách hàng đầu kỳ</td><td>Nhập số dư phải thu chi tiết theo từng khách hàng, hóa đơn, hạn thanh toán. Quản lý công nợ phải thu đầy đủ (đối chiếu, thu tiền, tuổi nợ) ở Giai đoạn 3.</td></tr>
+      <tr><td>5</td><td>Nhập công nợ nhà cung cấp đầu kỳ</td><td>Nhập số dư phải trả chi tiết theo từng nhà cung cấp, hóa đơn, hạn thanh toán. Quản lý công nợ phải trả đầy đủ (đối chiếu, thanh toán, tuổi nợ) ở Giai đoạn 2.</td></tr>
+      <tr><td>6</td><td>Nhập tồn kho đầu kỳ</td><td>Nhập số lượng, đơn giá, giá trị tồn đầu kỳ theo từng kho, từng mặt hàng. Nghiệp vụ kho đầy đủ (nhập, xuất, chuyển kho, kiểm kê) ở Giai đoạn 2.</td></tr>
+      <tr><td>7</td><td>Nhập tồn quỹ đầu kỳ</td><td>Nhập số dư tiền mặt đầu kỳ theo từng quỹ nếu có nhiều quỹ; nếu chưa tách danh mục quỹ riêng thì theo từng tài khoản tiền mặt / tiểu khoản liên quan.</td></tr>
+      <tr><td>8</td><td>Nhập số dư ngân hàng đầu kỳ</td><td>Nhập số dư tiền gửi đầu kỳ theo từng tài khoản ngân hàng.</td></tr>
+      <tr><td>9</td><td>Nhập tài sản cố định đầu kỳ</td><td>Nhập nguyên giá, hao mòn lũy kế, giá trị còn lại của tài sản. Quản lý chi tiết TSCĐ (khấu hao, điều chuyển, thanh lý) ở Giai đoạn 6.</td></tr>
+      <tr><td>10</td><td>Nhập công cụ dụng cụ đầu kỳ</td><td>Nhập giá trị ban đầu, giá trị đã phân bổ, giá trị còn lại. Quản lý chi tiết CCDC (phân bổ, xuất dùng, thu hồi) ở Giai đoạn 6.</td></tr>
+      <tr><td>11</td><td>Nhập chi phí trả trước đầu kỳ</td><td>Nhập giá trị còn lại và thời gian phân bổ còn lại. Quản lý chi tiết chi phí trả trước (phân bổ định kỳ, theo dõi giá trị) ở Giai đoạn 6.</td></tr>
+      <tr><td>12</td><td>Sửa dữ liệu đầu kỳ chưa khóa</td><td>Cho phép chỉnh sửa dữ liệu đầu kỳ khi chưa khóa và chưa bị chặn bởi các điều kiện kiểm soát phát sinh liên quan.</td></tr>
+      <tr><td>13</td><td>Xóa dữ liệu đầu kỳ chưa khóa</td><td>Cho phép xóa dữ liệu đầu kỳ khi chưa khóa; dữ liệu đã khóa hoặc đã phát sinh liên quan không được xóa trực tiếp.</td></tr>
+      <tr><td>14</td><td>Import số dư đầu kỳ</td><td>Nhập số dư từ Excel theo mẫu hệ thống.</td></tr>
+      <tr><td>15</td><td>Download file mẫu import</td><td>Tải file Excel mẫu theo từng loại dữ liệu hoặc mẫu tổng hợp để nhập đầu kỳ.</td></tr>
+      <tr><td>16</td><td>Xem trước dữ liệu import</td><td>Hiển thị preview dữ liệu trước khi lưu chính thức.</td></tr>
+      <tr><td>17</td><td>Kiểm tra lỗi import</td><td>Kiểm tra lỗi định dạng, thiếu cột, sai kiểu dữ liệu, trùng dữ liệu và thông báo lỗi theo dòng/cột.</td></tr>
+      <tr><td>18</td><td>Kiểm tra cân đối số dư</td><td>Kiểm tra tổng phát sinh Nợ / Có, tổng chi tiết công nợ / kho / quỹ / ngân hàng / TSCĐ / CCDC / chi phí trả trước khớp tài khoản tổng hợp.</td></tr>
+      <tr><td>19</td><td>Đối chiếu công nợ khách hàng</td><td>Kiểm tra chi tiết công nợ khách hàng khớp TK 131.</td></tr>
+      <tr><td>20</td><td>Đối chiếu công nợ nhà cung cấp</td><td>Kiểm tra chi tiết công nợ nhà cung cấp khớp TK 331.</td></tr>
+      <tr><td>21</td><td>Đối chiếu tồn kho</td><td>Kiểm tra chi tiết tồn kho khớp các tài khoản hàng tồn kho liên quan.</td></tr>
+      <tr><td>22</td><td>Đối chiếu tồn quỹ</td><td>Kiểm tra số dư quỹ / tiền mặt khớp TK 111.</td></tr>
+      <tr><td>23</td><td>Đối chiếu số dư ngân hàng</td><td>Kiểm tra số dư ngân hàng khớp TK 112.</td></tr>
+      <tr><td>24</td><td>Đối chiếu tài sản cố định</td><td>Kiểm tra nguyên giá và hao mòn lũy kế TSCĐ khớp TK 211 / 214.</td></tr>
+      <tr><td>25</td><td>Đối chiếu công cụ dụng cụ</td><td>Kiểm tra giá trị CCDC đầu kỳ khớp tài khoản liên quan theo thiết kế hệ thống.</td></tr>
+      <tr><td>26</td><td>Đối chiếu chi phí trả trước</td><td>Kiểm tra giá trị chi phí trả trước đầu kỳ khớp TK 242.</td></tr>
+      <tr><td>27</td><td>Khóa số dư đầu kỳ</td><td>Sau khi xác nhận đúng và tất cả đối chiếu hợp lệ, khóa số dư đầu kỳ để tránh sửa nhầm.</td></tr>
+      <tr><td>28</td><td>Mở khóa số dư đầu kỳ</td><td>Chỉ người có quyền cao (ví dụ Admin hoặc người được cấp quyền mở khóa) mới được mở khóa; bắt buộc nhập lý do và ghi nhật ký.</td></tr>
+      <tr><td>29</td><td>Xem lịch sử thay đổi</td><td>Theo dõi lịch sử nhập, sửa, xóa, import, khóa và mở khóa dữ liệu đầu kỳ.</td></tr>
+      <tr><td>30</td><td>In báo cáo số dư đầu kỳ</td><td>In báo cáo tổng hợp hoặc chi tiết số dư đầu kỳ theo từng nhóm dữ liệu.</td></tr>
+      <tr><td>31</td><td>Xuất Excel số dư đầu kỳ</td><td>Xuất dữ liệu đầu kỳ và kết quả đối chiếu phục vụ kiểm tra, lưu trữ.</td></tr>
+    </table>
+
+    <p><b>Use Case: Nhập số dư đầu kỳ</b></p>
+    <p><b>Actor:</b> Admin, Kế toán tổng hợp, Kế toán trưởng.</p>
+    <p><b>Điều kiện tiên quyết:</b> Đã khai báo năm tài chính, hệ thống tài khoản, khách hàng, nhà cung cấp, hàng hóa, kho, tài khoản ngân hàng; người dùng có quyền truy cập chức năng; dữ liệu đầu kỳ chưa khóa.</p>
+    <p><b>Luồng chính:</b> Người dùng truy cập chức năng Số dư đầu kỳ → chọn loại dữ liệu cần nhập → nhập trực tiếp hoặc import từ Excel → hệ thống kiểm tra tính hợp lệ dữ liệu → hệ thống lưu dữ liệu đầu kỳ → người dùng thực hiện đối chiếu số dư → hệ thống kiểm tra cân đối tổng hợp và chi tiết → người dùng có quyền thực hiện khóa số dư đầu kỳ → hệ thống ghi nhận trạng thái Đã khóa, người khóa và thời điểm khóa.</p>
+    <p><b>Luồng ngoại lệ:</b></p>
+    <ul>
+      <li><b>UC-01:</b> Thiếu dữ liệu bắt buộc → không cho lưu, hiển thị thông báo lỗi chi tiết.</li>
+      <li><b>UC-02:</b> Sai định dạng dữ liệu / sai mẫu import → không cho lưu hoặc import, hiển thị lỗi theo dòng/cột.</li>
+      <li><b>UC-03:</b> Tổng Nợ khác Tổng Có → không cho khóa số dư đầu kỳ.</li>
+      <li><b>UC-04:</b> Chi tiết công nợ khách hàng không khớp TK 131 → không cho khóa số dư đầu kỳ.</li>
+      <li><b>UC-05:</b> Chi tiết công nợ nhà cung cấp không khớp TK 331 → không cho khóa số dư đầu kỳ.</li>
+      <li><b>UC-06:</b> Chi tiết tồn kho không khớp tài khoản kho → không cho khóa số dư đầu kỳ.</li>
+      <li><b>UC-07:</b> Chi tiết quỹ hoặc ngân hàng không khớp TK 111 / 112 → không cho khóa số dư đầu kỳ.</li>
+      <li><b>UC-08:</b> Dữ liệu đã khóa hoặc người dùng không đủ quyền → không cho sửa, xóa, import hoặc mở khóa.</li>
+    </ul>
+
+    <p><b>Business Rules:</b></p>
+    <table>
+      <tr><th>Mã</th><th>Quy tắc</th></tr>
+      <tr><td>BR-001</td><td>Chỉ người dùng có quyền mới được truy cập và thao tác trên chức năng Số dư đầu kỳ.</td></tr>
+      <tr><td>BR-002</td><td>Chỉ người dùng có quyền mới được nhập, sửa, xóa, import, khóa hoặc mở khóa dữ liệu đầu kỳ.</td></tr>
+      <tr><td>BR-003</td><td>Không cho nhập hoặc sửa số dư đầu kỳ khi đã phát sinh chứng từ kế toán liên quan và hệ thống đang áp dụng chặn thay đổi dữ liệu đầu kỳ.</td></tr>
+      <tr><td>BR-004</td><td>Không cho sửa, xóa, import bổ sung dữ liệu sau khi số dư đầu kỳ đã khóa.</td></tr>
+      <tr><td>BR-005</td><td>Chỉ người dùng có quyền mở khóa (ví dụ Admin hoặc vai trò được cấp quyền tương ứng) mới được mở khóa số dư đầu kỳ.</td></tr>
+      <tr><td>BR-006</td><td>Tổng số dư Nợ đầu kỳ phải bằng tổng số dư Có đầu kỳ thì mới được khóa.</td></tr>
+      <tr><td>BR-007</td><td>Số dư đầu kỳ của tài khoản phải phù hợp với tính chất tài khoản (debit / credit / both).</td></tr>
+      <tr><td>BR-008</td><td>Chi tiết công nợ khách hàng phải khớp tổng số dư TK 131.</td></tr>
+      <tr><td>BR-009</td><td>Chi tiết công nợ nhà cung cấp phải khớp tổng số dư TK 331.</td></tr>
+      <tr><td>BR-010</td><td>Chi tiết tồn kho phải khớp các tài khoản hàng tồn kho liên quan.</td></tr>
+      <tr><td>BR-011</td><td>Chi tiết tiền mặt phải khớp TK 111; chi tiết tiền gửi ngân hàng phải khớp TK 112.</td></tr>
+      <tr><td>BR-012</td><td>Chi tiết TSCĐ phải khớp TK 211 / 214; chi tiết CCDC và chi phí trả trước phải khớp tài khoản liên quan theo thiết kế hệ thống.</td></tr>
+      <tr><td>BR-013</td><td>Import dữ liệu đầu kỳ phải theo nguyên tắc all-or-nothing: có lỗi thì không lưu bất kỳ dòng nào.</td></tr>
+      <tr><td>BR-014</td><td>Mọi thao tác tạo, sửa, xóa, import, khóa và mở khóa dữ liệu đầu kỳ đều phải ghi Audit Log.</td></tr>
+      <tr><td>BR-015</td><td>Chỉ được khóa số dư đầu kỳ khi tất cả dữ liệu chi tiết đã đối chiếu hợp lệ.</td></tr>
+      <tr><td>BR-016</td><td>Dữ liệu AR/AP, tồn kho, TSCĐ, CCDC và chi phí trả trước trong Phase 1 chỉ nhập và đối chiếu ở mức đầu kỳ; tuổi nợ, khấu hao, phân bổ định kỳ, điều chuyển, thanh lý và nghiệp vụ vận hành đầy đủ thuộc các giai đoạn sau.</td></tr>
     </table>
 
     <h3>2.3. Tiền mặt / Quỹ</h3>
