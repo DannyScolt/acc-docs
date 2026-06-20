@@ -1309,7 +1309,7 @@
         <tr><td><code>customer_id</code> UUID (FK→customer)</td><td>✓</td><td>—</td></tr>
         <tr><td><code>invoice_number</code> VARCHAR(50)</td><td>✓</td><td>—</td></tr>
         <tr><td><code>invoice_date</code> DATE</td><td>✓</td><td>—</td></tr>
-        <tr><td><code>due_date</code> DATE</td><td>—</td><td>Phase 3: tính tuổi nợ</td></tr>
+        <tr><td><code>due_date</code> DATE</td><td>✓</td><td>Phase 3: mở rộng tính tuổi nợ / cảnh báo quá hạn</td></tr>
         <tr><td><code>original_amount</code> DECIMAL(18,2)</td><td>✓</td><td>—</td></tr>
         <tr><td><code>paid_amount</code> DECIMAL(18,2)</td><td>✓ (default 0)</td><td>Phase 3: auto-update khi thu tiền</td></tr>
         <tr><td><code>remaining_amount</code> DECIMAL(18,2)</td><td>✓ (= original − paid)</td><td>Phase 3: auto-calc</td></tr>
@@ -1333,7 +1333,7 @@
         <tr><td><code>supplier_id</code> UUID (FK→supplier)</td><td>✓</td><td>—</td></tr>
         <tr><td><code>invoice_number</code> VARCHAR(50)</td><td>✓</td><td>—</td></tr>
         <tr><td><code>invoice_date</code> DATE</td><td>✓</td><td>—</td></tr>
-        <tr><td><code>due_date</code> DATE</td><td>—</td><td>Phase 2: tính tuổi nợ</td></tr>
+        <tr><td><code>due_date</code> DATE</td><td>✓</td><td>Phase 2: mở rộng tính tuổi nợ / cảnh báo quá hạn</td></tr>
         <tr><td><code>original_amount</code> DECIMAL(18,2)</td><td>✓</td><td>—</td></tr>
         <tr><td><code>paid_amount</code> DECIMAL(18,2)</td><td>✓ (default 0)</td><td>Phase 2: auto-update khi thanh toán</td></tr>
         <tr><td><code>remaining_amount</code> DECIMAL(18,2)</td><td>✓ (= original − paid)</td><td>Phase 2: auto-calc</td></tr>
@@ -1439,26 +1439,37 @@
 
   <h3>4.5 Nhập số dư đầu kỳ (FULL spec)</h3>
   <ul>
-    <li><strong>Số dư TK tổng hợp:</strong> form danh sách TK, nhập <code>debit_amount</code> / <code>credit_amount</code>; tự kiểm tra theo <code>nature</code>.</li>
-    <li><strong>Công nợ KH chi tiết:</strong> nhập từng hóa đơn (<code>customer</code>, <code>invoice_number</code>, <code>invoice_date</code>, <code>due_date</code>, <code>original_amount</code>); <code>remaining = original − paid</code>.</li>
-    <li><strong>Công nợ NCC chi tiết:</strong> tương tự AR nhưng cho <code>supplier</code>.</li>
+    <li><strong>Quản lý dữ liệu:</strong> màn hình danh sách số dư đầu kỳ cho phép lọc theo năm tài chính, loại dữ liệu, tài khoản, khách hàng, nhà cung cấp, kho, tài khoản ngân hàng và trạng thái khóa.</li>
+    <li><strong>Số dư TK tổng hợp:</strong> form danh sách TK, nhập <code>debit_amount</code> / <code>credit_amount</code>; tự kiểm tra theo <code>nature</code>; chỉ cho phép sửa/xóa khi chưa khóa.</li>
+    <li><strong>Công nợ KH chi tiết:</strong> nhập từng hóa đơn (<code>customer</code>, <code>invoice_number</code>, <code>invoice_date</code>, <code>due_date</code>, <code>original_amount</code>); <code>remaining = original − paid</code>; <code>due_date</code> được nhập ngay Phase 1 để phục vụ đối chiếu đầu kỳ, logic tuổi nợ đầy đủ ở Phase 3.</li>
+    <li><strong>Công nợ NCC chi tiết:</strong> tương tự AR nhưng cho <code>supplier</code>; <code>due_date</code> nhập ngay ở đầu kỳ, logic tuổi nợ đầy đủ ở Phase 2.</li>
     <li><strong>Tồn kho:</strong> nhập từng kho × mặt hàng (<code>warehouse</code>, <code>product</code>, <code>quantity</code>, <code>unit_cost</code>); <code>total = qty × cost</code>.</li>
-    <li><strong>TSCĐ:</strong> nhập từng tài sản (<code>asset_code</code>, <code>asset_name</code>, <code>original_cost</code>, <code>accumulated_depreciation</code>); <code>net_book_value = original − accumulated</code>.</li>
-    <li><strong>CCDC:</strong> nhập từng công cụ (<code>tool_code</code>, <code>tool_name</code>, <code>original_value</code>, <code>allocated_value</code>); <code>remaining = original − allocated</code>.</li>
-    <li><strong>Chi phí trả trước:</strong> nhập từng khoản (<code>code</code>, <code>name</code>, <code>original_value</code>, <code>allocated_value</code>, <code>remaining_months</code>).</li>
+    <li><strong>Tiền mặt đầu kỳ:</strong> nhập theo tài khoản tiền mặt / quỹ tiền mặt; nếu doanh nghiệp có nhiều quỹ, hệ thống phải cho nhập riêng từng quỹ hoặc từng tiểu khoản 111 tương ứng.</li>
+    <li><strong>Tiền gửi ngân hàng đầu kỳ:</strong> nhập theo từng <code>bank_account</code>; mỗi tài khoản ngân hàng liên kết với tài khoản kế toán 112x tương ứng.</li>
+    <li><strong>TSCĐ:</strong> nhập từng tài sản (<code>asset_code</code>, <code>asset_name</code>, <code>original_cost</code>, <code>accumulated_depreciation</code>); <code>net_book_value = original − accumulated</code>. Chỉ nhập opening skeleton, chưa tính khấu hao định kỳ ở Phase 1.</li>
+    <li><strong>CCDC:</strong> nhập từng công cụ (<code>tool_code</code>, <code>tool_name</code>, <code>original_value</code>, <code>allocated_value</code>); <code>remaining = original − allocated</code>. Chưa làm phân bổ định kỳ ở Phase 1.</li>
+    <li><strong>Chi phí trả trước:</strong> nhập từng khoản (<code>code</code>, <code>name</code>, <code>original_value</code>, <code>allocated_value</code>, <code>remaining_months</code>); chỉ ghi nhận opening skeleton, chưa làm phân bổ định kỳ ở Phase 1.</li>
+    <li><strong>Lịch sử thao tác:</strong> mọi thao tác create / update / delete / import / lock / unlock trên dữ liệu đầu kỳ phải ghi <code>audit_log</code>; UI cho phép tra cứu lịch sử thay đổi và lịch sử import/khóa/mở khóa.</li>
   </ul>
 
   <h3>4.6 Import, kiểm tra cân đối và khóa</h3>
   <ul>
-    <li><strong>Import Excel tổng hợp:</strong> hệ thống phân tách theo loại (mỗi loại một sheet), validate từng dòng, import atomic (all-or-nothing).</li>
+    <li><strong>Download file mẫu:</strong> cung cấp file Excel mẫu theo từng loại dữ liệu hoặc file tổng hợp nhiều sheet.</li>
+    <li><strong>Import Excel tổng hợp:</strong> hệ thống phân tách theo loại (mỗi loại một sheet), validate từng dòng, preview dữ liệu trước khi lưu và import atomic (all-or-nothing).</li>
+    <li><strong>Lỗi import:</strong> hiển thị lỗi theo dòng/cột; nếu có ít nhất 1 lỗi thì không lưu bất kỳ dòng nào từ file import.</li>
     <li><strong>Cân đối TK tổng hợp:</strong> <code>SUM(debit_amount) = SUM(credit_amount)</code> — hiển thị chênh lệch nếu lệch.</li>
     <li><strong>Cân đối AR:</strong> <code>SUM(remaining_amount)</code> theo customer = <code>opening_balance</code> TK 131 chi tiết theo customer.</li>
     <li><strong>Cân đối AP:</strong> <code>SUM(remaining_amount)</code> theo supplier = <code>opening_balance</code> TK 331 chi tiết theo supplier.</li>
     <li><strong>Cân đối tồn kho:</strong> <code>SUM(total_value)</code> theo account = <code>opening_balance</code> TK 152 / 156.</li>
+    <li><strong>Cân đối tiền mặt:</strong> tổng số dư tiền mặt chi tiết = <code>opening_balance</code> cho TK 111 tương ứng.</li>
+    <li><strong>Cân đối ngân hàng:</strong> tổng số dư các <code>bank_account</code> = <code>opening_balance</code> cho các TK 112x tương ứng.</li>
     <li><strong>Cân đối TSCĐ:</strong> <code>SUM(original_cost)</code> = <code>opening_balance</code> TK 211; <code>SUM(accumulated_depreciation)</code> = TK 2141.</li>
+    <li><strong>Cân đối CCDC:</strong> tổng giá trị CCDC đầu kỳ phải khớp tài khoản 153 / 242 liên quan theo rule đã khai báo.</li>
+    <li><strong>Cân đối chi phí trả trước:</strong> tổng <code>remaining_value</code> của <code>prepaid_opening</code> phải khớp TK 242.</li>
   </ul>
   <div class="notice">
-    <strong>Khóa số dư đầu kỳ:</strong> Kế toán trưởng xác nhận → <code>is_locked = true</code> cho tất cả <code>opening_balance</code> của <code>fiscal_year</code> đó. Không cho phép sửa sau khi khóa — chỉ admin với quyền <code>unlock_opening</code> mới có thể mở lại.
+    <strong>Khóa số dư đầu kỳ:</strong> Người dùng có quyền khóa xác nhận tất cả đối chiếu đã hợp lệ → <code>is_locked = true</code> cho tất cả <code>opening_balance</code> của <code>fiscal_year</code> đó. Không cho phép sửa / xóa / import bổ sung sau khi khóa.<br><br>
+    <strong>Mở khóa số dư đầu kỳ:</strong> Chỉ người dùng có quyền <code>unlock_opening</code> mới có thể mở lại; bắt buộc nhập lý do mở khóa và ghi <code>audit_log</code>. Đây là thao tác ngoại lệ, dùng khi cần điều chỉnh dữ liệu đầu kỳ sai.
   </div>
 </div>
 
