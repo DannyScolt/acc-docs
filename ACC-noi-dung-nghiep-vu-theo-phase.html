@@ -1773,43 +1773,105 @@
 
     <h3>2.5.1. Ghi sổ kế toán</h3>
     <table>
-      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
-      <tr><td>1</td><td>Ghi sổ từ phiếu thu</td><td>Khi phiếu thu được duyệt, hệ thống sinh bút toán vào sổ cái.</td></tr>
-      <tr><td>2</td><td>Ghi sổ từ phiếu chi</td><td>Khi phiếu chi được duyệt, hệ thống sinh bút toán vào sổ cái.</td></tr>
-      <tr><td>3</td><td>Ghi sổ từ chứng từ ngân hàng</td><td>Khi chứng từ ngân hàng được duyệt, hệ thống sinh bút toán vào sổ cái.</td></tr>
-      <tr><td>4</td><td>Kiểm tra cân đối Nợ / Có</td><td>Mỗi bút toán phải có tổng Nợ bằng tổng Có.</td></tr>
-      <tr><td>5</td><td>Truy vết về chứng từ gốc</td><td>Từ bút toán trên sổ cái có thể mở lại chứng từ gốc.</td></tr>
-      <tr><td>6</td><td>Không cho sửa trực tiếp bút toán đã ghi sổ</td><td>Muốn điều chỉnh phải hủy, đảo hoặc lập chứng từ điều chỉnh.</td></tr>
+      <tr><th>Nội dung</th><th>Chi tiết</th></tr>
+      <tr><td>Mục tiêu</td><td>Ghi nhận toàn bộ bút toán phát sinh từ các phân hệ vào sổ kế toán.</td></tr>
+      <tr><td>Actor</td><td>Hệ thống, Kế toán viên, Kế toán tổng hợp, Kế toán trưởng.</td></tr>
+      <tr><td>Chức năng</td><td>Ghi sổ từ Phiếu thu, Phiếu chi, Ngân hàng, Bán hàng, Mua hàng, Kho, TSCĐ, Tiền lương, Ghi sổ thủ công, Điều chỉnh bút toán, Đảo bút toán, Kết chuyển cuối kỳ, Phân bổ chi phí, Khóa kỳ, Mở khóa kỳ.</td></tr>
+      <tr><td>Luồng chính</td><td>1. Chứng từ được duyệt → 2. Hệ thống lấy cấu hình hạch toán → 3. Sinh bút toán Nợ/Có → 4. Kiểm tra cân đối → 5. Kiểm tra kỳ kế toán → 6. Ghi Journal Entry → 7. Cập nhật sổ cái → 8. Cập nhật số dư → 9. Ghi Audit Log.</td></tr>
+      <tr><td>Kết quả</td><td>Bút toán được ghi nhận vào hệ thống kế toán.</td></tr>
+      <tr><td>Business Rules</td><td>BR-GL-01: Tổng Nợ = Tổng Có.<br>BR-GL-02: Chứng từ chưa duyệt không được ghi sổ.<br>BR-GL-03: Không sửa trực tiếp bút toán đã ghi sổ.<br>BR-GL-04: Điều chỉnh bằng bút toán điều chỉnh hoặc đảo bút toán.<br>BR-GL-05: Không ghi sổ vào kỳ đã khóa.<br>BR-GL-06: Mỗi bút toán phải liên kết chứng từ nguồn.<br>BR-GL-07: Không được ghi sổ trùng chứng từ nguồn.</td></tr>
     </table>
 
     <h3>2.5.2. Sổ cái</h3>
     <table>
-      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
-      <tr><td>1</td><td>Xem sổ cái theo tài khoản</td><td>Tra cứu phát sinh Nợ / Có theo từng tài khoản kế toán.</td></tr>
-      <tr><td>2</td><td>Xem sổ cái theo kỳ</td><td>Tra cứu sổ cái theo tháng / quý / năm.</td></tr>
-      <tr><td>3</td><td>Lọc sổ cái theo đối tượng</td><td>Lọc theo khách hàng, nhà cung cấp, nhân viên, tài khoản ngân hàng, kho, khoản mục chi phí.</td></tr>
-      <tr><td>4</td><td>Xem chi tiết bút toán</td><td>Xem ngày chứng từ, số chứng từ, diễn giải, tài khoản đối ứng, số tiền.</td></tr>
-      <tr><td>5</td><td>Drill-down về chứng từ gốc</td><td>Bấm từ dòng sổ cái để xem chứng từ phát sinh.</td></tr>
-      <tr><td>6</td><td>Xuất sổ cái</td><td>Xuất Excel / PDF.</td></tr>
+      <tr><th>Nội dung</th><th>Chi tiết</th></tr>
+      <tr><td>Mục tiêu</td><td>Theo dõi toàn bộ phát sinh và số dư của từng tài khoản kế toán.</td></tr>
+      <tr><td>Actor</td><td>Kế toán tổng hợp, Kế toán trưởng, Giám đốc, Kiểm toán.</td></tr>
+      <tr><td>Chức năng</td><td>Xem sổ cái theo tài khoản, Theo kỳ, Theo đối tượng, Theo phòng ban, Theo chi nhánh, Theo dự án, Xem chi tiết bút toán, Drill-down chứng từ gốc, Xuất Excel/PDF, In mẫu TT200/133.</td></tr>
+      <tr><td>Luồng chính</td><td>1. Chọn tài khoản → 2. Chọn kỳ → 3. Chọn điều kiện lọc → 4. Hệ thống tính số dư đầu kỳ → 5. Tính phát sinh Nợ/Có → 6. Tính số dư cuối kỳ → 7. Hiển thị dữ liệu → 8. Cho phép xem chứng từ gốc.</td></tr>
+      <tr><td>Kết quả</td><td>Hiển thị đầy đủ tình hình phát sinh của tài khoản.</td></tr>
+      <tr><td>Business Rules</td><td>BR-LEDGER-01: Dữ liệu lấy trực tiếp từ Journal Entry đã ghi sổ.<br>BR-LEDGER-02: Không hiển thị bút toán chưa ghi sổ.<br>BR-LEDGER-03: Số dư cuối kỳ = Số dư đầu kỳ + Phát sinh.<br>BR-LEDGER-04: Người dùng chỉ xem dữ liệu theo quyền được cấp.</td></tr>
     </table>
 
     <h3>2.5.3. Sổ nhật ký chung</h3>
     <table>
-      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
-      <tr><td>1</td><td>Xem nhật ký chung</td><td>Liệt kê toàn bộ bút toán theo trình tự thời gian.</td></tr>
-      <tr><td>2</td><td>Lọc theo ngày chứng từ</td><td>Tra cứu theo khoảng thời gian.</td></tr>
-      <tr><td>3</td><td>Lọc theo loại chứng từ</td><td>Tra cứu theo phiếu thu, phiếu chi, ngân hàng, chứng từ khác.</td></tr>
-      <tr><td>4</td><td>Lọc theo tài khoản</td><td>Tra cứu các bút toán liên quan một tài khoản.</td></tr>
-      <tr><td>5</td><td>Xuất nhật ký chung</td><td>Xuất Excel / PDF.</td></tr>
+      <tr><th>Nội dung</th><th>Chi tiết</th></tr>
+      <tr><td>Mục tiêu</td><td>Theo dõi toàn bộ bút toán phát sinh theo trình tự thời gian.</td></tr>
+      <tr><td>Actor</td><td>Kế toán tổng hợp, Kế toán trưởng, Kiểm toán.</td></tr>
+      <tr><td>Chức năng</td><td>Xem nhật ký chung, Lọc theo thời gian, Lọc theo tài khoản, Lọc theo loại chứng từ, Lọc theo người lập, Tìm kiếm số chứng từ, Xem chi tiết bút toán, Drill-down chứng từ nguồn, Xuất Excel/PDF.</td></tr>
+      <tr><td>Luồng chính</td><td>1. Chọn thời gian → 2. Chọn bộ lọc → 3. Hệ thống truy vấn dữ liệu → 4. Sắp xếp theo ngày → 5. Hiển thị danh sách bút toán → 6. Xem chi tiết hoặc chứng từ nguồn.</td></tr>
+      <tr><td>Kết quả</td><td>Danh sách toàn bộ bút toán phát sinh theo thời gian.</td></tr>
+      <tr><td>Business Rules</td><td>BR-JE-01: Chỉ hiển thị bút toán đã ghi sổ.<br>BR-JE-02: Bút toán phải có số Journal duy nhất.<br>BR-JE-03: Nhật ký chung không được chỉnh sửa trực tiếp.<br>BR-JE-04: Mọi dòng phải truy xuất được chứng từ nguồn.</td></tr>
     </table>
 
     <h3>2.5.4. Bảng cân đối phát sinh</h3>
     <table>
-      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
-      <tr><td>1</td><td>Lập bảng cân đối phát sinh</td><td>Tổng hợp số dư đầu kỳ, phát sinh Nợ / Có, số dư cuối kỳ.</td></tr>
-      <tr><td>2</td><td>Kiểm tra cân đối phát sinh</td><td>Kiểm tra tổng Nợ bằng tổng Có.</td></tr>
-      <tr><td>3</td><td>Xem chi tiết theo tài khoản</td><td>Drill-down từ bảng cân đối vào sổ cái tài khoản.</td></tr>
-      <tr><td>4</td><td>Xuất bảng cân đối phát sinh</td><td>Xuất Excel / PDF.</td></tr>
+      <tr><th>Nội dung</th><th>Chi tiết</th></tr>
+      <tr><td>Mục tiêu</td><td>Tổng hợp số dư và phát sinh của toàn bộ tài khoản kế toán.</td></tr>
+      <tr><td>Actor</td><td>Kế toán tổng hợp, Kế toán trưởng, Giám đốc.</td></tr>
+      <tr><td>Chức năng</td><td>Lập bảng cân đối phát sinh, Kiểm tra cân đối, Drill-down vào sổ cái, Xem theo chi nhánh, Phòng ban, Dự án, So sánh nhiều kỳ, Xuất Excel/PDF.</td></tr>
+      <tr><td>Luồng chính</td><td>1. Chọn kỳ kế toán → 2. Chọn đơn vị hạch toán → 3. Hệ thống lấy dữ liệu sổ cái → 4. Tính số dư đầu kỳ → 5. Tính phát sinh Nợ → 6. Tính phát sinh Có → 7. Tính số dư cuối kỳ → 8. Kiểm tra cân đối → 9. Hiển thị báo cáo.</td></tr>
+      <tr><td>Kết quả</td><td>Báo cáo tổng hợp phát sinh và số dư toàn hệ thống.</td></tr>
+      <tr><td>Business Rules</td><td>BR-TB-01: Tổng phát sinh Nợ phải bằng Tổng phát sinh Có.<br>BR-TB-02: Dữ liệu lấy từ sổ cái.<br>BR-TB-03: Chỉ sử dụng dữ liệu đã ghi sổ.<br>BR-TB-04: Cho phép drill-down đến từng tài khoản và chứng từ.</td></tr>
+    </table>
+
+    <h3>Business Rules toàn phân hệ Sổ cái & hệ thống tài khoản</h3>
+    <table>
+      <tr><th>Mã Rule</th><th>Nội dung</th></tr>
+      <tr><td>BR-GLOBAL-01</td><td>Hệ thống sử dụng sơ đồ tài khoản theo TT200 hoặc TT133.</td></tr>
+      <tr><td>BR-GLOBAL-02</td><td>Mọi bút toán phải cân bằng Nợ = Có.</td></tr>
+      <tr><td>BR-GLOBAL-03</td><td>Chứng từ chưa duyệt không được ghi sổ.</td></tr>
+      <tr><td>BR-GLOBAL-04</td><td>Không cho phép sửa trực tiếp bút toán đã ghi sổ.</td></tr>
+      <tr><td>BR-GLOBAL-05</td><td>Điều chỉnh bằng bút toán điều chỉnh hoặc đảo bút toán.</td></tr>
+      <tr><td>BR-GLOBAL-06</td><td>Không được xóa bút toán đã ghi sổ.</td></tr>
+      <tr><td>BR-GLOBAL-07</td><td>Mỗi bút toán phải truy vết được chứng từ nguồn.</td></tr>
+      <tr><td>BR-GLOBAL-08</td><td>Không được ghi sổ vào kỳ đã khóa.</td></tr>
+      <tr><td>BR-GLOBAL-09</td><td>Chỉ Kế toán trưởng hoặc Admin được mở khóa kỳ.</td></tr>
+      <tr><td>BR-GLOBAL-10</td><td>Mọi thay đổi dữ liệu phải lưu Audit Log.</td></tr>
+      <tr><td>BR-GLOBAL-11</td><td>Hệ thống hỗ trợ đa năm tài chính.</td></tr>
+      <tr><td>BR-GLOBAL-12</td><td>Hệ thống hỗ trợ đa chi nhánh, đa đơn vị hạch toán.</td></tr>
+      <tr><td>BR-GLOBAL-13</td><td>Tất cả báo cáo kế toán lấy dữ liệu từ Sổ cái.</td></tr>
+      <tr><td>BR-GLOBAL-14</td><td>Không cho phép ghi sổ trùng chứng từ nguồn.</td></tr>
+      <tr><td>BR-GLOBAL-15</td><td>Ngày hạch toán phải thuộc kỳ kế toán đang mở.</td></tr>
+      <tr><td>BR-GLOBAL-16</td><td>Số Journal Entry phải duy nhất trong năm tài chính.</td></tr>
+      <tr><td>BR-GLOBAL-17</td><td>Hệ thống phải lưu đầy đủ lịch sử tạo, sửa, duyệt, hủy, ghi sổ.</td></tr>
+      <tr><td>BR-GLOBAL-18</td><td>Hệ thống phải hỗ trợ xuất báo cáo Excel và PDF.</td></tr>
+      <tr><td>BR-GLOBAL-19</td><td>Người dùng chỉ được xem dữ liệu theo phạm vi phân quyền.</td></tr>
+      <tr><td>BR-GLOBAL-20</td><td>Tổng phát sinh Nợ toàn hệ thống luôn bằng Tổng phát sinh Có.</td></tr>
+    </table>
+
+    <p><em>Kế toán vui lòng rà soát thêm các rule và phạm vi chức năng để bảo đảm khớp với thực tế vận hành doanh nghiệp.</em></p>
+
+    <h3>Bảng định khoản mẫu — Giai đoạn 1</h3>
+    <table>
+      <tr><th>STT</th><th>Nghiệp vụ</th><th>Nợ (TK)</th><th>Có (TK)</th><th>Điều kiện</th><th>Ghi chú</th></tr>
+      <tr><td>1</td><td>Thu tiền mặt bán hàng thu ngay</td><td>111</td><td>511</td><td>receipt_type = sale</td><td></td></tr>
+      <tr><td>2</td><td>Thu tiền mặt từ công nợ KH</td><td>111</td><td>131</td><td>receipt_type = customer_payment</td><td>Giảm AR</td></tr>
+      <tr><td>3</td><td>Thu hoàn ứng nhân viên</td><td>111</td><td>141</td><td>receipt_type = advance_return</td><td></td></tr>
+      <tr><td>4</td><td>Thu tiền lãi tiền gửi (tiền mặt)</td><td>111</td><td>515</td><td>receipt_type = interest</td><td></td></tr>
+      <tr><td>5</td><td>Thu khác bằng tiền mặt</td><td>111</td><td>711</td><td>receipt_type = other</td><td></td></tr>
+      <tr><td>6</td><td>Chi mua hàng trả ngay (tiền mặt)</td><td>156</td><td>111</td><td>payment_type = purchase</td><td></td></tr>
+      <tr><td>7</td><td>Chi thanh toán NCC (tiền mặt)</td><td>331</td><td>111</td><td>payment_type = supplier_payment</td><td>Giảm AP</td></tr>
+      <tr><td>8</td><td>Chi tạm ứng nhân viên</td><td>141</td><td>111</td><td>payment_type = advance</td><td></td></tr>
+      <tr><td>9</td><td>Chi phí bán hàng (tiền mặt)</td><td>641</td><td>111</td><td>payment_type = expense, dept = sales</td><td>[CẦN KẾ TOÁN XÁC NHẬN: phân biệt 641/642/627 theo dept hay theo expense_category?]</td></tr>
+      <tr><td>10</td><td>Chi phí quản lý (tiền mặt)</td><td>642</td><td>111</td><td>payment_type = expense, dept = admin</td><td></td></tr>
+      <tr><td>11</td><td>Chi phí sản xuất (tiền mặt)</td><td>627</td><td>111</td><td>payment_type = expense, dept = mfg</td><td></td></tr>
+      <tr><td>12</td><td>Chi khác bằng tiền mặt</td><td>811</td><td>111</td><td>payment_type = other</td><td>[CẦN KẾ TOÁN XÁC NHẬN: 811 hay TK khác?]</td></tr>
+      <tr><td>13</td><td>Thu tiền KH qua ngân hàng</td><td>112</td><td>131</td><td>bank receipt, customer_payment</td><td>Giảm AR</td></tr>
+      <tr><td>14</td><td>Thu lãi ngân hàng</td><td>112</td><td>515</td><td>bank receipt, interest</td><td></td></tr>
+      <tr><td>15</td><td>Thu khác qua ngân hàng</td><td>112</td><td>711</td><td>bank receipt, other</td><td></td></tr>
+      <tr><td>16</td><td>Chi thanh toán NCC qua NH</td><td>331</td><td>112</td><td>bank payment, supplier_payment</td><td>Giảm AP</td></tr>
+      <tr><td>17</td><td>Phí ngân hàng</td><td>?</td><td>112</td><td>bank payment, bank_fee</td><td>[CẦN KẾ TOÁN XÁC NHẬN: Nợ 6427 hay 635?]</td></tr>
+      <tr><td>18</td><td>Chi phí qua ngân hàng</td><td>641/642</td><td>112</td><td>bank payment, expense</td><td></td></tr>
+      <tr><td>19</td><td>Nộp tiền mặt vào NH</td><td>112</td><td>111</td><td>bank_transfer, cash_to_bank</td><td></td></tr>
+      <tr><td>20</td><td>Rút tiền NH về quỹ</td><td>111</td><td>112</td><td>bank_transfer, bank_to_cash</td><td></td></tr>
+      <tr><td>21</td><td>Chuyển giữa 2 TK NH</td><td>112b</td><td>112a</td><td>bank_transfer, bank_to_bank</td><td>a ≠ b</td></tr>
+      <tr><td>22</td><td>Phí chuyển khoản NH</td><td>?</td><td>112</td><td>bank_transfer, fee_amount > 0</td><td>[CẦN KẾ TOÁN XÁC NHẬN: 6427 hay 635?]</td></tr>
+      <tr><td>23</td><td>Kiểm kê quỹ thừa</td><td>111</td><td>?</td><td>cash_inventory, difference > 0</td><td>[CẦN KẾ TOÁN XÁC NHẬN: Có 3381 hay 711?]</td></tr>
+      <tr><td>24</td><td>Kiểm kê quỹ thiếu</td><td>?</td><td>111</td><td>cash_inventory, difference < 0</td><td>[CẦN KẾ TOÁN XÁC NHẬN: Nợ 1381 hay 1388?]</td></tr>
+      <tr><td>25</td><td>Chênh lệch tỷ giá (lãi)</td><td>112</td><td>515</td><td>Ngoại tệ, lãi</td><td>[CẦN KẾ TOÁN XÁC NHẬN: Phase 1 có phát sinh ngoại tệ không?]</td></tr>
+      <tr><td>26</td><td>Chênh lệch tỷ giá (lỗ)</td><td>635</td><td>112</td><td>Ngoại tệ, lỗ</td><td>[CẦN KẾ TOÁN XÁC NHẬN: như trên]</td></tr>
+      <tr><td>27</td><td>Chi hoàn tiền khách hàng</td><td>?</td><td>111</td><td>payment_type = refund_return</td><td>[CẦN KẾ TOÁN XÁC NHẬN: Nợ 131 hay 521 hay TK khác?]</td></tr>
     </table>
 
     <h3>Bảng định khoản mẫu — Giai đoạn 1</h3>
