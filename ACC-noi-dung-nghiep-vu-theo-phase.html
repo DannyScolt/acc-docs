@@ -90,6 +90,11 @@
     table.kv-table { table-layout: fixed; }
     table.kv-table th:first-child,
     table.kv-table td:first-child { width: 22%; }
+    table.stt-table { table-layout: fixed; }
+    table.stt-table th:first-child,
+    table.stt-table td:first-child { width: 5%; }
+    table.stt-table th:nth-child(2),
+    table.stt-table td:nth-child(2) { width: 35%; }
 
     .cover {
       min-height: 297mm;
@@ -596,7 +601,7 @@
 
   </div>
 <h3>2.1.1. Quản lý doanh nghiệp</h3>
-    <table>
+    <table class="stt-table">
       <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Khởi tạo doanh nghiệp</td><td>Tạo hồ sơ doanh nghiệp sử dụng phần mềm kế toán.</td></tr>
       <tr><td>2</td><td>Cập nhật thông tin doanh nghiệp</td><td>Cập nhật tên công ty, mã số thuế, địa chỉ, điện thoại, email, người đại diện, logo.</td></tr>
@@ -611,7 +616,7 @@
     </table>
 
     <h3>2.1.2. Quản lý người dùng</h3>
-    <table>
+    <table class="stt-table">
       <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Tạo tài khoản người dùng</td><td>Admin tạo tài khoản cho kế toán, thủ quỹ, thủ kho, quản lý, giám đốc.</td></tr>
       <tr><td>2</td><td>Cập nhật thông tin người dùng</td><td>Cập nhật họ tên, email, số điện thoại, phòng ban, chức vụ.</td></tr>
@@ -627,7 +632,7 @@
     </table>
 
     <h3>2.1.3. Vai trò & phân quyền</h3>
-    <table>
+    <table class="stt-table">
       <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Khai báo vai trò</td><td>Tạo các vai trò như Admin, Kế toán trưởng, Kế toán tổng hợp, Kế toán bán hàng, Kế toán mua hàng, Thủ quỹ, Thủ kho, Giám đốc.</td></tr>
       <tr><td>2</td><td>Cập nhật vai trò</td><td>Sửa tên, mô tả, phạm vi sử dụng của vai trò.</td></tr>
@@ -642,7 +647,7 @@
     </table>
 
     <h3>2.1.4. Nhật ký truy vết</h3>
-    <table>
+    <table class="stt-table">
       <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Ghi nhật ký đăng nhập</td><td>Ghi nhận thời gian đăng nhập, đăng xuất, tài khoản, thiết bị, IP nếu có.</td></tr>
       <tr><td>2</td><td>Ghi nhật ký thao tác dữ liệu</td><td>Ghi lại thao tác thêm, sửa, xóa, duyệt, hủy, khóa kỳ.</td></tr>
@@ -655,7 +660,7 @@
     </table>
 
     <h3>2.1.5. Cách ly dữ liệu & bảo mật</h3>
-    <table>
+    <table class="stt-table">
       <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Cách ly dữ liệu theo doanh nghiệp</td><td>Dữ liệu của doanh nghiệp này không được truy cập bởi người dùng của doanh nghiệp khác.</td></tr>
       <tr><td>2</td><td>Cách ly dữ liệu theo chi nhánh</td><td>Nếu doanh nghiệp có nhiều chi nhánh, người dùng chỉ xem dữ liệu trong phạm vi được cấp.</td></tr>
@@ -669,7 +674,7 @@
     <p>Module này dùng để khai báo dữ liệu nền tảng trước khi phát sinh chứng từ kế toán. Các phân hệ Quỹ, Ngân hàng, Mua hàng, Bán hàng, Kho, Công nợ, Tài sản và Báo cáo đều sử dụng chung các danh mục này.</p>
 
     <h3>2.2.1. Hệ thống tài khoản</h3>
-    <table>
+    <table class="stt-table">
       <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Khai báo hệ thống tài khoản</td><td>Tạo danh mục tài khoản kế toán theo chế độ kế toán áp dụng.</td></tr>
       <tr><td>2</td><td>Thêm tài khoản chi tiết</td><td>Cho phép doanh nghiệp tự mở tài khoản con theo nhu cầu quản lý.</td></tr>
@@ -682,7 +687,7 @@
     </table>
 
     <h3>2.2.2. Danh mục khách hàng</h3>
-    <table>
+    <table class="stt-table">
       <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Thêm khách hàng</td><td>Khai báo mã khách hàng, tên, mã số thuế, địa chỉ, người liên hệ.</td></tr>
       <tr><td>2</td><td>Sửa khách hàng</td><td>Cập nhật thông tin khách hàng.</td></tr>
@@ -696,7 +701,7 @@
     </table>
 
     <h3>2.2.3. Danh mục nhà cung cấp</h3>
-    <table>
+    <table class="stt-table">
       <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Thêm nhà cung cấp</td><td>Khai báo mã nhà cung cấp, tên, mã số thuế, địa chỉ, người liên hệ.</td></tr>
       <tr><td>2</td><td>Sửa nhà cung cấp</td><td>Cập nhật thông tin nhà cung cấp.</td></tr>
@@ -709,7 +714,7 @@
     </table>
 
     <h3>2.2.4. Danh mục nhân viên</h3>
-    <table>
+    <table class="stt-table">
       <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Thêm nhân viên</td><td>Khai báo mã nhân viên, họ tên, phòng ban, chức vụ, thông tin liên hệ.</td></tr>
       <tr><td>2</td><td>Sửa nhân viên</td><td>Cập nhật thông tin nhân viên.</td></tr>
@@ -721,7 +726,7 @@
     </table>
 
     <h3>2.2.5. Danh mục hàng hóa, vật tư, dịch vụ</h3>
-    <table>
+    <table class="stt-table">
       <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Thêm hàng hóa / vật tư / dịch vụ</td><td>Khai báo mã, tên, loại, đơn vị tính, nhóm hàng, tài khoản kho / doanh thu / chi phí.</td></tr>
       <tr><td>2</td><td>Sửa hàng hóa / vật tư / dịch vụ</td><td>Cập nhật thông tin mặt hàng.</td></tr>
@@ -737,7 +742,7 @@
     </table>
 
     <h3>2.2.6. Danh mục kho</h3>
-    <table>
+    <table class="stt-table">
       <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Thêm kho</td><td>Khai báo mã kho, tên kho, địa chỉ kho, người phụ trách.</td></tr>
       <tr><td>2</td><td>Sửa kho</td><td>Cập nhật thông tin kho.</td></tr>
@@ -747,7 +752,7 @@
     </table>
 
     <h3>2.2.7. Danh mục tài khoản ngân hàng</h3>
-    <table>
+    <table class="stt-table">
       <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Thêm tài khoản ngân hàng</td><td>Khai báo số tài khoản, ngân hàng, chi nhánh, chủ tài khoản, loại tiền.</td></tr>
       <tr><td>2</td><td>Sửa tài khoản ngân hàng</td><td>Cập nhật thông tin tài khoản ngân hàng.</td></tr>
@@ -757,7 +762,7 @@
     </table>
 
     <h3>2.2.8. Danh mục khoản mục chi phí</h3>
-    <table>
+    <table class="stt-table">
       <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Thêm khoản mục chi phí</td><td>Khai báo khoản mục phục vụ tập hợp và phân tích chi phí.</td></tr>
       <tr><td>2</td><td>Sửa khoản mục chi phí</td><td>Cập nhật tên, mã, nhóm chi phí.</td></tr>
@@ -766,7 +771,7 @@
     </table>
 
     <h3>2.2.9. Danh mục loại chứng từ</h3>
-    <table>
+    <table class="stt-table">
       <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Khai báo loại chứng từ</td><td>Khai báo các loại chứng từ như phiếu thu, phiếu chi, thu ngân hàng, chi ngân hàng, nhập kho, xuất kho.</td></tr>
       <tr><td>2</td><td>Thiết lập mẫu số chứng từ</td><td>Cấu hình tiền tố, độ dài số, tự tăng theo tháng / năm.</td></tr>
@@ -775,7 +780,7 @@
     </table>
 
     <h3>2.2.10. Số dư đầu kỳ</h3>
-    <table>
+    <table class="stt-table">
       <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Xem danh sách số dư đầu kỳ</td><td>Xem dữ liệu số dư đầu kỳ theo năm tài chính, trạng thái khóa và loại dữ liệu.</td></tr>
       <tr><td>2</td><td>Lọc / tìm kiếm dữ liệu đầu kỳ</td><td>Lọc theo tài khoản, khách hàng, nhà cung cấp, kho, tài khoản ngân hàng, loại dữ liệu hoặc trạng thái khóa.</td></tr>
@@ -854,7 +859,7 @@
     <h3>2.3.1. Phiếu thu</h3>
 
     <h4>Danh sách chức năng</h4>
-    <table>
+    <table class="stt-table">
       <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Lập phiếu thu</td><td>Ghi nhận nghiệp vụ thu tiền mặt.</td></tr>
       <tr><td>2</td><td>Thu tiền khách hàng</td><td>Thu công nợ khách hàng và giảm công nợ phải thu.</td></tr>
@@ -926,7 +931,7 @@
     <h3>2.3.2. Phiếu chi</h3>
 
     <h4>Danh sách chức năng</h4>
-    <table>
+    <table class="stt-table">
       <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Lập phiếu chi</td><td>Ghi nhận nghiệp vụ chi tiền mặt.</td></tr>
       <tr><td>2</td><td>Thanh toán nhà cung cấp</td><td>Giảm công nợ phải trả.</td></tr>
@@ -993,7 +998,7 @@
     <h3>2.3.3. Quản lý sổ quỹ</h3>
 
     <h4>Danh sách chức năng</h4>
-    <table>
+    <table class="stt-table">
       <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Xem sổ quỹ tiền mặt</td><td>Theo dõi toàn bộ phát sinh thu, chi và tồn quỹ theo thời gian.</td></tr>
       <tr><td>2</td><td>Xem tồn quỹ tức thời</td><td>Hiển thị số dư quỹ hiện tại theo thời gian thực.</td></tr>
@@ -1170,7 +1175,7 @@
     <h3>2.3.4. Kiểm kê quỹ</h3>
 
     <h4>Danh sách chức năng</h4>
-    <table>
+    <table class="stt-table">
       <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Lập biên bản kiểm kê quỹ</td><td>Ghi nhận số tiền thực tế kiểm kê.</td></tr>
       <tr><td>2</td><td>Nhập số lượng theo mệnh giá</td><td>Kiểm kê chi tiết từng loại tiền.</td></tr>
@@ -1245,7 +1250,7 @@
     <h3>2.3.5. Báo cáo quỹ</h3>
 
     <h4>Danh sách chức năng</h4>
-    <table>
+    <table class="stt-table">
       <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Sổ quỹ tiền mặt</td><td>Báo cáo chi tiết thu chi tồn quỹ.</td></tr>
       <tr><td>2</td><td>Bảng kê phiếu thu</td><td>Danh sách phiếu thu theo kỳ.</td></tr>
@@ -1970,7 +1975,7 @@
 
     <h3>3.2. Đơn mua & yêu cầu mua hàng</h3>
     <p>Module này dùng để ghi nhận nhu cầu mua hàng, lập đơn mua, theo dõi trạng thái duyệt và làm căn cứ cho hợp đồng / chứng từ mua hàng sau này.</p>
-    <table>
+    <table class="stt-table">
       <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Lập yêu cầu mua hàng</td><td>Ghi nhận nhu cầu mua vật tư, hàng hóa, dịch vụ từ phòng ban / bộ phận.</td></tr>
       <tr><td>2</td><td>Lập đơn mua hàng</td><td>Tạo đơn mua với nhà cung cấp, mặt hàng, số lượng, đơn giá dự kiến, thời gian giao hàng.</td></tr>
@@ -1987,7 +1992,7 @@
 
     <h3>3.3. Hợp đồng mua</h3>
     <p>Module này dùng để quản lý hợp đồng mua hàng / dịch vụ, theo dõi điều khoản, giá trị, tiến độ giao hàng và thanh toán.</p>
-    <table>
+    <table class="stt-table">
       <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Lập hợp đồng mua</td><td>Khai báo số hợp đồng, ngày ký, nhà cung cấp, giá trị hợp đồng, thời hạn hiệu lực.</td></tr>
       <tr><td>2</td><td>Lập hợp đồng từ đơn mua</td><td>Chuyển thông tin đơn mua đã duyệt thành hợp đồng mua.</td></tr>
@@ -2001,7 +2006,7 @@
 
     <h3>3.4. Mua hàng hóa / dịch vụ</h3>
     <p>Module này dùng để lập chứng từ mua hàng trong nước / mua dịch vụ, ghi nhận thông tin hàng hóa, chi phí, thuế và liên kết với nhập kho hoặc công nợ.</p>
-    <table>
+    <table class="stt-table">
       <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Lập chứng từ mua hàng hóa</td><td>Ghi nhận mua hàng hóa, vật tư từ nhà cung cấp.</td></tr>
       <tr><td>2</td><td>Lập chứng từ mua dịch vụ</td><td>Ghi nhận mua dịch vụ không qua kho như vận chuyển, tư vấn, thuê ngoài.</td></tr>
@@ -2021,7 +2026,7 @@
 
     <h3>3.5. Nhận hàng & nhập kho mua hàng</h3>
     <p>Module này dùng để ghi nhận hàng thực nhận, lập phiếu nhập kho, cập nhật tồn kho và liên kết chứng từ mua hàng với kho.</p>
-    <table>
+    <table class="stt-table">
       <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Lập phiếu nhận hàng</td><td>Ghi nhận số lượng hàng thực tế nhận từ nhà cung cấp.</td></tr>
       <tr><td>2</td><td>Lập phiếu nhập kho từ chứng từ mua hàng</td><td>Tự động tạo phiếu nhập kho từ chứng từ mua hàng đã ghi nhận.</td></tr>
@@ -2038,7 +2043,7 @@
 
     <h3>3.6. Hóa đơn mua vào</h3>
     <p>Module này dùng để quản lý hóa đơn đầu vào, liên kết hóa đơn với chứng từ mua hàng / nhập kho và phục vụ kê khai thuế.</p>
-    <table>
+    <table class="stt-table">
       <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Nhập hóa đơn mua vào</td><td>Ghi nhận số hóa đơn, ngày hóa đơn, mẫu số, ký hiệu, nhà cung cấp, giá trị trước thuế, thuế GTGT.</td></tr>
       <tr><td>2</td><td>Lập chứng từ mua hàng từ hóa đơn</td><td>Tạo nhanh chứng từ mua hàng dựa trên thông tin hóa đơn đầu vào.</td></tr>
@@ -2054,7 +2059,7 @@
 
     <h3>3.7. Công nợ phải trả nhà cung cấp</h3>
     <p>Module này dùng để theo dõi số tiền phải trả theo từng nhà cung cấp, hóa đơn, hợp đồng, hạn thanh toán và tình trạng thanh toán.</p>
-    <table>
+    <table class="stt-table">
       <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Ghi nhận công nợ phải trả</td><td>Chứng từ mua hàng / hóa đơn đã duyệt làm phát sinh công nợ phải trả nhà cung cấp.</td></tr>
       <tr><td>2</td><td>Theo dõi công nợ theo nhà cung cấp</td><td>Xem số dư đầu kỳ, phát sinh tăng, phát sinh giảm, số dư cuối kỳ theo từng nhà cung cấp.</td></tr>
@@ -2070,7 +2075,7 @@
 
     <h3>3.8. Thanh toán nhà cung cấp</h3>
     <p>Module này dùng để lập chứng từ thanh toán nhà cung cấp bằng tiền mặt, ngân hàng hoặc bù trừ, đồng thời tự động giảm công nợ phải trả.</p>
-    <table>
+    <table class="stt-table">
       <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Lập thanh toán nhà cung cấp</td><td>Chọn nhà cung cấp, hóa đơn / khoản nợ cần thanh toán và số tiền thanh toán.</td></tr>
       <tr><td>2</td><td>Thanh toán bằng tiền mặt</td><td>Tạo phiếu chi và giảm công nợ phải trả tương ứng.</td></tr>
@@ -2086,7 +2091,7 @@
 
     <h3>3.9. Trả lại hàng mua & giảm giá hàng mua</h3>
     <p>Module này dùng để xử lý trường hợp hàng mua bị trả lại, nhà cung cấp giảm giá hoặc điều chỉnh hóa đơn / công nợ.</p>
-    <table>
+    <table class="stt-table">
       <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Lập chứng từ trả lại hàng mua</td><td>Ghi nhận hàng trả lại cho nhà cung cấp do lỗi, sai quy cách hoặc không đạt yêu cầu.</td></tr>
       <tr><td>2</td><td>Lập phiếu xuất kho trả lại</td><td>Xuất kho hàng trả lại, làm giảm số lượng và giá trị tồn kho.</td></tr>
@@ -2100,7 +2105,7 @@
 
     <h3>3.10. Bù trừ & đối chiếu công nợ</h3>
     <p>Module này dùng để xử lý bù trừ công nợ và đối chiếu số liệu giữa ACC với nhà cung cấp / sổ cái.</p>
-    <table>
+    <table class="stt-table">
       <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Bù trừ công nợ cùng đối tượng</td><td>Bù trừ phải trả và phải thu với cùng một đối tượng vừa là khách hàng vừa là nhà cung cấp.</td></tr>
       <tr><td>2</td><td>Bù trừ công nợ theo hóa đơn</td><td>Chọn các hóa đơn / khoản nợ được bù trừ và xác định số tiền bù trừ.</td></tr>
@@ -2115,7 +2120,7 @@
     <p>Module này dùng để quản lý các nghiệp vụ kho phát sinh trong giai đoạn mua hàng: nhập kho, chuyển kho, kiểm kê, điều chỉnh tồn và theo dõi thẻ kho.</p>
 
     <h3>3.11.1. Nhập kho</h3>
-    <table>
+    <table class="stt-table">
       <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Lập chứng từ nhập kho</td><td>Ghi nhận hàng hóa, vật tư nhập vào kho.</td></tr>
       <tr><td>2</td><td>Nhập kho từ mua hàng</td><td>Tạo phiếu nhập kho từ chứng từ mua hàng / nhận hàng.</td></tr>
@@ -2125,7 +2130,7 @@
     </table>
 
     <h3>3.11.2. Chuyển kho</h3>
-    <table>
+    <table class="stt-table">
       <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Lập phiếu chuyển kho</td><td>Ghi nhận chuyển hàng từ kho nguồn sang kho đích.</td></tr>
       <tr><td>2</td><td>Kiểm tra tồn kho nguồn</td><td>Cảnh báo hoặc chặn nếu kho nguồn không đủ số lượng để chuyển.</td></tr>
@@ -2135,7 +2140,7 @@
     </table>
 
     <h3>3.11.3. Kiểm kê & điều chỉnh tồn kho</h3>
-    <table>
+    <table class="stt-table">
       <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Lập biên bản kiểm kê kho</td><td>Ghi nhận số lượng kiểm kê thực tế theo kho, mặt hàng.</td></tr>
       <tr><td>2</td><td>So sánh tồn thực tế với tồn sổ</td><td>Tự động xác định chênh lệch thừa / thiếu so với thẻ kho.</td></tr>
@@ -2146,7 +2151,7 @@
     </table>
 
     <h3>3.11.4. Thẻ kho & tồn kho</h3>
-    <table>
+    <table class="stt-table">
       <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Xem thẻ kho</td><td>Theo dõi nhập, xuất, tồn theo từng mặt hàng, từng kho.</td></tr>
       <tr><td>2</td><td>Xem sổ chi tiết vật tư hàng hóa</td><td>Tra cứu phát sinh số lượng, giá trị theo từng vật tư / hàng hóa.</td></tr>
@@ -2249,7 +2254,7 @@
 
     <h3>4.2. Báo giá</h3>
     <p>Module này dùng để lập báo giá gửi khách hàng, theo dõi hiệu lực báo giá và chuyển báo giá thành đơn đặt hàng hoặc chứng từ bán hàng.</p>
-    <table>
+    <table class="stt-table">
       <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Lập báo giá</td><td>Tạo báo giá theo khách hàng, mặt hàng / dịch vụ, số lượng, đơn giá, thuế, chiết khấu và thời hạn hiệu lực.</td></tr>
       <tr><td>2</td><td>Áp dụng bảng giá / chính sách giá</td><td>Tự động gợi ý đơn giá theo bảng giá, nhóm khách hàng, kênh bán hoặc thời điểm hiệu lực.</td></tr>
@@ -2262,7 +2267,7 @@
 
     <h3>4.3. Đơn đặt hàng bán</h3>
     <p>Module này dùng để ghi nhận đơn hàng khách đã đặt, theo dõi giao hàng, xuất hóa đơn, thu tiền và tình trạng hoàn thành.</p>
-    <table>
+    <table class="stt-table">
       <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Lập đơn đặt hàng</td><td>Ghi nhận đơn hàng theo khách hàng, hàng hóa / dịch vụ, số lượng, đơn giá, ngày giao dự kiến.</td></tr>
       <tr><td>2</td><td>Lập đơn hàng từ báo giá</td><td>Kế thừa thông tin từ báo giá đã được khách hàng chấp nhận.</td></tr>
@@ -2277,7 +2282,7 @@
 
     <h3>4.4. Hợp đồng bán</h3>
     <p>Module này dùng để quản lý hợp đồng bán hàng / dịch vụ, theo dõi giá trị thực hiện, hóa đơn, thu tiền và công nợ theo hợp đồng.</p>
-    <table>
+    <table class="stt-table">
       <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Lập hợp đồng bán</td><td>Khai báo số hợp đồng, khách hàng, ngày ký, giá trị hợp đồng, thời hạn hiệu lực.</td></tr>
       <tr><td>2</td><td>Lập hợp đồng từ báo giá / đơn hàng</td><td>Kế thừa thông tin hàng hóa, dịch vụ, giá bán và điều khoản từ chứng từ nguồn.</td></tr>
@@ -2291,7 +2296,7 @@
 
     <h3>4.5. Chính sách giá, bảng giá & chiết khấu</h3>
     <p>Module này dùng để thiết lập giá bán, chiết khấu và chính sách thương mại làm căn cứ cho báo giá, đơn hàng, hợp đồng và chứng từ bán hàng.</p>
-    <table>
+    <table class="stt-table">
       <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Khai báo bảng giá</td><td>Thiết lập bảng giá theo mặt hàng, nhóm hàng, thời gian hiệu lực.</td></tr>
       <tr><td>2</td><td>Giá bán theo nhóm khách hàng</td><td>Thiết lập giá riêng cho đại lý, khách lẻ, khách sỉ hoặc nhóm khách hàng.</td></tr>
@@ -2303,7 +2308,7 @@
 
     <h3>4.6. Bán hàng hóa / dịch vụ</h3>
     <p>Module chứng từ bán hàng là trung tâm ghi nhận doanh thu, thuế đầu ra, công nợ / tiền thu, hóa đơn bán ra và xuất kho nếu bán hàng hóa.</p>
-    <table>
+    <table class="stt-table">
       <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Lập chứng từ bán hàng hóa</td><td>Ghi nhận nghiệp vụ bán hàng hóa có thể phát sinh xuất kho và giá vốn.</td></tr>
       <tr><td>2</td><td>Lập chứng từ bán dịch vụ</td><td>Ghi nhận bán dịch vụ không phát sinh xuất kho.</td></tr>
@@ -2322,7 +2327,7 @@
 
     <h3>4.7. Hóa đơn bán ra</h3>
     <p>Module này dùng để quản lý hóa đơn bán ra, liên kết hóa đơn với chứng từ bán hàng và phục vụ kê khai thuế.</p>
-    <table>
+    <table class="stt-table">
       <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Lập hóa đơn bán ra</td><td>Ghi nhận thông tin hóa đơn: số hóa đơn, ngày hóa đơn, khách hàng, hàng hóa / dịch vụ, tiền hàng, thuế.</td></tr>
       <tr><td>2</td><td>Lập hóa đơn từ chứng từ bán hàng</td><td>Kế thừa dữ liệu từ chứng từ bán hàng đã duyệt.</td></tr>
@@ -2336,7 +2341,7 @@
 
     <h3>4.8. Xuất kho bán hàng</h3>
     <p>Module này dùng để xuất kho hàng bán, cập nhật tồn kho, kiểm soát xuất âm và liên kết xuất kho với chứng từ bán hàng.</p>
-    <table>
+    <table class="stt-table">
       <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Lập phiếu xuất kho bán hàng</td><td>Ghi nhận xuất kho hàng hóa bán cho khách hàng.</td></tr>
       <tr><td>2</td><td>Tự sinh phiếu xuất từ chứng từ bán hàng</td><td>Chứng từ bán hàng có tích kiêm phiếu xuất kho tự động sinh phiếu xuất.</td></tr>
@@ -2351,7 +2356,7 @@
 
     <h3>4.9. Tính giá vốn hàng bán</h3>
     <p>Module này dùng để tính giá xuất kho, ghi nhận giá vốn hàng bán và đối chiếu giá vốn với tồn kho / sổ cái.</p>
-    <table>
+    <table class="stt-table">
       <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Tính giá xuất kho</td><td>Tính giá xuất kho theo phương pháp đã khai báo: bình quân, FIFO hoặc phương pháp được thống nhất.</td></tr>
       <tr><td>2</td><td>Tự động ghi nhận giá vốn</td><td>Phiếu xuất bán được tính giá để ghi nhận giá vốn hàng bán.</td></tr>
@@ -2364,7 +2369,7 @@
 
     <h3>4.10. Công nợ phải thu & thu tiền khách hàng</h3>
     <p>Module này dùng để theo dõi công nợ phải thu theo khách hàng / hóa đơn / hợp đồng, lập kế hoạch thu nợ, thu tiền và đối chiếu công nợ.</p>
-    <table>
+    <table class="stt-table">
       <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Ghi nhận công nợ phải thu</td><td>Bán hàng chưa thu tiền làm phát sinh công nợ phải thu khách hàng.</td></tr>
       <tr><td>2</td><td>Theo dõi công nợ theo khách hàng</td><td>Xem số dư đầu kỳ, phát sinh tăng, phát sinh giảm, số dư cuối kỳ theo từng khách hàng.</td></tr>
@@ -2383,7 +2388,7 @@
 
     <h3>4.11. Bù trừ công nợ & đối trừ chứng từ</h3>
     <p>Module này dùng để xử lý bù trừ công nợ, đối trừ chứng từ phải thu và điều chỉnh chênh lệch công nợ.</p>
-    <table>
+    <table class="stt-table">
       <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Đối trừ chứng từ công nợ khách hàng</td><td>Đối trừ giữa các chứng từ phải thu, thu tiền, trả lại, giảm giá của cùng khách hàng.</td></tr>
       <tr><td>2</td><td>Bù trừ công nợ cùng đối tượng</td><td>Bù trừ phải thu và phải trả khi một đối tượng vừa là khách hàng vừa là nhà cung cấp.</td></tr>
@@ -2394,7 +2399,7 @@
 
     <h3>4.12. Trả lại hàng bán, giảm giá & chiết khấu sau bán</h3>
     <p>Module này dùng để xử lý hàng bán bị trả lại, giảm giá sau bán, chiết khấu thương mại và điều chỉnh hóa đơn / công nợ / tồn kho.</p>
-    <table>
+    <table class="stt-table">
       <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Lập chứng từ trả lại hàng bán</td><td>Ghi nhận hàng khách trả lại do lỗi, sai quy cách hoặc thỏa thuận khác.</td></tr>
       <tr><td>2</td><td>Nhập kho hàng bán bị trả lại</td><td>Hàng trả lại được nhập kho, làm tăng tồn kho nếu hàng còn sử dụng được.</td></tr>
@@ -2502,7 +2507,7 @@
 
     <h3>5.2. Chứng từ nghiệp vụ khác & bút toán tổng hợp</h3>
     <p>Module này dùng để ghi nhận các bút toán kế toán không thuộc trực tiếp các phân hệ Quỹ, Ngân hàng, Mua hàng, Bán hàng hoặc Kho.</p>
-    <table>
+    <table class="stt-table">
       <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Lập chứng từ nghiệp vụ khác</td><td>Ghi nhận các nghiệp vụ kế toán tổng hợp phát sinh ngoài các phân hệ chuyên biệt.</td></tr>
       <tr><td>2</td><td>Hạch toán nhiều dòng định khoản</td><td>Cho phép nhập nhiều dòng tài khoản Nợ / Có, đối tượng, khoản mục, diễn giải và số tiền.</td></tr>
@@ -2518,7 +2523,7 @@
 
     <h3>5.3. Quyết toán tạm ứng & phân bổ chi phí</h3>
     <p>Module này dùng để xử lý các khoản tạm ứng, chi phí chờ phân bổ và bút toán phân bổ định kỳ trước khi kết chuyển cuối kỳ.</p>
-    <table>
+    <table class="stt-table">
       <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Quyết toán tạm ứng</td><td>Ghi nhận nhân viên hoàn ứng, chi thực tế, số còn phải thu hoặc phải trả thêm.</td></tr>
       <tr><td>2</td><td>Đối chiếu tạm ứng nhân viên</td><td>Theo dõi số đã tạm ứng, đã quyết toán, còn tồn theo từng nhân viên.</td></tr>
@@ -2531,7 +2536,7 @@
 
     <h3>5.4. Cấu hình bút toán kết chuyển</h3>
     <p>Module này dùng để thiết lập các cặp tài khoản kết chuyển phục vụ tự động kết chuyển cuối kỳ.</p>
-    <table>
+    <table class="stt-table">
       <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Danh mục tài khoản kết chuyển</td><td>Quản lý danh sách các cặp tài khoản dùng để kết chuyển doanh thu, chi phí và xác định kết quả kinh doanh.</td></tr>
       <tr><td>2</td><td>Cặp kết chuyển mặc định</td><td>Hệ thống cung cấp sẵn các cặp tài khoản kết chuyển phổ biến theo chế độ kế toán.</td></tr>
@@ -2543,7 +2548,7 @@
 
     <h3>5.5. Kết chuyển cuối kỳ & xác định kết quả kinh doanh</h3>
     <p>Module này dùng để kết chuyển doanh thu, chi phí, xác định kết quả kinh doanh và ghi nhận lãi / lỗ cuối kỳ.</p>
-    <table>
+    <table class="stt-table">
       <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Lập chứng từ kết chuyển cuối kỳ</td><td>Tạo chứng từ kết chuyển theo tháng, quý, năm hoặc đến một ngày bất kỳ.</td></tr>
       <tr><td>2</td><td>Kết chuyển doanh thu</td><td>Kết chuyển các tài khoản doanh thu sang tài khoản xác định kết quả kinh doanh.</td></tr>
@@ -2558,7 +2563,7 @@
 
     <h3>5.6. Kiểm tra đối chiếu trước khóa kỳ</h3>
     <p>Module này giúp kế toán kiểm tra chất lượng số liệu trước khi khóa kỳ và lập báo cáo tài chính.</p>
-    <table>
+    <table class="stt-table">
       <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Kiểm tra chứng từ chưa ghi sổ</td><td>Liệt kê chứng từ nháp, chờ duyệt hoặc chưa ghi sổ trong kỳ.</td></tr>
       <tr><td>2</td><td>Kiểm tra cân đối Nợ / Có</td><td>Đảm bảo toàn bộ bút toán trong kỳ cân đối Nợ / Có.</td></tr>
@@ -2574,7 +2579,7 @@
 
     <h3>5.7. Khóa kỳ & mở lại kỳ</h3>
     <p>Module này dùng để khóa dữ liệu kế toán sau khi đã kiểm tra, đồng thời kiểm soát việc mở lại kỳ khi cần điều chỉnh.</p>
-    <table>
+    <table class="stt-table">
       <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Khóa kỳ kế toán</td><td>Khóa dữ liệu theo tháng, quý hoặc năm sau khi hoàn tất kiểm tra số liệu.</td></tr>
       <tr><td>2</td><td>Chặn thêm / sửa / xóa chứng từ trong kỳ khóa</td><td>Không cho phát sinh thay đổi dữ liệu trong kỳ đã khóa nếu không có quyền mở khóa.</td></tr>
