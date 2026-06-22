@@ -1994,6 +1994,18 @@
       </div>
     </div>
 
+    <div class="callout">
+      <h3>Lộ trình triển khai Phase 2 — 2.5 tháng (10 tuần)</h3>
+      <ul>
+        <li><b>Tuần 1 - 2 — Thiết kế luồng & duyệt yêu cầu:</b> Thiết kế cấu trúc dữ liệu, luồng duyệt động cho PR, PO và Hợp đồng.</li>
+        <li><b>Tuần 3 - 4 — Lập PO & chọn nhà cung cấp:</b> Viết tính năng lập đơn mua hàng (PO) từ PR đã duyệt, so sánh báo giá, chọn NCC và điều khoản thanh toán.</li>
+        <li><b>Tuần 5 - 6 — Quản lý hợp đồng mua:</b> Thiết lập thông tin hợp đồng, đính kèm hồ sơ, khai báo đợt thanh toán và kế hoạch giao hàng.</li>
+        <li><b>Tuần 7 - 8 — Chứng từ mua & nhập kho:</b> Lập chứng từ mua hàng hóa/dịch vụ, phân bổ chi phí bốc xếp/vận chuyển và sinh phiếu nhập kho (GRN).</li>
+        <li><b>Tuần 9 — Hóa đơn mua vào & thanh toán:</b> Nhập hóa đơn đầu vào, kiểm tra trùng, hạch toán công nợ AP và chi tiền thanh toán (tiền mặt/ngân hàng).</li>
+        <li><b>Tuần 10 — Trả hàng, giảm giá & nghiệm thu:</b> Xử lý xuất trả NCC, giảm giá hàng mua, bù trừ công nợ cùng đối tượng, báo cáo & nghiệm thu Phase 2.</li>
+      </ul>
+    </div>
+
     <h3>3.1. Quy trình mua hàng & nhập kho</h3>
     <div class="mini-flow">Nhu cầu mua / Đơn mua → Duyệt mua → Hợp đồng mua → Nhận hàng / dịch vụ → Nhập kho → Nhận hóa đơn đầu vào → Ghi công nợ phải trả → Thanh toán → Đối chiếu công nợ → Trả lại / Giảm giá (nếu có)</div>
 
@@ -3366,6 +3378,17 @@
       </div>
     </div>
 
+    <div class="callout">
+      <h3>Lộ trình triển khai Phase 3 — 2.5 tháng (10 tuần)</h3>
+      <ul>
+        <li><b>Tuần 1 - 2 — Báo giá & đơn đặt hàng (SO):</b> Xây dựng quy trình lập báo giá khách hàng, đơn đặt hàng bán (SO) và luồng duyệt giá bán.</li>
+        <li><b>Tuần 3 - 4 — Hợp đồng bán & xuất kho:</b> Quản lý hợp đồng bán hàng, điều khoản giao nhận và xuất kho bán hàng thực tế.</li>
+        <li><b>Tuần 5 - 6 — Hóa đơn bán ra & thu nợ:</b> Lập hóa đơn bán ra, ghi nhận công nợ AR và lập phiếu thu/thu ngân hàng từ khách hàng.</li>
+        <li><b>Tuần 7 - 8 — Trả hàng bán, giảm giá & tính giá vốn:</b> Xử lý hàng bán bị trả lại, giảm giá bán, bù trừ công nợ và chạy công cụ tính giá vốn xuất kho (Bình quân, FIFO).</li>
+        <li><b>Tuần 9 - 10 — Báo cáo & nghiệm thu:</b> Báo cáo bán hàng, doanh thu, giá vốn, công nợ AR, kiểm thử và nghiệm thu Phase 3.</li>
+      </ul>
+    </div>
+
     <h3>4.1. Quy trình bán hàng & xuất kho</h3>
     <div class="mini-flow">Báo giá → Đơn đặt hàng → Hợp đồng bán → Chứng từ bán hàng → Xuất kho → Hóa đơn bán ra → Ghi doanh thu / thuế / công nợ → Tính giá vốn → Thu tiền → Đối chiếu công nợ → Trả lại / Giảm giá / Chiết khấu</div>
     <p>Nguyên tắc chung: chỉ chứng từ đã duyệt mới ghi sổ; bán hàng hóa mới phát sinh xuất kho và giá vốn; bán chưa thu tiền phát sinh công nợ phải thu.</p>
@@ -3527,6 +3550,16 @@
         <div class="intro-panel"><h4>Phạm vi</h4><span>Chứng từ nghiệp vụ khác, quyết toán tạm ứng, phân bổ chi phí, cấu hình bút toán kết chuyển, đối chiếu trước khóa kỳ, khóa/mở kỳ, sổ tổng hợp và báo cáo tài chính.</span></div>
         <div class="intro-panel"><h4>Module chính</h4><ul><li>Điều chỉnh & kết chuyển cuối kỳ</li><li>Đối chiếu & khóa kỳ</li><li>Sổ sách & báo cáo tài chính</li></ul></div>
       </div>
+    </div>
+
+    <div class="callout">
+      <h3>Lộ trình triển khai Phase 4 — 1.5 tháng (6 tuần)</h3>
+      <ul>
+        <li><b>Tuần 1 - 2 — Bút toán tổng hợp & phân bổ:</b> Phát triển tính năng nhập bút toán thủ công (Journal Entry), trích trước và phân bổ tự động chi phí trả trước (TK 242).</li>
+        <li><b>Tuần 3 - 4 — Động cơ kết chuyển cuối kỳ:</b> Thiết lập và chạy kết chuyển tự động xác định kết quả kinh doanh cuối kỳ (TK 911 sang TK 421).</li>
+        <li><b>Tuần 5 — Báo cáo tài chính:</b> Kết xuất Bảng cân đối phát sinh, Bảng cân đối kế toán, Báo cáo kết quả kinh doanh và Báo cáo lưu chuyển tiền tệ.</li>
+        <li><b>Tuần 6 — Khóa kỳ & nghiệm thu:</b> Tính năng đóng/mở khóa kỳ kế toán, chặn ghi sổ và nghiệm thu Phase 4.</li>
+      </ul>
     </div>
 
     <h3>5.1. Quy trình tổng hợp cuối kỳ</h3>
@@ -3745,6 +3778,16 @@
         <div class="intro-panel"><h4>Phạm vi</h4><span>Kết nối MISA, hóa đơn đầu vào/đầu ra, kiểm tra hóa đơn, xử lý sai sót, bảng kê, tờ khai và báo cáo thuế.</span></div>
         <div class="intro-panel"><h4>Module chính</h4><ul><li>Kết nối hóa đơn điện tử</li><li>Quản lý hóa đơn & rủi ro</li><li>Kê khai và báo cáo thuế</li></ul></div>
       </div>
+    </div>
+
+    <div class="callout">
+      <h3>Lộ trình triển khai Phase 5 — 1.5 tháng (6 tuần)</h3>
+      <ul>
+        <li><b>Tuần 1 - 2 — Kết nối API Hóa đơn điện tử:</b> Cấu hình thông tin kết nối nhà cung cấp dịch vụ HĐĐT, chữ ký số (Token/HSM).</li>
+        <li><b>Tuần 3 - 4 — Phát hành & ký số HĐĐT:</b> Luồng tự động xuất HĐĐT từ hóa đơn bán ra, ký số điện tử và gửi cơ quan thuế cấp mã.</li>
+        <li><b>Tuần 5 — Xử lý hóa đơn sai sót & báo cáo:</b> Tính năng hủy hóa đơn, lập hóa đơn điều chỉnh, thay thế và báo cáo thuế mua vào/bán ra.</li>
+        <li><b>Tuần 6 — Tờ khai thuế GTGT & nghiệm thu:</b> Lập tờ khai thuế GTGT mẫu 01/GTGT và nghiệm thu Phase 5.</li>
+      </ul>
     </div>
 
     <h3>6.1. Quy trình hóa đơn điện tử & thuế</h3>
@@ -4080,6 +4123,17 @@
         <div class="intro-panel"><h4>Phạm vi</h4><span>TSCĐ, CCDC, chi phí trả trước, lương, giá thành, khế ước vay, hợp đồng, ngân hàng điện tử, dashboard và phân tích.</span></div>
         <div class="intro-panel"><h4>Module chính</h4><ul><li>Tài sản, CCDC, lương, giá thành</li><li>Vay, hợp đồng, ngân hàng điện tử</li><li>Dashboard, ngân sách, dòng tiền</li></ul></div>
       </div>
+    </div>
+
+    <div class="callout">
+      <h3>Lộ trình triển khai Phase 6 — 2.5 tháng (10 tuần)</h3>
+      <ul>
+        <li><b>Tuần 1 - 2 — Quản lý & khấu hao tài sản cố định (TSCĐ):</b> Ghi tăng, giảm, đánh giá lại và khấu hao tự động hàng tháng.</li>
+        <li><b>Tuần 3 - 4 — Công cụ dụng cụ & lương:</b> Quản lý CCDC (tăng, báo hỏng, phân bổ tự động) và phân hệ lương (tính lương, trích bảo hiểm).</li>
+        <li><b>Tuần 5 - 6 — Tính giá thành sản phẩm:</b> Tập hợp chi phí sản xuất, phân bổ chi phí chung và chạy động cơ tính giá thành.</li>
+        <li><b>Tuần 7 - 8 — Vay nợ, hợp đồng & e-banking:</b> Theo dõi khoản vay, thanh toán và kết nối ngân hàng điện tử chi trả lương/nhà cung cấp.</li>
+        <li><b>Tuần 9 - 10 — Tối ưu hóa, kiểm thử tích hợp & nghiệm thu bàn giao:</b> Tối ưu hiệu năng, kiểm thử tích hợp 6 Phase và bàn giao dự án.</li>
+      </ul>
     </div>
 
     <h3>7.0. Workflow tổng thể Giai đoạn 6</h3>
