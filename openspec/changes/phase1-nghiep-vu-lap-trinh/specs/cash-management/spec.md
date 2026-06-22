@@ -17,10 +17,12 @@ Hệ thống SHALL cho phép lập, duyệt, hủy phiếu thu tiền mặt vớ
 | employee_id | UUID(FK) | | → employee (khi receipt_type = advance_return) |
 | total_amount | DECIMAL(18,2) | ✓ | = SUM(lines.amount), readonly |
 | description | TEXT | | |
-| status | ENUM | ✓ | draft \| pending_approval \| approved \| cancelled |
+| status | ENUM | ✓ | draft \| pending_approval \| approved \| posted \| period_locked \| rejected \| cancelled |
 | approved_by | UUID(FK) | | → user |
 | approved_at | TIMESTAMP | | |
+| posted_at | TIMESTAMP | | Thời điểm ghi sổ |
 | cancelled_reason | TEXT | | Bắt buộc khi status = cancelled |
+| rejected_reason | TEXT | | Bắt buộc khi status = rejected |
 | created_by | UUID(FK) | ✓ | → user |
 | created_at | TIMESTAMP | ✓ | |
 | updated_at | TIMESTAMP | ✓ | |
@@ -38,11 +40,12 @@ Hệ thống SHALL cho phép lập, duyệt, hủy phiếu thu tiền mặt vớ
 | ar_invoice_opening_id | UUID(FK) | | → ar_invoice_opening (khi thu công nợ) |
 | expense_category_id | UUID(FK) | | → expense_category |
 
-**State machine:**
+**State machine (5+2 trạng thái):**
 ```
-Draft → submit() → Pending Approval → approve() → Approved
-                                     → reject() → Draft
-Approved → cancel() → Cancelled
+Draft → submit() → Pending Approval → approve() → Approved → post() → Posted → lock_period() → Period Locked
+                                     → reject() → Rejected → edit() → Draft
+Draft → cancel() → Cancelled
+Pending Approval → cancel() → Cancelled
 ```
 
 #### Scenario: Lập phiếu thu từ công nợ khách hàng
@@ -87,15 +90,18 @@ Hệ thống SHALL cho phép lập, duyệt, hủy phiếu chi tiền mặt.
 | branch_id | UUID(FK) | | → branch |
 | payment_number | VARCHAR(30) | ✓ | Auto-gen |
 | payment_date | DATE | ✓ | Kỳ chưa khóa |
-| payment_type | ENUM | ✓ | supplier_payment \| advance \| purchase \| expense \| other |
+| payment_type | ENUM | ✓ | supplier_payment \| advance \| purchase \| expense \| refund_return \| other |
 | supplier_id | UUID(FK) | | → supplier (khi payment_type = supplier_payment) |
 | employee_id | UUID(FK) | | → employee (khi payment_type = advance) |
+| customer_id | UUID(FK) | | → customer (khi payment_type = refund_return) |
 | total_amount | DECIMAL(18,2) | ✓ | = SUM(lines.amount) |
 | description | TEXT | | |
-| status | ENUM | ✓ | draft \| pending_approval \| approved \| cancelled |
+| status | ENUM | ✓ | draft \| pending_approval \| approved \| posted \| period_locked \| rejected \| cancelled |
 | approved_by | UUID(FK) | | → user |
 | approved_at | TIMESTAMP | | |
+| posted_at | TIMESTAMP | | Thời điểm ghi sổ |
 | cancelled_reason | TEXT | | |
+| rejected_reason | TEXT | | Bắt buộc khi status = rejected |
 | created_by | UUID(FK) | ✓ | → user |
 | created_at | TIMESTAMP | ✓ | |
 | updated_at | TIMESTAMP | ✓ | |
@@ -126,6 +132,10 @@ Hệ thống SHALL cho phép lập, duyệt, hủy phiếu chi tiền mặt.
 - **WHEN** user lập phiếu chi với payment_type = advance, chọn employee_id
 - **THEN** line.debit_account_id MUST = 141 (tạm ứng), hệ thống ghi nhận khoản tạm ứng cho employee
 
+#### Scenario: Chi hoàn tiền khách hàng
+- **WHEN** user lập phiếu chi với payment_type = refund_return, chọn customer_id
+- **THEN** bắt buộc chọn customer_id, hệ thống gợi ý TK đối ứng `[CẦN KẾ TOÁN XÁC NHẬN: 131 hay 521 hay TK khác?]`, sinh journal_entry Nợ TK xác nhận / Có 111
+
 ### Requirement: Kiểm kê quỹ (CashInventory)
 Hệ thống SHALL cho phép lập biên bản kiểm kê quỹ, so sánh tồn thực tế với tồn sổ, xử lý chênh lệch.
 
@@ -139,7 +149,7 @@ Hệ thống SHALL cho phép lập biên bản kiểm kê quỹ, so sánh tồn 
 | book_balance | DECIMAL(18,2) | ✓ | Tồn sổ (auto-calc từ cash_book) |
 | actual_balance | DECIMAL(18,2) | ✓ | Tồn thực tế kiểm kê |
 | difference | DECIMAL(18,2) | ✓ | = actual - book |
-| status | ENUM | ✓ | draft \| confirmed |
+| status | ENUM | ✓ | draft \| pending_approval \| approved \| adjusted \| cancelled |
 | adjustment_receipt_id | UUID(FK) | | → cash_receipt (khi thừa) |
 | adjustment_payment_id | UUID(FK) | | → cash_payment (khi thiếu) |
 | confirmed_by | UUID(FK) | | → user |
@@ -152,6 +162,20 @@ Hệ thống SHALL cho phép lập biên bản kiểm kê quỹ, so sánh tồn 
 #### Scenario: Kiểm kê phát hiện thiếu
 - **WHEN** actual_balance < book_balance
 - **THEN** difference < 0, hệ thống gợi ý tạo phiếu chi điều chỉnh với định khoản Nợ 1381 / Có 111 `[CẦN KẾ TOÁN XÁC NHẬN: 1381 hay 1388?]`
+
+**Entity: `cash_inventory_denomination`** (kiểm kê chi tiết theo mệnh giá)
+
+| Field | Type | Required | Ghi chú |
+|-------|------|----------|---------|
+| id | UUID | ✓ | PK |
+| cash_inventory_id | UUID(FK) | ✓ | → cash_inventory |
+| denomination | DECIMAL(18,2) | ✓ | Mệnh giá (500000, 200000, 100000...) |
+| quantity | INTEGER | ✓ | Số lượng tờ/đồng |
+| amount | DECIMAL(18,2) | ✓ | = denomination × quantity |
+
+#### Scenario: Nhập kiểm kê theo mệnh giá
+- **WHEN** thủ quỹ kiểm kê quỹ
+- **THEN** nhập số lượng cho từng mệnh giá, hệ thống tính amount = denomination × quantity, actual_balance = SUM(denomination lines.amount)
 
 ### Requirement: Sổ quỹ tiền mặt (CashBook)
 Hệ thống SHALL duy trì sổ quỹ ghi nhận tồn đầu kỳ, phát sinh thu, phát sinh chi, tồn cuối kỳ.

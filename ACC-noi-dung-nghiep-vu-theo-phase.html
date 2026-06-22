@@ -847,62 +847,460 @@
     <h3>2.3. Tiền mặt / Quỹ</h3>
     <p>Module này dùng để quản lý toàn bộ nghiệp vụ thu chi tiền mặt, kiểm kê quỹ và báo cáo tồn quỹ.</p>
 
+    <!-- ===== 2.3.1. PHIẾU THU ===== -->
     <h3>2.3.1. Phiếu thu</h3>
+
+    <h4>Danh sách chức năng</h4>
     <table>
       <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Lập phiếu thu</td><td>Ghi nhận nghiệp vụ thu tiền mặt.</td></tr>
-      <tr><td>2</td><td>Lập phiếu thu từ công nợ khách hàng</td><td>Thu tiền khách hàng và tự động giảm công nợ phải thu.</td></tr>
-      <tr><td>3</td><td>Lập phiếu thu khác</td><td>Thu tiền không liên quan trực tiếp đến bán hàng / công nợ.</td></tr>
-      <tr><td>4</td><td>Đính kèm chứng từ</td><td>Đính kèm file hóa đơn, biên nhận, giấy tờ liên quan.</td></tr>
-      <tr><td>5</td><td>In phiếu thu</td><td>In phiếu thu theo mẫu.</td></tr>
-      <tr><td>6</td><td>Duyệt phiếu thu</td><td>Người có quyền duyệt xác nhận phiếu thu.</td></tr>
-      <tr><td>7</td><td>Hủy phiếu thu</td><td>Hủy phiếu thu khi sai, bắt buộc nhập lý do hủy.</td></tr>
-      <tr><td>8</td><td>Ghi sổ phiếu thu</td><td>Phiếu thu đã duyệt được ghi vào sổ quỹ và sổ cái.</td></tr>
+      <tr><td>2</td><td>Thu tiền khách hàng</td><td>Thu công nợ khách hàng và giảm công nợ phải thu.</td></tr>
+      <tr><td>3</td><td>Thu hoàn ứng nhân viên</td><td>Thu hồi khoản tạm ứng còn thừa.</td></tr>
+      <tr><td>4</td><td>Thu khác</td><td>Các khoản thu khác không liên quan công nợ.</td></tr>
+      <tr><td>5</td><td>Chọn đối tượng thu</td><td>Khách hàng, nhân viên, nhà cung cấp hoặc đối tượng khác.</td></tr>
+      <tr><td>6</td><td>Hạch toán tự động</td><td>Sinh bút toán theo loại nghiệp vụ.</td></tr>
+      <tr><td>7</td><td>Đính kèm chứng từ</td><td>Upload hóa đơn, biên nhận, chứng từ liên quan.</td></tr>
+      <tr><td>8</td><td>Lưu nháp</td><td>Lưu chứng từ chưa hoàn tất.</td></tr>
+      <tr><td>9</td><td>Gửi duyệt</td><td>Chuyển chứng từ sang trạng thái chờ duyệt.</td></tr>
+      <tr><td>10</td><td>Duyệt phiếu thu</td><td>Người có quyền xác nhận chứng từ.</td></tr>
+      <tr><td>11</td><td>Từ chối duyệt</td><td>Trả lại chứng từ và nhập lý do.</td></tr>
+      <tr><td>12</td><td>Ghi sổ</td><td>Sinh bút toán kế toán và cập nhật sổ quỹ.</td></tr>
+      <tr><td>13</td><td>Hủy phiếu thu</td><td>Hủy chứng từ khi nhập sai.</td></tr>
+      <tr><td>14</td><td>In phiếu thu</td><td>In theo mẫu doanh nghiệp.</td></tr>
+      <tr><td>15</td><td>Xuất PDF</td><td>Xuất file PDF.</td></tr>
+      <tr><td>16</td><td>Xem lịch sử thao tác</td><td>Theo dõi toàn bộ thay đổi chứng từ.</td></tr>
     </table>
 
+    <h4>Trạng thái chứng từ</h4>
+    <table>
+      <tr><th>Trạng thái</th><th>Mô tả</th><th>Chuyển tiếp</th></tr>
+      <tr><td>Nháp</td><td>Đang nhập liệu</td><td>→ Chờ duyệt, → Đã hủy</td></tr>
+      <tr><td>Chờ duyệt</td><td>Đã gửi duyệt</td><td>→ Đã duyệt, → Từ chối, → Đã hủy</td></tr>
+      <tr><td>Đã duyệt</td><td>Đã được phê duyệt</td><td>→ Đã ghi sổ</td></tr>
+      <tr><td>Đã ghi sổ</td><td>Đã sinh bút toán kế toán</td><td>→ Đã khóa kỳ</td></tr>
+      <tr><td>Đã khóa kỳ</td><td>Kỳ kế toán đã đóng</td><td>(không chuyển tiếp)</td></tr>
+      <tr><td>Từ chối</td><td>Người duyệt trả lại</td><td>→ Nháp (sửa lại)</td></tr>
+      <tr><td>Đã hủy</td><td>Chứng từ bị hủy</td><td>(không chuyển tiếp)</td></tr>
+    </table>
+
+    <h4>Thông tin chứng từ phiếu thu</h4>
+    <table>
+      <tr><th>Nhóm</th><th>Trường dữ liệu</th></tr>
+      <tr><td>Thông tin chung</td><td>Số chứng từ, Ngày chứng từ, Ngày hạch toán, Quỹ tiền mặt, Đối tượng, Diễn giải</td></tr>
+      <tr><td>Thông tin hạch toán</td><td>Tài khoản Nợ, Tài khoản Có, Số tiền, Khoản mục chi phí, Phòng ban, Chi nhánh</td></tr>
+      <tr><td>Thông tin công nợ</td><td>Khách hàng, Hóa đơn, Số tiền thanh toán, Số tiền còn lại</td></tr>
+    </table>
+
+    <h4>Use Case — Phiếu thu</h4>
+    <p><em>[SỰ LÝ TỪ FORMAT PHIẾU CHI — CHỜ KẾ TOÁN XÁC NHẬN]</em></p>
+
+    <h5>Actor</h5>
+    <table>
+      <tr><th>Actor</th><th>Vai trò</th></tr>
+      <tr><td>Kế toán quỹ</td><td>Tạo, nhập liệu</td></tr>
+      <tr><td>Thủ quỹ</td><td>Kiểm tra, xác nhận</td></tr>
+      <tr><td>Kế toán trưởng</td><td>Duyệt</td></tr>
+      <tr><td>Giám đốc</td><td>Phê duyệt đặc biệt</td></tr>
+    </table>
+
+    <h5>Luồng chính</h5>
+    <table>
+      <tr><th>Bước</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Tạo phiếu thu.</td></tr>
+      <tr><td>2</td><td>Chọn đối tượng nộp tiền.</td></tr>
+      <tr><td>3</td><td>Nhập số tiền.</td></tr>
+      <tr><td>4</td><td>Chọn tài khoản hạch toán.</td></tr>
+      <tr><td>5</td><td>Đính kèm chứng từ.</td></tr>
+      <tr><td>6</td><td>Lưu nháp.</td></tr>
+      <tr><td>7</td><td>Gửi duyệt.</td></tr>
+      <tr><td>8</td><td>Người có thẩm quyền duyệt.</td></tr>
+      <tr><td>9</td><td>Ghi sổ.</td></tr>
+      <tr><td>10</td><td>Cập nhật tồn quỹ.</td></tr>
+      <tr><td>11</td><td>Sinh bút toán vào Sổ cái.</td></tr>
+    </table>
+
+    <!-- ===== 2.3.2. PHIẾU CHI ===== -->
     <h3>2.3.2. Phiếu chi</h3>
+
+    <h4>Danh sách chức năng</h4>
     <table>
       <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Lập phiếu chi</td><td>Ghi nhận nghiệp vụ chi tiền mặt.</td></tr>
-      <tr><td>2</td><td>Lập phiếu chi thanh toán nhà cung cấp</td><td>Chi tiền trả nhà cung cấp và tự động giảm công nợ phải trả.</td></tr>
-      <tr><td>3</td><td>Lập phiếu chi tạm ứng</td><td>Chi tiền tạm ứng cho nhân viên.</td></tr>
-      <tr><td>4</td><td>Lập phiếu chi khác</td><td>Chi tiền cho các khoản chi phí, nghiệp vụ khác.</td></tr>
-      <tr><td>5</td><td>Đính kèm chứng từ</td><td>Đính kèm hóa đơn, đề nghị thanh toán, giấy tờ liên quan.</td></tr>
-      <tr><td>6</td><td>In phiếu chi</td><td>In phiếu chi theo mẫu.</td></tr>
-      <tr><td>7</td><td>Duyệt phiếu chi</td><td>Người có quyền duyệt xác nhận phiếu chi.</td></tr>
-      <tr><td>8</td><td>Hủy phiếu chi</td><td>Hủy phiếu chi sai, bắt buộc nhập lý do.</td></tr>
-      <tr><td>9</td><td>Ghi sổ phiếu chi</td><td>Phiếu chi đã duyệt được ghi vào sổ quỹ và sổ cái.</td></tr>
+      <tr><td>2</td><td>Thanh toán nhà cung cấp</td><td>Giảm công nợ phải trả.</td></tr>
+      <tr><td>3</td><td>Chi tạm ứng</td><td>Tạm ứng tiền cho nhân viên.</td></tr>
+      <tr><td>4</td><td>Chi hoàn tiền khách hàng</td><td>Hoàn tiền hoặc trả lại tiền.</td></tr>
+      <tr><td>5</td><td>Chi khác</td><td>Chi phí hoạt động hoặc nghiệp vụ khác.</td></tr>
+      <tr><td>6</td><td>Chọn đối tượng chi</td><td>Nhà cung cấp, nhân viên, khách hàng hoặc khác.</td></tr>
+      <tr><td>7</td><td>Hạch toán tự động</td><td>Sinh bút toán theo nghiệp vụ.</td></tr>
+      <tr><td>8</td><td>Đính kèm chứng từ</td><td>Hóa đơn, đề nghị thanh toán, hợp đồng.</td></tr>
+      <tr><td>9</td><td>Lưu nháp</td><td>Lưu chứng từ chưa hoàn thiện.</td></tr>
+      <tr><td>10</td><td>Gửi duyệt</td><td>Chuyển sang trạng thái chờ duyệt.</td></tr>
+      <tr><td>11</td><td>Duyệt phiếu chi</td><td>Người có quyền duyệt.</td></tr>
+      <tr><td>12</td><td>Từ chối duyệt</td><td>Trả lại chứng từ.</td></tr>
+      <tr><td>13</td><td>Ghi sổ</td><td>Cập nhật sổ quỹ và sổ cái.</td></tr>
+      <tr><td>14</td><td>Hủy phiếu chi</td><td>Hủy chứng từ sai.</td></tr>
+      <tr><td>15</td><td>In phiếu chi</td><td>In theo mẫu.</td></tr>
+      <tr><td>16</td><td>Xuất PDF</td><td>Xuất PDF chứng từ.</td></tr>
+      <tr><td>17</td><td>Xem lịch sử thao tác</td><td>Truy vết toàn bộ thay đổi.</td></tr>
     </table>
 
+    <h4>Use Case — Phiếu chi</h4>
+
+    <h5>Actor</h5>
+    <table>
+      <tr><th>Actor</th><th>Vai trò</th></tr>
+      <tr><td>Kế toán quỹ</td><td>Tạo, nhập liệu</td></tr>
+      <tr><td>Thủ quỹ</td><td>Kiểm tra, xác nhận</td></tr>
+      <tr><td>Kế toán trưởng</td><td>Duyệt</td></tr>
+      <tr><td>Giám đốc</td><td>Phê duyệt đặc biệt</td></tr>
+    </table>
+
+    <h5>Luồng chính</h5>
+    <table>
+      <tr><th>Bước</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Tạo phiếu chi.</td></tr>
+      <tr><td>2</td><td>Chọn đối tượng nhận tiền.</td></tr>
+      <tr><td>3</td><td>Nhập số tiền.</td></tr>
+      <tr><td>4</td><td>Chọn tài khoản hạch toán.</td></tr>
+      <tr><td>5</td><td>Đính kèm chứng từ.</td></tr>
+      <tr><td>6</td><td>Lưu nháp.</td></tr>
+      <tr><td>7</td><td>Gửi duyệt.</td></tr>
+      <tr><td>8</td><td>Người có thẩm quyền duyệt.</td></tr>
+      <tr><td>9</td><td>Ghi sổ.</td></tr>
+      <tr><td>10</td><td>Cập nhật tồn quỹ.</td></tr>
+      <tr><td>11</td><td>Sinh bút toán vào Sổ cái.</td></tr>
+    </table>
+
+    <h5>Business Rules — Phiếu thu / Phiếu chi</h5>
+    <table>
+      <tr><th>Mã</th><th>Quy tắc</th></tr>
+      <tr><td>BR-Q01</td><td>Chứng từ phải có số chứng từ duy nhất.</td></tr>
+      <tr><td>BR-Q02</td><td>Không cho ghi sổ khi chưa duyệt.</td></tr>
+      <tr><td>BR-Q03</td><td>Không cho sửa chứng từ đã ghi sổ.</td></tr>
+      <tr><td>BR-Q04</td><td>Hủy chứng từ phải nhập lý do.</td></tr>
+      <tr><td>BR-Q05</td><td>Không cho xóa chứng từ đã ghi sổ.</td></tr>
+      <tr><td>BR-Q06</td><td>Không cho ghi sổ vào kỳ đã khóa.</td></tr>
+      <tr><td>BR-Q07</td><td>Phiếu chi không được làm âm quỹ nếu doanh nghiệp không cho phép.</td></tr>
+      <tr><td>BR-Q08</td><td>Tổng Nợ phải bằng Tổng Có.</td></tr>
+      <tr><td>BR-Q09</td><td>Người tạo và người duyệt không được là cùng một người (nếu bật kiểm soát nội bộ).</td></tr>
+      <tr><td>BR-Q10</td><td>Mọi thao tác thêm / sửa / xóa / duyệt / hủy phải ghi Audit Log.</td></tr>
+    </table>
+
+    <!-- ===== 2.3.3. QUẢN LÝ SỔ QUỸ ===== -->
     <h3>2.3.3. Quản lý sổ quỹ</h3>
+
+    <h4>Danh sách chức năng</h4>
     <table>
       <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
-      <tr><td>1</td><td>Xem sổ quỹ tiền mặt</td><td>Theo dõi tồn đầu kỳ, phát sinh thu, phát sinh chi, tồn cuối kỳ.</td></tr>
-      <tr><td>2</td><td>Xem tồn quỹ tức thời</td><td>Xem số dư quỹ tại thời điểm hiện tại.</td></tr>
-      <tr><td>3</td><td>Lọc sổ quỹ theo thời gian</td><td>Tra cứu theo ngày, tháng, quý, năm.</td></tr>
-      <tr><td>4</td><td>Lọc sổ quỹ theo đối tượng</td><td>Tra cứu theo khách hàng, nhà cung cấp, nhân viên, khoản mục.</td></tr>
-      <tr><td>5</td><td>Đối chiếu sổ quỹ với sổ cái</td><td>Kiểm tra số dư quỹ khớp tài khoản tiền mặt trên sổ cái.</td></tr>
-      <tr><td>6</td><td>Xuất sổ quỹ</td><td>Xuất Excel / PDF sổ quỹ.</td></tr>
+      <tr><td>1</td><td>Xem sổ quỹ tiền mặt</td><td>Theo dõi toàn bộ phát sinh thu, chi và tồn quỹ theo thời gian.</td></tr>
+      <tr><td>2</td><td>Xem tồn quỹ tức thời</td><td>Hiển thị số dư quỹ hiện tại theo thời gian thực.</td></tr>
+      <tr><td>3</td><td>Lọc sổ quỹ theo thời gian</td><td>Tra cứu theo ngày, tuần, tháng, quý, năm hoặc khoảng thời gian tùy chọn.</td></tr>
+      <tr><td>4</td><td>Lọc sổ quỹ theo đối tượng</td><td>Tra cứu theo khách hàng, nhà cung cấp, nhân viên, cổ đông.</td></tr>
+      <tr><td>5</td><td>Lọc sổ quỹ theo khoản mục</td><td>Tra cứu theo nhóm thu chi, mục đích sử dụng tiền.</td></tr>
+      <tr><td>6</td><td>Xem chi tiết chứng từ</td><td>Từ dòng sổ quỹ mở trực tiếp phiếu thu, phiếu chi liên quan.</td></tr>
+      <tr><td>7</td><td>Truy vết nguồn phát sinh</td><td>Xác định phát sinh từ nghiệp vụ nào.</td></tr>
+      <tr><td>8</td><td>Đối chiếu sổ quỹ với sổ cái</td><td>So sánh số dư quỹ và tài khoản tiền mặt trên sổ cái.</td></tr>
+      <tr><td>9</td><td>Xuất sổ quỹ</td><td>Xuất Excel hoặc PDF.</td></tr>
+      <tr><td>10</td><td>In sổ quỹ</td><td>In trực tiếp theo mẫu quy định.</td></tr>
+      <tr><td>11</td><td>Khóa sổ quỹ</td><td>Khóa dữ liệu theo kỳ kế toán.</td></tr>
+      <tr><td>12</td><td>Xem lịch sử chỉnh sửa</td><td>Theo dõi thay đổi dữ liệu quỹ.</td></tr>
     </table>
 
+    <h4>Use Case — Sổ quỹ</h4>
+    <table>
+      <tr><th>Mã UC</th><th>Tên Use Case</th><th>Actor</th></tr>
+      <tr><td>UC-Q01</td><td>Xem sổ quỹ tiền mặt</td><td>Thủ quỹ, Kế toán quỹ, Kế toán trưởng</td></tr>
+      <tr><td>UC-Q02</td><td>Xem tồn quỹ tức thời</td><td>Thủ quỹ, Kế toán</td></tr>
+      <tr><td>UC-Q03</td><td>Tra cứu sổ quỹ</td><td>Thủ quỹ, Kế toán</td></tr>
+      <tr><td>UC-Q04</td><td>Xem chi tiết chứng từ</td><td>Thủ quỹ, Kế toán</td></tr>
+      <tr><td>UC-Q05</td><td>Đối chiếu sổ quỹ</td><td>Kế toán trưởng</td></tr>
+      <tr><td>UC-Q06</td><td>Xuất / In sổ quỹ</td><td>Kế toán</td></tr>
+      <tr><td>UC-Q07</td><td>Khóa sổ quỹ</td><td>Kế toán trưởng, Admin</td></tr>
+    </table>
+
+    <h5>UC-Q01 — Xem sổ quỹ tiền mặt</h5>
+    <table>
+      <tr><th>Bước</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Người dùng mở màn hình Sổ quỹ.</td></tr>
+      <tr><td>2</td><td>Chọn khoảng thời gian.</td></tr>
+      <tr><td>3</td><td>Hệ thống lấy dữ liệu phát sinh.</td></tr>
+      <tr><td>4</td><td>Tính tồn đầu kỳ.</td></tr>
+      <tr><td>5</td><td>Tính thu, chi từng dòng.</td></tr>
+      <tr><td>6</td><td>Tính tồn cuối từng dòng.</td></tr>
+      <tr><td>7</td><td>Hiển thị dữ liệu.</td></tr>
+    </table>
+
+    <h5>UC-Q02 — Xem tồn quỹ tức thời</h5>
+    <p><strong>Mục đích:</strong> Cho phép người dùng xem nhanh số dư quỹ tiền mặt hiện tại tại thời điểm truy cập.</p>
+    <p><strong>Actor:</strong> Thủ quỹ, Kế toán quỹ, Kế toán trưởng, Giám đốc</p>
+    <p><strong>Điều kiện tiên quyết:</strong> Người dùng đã đăng nhập. Có quyền xem quỹ tiền mặt.</p>
+    <p><strong>Dữ liệu đầu vào (tùy chọn):</strong> Quỹ tiền mặt, Chi nhánh, Đơn vị hạch toán.</p>
+
+    <p><strong>Luồng chính:</strong></p>
+    <table>
+      <tr><th>Bước</th><th>Người thực hiện</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Người dùng</td><td>Mở màn hình Dashboard Quỹ hoặc Tồn quỹ.</td></tr>
+      <tr><td>2</td><td>Hệ thống</td><td>Xác định quỹ được phép truy cập.</td></tr>
+      <tr><td>3</td><td>Hệ thống</td><td>Lấy tồn đầu kỳ gần nhất.</td></tr>
+      <tr><td>4</td><td>Hệ thống</td><td>Tổng hợp toàn bộ phiếu thu đã ghi sổ.</td></tr>
+      <tr><td>5</td><td>Hệ thống</td><td>Tổng hợp toàn bộ phiếu chi đã ghi sổ.</td></tr>
+      <tr><td>6</td><td>Hệ thống</td><td>Tổng hợp các chứng từ điều chỉnh quỹ.</td></tr>
+      <tr><td>7</td><td>Hệ thống</td><td>Tính tồn quỹ hiện tại.</td></tr>
+      <tr><td>8</td><td>Hệ thống</td><td>Hiển thị số dư quỹ hiện tại.</td></tr>
+    </table>
+    <p><strong>Công thức:</strong> Tồn hiện tại = Tồn đầu kỳ + Tổng thu − Tổng chi + Điều chỉnh tăng − Điều chỉnh giảm</p>
+
+    <p><strong>Luồng ngoại lệ:</strong></p>
+    <table>
+      <tr><th>Mã</th><th>Điều kiện</th><th>Xử lý</th></tr>
+      <tr><td>EX-01</td><td>Không tìm thấy dữ liệu quỹ</td><td>Hiển thị thông báo "Không tìm thấy dữ liệu quỹ." Người dùng chọn quỹ khác.</td></tr>
+      <tr><td>EX-02</td><td>Người dùng không có quyền</td><td>Hiển thị thông báo "Bạn không có quyền xem quỹ này."</td></tr>
+    </table>
+
+    <p><strong>Business Rules riêng UC-Q02:</strong></p>
+    <table>
+      <tr><th>Mã</th><th>Quy tắc</th></tr>
+      <tr><td>BR-Q02-01</td><td>Chỉ tính các chứng từ đã ghi sổ.</td></tr>
+      <tr><td>BR-Q02-02</td><td>Không tính chứng từ nháp.</td></tr>
+      <tr><td>BR-Q02-03</td><td>Không tính chứng từ hủy.</td></tr>
+      <tr><td>BR-Q02-04</td><td>Tồn quỹ hiển thị theo thời gian thực.</td></tr>
+      <tr><td>BR-Q02-05</td><td>Không cho phép chỉnh sửa trực tiếp tồn quỹ.</td></tr>
+    </table>
+
+    <h5>UC-Q03 — Tra cứu / Lọc sổ quỹ</h5>
+    <p><strong>Mục đích:</strong> Cho phép tìm kiếm và lọc dữ liệu sổ quỹ theo nhiều tiêu chí khác nhau.</p>
+    <p><strong>Actor:</strong> Thủ quỹ, Kế toán quỹ, Kế toán trưởng</p>
+    <p><strong>Điều kiện tiên quyết:</strong> Người dùng có quyền xem sổ quỹ.</p>
+
+    <p><strong>Bộ lọc hỗ trợ:</strong></p>
+    <table>
+      <tr><th>Nhóm lọc</th><th>Giá trị</th></tr>
+      <tr><td>Thời gian</td><td>Hôm nay, Tuần này, Tháng này, Quý này, Năm nay, Tùy chọn</td></tr>
+      <tr><td>Theo chứng từ</td><td>Số chứng từ, Loại chứng từ</td></tr>
+      <tr><td>Theo đối tượng</td><td>Khách hàng, Nhà cung cấp, Nhân viên</td></tr>
+      <tr><td>Theo khoản mục</td><td>Thu bán hàng, Thu khác, Mua hàng, Chi phí, Thuế</td></tr>
+      <tr><td>Theo số tiền</td><td>Từ tiền, Đến tiền</td></tr>
+    </table>
+
+    <p><strong>Luồng chính:</strong></p>
+    <table>
+      <tr><th>Bước</th><th>Người thực hiện</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Người dùng</td><td>Mở màn hình Sổ quỹ.</td></tr>
+      <tr><td>2</td><td>Người dùng</td><td>Nhập điều kiện lọc.</td></tr>
+      <tr><td>3</td><td>Người dùng</td><td>Chọn Tìm kiếm.</td></tr>
+      <tr><td>4</td><td>Hệ thống</td><td>Kiểm tra điều kiện lọc.</td></tr>
+      <tr><td>5</td><td>Hệ thống</td><td>Truy vấn dữ liệu.</td></tr>
+      <tr><td>6</td><td>Hệ thống</td><td>Tính toán số dư.</td></tr>
+      <tr><td>7</td><td>Hệ thống</td><td>Hiển thị kết quả.</td></tr>
+    </table>
+
+    <p><strong>Luồng ngoại lệ:</strong></p>
+    <table>
+      <tr><th>Mã</th><th>Điều kiện</th><th>Xử lý</th></tr>
+      <tr><td>EX-01</td><td>Không có dữ liệu</td><td>Hiển thị danh sách rỗng. Thông báo "Không có dữ liệu phù hợp."</td></tr>
+      <tr><td>EX-02</td><td>Ngày bắt đầu lớn hơn ngày kết thúc</td><td>Thông báo "Ngày bắt đầu phải nhỏ hơn ngày kết thúc."</td></tr>
+    </table>
+
+    <p><strong>Business Rules riêng UC-Q03:</strong></p>
+    <table>
+      <tr><th>Mã</th><th>Quy tắc</th></tr>
+      <tr><td>BR-Q03-01</td><td>Có thể kết hợp nhiều điều kiện lọc.</td></tr>
+      <tr><td>BR-Q03-02</td><td>Mặc định hiển thị tháng hiện tại.</td></tr>
+      <tr><td>BR-Q03-03</td><td>Kết quả được sắp xếp theo ngày tăng dần.</td></tr>
+      <tr><td>BR-Q03-04</td><td>Nếu cùng ngày thì sắp xếp theo thời gian tạo.</td></tr>
+      <tr><td>BR-Q03-05</td><td>Chỉ hiển thị dữ liệu thuộc phạm vi phân quyền.</td></tr>
+    </table>
+
+    <h5>UC-Q04 — Xem chi tiết chứng từ từ sổ quỹ</h5>
+    <p><strong>Mục đích:</strong> Cho phép truy xuất ngược từ dòng sổ quỹ đến chứng từ gốc.</p>
+    <p><strong>Actor:</strong> Thủ quỹ, Kế toán quỹ, Kế toán trưởng, Kiểm toán nội bộ</p>
+    <p><strong>Điều kiện tiên quyết:</strong> Người dùng có quyền xem chứng từ.</p>
+
+    <p><strong>Nguồn chứng từ có thể truy vết:</strong></p>
+    <table>
+      <tr><th>Loại chứng từ</th></tr>
+      <tr><td>Phiếu thu</td></tr>
+      <tr><td>Phiếu chi</td></tr>
+      <tr><td>Thu công nợ</td></tr>
+      <tr><td>Chi công nợ</td></tr>
+      <tr><td>Điều chỉnh quỹ</td></tr>
+      <tr><td>Điều chỉnh kiểm kê</td></tr>
+    </table>
+
+    <p><strong>Luồng chính:</strong></p>
+    <table>
+      <tr><th>Bước</th><th>Người thực hiện</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Người dùng</td><td>Mở Sổ quỹ.</td></tr>
+      <tr><td>2</td><td>Người dùng</td><td>Chọn một dòng phát sinh.</td></tr>
+      <tr><td>3</td><td>Người dùng</td><td>Click số chứng từ.</td></tr>
+      <tr><td>4</td><td>Hệ thống</td><td>Kiểm tra quyền xem.</td></tr>
+      <tr><td>5</td><td>Hệ thống</td><td>Tìm chứng từ gốc.</td></tr>
+      <tr><td>6</td><td>Hệ thống</td><td>Mở màn hình chi tiết chứng từ.</td></tr>
+      <tr><td>7</td><td>Hệ thống</td><td>Hiển thị toàn bộ thông tin chứng từ.</td></tr>
+    </table>
+
+    <h5>UC-Q05 — Đối chiếu sổ quỹ</h5>
+    <table>
+      <tr><th>Bước</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Người dùng chọn kỳ đối chiếu.</td></tr>
+      <tr><td>2</td><td>Hệ thống lấy số dư quỹ.</td></tr>
+      <tr><td>3</td><td>Hệ thống lấy số dư TK 111.</td></tr>
+      <tr><td>4</td><td>So sánh số liệu.</td></tr>
+      <tr><td>5</td><td>Hiển thị kết quả đối chiếu.</td></tr>
+    </table>
+
+    <h5>Business Rules — Sổ quỹ</h5>
+    <table>
+      <tr><th>Mã</th><th>Quy tắc</th></tr>
+      <tr><td>BR-Q01</td><td>Sổ quỹ chỉ phát sinh từ phiếu thu, phiếu chi và chứng từ điều chỉnh.</td></tr>
+      <tr><td>BR-Q02</td><td>Không được nhập trực tiếp vào sổ quỹ.</td></tr>
+      <tr><td>BR-Q03</td><td>Tồn cuối = Tồn đầu + Thu − Chi.</td></tr>
+      <tr><td>BR-Q04</td><td>Không cho sửa số dư quỹ trực tiếp.</td></tr>
+      <tr><td>BR-Q05</td><td>Chứng từ đã khóa kỳ không được sửa hoặc xóa.</td></tr>
+      <tr><td>BR-Q06</td><td>Dữ liệu hiển thị theo ngày hạch toán.</td></tr>
+      <tr><td>BR-Q07</td><td>Một dòng sổ quỹ phải liên kết được chứng từ nguồn.</td></tr>
+      <tr><td>BR-Q08</td><td>Có thể cấu hình không cho phép âm quỹ.</td></tr>
+      <tr><td>BR-Q09</td><td>Mọi thay đổi phải ghi Audit Log.</td></tr>
+    </table>
+
+    <!-- ===== 2.3.4. KIỂM KÊ QUỸ ===== -->
     <h3>2.3.4. Kiểm kê quỹ</h3>
+
+    <h4>Danh sách chức năng</h4>
     <table>
       <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Lập biên bản kiểm kê quỹ</td><td>Ghi nhận số tiền thực tế kiểm kê.</td></tr>
-      <tr><td>2</td><td>So sánh tồn thực tế với tồn sổ</td><td>Tự động xác định chênh lệch thừa / thiếu quỹ.</td></tr>
-      <tr><td>3</td><td>Xử lý chênh lệch quỹ</td><td>Lập chứng từ điều chỉnh khi có chênh lệch.</td></tr>
-      <tr><td>4</td><td>In biên bản kiểm kê quỹ</td><td>In biên bản kiểm kê theo mẫu.</td></tr>
-      <tr><td>5</td><td>Lưu lịch sử kiểm kê</td><td>Theo dõi các lần kiểm kê quỹ.</td></tr>
+      <tr><td>2</td><td>Nhập số lượng theo mệnh giá</td><td>Kiểm kê chi tiết từng loại tiền.</td></tr>
+      <tr><td>3</td><td>So sánh tồn thực tế với tồn sổ</td><td>Tự động tính chênh lệch.</td></tr>
+      <tr><td>4</td><td>Duyệt biên bản kiểm kê</td><td>Xác nhận kết quả kiểm kê.</td></tr>
+      <tr><td>5</td><td>Xử lý chênh lệch quỹ</td><td>Sinh chứng từ điều chỉnh.</td></tr>
+      <tr><td>6</td><td>In biên bản kiểm kê</td><td>In theo mẫu.</td></tr>
+      <tr><td>7</td><td>Lưu lịch sử kiểm kê</td><td>Theo dõi các lần kiểm kê.</td></tr>
+      <tr><td>8</td><td>Tra cứu kiểm kê</td><td>Tìm kiếm các đợt kiểm kê trước.</td></tr>
     </table>
 
+    <h4>Use Case — Kiểm kê quỹ</h4>
+    <table>
+      <tr><th>Mã UC</th><th>Tên Use Case</th><th>Actor</th></tr>
+      <tr><td>UC-KQ01</td><td>Lập biên bản kiểm kê</td><td>Thủ quỹ</td></tr>
+      <tr><td>UC-KQ02</td><td>Gửi duyệt kiểm kê</td><td>Thủ quỹ</td></tr>
+      <tr><td>UC-KQ03</td><td>Duyệt kiểm kê</td><td>Kế toán trưởng</td></tr>
+      <tr><td>UC-KQ04</td><td>Điều chỉnh chênh lệch</td><td>Kế toán</td></tr>
+      <tr><td>UC-KQ05</td><td>In biên bản kiểm kê</td><td>Kế toán</td></tr>
+      <tr><td>UC-KQ06</td><td>Xem lịch sử kiểm kê</td><td>Kế toán</td></tr>
+    </table>
+
+    <h5>UC-KQ01 — Lập biên bản kiểm kê</h5>
+    <table>
+      <tr><th>Bước</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Tạo biên bản kiểm kê.</td></tr>
+      <tr><td>2</td><td>Nhập thông tin kiểm kê.</td></tr>
+      <tr><td>3</td><td>Nhập số lượng từng mệnh giá.</td></tr>
+      <tr><td>4</td><td>Hệ thống tính tổng tiền thực tế.</td></tr>
+      <tr><td>5</td><td>Hệ thống lấy tồn sổ.</td></tr>
+      <tr><td>6</td><td>Tính chênh lệch.</td></tr>
+      <tr><td>7</td><td>Lưu biên bản.</td></tr>
+    </table>
+
+    <h5>UC-KQ04 — Điều chỉnh chênh lệch</h5>
+    <table>
+      <tr><th>Bước</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Chọn biên bản đã duyệt.</td></tr>
+      <tr><td>2</td><td>Chọn điều chỉnh.</td></tr>
+      <tr><td>3</td><td>Hệ thống xác định thừa hoặc thiếu.</td></tr>
+      <tr><td>4</td><td>Sinh phiếu thu hoặc phiếu chi điều chỉnh.</td></tr>
+      <tr><td>5</td><td>Cập nhật tồn quỹ.</td></tr>
+      <tr><td>6</td><td>Hoàn thành điều chỉnh.</td></tr>
+    </table>
+
+    <h5>Workflow — Kiểm kê quỹ</h5>
+    <table>
+      <tr><th>Trạng thái</th><th>Mô tả</th></tr>
+      <tr><td>Nháp</td><td>Đang nhập liệu</td></tr>
+      <tr><td>Chờ duyệt</td><td>Đã gửi duyệt</td></tr>
+      <tr><td>Đã duyệt</td><td>Đã được phê duyệt</td></tr>
+      <tr><td>Đã điều chỉnh</td><td>Đã xử lý chênh lệch</td></tr>
+      <tr><td>Hủy</td><td>Không sử dụng</td></tr>
+    </table>
+
+    <h5>Business Rules — Kiểm kê quỹ</h5>
+    <table>
+      <tr><th>Mã</th><th>Quy tắc</th></tr>
+      <tr><td>BR-KQ01</td><td>Số biên bản kiểm kê tự động tăng.</td></tr>
+      <tr><td>BR-KQ02</td><td>Một quỹ chỉ có một biên bản nháp tại một thời điểm.</td></tr>
+      <tr><td>BR-KQ03</td><td>Chỉ biên bản đã duyệt mới được điều chỉnh.</td></tr>
+      <tr><td>BR-KQ04</td><td>Không được điều chỉnh nhiều lần cho cùng một biên bản.</td></tr>
+      <tr><td>BR-KQ05</td><td>Chênh lệch = Tồn thực tế − Tồn sổ.</td></tr>
+      <tr><td>BR-KQ06</td><td>Chênh lệch dương sinh phiếu thu điều chỉnh.</td></tr>
+      <tr><td>BR-KQ07</td><td>Chênh lệch âm sinh phiếu chi điều chỉnh.</td></tr>
+      <tr><td>BR-KQ08</td><td>Sau điều chỉnh, tồn sổ phải bằng tồn thực tế.</td></tr>
+      <tr><td>BR-KQ09</td><td>Không cho sửa biên bản đã duyệt.</td></tr>
+      <tr><td>BR-KQ10</td><td>Không được xóa lịch sử kiểm kê.</td></tr>
+    </table>
+
+    <!-- ===== 2.3.5. BÁO CÁO QUỸ ===== -->
     <h3>2.3.5. Báo cáo quỹ</h3>
+
+    <h4>Danh sách chức năng</h4>
     <table>
       <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
-      <tr><td>1</td><td>Sổ quỹ tiền mặt</td><td>Báo cáo chi tiết thu, chi, tồn quỹ.</td></tr>
+      <tr><td>1</td><td>Sổ quỹ tiền mặt</td><td>Báo cáo chi tiết thu chi tồn quỹ.</td></tr>
       <tr><td>2</td><td>Bảng kê phiếu thu</td><td>Danh sách phiếu thu theo kỳ.</td></tr>
       <tr><td>3</td><td>Bảng kê phiếu chi</td><td>Danh sách phiếu chi theo kỳ.</td></tr>
-      <tr><td>4</td><td>Báo cáo tồn quỹ</td><td>Tổng hợp tồn quỹ theo ngày / kỳ.</td></tr>
-      <tr><td>5</td><td>Báo cáo dòng tiền tiền mặt</td><td>Theo dõi luồng tiền vào / ra bằng tiền mặt.</td></tr>
+      <tr><td>4</td><td>Báo cáo tồn quỹ</td><td>Theo dõi tồn quỹ theo thời gian.</td></tr>
+      <tr><td>5</td><td>Báo cáo dòng tiền tiền mặt</td><td>Theo dõi luồng tiền vào ra.</td></tr>
+      <tr><td>6</td><td>Báo cáo thu chi theo khoản mục</td><td>Phân tích mục đích thu chi.</td></tr>
+      <tr><td>7</td><td>Báo cáo thu chi theo đối tượng</td><td>Phân tích khách hàng, NCC, nhân viên.</td></tr>
+      <tr><td>8</td><td>Báo cáo chênh lệch kiểm kê</td><td>Theo dõi sai lệch quỹ.</td></tr>
+      <tr><td>9</td><td>Dashboard quỹ</td><td>Tổng quan tình hình quỹ.</td></tr>
+    </table>
+
+    <h4>Use Case — Báo cáo quỹ</h4>
+    <table>
+      <tr><th>Mã UC</th><th>Tên Use Case</th><th>Actor</th></tr>
+      <tr><td>UC-BC01</td><td>Xem sổ quỹ tiền mặt</td><td>Kế toán</td></tr>
+      <tr><td>UC-BC02</td><td>Xem bảng kê phiếu thu</td><td>Kế toán</td></tr>
+      <tr><td>UC-BC03</td><td>Xem bảng kê phiếu chi</td><td>Kế toán</td></tr>
+      <tr><td>UC-BC04</td><td>Xem báo cáo tồn quỹ</td><td>Kế toán trưởng</td></tr>
+      <tr><td>UC-BC05</td><td>Xem báo cáo dòng tiền</td><td>Kế toán trưởng</td></tr>
+      <tr><td>UC-BC06</td><td>Xem dashboard quỹ</td><td>Ban giám đốc</td></tr>
+    </table>
+
+    <h5>UC-BC05 — Báo cáo dòng tiền</h5>
+    <table>
+      <tr><th>Bước</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Chọn kỳ báo cáo.</td></tr>
+      <tr><td>2</td><td>Hệ thống tổng hợp thu tiền.</td></tr>
+      <tr><td>3</td><td>Hệ thống tổng hợp chi tiền.</td></tr>
+      <tr><td>4</td><td>Nhóm theo khoản mục.</td></tr>
+      <tr><td>5</td><td>Tính chênh lệch dòng tiền.</td></tr>
+      <tr><td>6</td><td>Hiển thị báo cáo.</td></tr>
+    </table>
+
+    <h5>Business Rules — Báo cáo quỹ</h5>
+    <table>
+      <tr><th>Mã</th><th>Quy tắc</th></tr>
+      <tr><td>BR-BC01</td><td>Báo cáo chỉ lấy dữ liệu đã ghi sổ.</td></tr>
+      <tr><td>BR-BC02</td><td>Báo cáo phải phản ánh đúng dữ liệu tại thời điểm chạy.</td></tr>
+      <tr><td>BR-BC03</td><td>Cho phép lọc theo thời gian, đối tượng, khoản mục.</td></tr>
+      <tr><td>BR-BC04</td><td>Báo cáo xuất ra phải giống dữ liệu hiển thị.</td></tr>
+      <tr><td>BR-BC05</td><td>Dashboard cập nhật realtime.</td></tr>
+      <tr><td>BR-BC06</td><td>Báo cáo tồn quỹ lấy tồn cuối ngày.</td></tr>
+      <tr><td>BR-BC07</td><td>Báo cáo dòng tiền phân loại theo nhóm thu chi.</td></tr>
+    </table>
+
+    <!-- ===== BUSINESS RULES TOÀN PHÂN HỆ QUỸ ===== -->
+    <h3>Business Rules toàn phân hệ quỹ</h3>
+    <table>
+      <tr><th>Mã</th><th>Quy tắc</th></tr>
+      <tr><td>BR-G01</td><td>Không cho phép chi vượt tồn quỹ nếu bật cấu hình "Không cho âm quỹ".</td></tr>
+      <tr><td>BR-G02</td><td>Mọi chứng từ quỹ phải sinh bút toán sổ cái tương ứng.</td></tr>
+      <tr><td>BR-G03</td><td>Chứng từ đã khóa kỳ không được sửa, xóa hoặc duyệt lại.</td></tr>
+      <tr><td>BR-G04</td><td>Tồn đầu kỳ sau = Tồn cuối kỳ trước.</td></tr>
+      <tr><td>BR-G05</td><td>Số chứng từ không được trùng trong cùng năm tài chính.</td></tr>
+      <tr><td>BR-G06</td><td>Mọi thao tác thêm, sửa, xóa, duyệt phải ghi Audit Log.</td></tr>
+      <tr><td>BR-G07</td><td>Người dùng chỉ được xem dữ liệu thuộc phạm vi được phân quyền.</td></tr>
+      <tr><td>BR-G08</td><td>Hệ thống phải lưu lịch sử thay đổi dữ liệu tối thiểu theo người thao tác, thời gian và nội dung thay đổi.</td></tr>
     </table>
 
     <h3>2.4. Tiền gửi ngân hàng</h3>
@@ -1018,13 +1416,34 @@
 
     <h3>Bảng định khoản mẫu — Giai đoạn 1</h3>
     <table>
-      <tr><th>STT</th><th>Nghiệp vụ</th><th>Nợ (TK)</th><th>Có (TK)</th><th>Ghi chú</th></tr>
-      <tr><td>1</td><td>Thu tiền mặt bán hàng</td><td>111</td><td>511</td><td></td></tr>
-      <tr><td>2</td><td>Thu tiền mặt từ công nợ khách hàng</td><td>111</td><td>131</td><td></td></tr>
-      <tr><td>3</td><td>Chi tiền mặt mua hàng hóa / dịch vụ</td><td>152, 156, 641, 642</td><td>111</td><td></td></tr>
-      <tr><td>4</td><td>Thu tiền gửi ngân hàng từ khách hàng</td><td>112</td><td>131</td><td></td></tr>
-      <tr><td>5</td><td>Chi tiền gửi ngân hàng thanh toán nhà cung cấp</td><td>331</td><td>112</td><td></td></tr>
-      <tr><td>6</td><td>Rút tiền gửi ngân hàng về quỹ tiền mặt</td><td>111</td><td>112</td><td></td></tr>
+      <tr><th>STT</th><th>Nghiệp vụ</th><th>Nợ (TK)</th><th>Có (TK)</th><th>Điều kiện</th><th>Ghi chú</th></tr>
+      <tr><td>1</td><td>Thu tiền mặt bán hàng thu ngay</td><td>111</td><td>511</td><td>receipt_type = sale</td><td></td></tr>
+      <tr><td>2</td><td>Thu tiền mặt từ công nợ KH</td><td>111</td><td>131</td><td>receipt_type = customer_payment</td><td>Giảm AR</td></tr>
+      <tr><td>3</td><td>Thu hoàn ứng nhân viên</td><td>111</td><td>141</td><td>receipt_type = advance_return</td><td></td></tr>
+      <tr><td>4</td><td>Thu tiền lãi tiền gửi (tiền mặt)</td><td>111</td><td>515</td><td>receipt_type = interest</td><td></td></tr>
+      <tr><td>5</td><td>Thu khác bằng tiền mặt</td><td>111</td><td>711</td><td>receipt_type = other</td><td></td></tr>
+      <tr><td>6</td><td>Chi mua hàng trả ngay (tiền mặt)</td><td>156</td><td>111</td><td>payment_type = purchase</td><td></td></tr>
+      <tr><td>7</td><td>Chi thanh toán NCC (tiền mặt)</td><td>331</td><td>111</td><td>payment_type = supplier_payment</td><td>Giảm AP</td></tr>
+      <tr><td>8</td><td>Chi tạm ứng nhân viên</td><td>141</td><td>111</td><td>payment_type = advance</td><td></td></tr>
+      <tr><td>9</td><td>Chi phí bán hàng (tiền mặt)</td><td>641</td><td>111</td><td>payment_type = expense, dept = sales</td><td>[CẦN KẾ TOÁN XÁC NHẬN: phân biệt 641/642/627 theo dept hay theo expense_category?]</td></tr>
+      <tr><td>10</td><td>Chi phí quản lý (tiền mặt)</td><td>642</td><td>111</td><td>payment_type = expense, dept = admin</td><td></td></tr>
+      <tr><td>11</td><td>Chi phí sản xuất (tiền mặt)</td><td>627</td><td>111</td><td>payment_type = expense, dept = mfg</td><td></td></tr>
+      <tr><td>12</td><td>Chi khác bằng tiền mặt</td><td>811</td><td>111</td><td>payment_type = other</td><td>[CẦN KẾ TOÁN XÁC NHẬN: 811 hay TK khác?]</td></tr>
+      <tr><td>13</td><td>Thu tiền KH qua ngân hàng</td><td>112</td><td>131</td><td>bank receipt, customer_payment</td><td>Giảm AR</td></tr>
+      <tr><td>14</td><td>Thu lãi ngân hàng</td><td>112</td><td>515</td><td>bank receipt, interest</td><td></td></tr>
+      <tr><td>15</td><td>Thu khác qua ngân hàng</td><td>112</td><td>711</td><td>bank receipt, other</td><td></td></tr>
+      <tr><td>16</td><td>Chi thanh toán NCC qua NH</td><td>331</td><td>112</td><td>bank payment, supplier_payment</td><td>Giảm AP</td></tr>
+      <tr><td>17</td><td>Phí ngân hàng</td><td>?</td><td>112</td><td>bank payment, bank_fee</td><td>[CẦN KẾ TOÁN XÁC NHẬN: Nợ 6427 hay 635?]</td></tr>
+      <tr><td>18</td><td>Chi phí qua ngân hàng</td><td>641/642</td><td>112</td><td>bank payment, expense</td><td></td></tr>
+      <tr><td>19</td><td>Nộp tiền mặt vào NH</td><td>112</td><td>111</td><td>bank_transfer, cash_to_bank</td><td></td></tr>
+      <tr><td>20</td><td>Rút tiền NH về quỹ</td><td>111</td><td>112</td><td>bank_transfer, bank_to_cash</td><td></td></tr>
+      <tr><td>21</td><td>Chuyển giữa 2 TK NH</td><td>112b</td><td>112a</td><td>bank_transfer, bank_to_bank</td><td>a ≠ b</td></tr>
+      <tr><td>22</td><td>Phí chuyển khoản NH</td><td>?</td><td>112</td><td>bank_transfer, fee_amount > 0</td><td>[CẦN KẾ TOÁN XÁC NHẬN: 6427 hay 635?]</td></tr>
+      <tr><td>23</td><td>Kiểm kê quỹ thừa</td><td>111</td><td>?</td><td>cash_inventory, difference > 0</td><td>[CẦN KẾ TOÁN XÁC NHẬN: Có 3381 hay 711?]</td></tr>
+      <tr><td>24</td><td>Kiểm kê quỹ thiếu</td><td>?</td><td>111</td><td>cash_inventory, difference < 0</td><td>[CẦN KẾ TOÁN XÁC NHẬN: Nợ 1381 hay 1388?]</td></tr>
+      <tr><td>25</td><td>Chênh lệch tỷ giá (lãi)</td><td>112</td><td>515</td><td>Ngoại tệ, lãi</td><td>[CẦN KẾ TOÁN XÁC NHẬN: Phase 1 có phát sinh ngoại tệ không?]</td></tr>
+      <tr><td>26</td><td>Chênh lệch tỷ giá (lỗ)</td><td>635</td><td>112</td><td>Ngoại tệ, lỗ</td><td>[CẦN KẾ TOÁN XÁC NHẬN: như trên]</td></tr>
+      <tr><td>27</td><td>Chi hoàn tiền khách hàng</td><td>?</td><td>111</td><td>payment_type = refund_return</td><td>[CẦN KẾ TOÁN XÁC NHẬN: Nợ 131 hay 521 hay TK khác?]</td></tr>
     </table>
     <p><em>Kế toán vui lòng kiểm tra, bổ sung hoặc điều chỉnh tài khoản và nội dung hạch toán cho phù hợp thực tế doanh nghiệp.</em></p>
 

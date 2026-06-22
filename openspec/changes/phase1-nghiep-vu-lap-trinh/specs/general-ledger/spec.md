@@ -100,6 +100,11 @@ Hệ thống SHALL hỗ trợ tất cả các nghiệp vụ định khoản sau 
 | 24 | Kiểm kê quỹ thiếu | ? | 111 | cash_inventory, difference < 0 | `[CẦN XÁC NHẬN: Nợ 1381 hay 1388?]` |
 | 25 | Chênh lệch tỷ giá (lãi) | 112 | 515 | Ngoại tệ, lãi | `[CẦN XÁC NHẬN: Phase 1 có phát sinh ngoại tệ không?]` |
 | 26 | Chênh lệch tỷ giá (lỗ) | 635 | 112 | Ngoại tệ, lỗ | `[CẦN XÁC NHẬN: như trên]` |
+| 27 | Chi hoàn tiền khách hàng | `[CẦN KẾ TOÁN XÁC NHẬN: 131 hay 521 hay TK khác?]` | 111 | payment_type = refund_return | Nghiệp vụ mới từ docx kế toán |
+
+#### Scenario: Ghi sổ khi duyệt phiếu chi hoàn tiền
+- **WHEN** phiếu chi refund_return được duyệt
+- **THEN** sinh journal_entry với debit_account = TK được kế toán xác nhận, credit = 111
 
 #### Scenario: Kế toán xác nhận định khoản
 - **WHEN** kế toán review bảng định khoản và chốt tài khoản cho các mục `[CẦN XÁC NHẬN]`

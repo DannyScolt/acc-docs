@@ -10,6 +10,10 @@ Hệ thống SHALL cung cấp các báo cáo liên quan quỹ tiền mặt.
 | Bảng kê phiếu chi | cash_payment | Kỳ, trạng thái, payment_type | → phiếu chi |
 | Báo cáo tồn quỹ | opening_balance(111) + cash_receipt - cash_payment | Ngày | — |
 | Báo cáo dòng tiền tiền mặt | cash_receipt + cash_payment grouped by type | Kỳ | → bảng kê |
+| Báo cáo thu chi theo khoản mục | cash_receipt + cash_payment grouped by expense_category | Kỳ, Khoản mục, Loại | → bảng kê chi tiết |
+| Báo cáo thu chi theo đối tượng | cash_receipt + cash_payment grouped by customer/supplier/employee | Kỳ, Loại đối tượng | → phiếu thu/chi |
+| Báo cáo chênh lệch kiểm kê | cash_inventory (approved) | Kỳ, Quỹ | — |
+| Dashboard quỹ | Tổng hợp realtime | — | — |
 
 **Công thức tồn quỹ:**
 ```
@@ -23,6 +27,22 @@ Tồn cuối = Opening(111) + SUM(approved receipts in period) - SUM(approved pa
 #### Scenario: Lọc sổ quỹ theo đối tượng
 - **WHEN** user lọc theo customer_id hoặc supplier_id
 - **THEN** chỉ hiển thị phiếu thu/chi liên quan đối tượng đó
+
+#### Scenario: Xem báo cáo thu chi theo khoản mục
+- **WHEN** user chọn kỳ và bấm xem báo cáo
+- **THEN** hiển thị bảng: Khoản mục, Tổng thu, Tổng chi, Chênh lệch, drill-down → bảng kê chi tiết
+
+#### Scenario: Xem báo cáo thu chi theo đối tượng
+- **WHEN** user chọn loại đối tượng và kỳ
+- **THEN** hiển thị bảng: Đối tượng, Tổng thu, Tổng chi, Số dư, drill-down → phiếu thu/chi
+
+#### Scenario: Xem báo cáo chênh lệch kiểm kê
+- **WHEN** user chọn kỳ
+- **THEN** hiển thị bảng: Ngày kiểm kê, Tồn sổ, Tồn thực tế, Chênh lệch, Trạng thái điều chỉnh
+
+#### Scenario: Xem dashboard quỹ
+- **WHEN** Ban giám đốc mở Dashboard quỹ
+- **THEN** hiển thị: Tồn quỹ hiện tại (realtime), biểu đồ thu chi theo thời gian, top đối tượng thu/chi, cảnh báo quỹ thấp (nếu bật cấu hình)
 
 ### Requirement: Báo cáo tiền gửi ngân hàng
 Hệ thống SHALL cung cấp các báo cáo liên quan tiền gửi ngân hàng.
