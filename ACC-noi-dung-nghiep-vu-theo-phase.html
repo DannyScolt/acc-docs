@@ -1306,68 +1306,466 @@
     <h3>2.4. Tiền gửi ngân hàng</h3>
     <p>Module này dùng để quản lý thu chi qua ngân hàng, tài khoản ngân hàng, sao kê, đối chiếu ngân hàng và báo cáo tiền gửi.</p>
 
-    <h3>2.4.1. Thu tiền gửi</h3>
+    <!-- ===== 2.4.1. THU TIỀN GỬI NGÂN HÀNG ===== -->
+    <h3>2.4.1. Thu tiền gửi ngân hàng</h3>
+
+    <h4>UC-BK-01: Lập chứng từ thu ngân hàng</h4>
+    <p><strong>Mục đích:</strong> Ghi nhận khoản tiền vào tài khoản ngân hàng.</p>
+    <p><strong>Actor:</strong> Kế toán ngân hàng, Kế toán tổng hợp</p>
+    <p><strong>Điều kiện:</strong> Đã khai báo tài khoản ngân hàng. Kỳ kế toán chưa khóa.</p>
+
+    <p><strong>Dữ liệu nhập:</strong></p>
     <table>
-      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
-      <tr><td>1</td><td>Lập chứng từ thu ngân hàng</td><td>Ghi nhận tiền vào tài khoản ngân hàng.</td></tr>
-      <tr><td>2</td><td>Thu tiền khách hàng qua ngân hàng</td><td>Thu tiền và tự động giảm công nợ phải thu.</td></tr>
-      <tr><td>3</td><td>Thu khác qua ngân hàng</td><td>Ghi nhận các khoản thu không liên quan công nợ.</td></tr>
-      <tr><td>4</td><td>Đính kèm chứng từ ngân hàng</td><td>Đính kèm giấy báo Có, sao kê, ủy nhiệm thu.</td></tr>
-      <tr><td>5</td><td>Duyệt chứng từ thu ngân hàng</td><td>Người có quyền duyệt xác nhận chứng từ.</td></tr>
-      <tr><td>6</td><td>Hủy chứng từ thu ngân hàng</td><td>Hủy chứng từ sai, bắt buộc nhập lý do.</td></tr>
-      <tr><td>7</td><td>Ghi sổ thu ngân hàng</td><td>Chứng từ đã duyệt được ghi vào sổ tiền gửi và sổ cái.</td></tr>
+      <tr><th>Trường</th><th>Bắt buộc</th></tr>
+      <tr><td>Số chứng từ</td><td>Auto/Manual</td></tr>
+      <tr><td>Ngày chứng từ</td><td>✓</td></tr>
+      <tr><td>Ngày hạch toán</td><td>✓</td></tr>
+      <tr><td>Tài khoản ngân hàng</td><td>✓</td></tr>
+      <tr><td>Đối tượng</td><td></td></tr>
+      <tr><td>Nội dung thu</td><td>✓</td></tr>
+      <tr><td>Số tiền</td><td>✓</td></tr>
+      <tr><td>Loại thu</td><td>✓</td></tr>
+      <tr><td>Tiền tệ</td><td>✓</td></tr>
+      <tr><td>Tỷ giá</td><td>Nếu ngoại tệ</td></tr>
     </table>
 
-    <h3>2.4.2. Chi tiền gửi</h3>
+    <p><strong>Luồng chính:</strong></p>
     <table>
-      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
-      <tr><td>1</td><td>Lập chứng từ chi ngân hàng</td><td>Ghi nhận tiền ra khỏi tài khoản ngân hàng.</td></tr>
-      <tr><td>2</td><td>Thanh toán nhà cung cấp qua ngân hàng</td><td>Chi tiền và tự động giảm công nợ phải trả.</td></tr>
-      <tr><td>3</td><td>Chi khác qua ngân hàng</td><td>Ghi nhận các khoản chi phí hoặc nghiệp vụ khác.</td></tr>
-      <tr><td>4</td><td>Đính kèm chứng từ ngân hàng</td><td>Đính kèm ủy nhiệm chi, giấy báo Nợ, sao kê.</td></tr>
-      <tr><td>5</td><td>Duyệt chứng từ chi ngân hàng</td><td>Người có quyền duyệt xác nhận chứng từ.</td></tr>
-      <tr><td>6</td><td>Hủy chứng từ chi ngân hàng</td><td>Hủy chứng từ sai, bắt buộc nhập lý do.</td></tr>
-      <tr><td>7</td><td>Ghi sổ chi ngân hàng</td><td>Chứng từ đã duyệt được ghi vào sổ tiền gửi và sổ cái.</td></tr>
+      <tr><th>Bước</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Người dùng chọn "Thu ngân hàng".</td></tr>
+      <tr><td>2</td><td>Nhập thông tin chứng từ.</td></tr>
+      <tr><td>3</td><td>Chọn loại thu: Thu khách hàng / Thu khác.</td></tr>
+      <tr><td>4</td><td>Hệ thống kiểm tra dữ liệu.</td></tr>
+      <tr><td>5</td><td>Lưu chứng từ trạng thái "Nháp".</td></tr>
     </table>
 
+    <p><strong>Business Rules:</strong></p>
+    <table>
+      <tr><th>Mã</th><th>Quy tắc</th></tr>
+      <tr><td>BR01</td><td>Số tiền > 0.</td></tr>
+      <tr><td>BR02</td><td>Ngày hạch toán không nằm trong kỳ khóa.</td></tr>
+      <tr><td>BR03</td><td>Tài khoản ngân hàng phải đang hoạt động.</td></tr>
+      <tr><td>BR04</td><td>Không cho sửa số tiền sau khi ghi sổ.</td></tr>
+    </table>
+
+    <h4>UC-BK-02: Thu tiền khách hàng qua ngân hàng</h4>
+    <p><strong>Mục đích:</strong> Thu tiền công nợ khách hàng.</p>
+    <p><strong>Actor:</strong> Kế toán công nợ, Kế toán ngân hàng</p>
+
+    <p><strong>Luồng chính:</strong></p>
+    <table>
+      <tr><th>Bước</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Chọn khách hàng.</td></tr>
+      <tr><td>2</td><td>Hệ thống hiển thị công nợ chưa thanh toán.</td></tr>
+      <tr><td>3</td><td>Chọn hóa đơn cần thu.</td></tr>
+      <tr><td>4</td><td>Nhập số tiền nhận.</td></tr>
+      <tr><td>5</td><td>Hệ thống phân bổ công nợ.</td></tr>
+      <tr><td>6</td><td>Lưu chứng từ.</td></tr>
+    </table>
+
+    <p><strong>Business Rules:</strong></p>
+    <table>
+      <tr><th>Mã</th><th>Quy tắc</th></tr>
+      <tr><td>BR05</td><td>Không thu vượt công nợ nếu không cho phép thu trước.</td></tr>
+      <tr><td>BR06</td><td>Sau ghi sổ: Nợ 112 / Có 131.</td></tr>
+      <tr><td>BR07</td><td>Công nợ tự động giảm.</td></tr>
+    </table>
+
+    <h4>UC-BK-03: Thu khác qua ngân hàng</h4>
+    <p><strong>Mục đích:</strong> Ghi nhận các khoản thu không phải công nợ khách hàng (thu lãi tiền gửi, hoàn thuế, cổ tức, thanh lý).</p>
+
+    <p><strong>Luồng chính:</strong></p>
+    <table>
+      <tr><th>Bước</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Chọn loại thu khác.</td></tr>
+      <tr><td>2</td><td>Chọn tài khoản đối ứng.</td></tr>
+      <tr><td>3</td><td>Nhập số tiền.</td></tr>
+      <tr><td>4</td><td>Lưu chứng từ.</td></tr>
+    </table>
+
+    <p><strong>Business Rules:</strong></p>
+    <table>
+      <tr><th>Mã</th><th>Quy tắc</th></tr>
+      <tr><td>BR08</td><td>Bắt buộc tài khoản đối ứng.</td></tr>
+      <tr><td>BR09</td><td>Tự sinh bút toán theo tài khoản chọn.</td></tr>
+    </table>
+
+    <h4>UC-BK-04: Đính kèm chứng từ ngân hàng</h4>
+    <p><strong>Mục đích:</strong> Lưu giấy báo Có, sao kê, chứng từ điện tử.</p>
+
+    <p><strong>Luồng chính:</strong></p>
+    <table>
+      <tr><th>Bước</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Mở chứng từ.</td></tr>
+      <tr><td>2</td><td>Upload file.</td></tr>
+      <tr><td>3</td><td>Lưu file đính kèm.</td></tr>
+    </table>
+
+    <p><strong>Business Rules:</strong></p>
+    <table>
+      <tr><th>Mã</th><th>Quy tắc</th></tr>
+      <tr><td>BR10</td><td>Chỉ cho phép PDF/JPG/PNG/XLSX.</td></tr>
+      <tr><td>BR11</td><td>Kích thước file ≤ 20MB.</td></tr>
+      <tr><td>BR12</td><td>Lưu lịch sử upload.</td></tr>
+    </table>
+
+    <h4>UC-BK-05: Duyệt chứng từ thu ngân hàng</h4>
+    <p><strong>Actor:</strong> Kế toán trưởng</p>
+
+    <p><strong>Luồng chính:</strong></p>
+    <table>
+      <tr><th>Bước</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Mở danh sách chờ duyệt.</td></tr>
+      <tr><td>2</td><td>Kiểm tra chứng từ.</td></tr>
+      <tr><td>3</td><td>Chọn Duyệt.</td></tr>
+      <tr><td>4</td><td>Chuyển trạng thái: Nháp → Chờ duyệt → Đã duyệt.</td></tr>
+    </table>
+
+    <p><strong>Business Rules:</strong></p>
+    <table>
+      <tr><th>Mã</th><th>Quy tắc</th></tr>
+      <tr><td>BR13</td><td>Người lập không được tự duyệt.</td></tr>
+      <tr><td>BR14</td><td>Chứng từ đã duyệt không được sửa.</td></tr>
+    </table>
+
+    <h4>UC-BK-06: Hủy chứng từ thu ngân hàng</h4>
+
+    <p><strong>Luồng chính:</strong></p>
+    <table>
+      <tr><th>Bước</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Chọn chứng từ.</td></tr>
+      <tr><td>2</td><td>Chọn Hủy.</td></tr>
+      <tr><td>3</td><td>Nhập lý do.</td></tr>
+      <tr><td>4</td><td>Hệ thống ghi log.</td></tr>
+    </table>
+
+    <p><strong>Business Rules:</strong></p>
+    <table>
+      <tr><th>Mã</th><th>Quy tắc</th></tr>
+      <tr><td>BR15</td><td>Bắt buộc nhập lý do.</td></tr>
+      <tr><td>BR16</td><td>Không được hủy nếu đã khóa kỳ.</td></tr>
+    </table>
+
+    <h4>UC-BK-07: Ghi sổ thu ngân hàng</h4>
+
+    <p><strong>Luồng chính:</strong></p>
+    <table>
+      <tr><th>Bước</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Chọn chứng từ đã duyệt.</td></tr>
+      <tr><td>2</td><td>Chọn Ghi sổ.</td></tr>
+      <tr><td>3</td><td>Hệ thống sinh bút toán.</td></tr>
+      <tr><td>4</td><td>Cập nhật sổ tiền gửi.</td></tr>
+      <tr><td>5</td><td>Cập nhật sổ cái.</td></tr>
+    </table>
+
+    <p><strong>Business Rules:</strong></p>
+    <table>
+      <tr><th>Mã</th><th>Quy tắc</th></tr>
+      <tr><td>BR17</td><td>Chỉ chứng từ đã duyệt mới được ghi sổ.</td></tr>
+      <tr><td>BR18</td><td>Sau ghi sổ: Trạng thái = Đã ghi sổ.</td></tr>
+    </table>
+
+    <!-- ===== 2.4.2. CHI TIỀN GỬI NGÂN HÀNG ===== -->
+    <h3>2.4.2. Chi tiền gửi ngân hàng</h3>
+
+    <h4>UC-BK-08: Lập chứng từ chi ngân hàng</h4>
+
+    <p><strong>Luồng chính:</strong></p>
+    <table>
+      <tr><th>Bước</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Chọn Chi ngân hàng.</td></tr>
+      <tr><td>2</td><td>Nhập thông tin thanh toán.</td></tr>
+      <tr><td>3</td><td>Chọn đối tượng nhận tiền.</td></tr>
+      <tr><td>4</td><td>Lưu chứng từ.</td></tr>
+    </table>
+
+    <p><strong>Business Rules:</strong></p>
+    <table>
+      <tr><th>Mã</th><th>Quy tắc</th></tr>
+      <tr><td>BR19</td><td>Số tiền chi ≤ số dư khả dụng (nếu bật kiểm soát quỹ).</td></tr>
+      <tr><td>BR20</td><td>Tài khoản ngân hàng phải hoạt động.</td></tr>
+    </table>
+
+    <h4>UC-BK-09: Thanh toán nhà cung cấp qua ngân hàng</h4>
+
+    <p><strong>Luồng chính:</strong></p>
+    <table>
+      <tr><th>Bước</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Chọn nhà cung cấp.</td></tr>
+      <tr><td>2</td><td>Hiển thị công nợ cần thanh toán.</td></tr>
+      <tr><td>3</td><td>Chọn hóa đơn.</td></tr>
+      <tr><td>4</td><td>Nhập số tiền.</td></tr>
+      <tr><td>5</td><td>Ghi nhận thanh toán.</td></tr>
+    </table>
+
+    <p><strong>Business Rules:</strong></p>
+    <table>
+      <tr><th>Mã</th><th>Quy tắc</th></tr>
+      <tr><td>BR21</td><td>Bút toán: Nợ 331 / Có 112.</td></tr>
+      <tr><td>BR22</td><td>Công nợ phải trả giảm tương ứng.</td></tr>
+    </table>
+
+    <h4>UC-BK-10: Chi khác qua ngân hàng</h4>
+    <p><strong>Ví dụ:</strong> Nộp thuế, Trả lương, Thanh toán chi phí.</p>
+
+    <p><strong>Business Rules:</strong></p>
+    <table>
+      <tr><th>Mã</th><th>Quy tắc</th></tr>
+      <tr><td>BR23</td><td>Bắt buộc chọn tài khoản chi phí hoặc công nợ tương ứng.</td></tr>
+    </table>
+
+    <h4>UC-BK-11: Duyệt chứng từ chi</h4>
+    <p><strong>Luồng:</strong> Nháp → Chờ duyệt → Đã duyệt → Ghi sổ</p>
+
+    <p><strong>Business Rules:</strong></p>
+    <table>
+      <tr><th>Mã</th><th>Quy tắc</th></tr>
+      <tr><td>BR24</td><td>Áp dụng quy trình phê duyệt theo hạn mức: &lt;50 triệu → 1 cấp; ≥50 triệu → 2 cấp.</td></tr>
+    </table>
+
+    <h4>UC-BK-12: Hủy chứng từ chi</h4>
+
+    <p><strong>Business Rules:</strong></p>
+    <table>
+      <tr><th>Mã</th><th>Quy tắc</th></tr>
+      <tr><td>BR25</td><td>Bắt buộc ghi lý do.</td></tr>
+      <tr><td>BR26</td><td>Lưu audit log.</td></tr>
+    </table>
+
+    <h4>UC-BK-13: Ghi sổ chi ngân hàng</h4>
+
+    <p><strong>Business Rules:</strong></p>
+    <table>
+      <tr><th>Mã</th><th>Quy tắc</th></tr>
+      <tr><td>BR27</td><td>Sinh bút toán: Nợ TK liên quan / Có 112.</td></tr>
+    </table>
+
+    <!-- ===== 2.4.3. CHUYỂN TIỀN NỘI BỘ ===== -->
     <h3>2.4.3. Chuyển tiền nội bộ</h3>
+
+    <h4>UC-BK-14: Chuyển tiền giữa các tài khoản ngân hàng</h4>
+
+    <p><strong>Luồng chính:</strong></p>
     <table>
-      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
-      <tr><td>1</td><td>Chuyển tiền giữa các tài khoản ngân hàng</td><td>Ghi nhận chuyển tiền từ tài khoản ngân hàng này sang tài khoản ngân hàng khác.</td></tr>
-      <tr><td>2</td><td>Chuyển tiền từ quỹ ra ngân hàng</td><td>Ghi nhận nộp tiền mặt vào ngân hàng.</td></tr>
-      <tr><td>3</td><td>Rút tiền từ ngân hàng về quỹ</td><td>Ghi nhận rút tiền mặt từ ngân hàng nhập quỹ.</td></tr>
-      <tr><td>4</td><td>Theo dõi phí chuyển tiền</td><td>Ghi nhận phí ngân hàng nếu có.</td></tr>
+      <tr><th>Bước</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Chọn TK nguồn.</td></tr>
+      <tr><td>2</td><td>Chọn TK đích.</td></tr>
+      <tr><td>3</td><td>Nhập số tiền.</td></tr>
+      <tr><td>4</td><td>Nhập phí chuyển khoản (nếu có).</td></tr>
+      <tr><td>5</td><td>Ghi sổ.</td></tr>
     </table>
 
+    <p><strong>Bút toán:</strong> Nợ 112-B / Có 112-A</p>
+
+    <p><strong>Business Rules:</strong></p>
+    <table>
+      <tr><th>Mã</th><th>Quy tắc</th></tr>
+      <tr><td>BR28</td><td>Không được chuyển cùng một tài khoản.</td></tr>
+      <tr><td>BR29</td><td>Tài khoản nguồn phải đủ số dư.</td></tr>
+    </table>
+
+    <h4>UC-BK-15: Nộp tiền mặt vào ngân hàng</h4>
+
+    <p><strong>Luồng chính:</strong></p>
+    <table>
+      <tr><th>Bước</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Chọn quỹ tiền mặt.</td></tr>
+      <tr><td>2</td><td>Chọn tài khoản ngân hàng.</td></tr>
+      <tr><td>3</td><td>Nhập số tiền.</td></tr>
+      <tr><td>4</td><td>Ghi sổ.</td></tr>
+    </table>
+
+    <p><strong>Bút toán:</strong> Nợ 112 / Có 111</p>
+
+    <h4>UC-BK-16: Rút tiền ngân hàng về quỹ</h4>
+    <p><strong>Bút toán:</strong> Nợ 111 / Có 112</p>
+
+    <p><strong>Business Rules:</strong></p>
+    <table>
+      <tr><th>Mã</th><th>Quy tắc</th></tr>
+      <tr><td>BR30</td><td>Không cho phép âm quỹ ngân hàng.</td></tr>
+    </table>
+
+    <h4>UC-BK-17: Theo dõi phí chuyển tiền</h4>
+
+    <p><strong>Luồng chính:</strong></p>
+    <table>
+      <tr><th>Bước</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Nhập phí.</td></tr>
+      <tr><td>2</td><td>Chọn tài khoản chi phí.</td></tr>
+      <tr><td>3</td><td>Ghi sổ.</td></tr>
+    </table>
+
+    <p><strong>Bút toán:</strong> Nợ 642/635 / Có 112</p>
+
+    <!-- ===== 2.4.4. SAO KÊ NGÂN HÀNG ===== -->
     <h3>2.4.4. Sao kê ngân hàng</h3>
+
+    <h4>UC-BK-18: Nhập sao kê ngân hàng</h4>
+    <p><strong>Actor:</strong> Kế toán ngân hàng</p>
+
+    <p><strong>Luồng chính:</strong></p>
     <table>
-      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
-      <tr><td>1</td><td>Nhập sao kê ngân hàng</td><td>Nhập sao kê từ file Excel / CSV của ngân hàng.</td></tr>
-      <tr><td>2</td><td>Kết nối lấy sao kê tự động</td><td>Nếu có tích hợp ngân hàng, hệ thống tự lấy sao kê.</td></tr>
-      <tr><td>3</td><td>Xem danh sách giao dịch sao kê</td><td>Hiển thị các giao dịch phát sinh theo tài khoản ngân hàng.</td></tr>
-      <tr><td>4</td><td>Tự động gợi ý đối chiếu</td><td>Gợi ý khớp giao dịch sao kê với chứng từ kế toán theo số tiền, ngày, nội dung.</td></tr>
-      <tr><td>5</td><td>Đánh dấu giao dịch đã khớp</td><td>Xác nhận giao dịch sao kê đã khớp với chứng từ.</td></tr>
-      <tr><td>6</td><td>Theo dõi giao dịch chưa khớp</td><td>Liệt kê giao dịch sao kê chưa có chứng từ tương ứng.</td></tr>
+      <tr><th>Bước</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Chọn tài khoản ngân hàng.</td></tr>
+      <tr><td>2</td><td>Upload Excel/CSV.</td></tr>
+      <tr><td>3</td><td>Mapping cột dữ liệu.</td></tr>
+      <tr><td>4</td><td>Import.</td></tr>
     </table>
 
+    <p><strong>Business Rules:</strong></p>
+    <table>
+      <tr><th>Mã</th><th>Quy tắc</th></tr>
+      <tr><td>BR31</td><td>Không import trùng giao dịch.</td></tr>
+      <tr><td>BR32</td><td>Kiểm tra định dạng file.</td></tr>
+    </table>
+
+    <h4>UC-BK-19: Kết nối lấy sao kê tự động</h4>
+
+    <p><strong>Luồng chính:</strong></p>
+    <table>
+      <tr><th>Bước</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Kết nối API ngân hàng.</td></tr>
+      <tr><td>2</td><td>Chọn khoảng thời gian.</td></tr>
+      <tr><td>3</td><td>Đồng bộ dữ liệu.</td></tr>
+    </table>
+
+    <p><strong>Business Rules:</strong></p>
+    <table>
+      <tr><th>Mã</th><th>Quy tắc</th></tr>
+      <tr><td>BR33</td><td>Chỉ lấy giao dịch chưa tồn tại.</td></tr>
+      <tr><td>BR34</td><td>Lưu log đồng bộ.</td></tr>
+    </table>
+
+    <h4>UC-BK-20: Xem danh sách giao dịch sao kê</h4>
+    <p><strong>Chức năng lọc:</strong> Theo tài khoản, Theo ngày, Theo số tiền, Theo trạng thái đối chiếu.</p>
+
+    <h4>UC-BK-21: Tự động gợi ý đối chiếu</h4>
+
+    <p><strong>Luồng chính:</strong></p>
+    <table>
+      <tr><th>Bước</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Hệ thống đọc giao dịch sao kê.</td></tr>
+      <tr><td>2</td><td>So sánh với chứng từ (Số tiền, Ngày, Nội dung, Mã tham chiếu).</td></tr>
+      <tr><td>3</td><td>Đưa ra danh sách đề xuất.</td></tr>
+    </table>
+
+    <p><strong>Business Rules:</strong></p>
+    <table>
+      <tr><th>Mã</th><th>Quy tắc</th></tr>
+      <tr><td>BR35</td><td>Độ chính xác đối chiếu ≥ 80%.</td></tr>
+    </table>
+
+    <h4>UC-BK-22: Đánh dấu giao dịch đã khớp</h4>
+
+    <p><strong>Luồng chính:</strong></p>
+    <table>
+      <tr><th>Bước</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Người dùng xác nhận.</td></tr>
+      <tr><td>2</td><td>Hệ thống liên kết giao dịch với chứng từ.</td></tr>
+    </table>
+
+    <p><strong>Business Rules:</strong></p>
+    <table>
+      <tr><th>Mã</th><th>Quy tắc</th></tr>
+      <tr><td>BR36</td><td>Một giao dịch sao kê chỉ được khớp một lần.</td></tr>
+    </table>
+
+    <h4>UC-BK-23: Theo dõi giao dịch chưa khớp</h4>
+    <p><strong>Màn hình:</strong> Danh sách chưa khớp, Quá hạn đối chiếu, Chưa có chứng từ kế toán.</p>
+
+    <!-- ===== 2.4.5. ĐỐI CHIẾU NGÂN HÀNG ===== -->
     <h3>2.4.5. Đối chiếu ngân hàng</h3>
+
+    <h4>UC-BK-24: Đối chiếu sổ tiền gửi với sao kê</h4>
+
+    <p><strong>Luồng chính:</strong></p>
     <table>
-      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
-      <tr><td>1</td><td>Đối chiếu sổ tiền gửi với sao kê</td><td>So sánh số dư và giao dịch giữa sổ kế toán và sao kê ngân hàng.</td></tr>
-      <tr><td>2</td><td>Xử lý giao dịch lệch</td><td>Tạo chứng từ bổ sung hoặc điều chỉnh khi có chênh lệch.</td></tr>
-      <tr><td>3</td><td>Lập biên bản đối chiếu ngân hàng</td><td>Ghi nhận kết quả đối chiếu.</td></tr>
-      <tr><td>4</td><td>Khóa kỳ đối chiếu ngân hàng</td><td>Sau khi đối chiếu xong, khóa dữ liệu để tránh thay đổi.</td></tr>
-      <tr><td>5</td><td>Xem lịch sử đối chiếu</td><td>Theo dõi các lần đối chiếu theo tài khoản và kỳ.</td></tr>
+      <tr><th>Bước</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Chọn tài khoản.</td></tr>
+      <tr><td>2</td><td>Chọn kỳ đối chiếu.</td></tr>
+      <tr><td>3</td><td>Hệ thống tính: Số dư sổ kế toán, Số dư sao kê, Chênh lệch.</td></tr>
+      <tr><td>4</td><td>Hiển thị kết quả.</td></tr>
     </table>
 
-    <h3>2.4.6. Báo cáo tiền gửi ngân hàng</h3>
+    <p><strong>Business Rules:</strong></p>
     <table>
-      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
-      <tr><td>1</td><td>Sổ tiền gửi ngân hàng</td><td>Theo dõi thu, chi, tồn theo từng tài khoản ngân hàng.</td></tr>
-      <tr><td>2</td><td>Bảng kê thu ngân hàng</td><td>Danh sách chứng từ thu ngân hàng theo kỳ.</td></tr>
-      <tr><td>3</td><td>Bảng kê chi ngân hàng</td><td>Danh sách chứng từ chi ngân hàng theo kỳ.</td></tr>
-      <tr><td>4</td><td>Báo cáo số dư ngân hàng</td><td>Tổng hợp số dư từng tài khoản ngân hàng.</td></tr>
-      <tr><td>5</td><td>Báo cáo giao dịch chưa đối chiếu</td><td>Liệt kê giao dịch còn lệch giữa sao kê và sổ kế toán.</td></tr>
+      <tr><th>Mã</th><th>Quy tắc</th></tr>
+      <tr><td>BR37</td><td>Chỉ đối chiếu theo từng tài khoản.</td></tr>
+    </table>
+
+    <h4>UC-BK-25: Xử lý giao dịch lệch</h4>
+
+    <p><strong>Luồng chính:</strong></p>
+    <table>
+      <tr><th>Bước</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Chọn giao dịch lệch.</td></tr>
+      <tr><td>2</td><td>Chọn phương án: Tạo chứng từ bổ sung / Điều chỉnh / Bỏ qua.</td></tr>
+      <tr><td>3</td><td>Ghi nhận xử lý.</td></tr>
+    </table>
+
+    <p><strong>Business Rules:</strong></p>
+    <table>
+      <tr><th>Mã</th><th>Quy tắc</th></tr>
+      <tr><td>BR38</td><td>Phải lưu lý do xử lý.</td></tr>
+    </table>
+
+    <h4>UC-BK-26: Lập biên bản đối chiếu ngân hàng</h4>
+    <p><strong>Nội dung:</strong> Số dư đầu kỳ, Phát sinh thu, Phát sinh chi, Chênh lệch, Kết quả xử lý.</p>
+    <p><strong>Output:</strong> PDF / Excel</p>
+
+    <h4>UC-BK-27: Khóa kỳ đối chiếu</h4>
+
+    <p><strong>Luồng chính:</strong></p>
+    <table>
+      <tr><th>Bước</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Hoàn tất đối chiếu.</td></tr>
+      <tr><td>2</td><td>Chọn Khóa kỳ.</td></tr>
+      <tr><td>3</td><td>Hệ thống khóa dữ liệu.</td></tr>
+    </table>
+
+    <p><strong>Business Rules:</strong></p>
+    <table>
+      <tr><th>Mã</th><th>Quy tắc</th></tr>
+      <tr><td>BR39</td><td>Không sửa chứng từ thuộc kỳ đã khóa.</td></tr>
+    </table>
+
+    <h4>UC-BK-28: Xem lịch sử đối chiếu</h4>
+    <p><strong>Chức năng:</strong> Tra cứu, In lại biên bản, Xem người thực hiện.</p>
+
+    <!-- ===== 2.4.6. BÁO CÁO TIỀN GỬI NGÂN HÀNG ===== -->
+    <h3>2.4.6. Báo cáo tiền gửi ngân hàng</h3>
+
+    <h4>UC-BK-29: Sổ tiền gửi ngân hàng</h4>
+    <p><strong>Thông tin:</strong> Tồn đầu kỳ, Thu, Chi, Tồn cuối kỳ — theo từng tài khoản ngân hàng.</p>
+
+    <h4>UC-BK-30: Bảng kê thu ngân hàng</h4>
+    <p><strong>Bộ lọc:</strong> Từ ngày → đến ngày, Tài khoản ngân hàng, Người lập.</p>
+
+    <h4>UC-BK-31: Bảng kê chi ngân hàng</h4>
+    <p>Tương tự bảng kê thu.</p>
+
+    <h4>UC-BK-32: Báo cáo số dư ngân hàng</h4>
+    <p><strong>Hiển thị:</strong> Tài khoản, Ngân hàng, Số dư.</p>
+
+    <h4>UC-BK-33: Báo cáo giao dịch chưa đối chiếu</h4>
+    <p><strong>Thông tin:</strong> Ngày giao dịch, Nội dung, Số tiền, Tài khoản, Trạng thái.</p>
+
+    <!-- ===== WORKFLOW TỔNG THỂ ===== -->
+    <h3>Workflow tổng thể phân hệ Tiền gửi ngân hàng</h3>
+    <table>
+      <tr><th>Bước</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Lập chứng từ</td></tr>
+      <tr><td>2</td><td>Nháp</td></tr>
+      <tr><td>3</td><td>Chờ duyệt</td></tr>
+      <tr><td>4</td><td>Đã duyệt</td></tr>
+      <tr><td>5</td><td>Ghi sổ</td></tr>
+      <tr><td>6</td><td>Sinh bút toán kế toán</td></tr>
+      <tr><td>7</td><td>Cập nhật sổ tiền gửi</td></tr>
+      <tr><td>8</td><td>Đồng bộ sao kê</td></tr>
+      <tr><td>9</td><td>Đối chiếu ngân hàng</td></tr>
+      <tr><td>10</td><td>Khóa kỳ đối chiếu</td></tr>
+      <tr><td>11</td><td>Báo cáo</td></tr>
     </table>
 
     <h3>2.5. Sổ cái & hệ thống tài khoản</h3>
