@@ -2678,148 +2678,186 @@
     </div>
 
     <h3>6.1. Quy trình hóa đơn điện tử & thuế</h3>
-    <div class="mini-flow">Kết nối nền tảng hóa đơn → Đồng bộ hóa đơn đầu vào / đầu ra → Liên kết hóa đơn với chứng từ kế toán → Kiểm tra hợp lệ / đối chiếu → Xử lý sai sót hóa đơn → Lập bảng kê thuế → Lập tờ khai thuế → Giấy nộp tiền / lưu báo cáo</div>
+    <table>
+      <tr><th>Nội dung</th><th>Chi tiết</th></tr>
+      <tr><td>Mục tiêu</td><td>Mô tả workflow tổng thể từ kết nối nền tảng hóa đơn điện tử, đồng bộ hóa đơn, kiểm tra hợp lệ, liên kết chứng từ kế toán, lập bảng kê, lập tờ khai, xác định nghĩa vụ thuế đến giấy nộp tiền và lưu hồ sơ thuế.</td></tr>
+      <tr><td>Actor</td><td>Quản trị hệ thống, Kế toán thuế, Kế toán mua hàng, Kế toán bán hàng, Kế toán công nợ, Kế toán tổng hợp, Kế toán trưởng, Hệ thống ACC, Nền tảng hóa đơn điện tử, Hệ thống thuế điện tử.</td></tr>
+      <tr><td>Phạm vi kiểm soát</td><td>Bao phủ các phân hệ 6.2 đến 6.9, liên kết với công nợ, doanh thu, chi phí, sổ cái, tiền mặt / ngân hàng và nghĩa vụ thuế.</td></tr>
+      <tr><td>Luồng chính</td><td>1. Cấu hình và xác thực kết nối nền tảng hóa đơn điện tử.<br>2. Đồng bộ hóa đơn đầu vào / đầu ra và lưu lịch sử truyền nhận.<br>3. Kiểm tra hợp lệ, trùng hóa đơn, trạng thái hóa đơn và dữ liệu bắt buộc.<br>4. Liên kết hóa đơn với chứng từ mua hàng, bán hàng, công nợ, nhập kho hoặc thanh toán liên quan.<br>5. Chuyển hóa đơn hợp lệ sang trạng thái sẵn sàng hạch toán / kê khai; hóa đơn sai lệch chuyển sang trạng thái chờ xử lý.<br>6. Xử lý hóa đơn sai sót bằng điều chỉnh, thay thế hoặc hủy theo hồ sơ nghiệp vụ.<br>7. Tổng hợp bảng kê hóa đơn mua vào / bán ra theo kỳ kê khai.<br>8. Lập, kiểm tra, chốt và lưu phiên bản tờ khai thuế.<br>9. Xác định nghĩa vụ thuế, lập giấy nộp tiền và theo dõi tình trạng nộp thuế.<br>10. Xuất báo cáo, lưu hồ sơ XML / PDF / biên bản / dữ liệu kê khai phục vụ tra cứu và kiểm toán.</td></tr>
+      <tr><td>Điểm kiểm soát</td><td>Hóa đơn chưa hợp lệ hoặc chưa liên kết chứng từ không được xem là hoàn tất xử lý; hóa đơn sai sót sau khi phát hành không được sửa trực tiếp; tờ khai chưa chốt không được dùng làm căn cứ chính thức để xác định nghĩa vụ thuế; giấy nộp tiền phải truy vết được tới nghĩa vụ thuế và chứng từ thanh toán.</td></tr>
+      <tr><td>Kết quả</td><td>Doanh nghiệp theo dõi được đầy đủ vòng đời hóa đơn điện tử và thuế, giảm thao tác thủ công, tăng khả năng đối chiếu với sổ kế toán và đảm bảo hồ sơ điện tử phục vụ kê khai / thanh tra / kiểm toán.</td></tr>
+    </table>
 
     <h3>6.2. Kết nối nền tảng hóa đơn điện tử</h3>
-    <p>Module này dùng để kết nối ACC với nền tảng hóa đơn điện tử MISA, phục vụ đồng bộ hóa đơn và theo dõi lịch sử truyền nhận.</p>
     <table>
-      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
-      <tr><td>1</td><td>Kết nối nền tảng hóa đơn MISA</td><td>Thiết lập kết nối giữa ACC và nền tảng hóa đơn điện tử MISA theo doanh nghiệp sử dụng.</td></tr>
-      <tr><td>2</td><td>Khai báo thông tin kết nối</td><td>Khai báo tài khoản, mã doanh nghiệp, môi trường kết nối và các thông số tích hợp cần thiết.</td></tr>
-      <tr><td>3</td><td>Kiểm tra trạng thái kết nối</td><td>Hiển thị trạng thái đang kết nối, mất kết nối, lỗi xác thực hoặc lỗi đồng bộ.</td></tr>
-      <tr><td>4</td><td>Đồng bộ danh sách hóa đơn</td><td>Nhận dữ liệu hóa đơn đầu vào / đầu ra từ nền tảng hóa đơn về ACC theo lô hoặc theo thời điểm.</td></tr>
-      <tr><td>5</td><td>Lịch sử truyền nhận</td><td>Lưu lịch sử đồng bộ, thời gian nhận, số lượng hóa đơn, trạng thái thành công / lỗi.</td></tr>
-      <tr><td>6</td><td>Đồng bộ lại dữ liệu</td><td>Cho phép đồng bộ lại khi có lỗi hoặc cần lấy lại dữ liệu hóa đơn bị thiếu.</td></tr>
-      <tr><td>7</td><td>Cảnh báo lỗi kết nối</td><td>Cảnh báo khi mất kết nối hoặc đồng bộ hóa đơn thất bại để kế toán xử lý kịp thời.</td></tr>
+      <tr><th>Nội dung</th><th>Chi tiết</th></tr>
+      <tr><td>Mục tiêu</td><td>Thiết lập và duy trì kết nối giữa ACC với nền tảng hóa đơn điện tử để đồng bộ dữ liệu hóa đơn, theo dõi trạng thái tích hợp và kiểm soát lịch sử truyền nhận.</td></tr>
+      <tr><td>Actor</td><td>Quản trị hệ thống, Kế toán thuế, Hệ thống ACC, Nền tảng hóa đơn điện tử MISA.</td></tr>
+      <tr><td>Chức năng / Use Case</td><td>UC-EINV-CONN-01: Thiết lập kết nối nền tảng hóa đơn điện tử.<br>UC-EINV-CONN-02: Khai báo / cập nhật thông tin kết nối.<br>UC-EINV-CONN-03: Kiểm tra trạng thái kết nối.<br>UC-EINV-CONN-04: Đồng bộ danh sách hóa đơn đầu vào / đầu ra.<br>UC-EINV-CONN-05: Xem lịch sử truyền nhận.<br>UC-EINV-CONN-06: Đồng bộ lại dữ liệu lỗi hoặc thiếu.<br>UC-EINV-CONN-07: Nhận cảnh báo lỗi kết nối và lỗi xác thực.</td></tr>
+      <tr><td>Điều kiện / Dữ liệu đầu vào</td><td>Doanh nghiệp đã đăng ký dịch vụ hóa đơn điện tử; có tài khoản tích hợp hợp lệ; có mã doanh nghiệp, môi trường kết nối, thông số API hoặc token xác thực; user có quyền cấu hình và đồng bộ.</td></tr>
+      <tr><td>Luồng chính</td><td>1. Quản trị hệ thống khai báo thông tin tài khoản, mã doanh nghiệp và môi trường tích hợp.<br>2. Hệ thống xác thực thông tin kết nối với nền tảng hóa đơn điện tử.<br>3. Nếu xác thực thành công, hệ thống lưu cấu hình và kích hoạt trạng thái sẵn sàng đồng bộ.<br>4. Kế toán thuế hoặc hệ thống theo lịch thực hiện đồng bộ danh sách hóa đơn.<br>5. Hệ thống nhận dữ liệu hóa đơn, ghi nhận số lượng chứng từ nhận được, thời điểm nhận và trạng thái phiên đồng bộ.<br>6. Khi có lỗi, hệ thống lưu log lỗi và cho phép đồng bộ lại trên phạm vi dữ liệu bị thiếu hoặc bị lỗi.<br>7. Kế toán tra cứu lịch sử truyền nhận để theo dõi tình hình tích hợp.</td></tr>
+      <tr><td>Kết quả</td><td>ACC kết nối được với nền tảng hóa đơn điện tử, có cấu hình tích hợp hợp lệ, ghi nhận đầy đủ lịch sử đồng bộ và có cơ chế đồng bộ lại khi phát sinh lỗi.</td></tr>
+      <tr><td>Workflow / Trạng thái</td><td>Chưa cấu hình → Chờ xác thực → Kết nối thành công / Kết nối lỗi → Sẵn sàng đồng bộ → Đồng bộ thành công / Đồng bộ lỗi → Chờ đồng bộ lại.</td></tr>
+      <tr><td>Business Rules</td><td>BR-EINV-CONN-01: Chỉ user có quyền quản trị hoặc quyền tích hợp mới được thay đổi cấu hình kết nối.<br>BR-EINV-CONN-02: Hệ thống không được đồng bộ dữ liệu khi xác thực kết nối thất bại.<br>BR-EINV-CONN-03: Mọi phiên đồng bộ phải lưu lịch sử truyền nhận gồm thời gian, số lượng hóa đơn, trạng thái và thông tin lỗi nếu có.<br>BR-EINV-CONN-04: Đồng bộ lại không được tạo trùng hóa đơn đã nhận hợp lệ trước đó.<br>BR-EINV-CONN-05: Lỗi xác thực hoặc mất kết nối phải phát sinh cảnh báo để kế toán xử lý kịp thời.</td></tr>
     </table>
 
     <h3>6.3. Quản lý hóa đơn đầu vào</h3>
-    <p>Module này dùng để tiếp nhận, tra cứu, lưu trữ và liên kết hóa đơn đầu vào với các chứng từ mua hàng / công nợ / thuế.</p>
     <table>
-      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
-      <tr><td>1</td><td>Đồng bộ hóa đơn đầu vào</td><td>Nhận hóa đơn mua vào từ nền tảng hóa đơn điện tử hoặc nguồn tích hợp liên quan.</td></tr>
-      <tr><td>2</td><td>Tra cứu hóa đơn đầu vào</td><td>Tìm kiếm hóa đơn theo nhà cung cấp, mã số thuế, số hóa đơn, ngày hóa đơn, trạng thái.</td></tr>
-      <tr><td>3</td><td>Xem chi tiết hóa đơn đầu vào</td><td>Hiển thị thông tin hóa đơn, tiền hàng, thuế, file XML / PDF và dữ liệu liên quan.</td></tr>
-      <tr><td>4</td><td>Liên kết hóa đơn với chứng từ mua hàng</td><td>Gắn hóa đơn đầu vào với chứng từ mua hàng, nhập kho, công nợ hoặc thanh toán liên quan.</td></tr>
-      <tr><td>5</td><td>Theo dõi hóa đơn chưa hạch toán</td><td>Liệt kê hóa đơn đã đồng bộ nhưng chưa liên kết với chứng từ kế toán.</td></tr>
-      <tr><td>6</td><td>Kiểm tra trùng hóa đơn đầu vào</td><td>Cảnh báo khi có hóa đơn trùng số, ký hiệu, mã số thuế nhà cung cấp.</td></tr>
-      <tr><td>7</td><td>Lưu trữ XML / PDF hóa đơn đầu vào</td><td>Lưu file XML, PDF và tài liệu liên quan phục vụ kiểm tra, kê khai và kiểm toán.</td></tr>
-      <tr><td>8</td><td>Quản lý trạng thái hóa đơn đầu vào</td><td>Theo dõi trạng thái mới nhận, đã kiểm tra, đã hạch toán, điều chỉnh, thay thế hoặc hủy.</td></tr>
+      <tr><th>Nội dung</th><th>Chi tiết</th></tr>
+      <tr><td>Mục tiêu</td><td>Tiếp nhận, tra cứu, lưu trữ, đối chiếu và liên kết hóa đơn đầu vào với chứng từ mua hàng, nhập kho, công nợ và dữ liệu thuế để phục vụ hạch toán và kê khai.</td></tr>
+      <tr><td>Actor</td><td>Kế toán mua hàng, Kế toán công nợ, Kế toán thuế, Kế toán tổng hợp, Kế toán trưởng, Hệ thống ACC.</td></tr>
+      <tr><td>Chức năng / Use Case</td><td>UC-EINV-IN-01: Đồng bộ hóa đơn đầu vào.<br>UC-EINV-IN-02: Tra cứu hóa đơn đầu vào.<br>UC-EINV-IN-03: Xem chi tiết hóa đơn đầu vào.<br>UC-EINV-IN-04: Liên kết hóa đơn với chứng từ mua hàng / nhập kho / công nợ.<br>UC-EINV-IN-05: Theo dõi hóa đơn chưa hạch toán hoặc chưa kê khai.<br>UC-EINV-IN-06: Kiểm tra trùng hóa đơn đầu vào.<br>UC-EINV-IN-07: Lưu trữ XML / PDF và hồ sơ liên quan.<br>UC-EINV-IN-08: Quản lý trạng thái hóa đơn đầu vào.<br>UC-EINV-IN-09: Theo dõi hóa đơn điều chỉnh / thay thế / hủy từ phía nhà cung cấp.</td></tr>
+      <tr><td>Điều kiện / Dữ liệu đầu vào</td><td>Có dữ liệu hóa đơn từ nền tảng điện tử hoặc nguồn tích hợp hợp lệ; có thông tin nhà cung cấp, mã số thuế, số hóa đơn, ký hiệu, ngày hóa đơn, tiền hàng, thuế; có thể có chứng từ mua hàng, nhập kho hoặc công nợ liên quan để đối chiếu.</td></tr>
+      <tr><td>Luồng chính</td><td>1. Hệ thống nhận hóa đơn đầu vào từ nền tảng điện tử và lưu dữ liệu XML / PDF cùng các chỉ tiêu liên quan.<br>2. Kế toán tra cứu hóa đơn theo nhà cung cấp, số hóa đơn, ngày hóa đơn hoặc trạng thái xử lý.<br>3. Hệ thống kiểm tra trùng hóa đơn theo mã số thuế, ký hiệu, số hóa đơn và thông tin nhận diện chính.<br>4. Kế toán xem chi tiết hóa đơn, đối chiếu với chứng từ mua hàng, phiếu nhập kho, công nợ hoặc thanh toán liên quan.<br>5. Nếu dữ liệu đầy đủ và khớp, hóa đơn được liên kết với chứng từ nguồn và chuyển sang trạng thái hợp lệ / sẵn sàng hạch toán.<br>6. Nếu có sai lệch hoặc thiếu liên kết, hóa đơn được đưa vào danh sách chờ xử lý, kèm cảnh báo và ghi chú nguyên nhân.<br>7. Hóa đơn đủ điều kiện được dùng làm cơ sở hạch toán VAT đầu vào, công nợ phải trả, chi phí hoặc hàng tồn kho theo nghiệp vụ liên quan.<br>8. Kế toán tiếp tục theo dõi trạng thái hóa đơn cho tới khi hóa đơn được hạch toán, kê khai hoặc xử lý sai sót hoàn tất.</td></tr>
+      <tr><td>Kết quả</td><td>Hóa đơn đầu vào được lưu trữ đầy đủ, truy vết được tới chứng từ nguồn, được kiểm soát trùng/sai lệch và có trạng thái rõ ràng để phục vụ hạch toán và kê khai thuế.</td></tr>
+      <tr><td>Workflow / Trạng thái</td><td>Mới nhận → Chờ kiểm tra → Hợp lệ / Sai lệch → Đã liên kết chứng từ → Chờ hạch toán → Đã hạch toán → Đã kê khai → Điều chỉnh / Thay thế / Hủy (nếu phát sinh).</td></tr>
+      <tr><td>Ảnh hưởng kế toán / thuế</td><td>Liên kết tới công nợ phải trả nhà cung cấp, VAT đầu vào được khấu trừ, chi phí mua dịch vụ, hàng tồn kho khi nhập kho và các bút toán ghi sổ liên quan trong sổ cái.</td></tr>
+      <tr><td>Business Rules</td><td>BR-EINV-IN-01: Không được tạo trùng hóa đơn đầu vào theo tổ hợp mã số thuế nhà cung cấp + ký hiệu + số hóa đơn, trừ trường hợp hồ sơ sai sót đã được gắn cờ xử lý riêng.<br>BR-EINV-IN-02: Mỗi hóa đơn đầu vào phải lưu được file XML hoặc dữ liệu điện tử tương đương làm căn cứ tra cứu và kiểm toán.<br>BR-EINV-IN-03: Hóa đơn đầu vào chưa liên kết với chứng từ nguồn phù hợp không được xem là hoàn tất xử lý.<br>BR-EINV-IN-04: Hóa đơn sai lệch về tiền hàng, thuế, ngày hóa đơn hoặc đối tượng phải được đưa vào trạng thái chờ xử lý trước khi hạch toán.<br>BR-EINV-IN-05: Hóa đơn thuộc kỳ kế toán đã khóa không được ghi sổ trực tiếp; việc điều chỉnh phải thực hiện theo quy trình điều chỉnh tương ứng.<br>BR-EINV-IN-06: Mọi thay đổi trạng thái hóa đơn đầu vào phải có lịch sử truy vết người thực hiện, thời điểm và lý do thay đổi.</td></tr>
     </table>
 
     <h3>6.4. Quản lý hóa đơn đầu ra</h3>
-    <p>Module này dùng để theo dõi hóa đơn bán ra đã phát hành từ nền tảng hóa đơn, liên kết với chứng từ bán hàng và kê khai thuế đầu ra.</p>
     <table>
-      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
-      <tr><td>1</td><td>Đồng bộ hóa đơn đầu ra</td><td>Nhận dữ liệu hóa đơn bán ra từ nền tảng hóa đơn điện tử về ACC.</td></tr>
-      <tr><td>2</td><td>Tra cứu hóa đơn đầu ra</td><td>Tìm kiếm theo khách hàng, số hóa đơn, ngày hóa đơn, giá trị, trạng thái.</td></tr>
-      <tr><td>3</td><td>Liên kết hóa đơn với chứng từ bán hàng</td><td>Gắn hóa đơn đầu ra với chứng từ bán hàng, doanh thu, công nợ và thuế đầu ra tương ứng.</td></tr>
-      <tr><td>4</td><td>Theo dõi chứng từ bán chưa có hóa đơn</td><td>Liệt kê chứng từ bán hàng đã ghi nhận nhưng chưa phát hành / đồng bộ hóa đơn.</td></tr>
-      <tr><td>5</td><td>Xem chi tiết hóa đơn đầu ra</td><td>Hiển thị hàng hóa / dịch vụ, tiền hàng, thuế, khách hàng và file XML / PDF.</td></tr>
-      <tr><td>6</td><td>Lưu trữ XML / PDF hóa đơn đầu ra</td><td>Lưu trữ hóa đơn điện tử phục vụ tra cứu và đối chiếu sau này.</td></tr>
-      <tr><td>7</td><td>Quản lý trạng thái hóa đơn đầu ra</td><td>Theo dõi mới lập, đã phát hành, điều chỉnh, thay thế, hủy và các trạng thái liên quan.</td></tr>
+      <tr><th>Nội dung</th><th>Chi tiết</th></tr>
+      <tr><td>Mục tiêu</td><td>Theo dõi hóa đơn đầu ra đã phát hành, liên kết với chứng từ bán hàng, doanh thu, công nợ phải thu và dữ liệu thuế đầu ra để phục vụ đối chiếu và kê khai.</td></tr>
+      <tr><td>Actor</td><td>Kế toán bán hàng, Kế toán thuế, Kế toán công nợ, Kế toán tổng hợp, Kế toán trưởng, Hệ thống ACC.</td></tr>
+      <tr><td>Chức năng / Use Case</td><td>UC-EINV-OUT-01: Đồng bộ hóa đơn đầu ra.<br>UC-EINV-OUT-02: Tra cứu hóa đơn đầu ra.<br>UC-EINV-OUT-03: Liên kết hóa đơn với chứng từ bán hàng / doanh thu / công nợ.<br>UC-EINV-OUT-04: Theo dõi chứng từ bán chưa có hóa đơn.<br>UC-EINV-OUT-05: Xem chi tiết hóa đơn đầu ra.<br>UC-EINV-OUT-06: Lưu trữ XML / PDF hóa đơn đầu ra.<br>UC-EINV-OUT-07: Quản lý trạng thái hóa đơn đầu ra.<br>UC-EINV-OUT-08: Theo dõi hóa đơn điều chỉnh / thay thế / hủy.</td></tr>
+      <tr><td>Điều kiện / Dữ liệu đầu vào</td><td>Có dữ liệu hóa đơn đầu ra từ nền tảng điện tử; có thông tin khách hàng, mã số thuế, số hóa đơn, ngày hóa đơn, tiền hàng, thuế; có chứng từ bán hàng, doanh thu hoặc công nợ liên quan để đối chiếu.</td></tr>
+      <tr><td>Luồng chính</td><td>1. Hệ thống nhận dữ liệu hóa đơn đầu ra từ nền tảng điện tử và lưu dữ liệu XML / PDF cùng thông tin phát hành.<br>2. Kế toán tra cứu hóa đơn theo khách hàng, số hóa đơn, ngày hóa đơn, giá trị hoặc trạng thái.<br>3. Hệ thống kiểm tra chứng từ bán hàng nào đã ghi nhận doanh thu nhưng chưa phát hành / đồng bộ hóa đơn để cảnh báo kịp thời.<br>4. Kế toán liên kết hóa đơn đầu ra với chứng từ bán hàng, doanh thu, công nợ và thuế đầu ra tương ứng.<br>5. Hệ thống cập nhật trạng thái hóa đơn đầu ra và phục vụ đối chiếu giữa dữ liệu bán hàng với dữ liệu hóa đơn thực tế đã phát hành.<br>6. Nếu phát sinh sai lệch hoặc sai sót, hóa đơn được chuyển sang quy trình điều chỉnh / thay thế / hủy theo phân hệ 6.6.<br>7. Hóa đơn đầu ra hợp lệ được dùng làm căn cứ kê khai thuế đầu ra và đối chiếu với doanh thu, công nợ phải thu, sổ cái.</td></tr>
+      <tr><td>Kết quả</td><td>Doanh nghiệp kiểm soát được vòng đời hóa đơn đầu ra, bảo đảm hóa đơn đã phát hành được liên kết đúng với chứng từ bán hàng, doanh thu và nghĩa vụ thuế.</td></tr>
+      <tr><td>Workflow / Trạng thái</td><td>Mới đồng bộ → Chờ kiểm tra → Đã phát hành → Đã liên kết chứng từ bán hàng → Đã kê khai → Điều chỉnh / Thay thế / Hủy.</td></tr>
+      <tr><td>Ảnh hưởng kế toán / thuế</td><td>Liên kết tới doanh thu, công nợ phải thu, VAT đầu ra và các bút toán ghi sổ liên quan trong sổ cái; là cơ sở đối chiếu với bảng kê và tờ khai thuế.</td></tr>
+      <tr><td>Business Rules</td><td>BR-EINV-OUT-01: Mỗi hóa đơn đầu ra phải liên kết được với chứng từ bán hàng hoặc căn cứ phát sinh doanh thu tương ứng.<br>BR-EINV-OUT-02: Không phát hành / đồng bộ trùng hóa đơn đầu ra cho cùng số hóa đơn, ký hiệu và doanh nghiệp phát hành.<br>BR-EINV-OUT-03: Hóa đơn đầu ra đã phát hành không được sửa trực tiếp dữ liệu gốc; mọi sai sót phải xử lý theo nghiệp vụ điều chỉnh, thay thế hoặc hủy.<br>BR-EINV-OUT-04: Chứng từ bán hàng đã ghi nhận nhưng chưa có hóa đơn đầu ra phải được cảnh báo để tránh kê khai thiếu.<br>BR-EINV-OUT-05: Hóa đơn đầu ra đã được kê khai nếu phát hiện sai sót phải đi qua quy trình xử lý sai sót và lưu đầy đủ lịch sử điều chỉnh.</td></tr>
     </table>
 
     <h3>6.5. Kiểm tra hợp lệ hóa đơn & cảnh báo rủi ro</h3>
-    <p>Module này dùng để kiểm tra tính hợp lệ của hóa đơn, phát hiện sai lệch và hỗ trợ kiểm soát rủi ro thuế.</p>
     <table>
-      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
-      <tr><td>1</td><td>Kiểm tra tính hợp lệ hóa đơn</td><td>Kiểm tra sự đầy đủ thông tin hóa đơn, định dạng, trạng thái và dữ liệu bắt buộc.</td></tr>
-      <tr><td>2</td><td>Cảnh báo hóa đơn sai lệch</td><td>Cảnh báo khi hóa đơn lệch tiền hàng, tiền thuế, ngày hóa đơn hoặc đối tượng so với chứng từ kế toán.</td></tr>
-      <tr><td>3</td><td>Kiểm tra nhà cung cấp rủi ro</td><td>Theo dõi và cảnh báo nhà cung cấp có rủi ro nếu doanh nghiệp có nhu cầu kiểm soát.</td></tr>
-      <tr><td>4</td><td>Kiểm tra hóa đơn chưa liên kết chứng từ</td><td>Phát hiện hóa đơn đầu vào / đầu ra chưa được gắn với chứng từ kế toán tương ứng.</td></tr>
-      <tr><td>5</td><td>Cảnh báo sai lệch thuế</td><td>Cảnh báo khi số thuế trên hóa đơn không khớp số thuế hạch toán hoặc kê khai.</td></tr>
-      <tr><td>6</td><td>Báo cáo hóa đơn bất thường</td><td>Liệt kê hóa đơn điều chỉnh, thay thế, hủy, trùng hoặc có sai lệch cần rà soát.</td></tr>
+      <tr><th>Nội dung</th><th>Chi tiết</th></tr>
+      <tr><td>Mục tiêu</td><td>Kiểm tra dữ liệu hóa đơn, phát hiện sai lệch, gắn cờ rủi ro và hỗ trợ kiểm soát trước khi hạch toán, kê khai hoặc lưu hồ sơ thuế.</td></tr>
+      <tr><td>Actor</td><td>Kế toán thuế, Kế toán mua hàng, Kế toán bán hàng, Kế toán trưởng, Hệ thống ACC.</td></tr>
+      <tr><td>Chức năng / Use Case</td><td>UC-EINV-CTRL-01: Kiểm tra tính hợp lệ hóa đơn.<br>UC-EINV-CTRL-02: Cảnh báo hóa đơn sai lệch.<br>UC-EINV-CTRL-03: Kiểm tra nhà cung cấp rủi ro.<br>UC-EINV-CTRL-04: Kiểm tra hóa đơn chưa liên kết chứng từ.<br>UC-EINV-CTRL-05: Cảnh báo sai lệch thuế.<br>UC-EINV-CTRL-06: Lập báo cáo hóa đơn bất thường.</td></tr>
+      <tr><td>Điều kiện / Dữ liệu đầu vào</td><td>Có dữ liệu hóa đơn đầu vào / đầu ra, dữ liệu chứng từ kế toán liên quan, quy tắc kiểm soát rủi ro đang áp dụng và danh sách nhà cung cấp / khách hàng cần theo dõi nếu có.</td></tr>
+      <tr><td>Luồng chính</td><td>1. Hệ thống kiểm tra sự đầy đủ của thông tin bắt buộc trên hóa đơn và tính hợp lệ của dữ liệu điện tử nhận được.<br>2. Hệ thống so khớp các chỉ tiêu tiền hàng, tiền thuế, ngày hóa đơn, đối tượng và chứng từ kế toán liên quan.<br>3. Nếu phát hiện hóa đơn chưa liên kết chứng từ, trùng hóa đơn, sai lệch thuế hoặc đối tượng rủi ro, hệ thống sinh cảnh báo và gắn cờ hóa đơn.<br>4. Kế toán thuế hoặc người có thẩm quyền rà soát cảnh báo, xác nhận nguyên nhân và quyết định tiếp tục xử lý, tạm treo hoặc chuyển hóa đơn sang quy trình sai sót.<br>5. Hệ thống tổng hợp hóa đơn bất thường thành báo cáo riêng để phục vụ kiểm soát nội bộ.</td></tr>
+      <tr><td>Kết quả</td><td>Hóa đơn được phân loại rõ hợp lệ / cần rà soát / rủi ro cao; cảnh báo được lưu vết và được dùng làm đầu vào cho xử lý sai sót hoặc ngăn chặn bước kê khai tiếp theo.</td></tr>
+      <tr><td>Mức cảnh báo</td><td>Cảnh báo thông tin: chỉ nhắc rà soát; Cảnh báo kiểm soát: yêu cầu người có quyền xác nhận trước khi tiếp tục; Cảnh báo chặn: không cho chuyển sang trạng thái hoàn tất xử lý / chốt kê khai khi chưa được giải quyết.</td></tr>
+      <tr><td>Business Rules</td><td>BR-EINV-CTRL-01: Hóa đơn thiếu trường dữ liệu bắt buộc phải được gắn cờ kiểm tra trước khi hạch toán hoặc kê khai.<br>BR-EINV-CTRL-02: Hóa đơn sai lệch về tiền thuế so với chứng từ hoặc dữ liệu hạch toán phải được cảnh báo kiểm soát hoặc cảnh báo chặn tùy mức độ.<br>BR-EINV-CTRL-03: Hóa đơn chưa liên kết với chứng từ kế toán tương ứng không được xem là hoàn tất xử lý.<br>BR-EINV-CTRL-04: Chỉ người có quyền phê duyệt mới được xác nhận bỏ qua cảnh báo kiểm soát; việc override phải có lý do và lịch sử truy vết.<br>BR-EINV-CTRL-05: Hóa đơn được gắn cờ rủi ro cao phải được đưa vào báo cáo hóa đơn bất thường để theo dõi tập trung.</td></tr>
     </table>
 
     <h3>6.6. Xử lý hóa đơn sai sót</h3>
-    <p>Module này dùng để theo dõi và xử lý hóa đơn sai sót theo các hình thức điều chỉnh, thay thế hoặc hủy.</p>
     <table>
-      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
-      <tr><td>1</td><td>Lập hồ sơ xử lý sai sót</td><td>Ghi nhận trường hợp hóa đơn sai sót, lý do và phương án xử lý.</td></tr>
-      <tr><td>2</td><td>Hóa đơn điều chỉnh</td><td>Theo dõi hóa đơn điều chỉnh cho hóa đơn gốc khi phát sinh sai lệch cần điều chỉnh.</td></tr>
-      <tr><td>3</td><td>Hóa đơn thay thế</td><td>Theo dõi hóa đơn thay thế cho hóa đơn gốc khi cần thay toàn bộ nội dung.</td></tr>
-      <tr><td>4</td><td>Hủy hóa đơn</td><td>Ghi nhận nghiệp vụ hủy hóa đơn và trạng thái hóa đơn bị hủy theo quy định.</td></tr>
-      <tr><td>5</td><td>Liên kết hóa đơn gốc và hóa đơn xử lý</td><td>Liên kết hóa đơn gốc với hóa đơn điều chỉnh / thay thế / hủy để truy vết đầy đủ.</td></tr>
-      <tr><td>6</td><td>Điều chỉnh chứng từ kế toán liên quan</td><td>Cập nhật hoặc cảnh báo điều chỉnh doanh thu, chi phí, thuế, công nợ tương ứng với hóa đơn sai sót.</td></tr>
-      <tr><td>7</td><td>Lưu biên bản xử lý hóa đơn</td><td>Lưu biên bản điều chỉnh, thay thế, hủy và tài liệu giải trình liên quan.</td></tr>
+      <tr><th>Nội dung</th><th>Chi tiết</th></tr>
+      <tr><td>Mục tiêu</td><td>Quản lý đầy đủ hồ sơ xử lý hóa đơn sai sót theo các hình thức điều chỉnh, thay thế hoặc hủy; bảo đảm truy vết tới hóa đơn gốc, chứng từ kế toán và dữ liệu thuế liên quan.</td></tr>
+      <tr><td>Actor</td><td>Kế toán thuế, Kế toán bán hàng, Kế toán mua hàng, Kế toán tổng hợp, Kế toán trưởng, Hệ thống ACC.</td></tr>
+      <tr><td>Chức năng / Use Case</td><td>UC-EINV-ERR-01: Lập hồ sơ xử lý sai sót.<br>UC-EINV-ERR-02: Xử lý hóa đơn điều chỉnh.<br>UC-EINV-ERR-03: Xử lý hóa đơn thay thế.<br>UC-EINV-ERR-04: Hủy hóa đơn.<br>UC-EINV-ERR-05: Liên kết hóa đơn gốc và hóa đơn xử lý.<br>UC-EINV-ERR-06: Điều chỉnh chứng từ kế toán liên quan.<br>UC-EINV-ERR-07: Lưu biên bản xử lý và hồ sơ giải trình.</td></tr>
+      <tr><td>Điều kiện / Dữ liệu đầu vào</td><td>Đã xác định hóa đơn có sai sót; có thông tin hóa đơn gốc, lý do sai sót, phương án xử lý dự kiến, biên bản / giải trình và dữ liệu về các chứng từ kế toán hoặc tờ khai liên quan.</td></tr>
+      <tr><td>Luồng chính</td><td>1. Kế toán ghi nhận hóa đơn sai sót và lập hồ sơ xử lý, nêu rõ nguyên nhân và phạm vi ảnh hưởng.<br>2. Xác định phương án xử lý: điều chỉnh, thay thế hoặc hủy theo tính chất sai sót và trạng thái nghiệp vụ liên quan.<br>3. Hệ thống tạo liên kết giữa hóa đơn gốc và hóa đơn xử lý để truy vết đầy đủ.<br>4. Kế toán cập nhật ảnh hưởng tới doanh thu, chi phí, công nợ, VAT đầu vào / đầu ra và các chứng từ kế toán liên quan.<br>5. Hệ thống lưu biên bản xử lý, hồ sơ giải trình và lịch sử cập nhật trạng thái.<br>6. Hồ sơ chỉ được xem là hoàn tất khi cập nhật xong ảnh hưởng kế toán và thuế, đồng thời lưu đủ chứng từ hỗ trợ.</td></tr>
+      <tr><td>Kết quả</td><td>Mọi hóa đơn sai sót được xử lý theo đúng nghiệp vụ, có hồ sơ đầy đủ, có liên kết với hóa đơn gốc và không làm mất khả năng truy vết tới chứng từ, tờ khai hay bút toán liên quan.</td></tr>
+      <tr><td>Workflow / Trạng thái</td><td>Phát hiện sai sót → Chờ xử lý → Điều chỉnh / Thay thế / Hủy → Cập nhật kế toán / thuế → Hoàn tất hồ sơ.</td></tr>
+      <tr><td>Business Rules</td><td>BR-EINV-ERR-01: Không được sửa trực tiếp dữ liệu gốc của hóa đơn đã phát hành; mọi sai sót phải xử lý bằng hồ sơ điều chỉnh, thay thế hoặc hủy.<br>BR-EINV-ERR-02: Mỗi hóa đơn xử lý phải liên kết được với hóa đơn gốc và lý do xử lý tương ứng.<br>BR-EINV-ERR-03: Hồ sơ xử lý sai sót phải lưu biên bản, giải trình và chứng từ liên quan phục vụ tra cứu, thanh tra hoặc kiểm toán.<br>BR-EINV-ERR-04: Mọi điều chỉnh ảnh hưởng kế toán hoặc thuế phải truy vết được tới chứng từ gốc và bút toán liên quan.<br>BR-EINV-ERR-05: Hóa đơn sai sót đã ảnh hưởng tới kỳ kê khai trước đó phải được xử lý theo quy trình điều chỉnh phù hợp với hồ sơ thuế đã nộp.</td></tr>
     </table>
 
     <h3>6.7. Bảng kê hóa đơn mua vào / bán ra</h3>
-    <p>Module này tổng hợp dữ liệu hóa đơn phục vụ kê khai thuế và đối chiếu với số liệu kế toán.</p>
     <table>
-      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
-      <tr><td>1</td><td>Lập bảng kê hóa đơn mua vào</td><td>Tổng hợp hóa đơn đầu vào theo kỳ kê khai thuế.</td></tr>
-      <tr><td>2</td><td>Lập bảng kê hóa đơn bán ra</td><td>Tổng hợp hóa đơn đầu ra theo kỳ kê khai thuế.</td></tr>
-      <tr><td>3</td><td>Đối chiếu bảng kê với chứng từ kế toán</td><td>Kiểm tra hóa đơn trên bảng kê khớp với chứng từ mua hàng, bán hàng và hạch toán thuế.</td></tr>
-      <tr><td>4</td><td>Đối chiếu hóa đơn thiếu / thừa</td><td>Phát hiện hóa đơn có trên nền tảng hóa đơn nhưng chưa có trên bảng kê hoặc ngược lại.</td></tr>
-      <tr><td>5</td><td>Lọc bảng kê theo kỳ / trạng thái</td><td>Tra cứu bảng kê theo tháng, quý, loại hóa đơn hoặc trạng thái xử lý.</td></tr>
-      <tr><td>6</td><td>Xuất bảng kê</td><td>Xuất Excel / PDF phục vụ kiểm tra hoặc lưu hồ sơ thuế.</td></tr>
+      <tr><th>Nội dung</th><th>Chi tiết</th></tr>
+      <tr><td>Mục tiêu</td><td>Tổng hợp dữ liệu hóa đơn đầu vào / đầu ra theo kỳ kê khai, hỗ trợ đối chiếu với chứng từ kế toán và chuẩn bị dữ liệu đầu vào cho tờ khai thuế.</td></tr>
+      <tr><td>Actor</td><td>Kế toán thuế, Kế toán tổng hợp, Kế toán trưởng, Hệ thống ACC.</td></tr>
+      <tr><td>Chức năng / Use Case</td><td>UC-TAX-LIST-01: Lập bảng kê hóa đơn mua vào.<br>UC-TAX-LIST-02: Lập bảng kê hóa đơn bán ra.<br>UC-TAX-LIST-03: Đối chiếu bảng kê với chứng từ kế toán.<br>UC-TAX-LIST-04: Đối chiếu hóa đơn thiếu / thừa.<br>UC-TAX-LIST-05: Lọc bảng kê theo kỳ / trạng thái / loại hóa đơn.<br>UC-TAX-LIST-06: Xuất bảng kê.</td></tr>
+      <tr><td>Điều kiện / Dữ liệu đầu vào</td><td>Có hóa đơn đã đồng bộ; có trạng thái kiểm soát / hạch toán tương ứng; có dữ liệu kế toán và thuế theo kỳ kê khai cần tổng hợp.</td></tr>
+      <tr><td>Luồng chính</td><td>1. Người dùng chọn kỳ kê khai và loại bảng kê cần lập (mua vào / bán ra).<br>2. Hệ thống lấy các hóa đơn đủ điều kiện theo kỳ, trạng thái và loại nghiệp vụ tương ứng.<br>3. Hệ thống tổng hợp dữ liệu hóa đơn vào bảng kê và gắn cờ các hóa đơn thiếu liên kết, thiếu trạng thái hoặc sai lệch chỉ tiêu nếu có.<br>4. Kế toán đối chiếu bảng kê với chứng từ mua hàng, bán hàng, công nợ, hạch toán thuế và báo cáo sai lệch.<br>5. Kế toán xử lý các trường hợp hóa đơn thiếu / thừa hoặc sai lệch trước khi chốt bảng kê.<br>6. Hệ thống cho phép xuất bảng kê ra định dạng phục vụ lưu hồ sơ hoặc làm đầu vào cho lập tờ khai.</td></tr>
+      <tr><td>Kết quả</td><td>Bảng kê hóa đơn được tổng hợp đúng kỳ, có thể truy vết tới hóa đơn nguồn, phát hiện được sai lệch và sẵn sàng dùng cho bước lập tờ khai thuế.</td></tr>
+      <tr><td>Workflow / Trạng thái</td><td>Nháp → Đang rà soát → Chờ xử lý sai lệch → Đã chốt → Đã xuất / lưu hồ sơ.</td></tr>
+      <tr><td>Business Rules</td><td>BR-TAX-LIST-01: Bảng kê chỉ được lấy các hóa đơn thuộc đúng kỳ kê khai và đáp ứng điều kiện trạng thái theo quy định nội bộ.<br>BR-TAX-LIST-02: Hóa đơn có cảnh báo chặn hoặc chưa liên kết chứng từ không được chốt vào bảng kê hoàn chỉnh.<br>BR-TAX-LIST-03: Mọi chênh lệch giữa bảng kê và dữ liệu kế toán phải được ghi nhận để xử lý trước khi lập tờ khai.<br>BR-TAX-LIST-04: Bảng kê đã chốt không được sửa trực tiếp; nếu cần điều chỉnh phải mở lại theo quyền được cấp và lưu lịch sử chỉnh sửa.</td></tr>
     </table>
 
     <h3>6.8. Kê khai thuế & tờ khai thuế</h3>
-    <p>Module này dùng để đăng ký, lập, kiểm tra và lưu trữ các tờ khai thuế trong phạm vi đã thống nhất với bộ phận kế toán.</p>
     <table>
-      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
-      <tr><td>1</td><td>Đăng ký tờ khai thuế</td><td>Khai báo các loại tờ khai, kỳ kê khai tháng / quý và phạm vi áp dụng.</td></tr>
-      <tr><td>2</td><td>Lập tờ khai thuế GTGT</td><td>Tổng hợp dữ liệu đầu vào / đầu ra để lập tờ khai thuế GTGT theo kỳ.</td></tr>
-      <tr><td>3</td><td>Lập các báo cáo thuế liên quan</td><td>Lập các báo cáo và phụ lục thuế trong phạm vi được triển khai.</td></tr>
-      <tr><td>4</td><td>Kiểm tra số liệu tờ khai</td><td>Đối chiếu tờ khai với bảng kê hóa đơn và số phát sinh thuế trên sổ kế toán.</td></tr>
-      <tr><td>5</td><td>Lưu phiên bản tờ khai</td><td>Lưu các lần lập / điều chỉnh tờ khai để phục vụ đối chiếu lịch sử.</td></tr>
-      <tr><td>6</td><td>Xuất dữ liệu nộp thuế điện tử</td><td>Xuất file hoặc dữ liệu phục vụ nộp qua hệ thống thuế điện tử.</td></tr>
-      <tr><td>7</td><td>Tra cứu tờ khai đã lập</td><td>Tìm kiếm theo kỳ, loại tờ khai, trạng thái lập hoặc trạng thái nộp.</td></tr>
+      <tr><th>Nội dung</th><th>Chi tiết</th></tr>
+      <tr><td>Mục tiêu</td><td>Đăng ký, lập, kiểm tra, chốt, lưu phiên bản và xuất dữ liệu các tờ khai thuế trong phạm vi triển khai, bảo đảm thống nhất với bảng kê hóa đơn và số phát sinh trên sổ kế toán.</td></tr>
+      <tr><td>Actor</td><td>Kế toán thuế, Kế toán tổng hợp, Kế toán trưởng, Hệ thống ACC.</td></tr>
+      <tr><td>Chức năng / Use Case</td><td>UC-TAX-RET-01: Đăng ký tờ khai thuế.<br>UC-TAX-RET-02: Lập tờ khai thuế GTGT.<br>UC-TAX-RET-03: Lập các báo cáo / phụ lục thuế liên quan.<br>UC-TAX-RET-04: Kiểm tra số liệu tờ khai.<br>UC-TAX-RET-05: Lưu phiên bản tờ khai.<br>UC-TAX-RET-06: Xuất dữ liệu nộp thuế điện tử.<br>UC-TAX-RET-07: Tra cứu tờ khai đã lập.<br>UC-TAX-RET-08: Điều chỉnh / bổ sung tờ khai khi phát sinh sai lệch sau chốt.</td></tr>
+      <tr><td>Điều kiện / Dữ liệu đầu vào</td><td>Có bảng kê hóa đơn đã rà soát; có số liệu thuế trên sổ kế toán; đã khai báo loại tờ khai, kỳ kê khai và phạm vi áp dụng; user có quyền lập hoặc chốt tờ khai.</td></tr>
+      <tr><td>Luồng chính</td><td>1. Kế toán đăng ký loại tờ khai và kỳ kê khai cần lập.<br>2. Hệ thống nhận dữ liệu đầu vào từ bảng kê hóa đơn, số phát sinh thuế trên sổ kế toán và các báo cáo/phụ lục liên quan.<br>3. Kế toán lập tờ khai thuế GTGT hoặc các tờ khai trong phạm vi triển khai.<br>4. Hệ thống kiểm tra số liệu tờ khai với bảng kê và sổ kế toán, cảnh báo nếu có sai lệch.<br>5. Kế toán lưu các phiên bản nháp hoặc điều chỉnh để phục vụ đối chiếu lịch sử.<br>6. Khi số liệu hợp lệ, người có thẩm quyền chốt tờ khai và xuất dữ liệu phục vụ nộp điện tử.<br>7. Nếu phát sinh sai sót sau khi chốt / nộp, kế toán lập phiên bản điều chỉnh / bổ sung theo quy trình nội bộ.</td></tr>
+      <tr><td>Kết quả</td><td>Tờ khai thuế được lập, kiểm tra, chốt và lưu lịch sử đầy đủ; dữ liệu đầu ra có thể dùng để nộp điện tử và đối chiếu với nghĩa vụ thuế thực tế.</td></tr>
+      <tr><td>Workflow / Trạng thái</td><td>Nháp → Chờ kiểm tra → Đã chốt → Đã xuất dữ liệu → Đã nộp → Điều chỉnh / Bổ sung.</td></tr>
+      <tr><td>Business Rules</td><td>BR-TAX-RET-01: Tờ khai thuế phải khớp dữ liệu bảng kê và số phát sinh thuế trên sổ kế toán trước khi được chốt.<br>BR-TAX-RET-02: Tờ khai đã chốt không được sửa trực tiếp; mọi thay đổi phải đi qua cơ chế lưu phiên bản điều chỉnh / bổ sung.<br>BR-TAX-RET-03: Mỗi lần điều chỉnh tờ khai phải lưu được thời điểm, người thực hiện và lý do điều chỉnh.<br>BR-TAX-RET-04: Kỳ thuế đã nộp nếu có thay đổi phải thực hiện theo quy trình điều chỉnh / bổ sung phù hợp và lưu hồ sơ truy vết.</td></tr>
     </table>
 
     <h3>6.9. Giấy nộp tiền & báo cáo thuế</h3>
-    <p>Module này dùng để theo dõi nghĩa vụ thuế, giấy nộp tiền và các báo cáo phục vụ quản lý thuế nội bộ.</p>
     <table>
-      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
-      <tr><td>1</td><td>Lập giấy nộp tiền</td><td>Ghi nhận thông tin giấy nộp tiền thuế theo từng kỳ và từng sắc thuế.</td></tr>
-      <tr><td>2</td><td>Theo dõi trạng thái nộp thuế</td><td>Theo dõi đã lập, đã nộp, chờ nộp hoặc cần điều chỉnh giấy nộp tiền.</td></tr>
-      <tr><td>3</td><td>Báo cáo thuế theo kỳ</td><td>Tổng hợp tình hình kê khai, số thuế phải nộp, đã nộp và còn phải nộp.</td></tr>
-      <tr><td>4</td><td>Đối chiếu nghĩa vụ thuế</td><td>Kiểm tra số phát sinh thuế trên kế toán khớp số liệu tờ khai và giấy nộp tiền.</td></tr>
-      <tr><td>5</td><td>Xuất báo cáo thuế</td><td>Xuất báo cáo thuế và giấy nộp tiền ra Excel / PDF để lưu hồ sơ.</td></tr>
+      <tr><th>Nội dung</th><th>Chi tiết</th></tr>
+      <tr><td>Mục tiêu</td><td>Theo dõi nghĩa vụ thuế phải nộp, lập giấy nộp tiền, cập nhật trạng thái nộp thuế và tổng hợp báo cáo phục vụ quản lý thuế nội bộ.</td></tr>
+      <tr><td>Actor</td><td>Kế toán thuế, Kế toán thanh toán, Kế toán tổng hợp, Kế toán trưởng, Hệ thống ACC.</td></tr>
+      <tr><td>Chức năng / Use Case</td><td>UC-TAX-PAY-01: Lập giấy nộp tiền.<br>UC-TAX-PAY-02: Theo dõi trạng thái nộp thuế.<br>UC-TAX-PAY-03: Báo cáo thuế theo kỳ.<br>UC-TAX-PAY-04: Đối chiếu nghĩa vụ thuế.<br>UC-TAX-PAY-05: Xuất báo cáo thuế.<br>UC-TAX-PAY-06: Liên kết giấy nộp tiền với chứng từ thanh toán thực tế.</td></tr>
+      <tr><td>Điều kiện / Dữ liệu đầu vào</td><td>Có tờ khai đã chốt hoặc nghĩa vụ thuế xác định được; có thông tin sắc thuế, kỳ thuế, số phải nộp, số đã nộp, tài khoản thanh toán và chứng từ ngân hàng / tiền mặt liên quan nếu đã thanh toán.</td></tr>
+      <tr><td>Luồng chính</td><td>1. Hệ thống xác định nghĩa vụ thuế phải nộp từ tờ khai đã chốt và dữ liệu đối chiếu kế toán.<br>2. Kế toán lập giấy nộp tiền cho từng kỳ / từng sắc thuế tương ứng.<br>3. Hệ thống theo dõi trạng thái giấy nộp tiền: đã lập, chờ nộp, đã nộp hoặc cần điều chỉnh.<br>4. Khi có chứng từ thanh toán thực tế, kế toán liên kết giấy nộp tiền với giao dịch thanh toán và cập nhật số đã nộp / còn phải nộp.<br>5. Kế toán lập báo cáo thuế theo kỳ để theo dõi tình hình kê khai, nghĩa vụ thuế, số đã nộp và số còn phải nộp.<br>6. Hệ thống cho phép xuất báo cáo, giấy nộp tiền và dữ liệu liên quan để lưu hồ sơ hoặc phục vụ kiểm tra nội bộ.</td></tr>
+      <tr><td>Kết quả</td><td>Doanh nghiệp theo dõi được nghĩa vụ thuế theo kỳ, giấy nộp tiền phát sinh, tình trạng đã nộp / chưa nộp và có báo cáo tổng hợp để đối chiếu với dữ liệu kế toán.</td></tr>
+      <tr><td>Workflow / Trạng thái</td><td>Xác định nghĩa vụ thuế → Đã lập giấy nộp tiền → Chờ nộp → Đã nộp / Nộp một phần → Cần điều chỉnh → Hoàn tất đối chiếu.</td></tr>
+      <tr><td>Ảnh hưởng kế toán / thuế</td><td>Liên kết với tiền gửi ngân hàng / tiền mặt, tài khoản thuế phải nộp, bút toán khấu trừ và nộp thuế trong sổ cái, đồng thời ảnh hưởng tới số còn phải nộp trên báo cáo thuế nội bộ.</td></tr>
+      <tr><td>Business Rules</td><td>BR-TAX-PAY-01: Giấy nộp tiền phải gắn được với nghĩa vụ thuế hợp lệ theo từng kỳ và từng sắc thuế.<br>BR-TAX-PAY-02: Không được lập trùng giấy nộp tiền cho cùng nghĩa vụ thuế chưa xử lý xong, trừ trường hợp tách lần nộp có kiểm soát rõ ràng.<br>BR-TAX-PAY-03: Trạng thái nộp thuế phải phản ánh đúng chứng từ thanh toán thực tế đã liên kết.<br>BR-TAX-PAY-04: Mọi điều chỉnh nghĩa vụ thuế hoặc giấy nộp tiền phải có lịch sử truy vết và đối chiếu lại với tờ khai, sổ kế toán liên quan.</td></tr>
+    </table>
+
+    <h3>Workflow và quy tắc truy vết toàn Phase 5</h3>
+    <table>
+      <tr><th>Nội dung</th><th>Chi tiết</th></tr>
+      <tr><td>Luồng truy vết tổng thể</td><td>Hóa đơn điện tử → Kiểm tra hợp lệ → Liên kết chứng từ kế toán → Bảng kê hóa đơn → Tờ khai thuế → Nghĩa vụ thuế → Giấy nộp tiền → Báo cáo / lưu hồ sơ.</td></tr>
+      <tr><td>Điểm kiểm soát bắt buộc</td><td>Hóa đơn có cảnh báo chặn không được chốt vào bảng kê; bảng kê chưa xử lý sai lệch không được dùng làm căn cứ chốt tờ khai; tờ khai chưa chốt không được xác định là nghĩa vụ thuế chính thức; giấy nộp tiền phải liên kết được với chứng từ thanh toán.</td></tr>
+      <tr><td>Truy vết chứng từ</td><td>Mỗi bước phải truy được về chứng từ nguồn trước đó, bao gồm XML/PDF hóa đơn, chứng từ mua/bán, hồ sơ xử lý sai sót, bảng kê, tờ khai, giấy nộp tiền và bút toán liên quan.</td></tr>
+      <tr><td>Nguyên tắc ghi sổ</td><td>Các nghiệp vụ VAT đầu vào, VAT đầu ra, khấu trừ, điều chỉnh thuế và nộp thuế phải đồng bộ với nguyên tắc ghi sổ: không sửa trực tiếp bút toán đã ghi sổ, không ghi vào kỳ đã khóa và phải có chứng từ nguồn đầy đủ.</td></tr>
     </table>
 
     <h3>Bảng định khoản mẫu — Giai đoạn 5</h3>
     <table>
       <tr><th>STT</th><th>Nghiệp vụ</th><th>Nợ (TK)</th><th>Có (TK)</th><th>Ghi chú</th></tr>
-      <tr><td>1</td><td>Thuế GTGT đầu vào được khấu trừ (khi mua hàng)</td><td>133</td><td>111, 112, 331</td><td></td></tr>
-      <tr><td>2</td><td>Thuế GTGT đầu ra (khi bán hàng)</td><td>131</td><td>3331</td><td></td></tr>
-      <tr><td>3</td><td>Khấu trừ thuế GTGT cuối kỳ</td><td>3331</td><td>133</td><td></td></tr>
-      <tr><td>4</td><td>Nộp thuế GTGT vào ngân sách</td><td>3331</td><td>111, 112</td><td></td></tr>
+      <tr><td>1</td><td>Thuế GTGT đầu vào được khấu trừ khi mua hàng hóa / dịch vụ</td><td>133</td><td>111, 112, 331</td><td>Liên kết với hóa đơn đầu vào hợp lệ và chứng từ mua hàng tương ứng.</td></tr>
+      <tr><td>2</td><td>Thuế GTGT đầu ra khi bán hàng hóa / dịch vụ</td><td>131</td><td>3331</td><td>Liên kết với hóa đơn đầu ra, doanh thu và công nợ phải thu tương ứng.</td></tr>
+      <tr><td>3</td><td>Khấu trừ thuế GTGT cuối kỳ</td><td>3331</td><td>133</td><td>Thực hiện sau khi đối chiếu bảng kê và tờ khai theo kỳ kê khai.</td></tr>
+      <tr><td>4</td><td>Nộp thuế GTGT vào ngân sách</td><td>3331</td><td>111, 112</td><td>Liên kết với giấy nộp tiền và chứng từ thanh toán thực tế.</td></tr>
+      <tr><td>5</td><td>Điều chỉnh tăng thuế GTGT đầu vào được khấu trừ</td><td>133</td><td>331, 338 hoặc tài khoản liên quan</td><td>Áp dụng khi hóa đơn điều chỉnh làm tăng số thuế được khấu trừ.</td></tr>
+      <tr><td>6</td><td>Điều chỉnh giảm thuế GTGT đầu vào được khấu trừ</td><td>331, 338 hoặc tài khoản liên quan</td><td>133</td><td>Áp dụng khi hóa đơn điều chỉnh làm giảm số thuế được khấu trừ.</td></tr>
+      <tr><td>7</td><td>Điều chỉnh tăng thuế GTGT đầu ra phải nộp</td><td>131, 138 hoặc tài khoản liên quan</td><td>3331</td><td>Áp dụng khi hóa đơn điều chỉnh làm tăng nghĩa vụ thuế đầu ra.</td></tr>
+      <tr><td>8</td><td>Điều chỉnh giảm thuế GTGT đầu ra phải nộp</td><td>3331</td><td>131, 338 hoặc tài khoản liên quan</td><td>Áp dụng khi hóa đơn điều chỉnh làm giảm nghĩa vụ thuế đầu ra.</td></tr>
+      <tr><td>9</td><td>Ghi nhận khoản thuế phải nộp bổ sung sau đối chiếu / điều chỉnh tờ khai</td><td>Chi phí / tài khoản điều chỉnh liên quan</td><td>3331</td><td>Kế toán cần xác nhận tài khoản cụ thể theo tính chất điều chỉnh thực tế.</td></tr>
+      <tr><td>10</td><td>Điều chỉnh nghĩa vụ thuế do hóa đơn hủy / thay thế</td><td>Tài khoản điều chỉnh liên quan</td><td>Tài khoản điều chỉnh liên quan</td><td>Phải truy vết tới hóa đơn gốc, hồ sơ xử lý và tờ khai liên quan.</td></tr>
     </table>
     <p><em>Kế toán vui lòng kiểm tra, bổ sung hoặc điều chỉnh tài khoản và nội dung hạch toán cho phù hợp thực tế doanh nghiệp.</em></p>
 
     <h3>Quy tắc nghiệp vụ chung của Giai đoạn 5</h3>
     <table>
-      <tr><th>STT</th><th>Quy tắc</th><th>Nội dung</th></tr>
-      <tr><td>1</td><td>Hóa đơn phải có trạng thái rõ ràng</td><td>Mọi hóa đơn đầu vào / đầu ra phải theo dõi được trạng thái đồng bộ, hạch toán, điều chỉnh, thay thế hoặc hủy.</td></tr>
-      <tr><td>2</td><td>Không sửa tùy tiện hóa đơn sai sót</td><td>Hóa đơn sai phải được xử lý theo nghiệp vụ điều chỉnh, thay thế hoặc hủy, không sửa trực tiếp dữ liệu gốc.</td></tr>
-      <tr><td>3</td><td>Hóa đơn phải liên kết chứng từ kế toán</td><td>Hóa đơn mua vào / bán ra phải gắn với chứng từ kế toán liên quan để phục vụ đối chiếu và kê khai.</td></tr>
-      <tr><td>4</td><td>Bảng kê thuế khớp dữ liệu kế toán</td><td>Bảng kê hóa đơn và tờ khai thuế phải khớp số phát sinh thuế trên sổ kế toán.</td></tr>
-      <tr><td>5</td><td>Lưu trữ đầy đủ hồ sơ điện tử</td><td>XML, PDF, lịch sử truyền nhận và hồ sơ xử lý sai sót phải được lưu đầy đủ để tra cứu.</td></tr>
-      <tr><td>6</td><td>Cảnh báo sai lệch trước khi kê khai</td><td>Hệ thống cần cảnh báo hóa đơn trùng, thiếu, sai lệch thuế hoặc chưa hạch toán trước khi lập tờ khai.</td></tr>
+      <tr><th>Mã rule</th><th>Quy tắc</th><th>Nội dung</th></tr>
+      <tr><td>BR-P5-G-01</td><td>Hóa đơn phải có trạng thái rõ ràng</td><td>Mọi hóa đơn đầu vào / đầu ra phải theo dõi được trạng thái đồng bộ, kiểm tra, liên kết chứng từ, hạch toán, kê khai, điều chỉnh, thay thế hoặc hủy.</td></tr>
+      <tr><td>BR-P5-G-02</td><td>Không sửa trực tiếp hóa đơn sai sót</td><td>Hóa đơn đã phát hành hoặc đã nhận hợp lệ không được sửa trực tiếp dữ liệu gốc; việc xử lý sai sót phải đi qua hồ sơ điều chỉnh, thay thế hoặc hủy.</td></tr>
+      <tr><td>BR-P5-G-03</td><td>Phải liên kết chứng từ kế toán</td><td>Hóa đơn mua vào / bán ra phải gắn với chứng từ kế toán liên quan để phục vụ đối chiếu và truy vết ghi sổ.</td></tr>
+      <tr><td>BR-P5-G-04</td><td>Bảng kê và tờ khai phải khớp dữ liệu kế toán</td><td>Bảng kê hóa đơn và tờ khai thuế phải đối chiếu được với số phát sinh thuế trên sổ kế toán.</td></tr>
+      <tr><td>BR-P5-G-05</td><td>Lưu trữ đầy đủ hồ sơ điện tử</td><td>XML, PDF, lịch sử truyền nhận, biên bản xử lý sai sót, dữ liệu bảng kê, tờ khai và giấy nộp tiền phải được lưu đầy đủ để tra cứu.</td></tr>
+      <tr><td>BR-P5-G-06</td><td>Cảnh báo sai lệch trước khi kê khai</td><td>Hệ thống phải cảnh báo hóa đơn trùng, hóa đơn thiếu liên kết, sai lệch thuế, sai lệch đối tượng hoặc nhà cung cấp rủi ro trước khi chốt bảng kê / tờ khai.</td></tr>
+      <tr><td>BR-P5-G-07</td><td>Khóa kỳ thuế và kỳ kế toán phải được tôn trọng</td><td>Không được ghi sổ hoặc điều chỉnh trực tiếp vào kỳ đã khóa; mọi điều chỉnh phải theo quy trình được cho phép và lưu vết đầy đủ.</td></tr>
+      <tr><td>BR-P5-G-08</td><td>Override cảnh báo phải có phân quyền</td><td>Chỉ user có thẩm quyền mới được xác nhận bỏ qua cảnh báo kiểm soát, và phải ghi rõ lý do override.</td></tr>
+      <tr><td>BR-P5-G-09</td><td>Tờ khai phải quản lý phiên bản</td><td>Mọi lần lập mới, điều chỉnh hoặc bổ sung tờ khai thuế phải lưu phiên bản để đối chiếu lịch sử.</td></tr>
+      <tr><td>BR-P5-G-10</td><td>Nghĩa vụ thuế phải truy vết được tới chứng từ nguồn</td><td>Số phải nộp, số đã nộp và số còn phải nộp phải lần vết được tới hóa đơn, bảng kê, tờ khai, giấy nộp tiền và chứng từ thanh toán liên quan.</td></tr>
     </table>
 
     <h3>Kết quả bàn giao</h3>
     <ul>
-      <li>ACC kết nối được với nền tảng hóa đơn điện tử MISA để tiếp nhận và theo dõi hóa đơn đầu vào / đầu ra.</li>
-      <li>Hóa đơn được liên kết với chứng từ kế toán, công nợ, doanh thu, chi phí và dữ liệu thuế liên quan.</li>
-      <li>Quản lý được trạng thái hóa đơn, lịch sử truyền nhận và hồ sơ xử lý hóa đơn sai sót.</li>
-      <li>Lập được bảng kê hóa đơn mua vào / bán ra, tờ khai thuế GTGT và các báo cáo thuế trong phạm vi đã thống nhất.</li>
-      <li>Xuất được dữ liệu phục vụ nộp qua hệ thống thuế điện tử và lưu trữ hồ sơ thuế điện tử.</li>
+      <li>ACC kết nối được với nền tảng hóa đơn điện tử MISA, theo dõi được trạng thái kết nối, log đồng bộ và tình trạng lỗi / đồng bộ lại.</li>
+      <li>Quản lý được hóa đơn đầu vào / đầu ra với danh sách use case rõ ràng, trạng thái xử lý rõ ràng và liên kết tới chứng từ mua hàng, bán hàng, công nợ và dữ liệu thuế.</li>
+      <li>Kiểm soát được tính hợp lệ hóa đơn, hóa đơn trùng, sai lệch thuế, hóa đơn chưa liên kết chứng từ và các trường hợp rủi ro cần rà soát.</li>
+      <li>Xử lý được hóa đơn sai sót theo các nghiệp vụ điều chỉnh, thay thế, hủy; lưu được hồ sơ, biên bản và lịch sử truy vết đầy đủ.</li>
+      <li>Lập được bảng kê hóa đơn mua vào / bán ra, tờ khai thuế, giấy nộp tiền và báo cáo thuế theo kỳ, có khả năng đối chiếu với dữ liệu kế toán.</li>
+      <li>Mở rộng được bảng định khoản mẫu và quy tắc nghiệp vụ chung của Phase 5 để phục vụ review, triển khai và kiểm thử như chuẩn Phase 1.</li>
     </ul>
 
     <h3>Tiêu chí nghiệm thu</h3>
     <table>
-      <tr><th>Tiêu chí</th><th>Nội dung kiểm tra</th></tr>
-      <tr><td>Kết nối hóa đơn điện tử</td><td>ACC nhận được dữ liệu hóa đơn từ nền tảng hóa đơn MISA, theo dõi được trạng thái đồng bộ và lịch sử truyền nhận.</td></tr>
-      <tr><td>Hóa đơn đầu vào / đầu ra</td><td>Hóa đơn được tra cứu, lưu trữ XML / PDF, liên kết đúng với chứng từ kế toán liên quan.</td></tr>
-      <tr><td>Hóa đơn sai sót</td><td>Hóa đơn điều chỉnh / thay thế / hủy được theo dõi đúng, có liên kết với hóa đơn gốc và hồ sơ xử lý.</td></tr>
-      <tr><td>Đối chiếu thuế</td><td>Bảng kê hóa đơn, tờ khai thuế và số liệu thuế trên kế toán đối chiếu khớp nhau.</td></tr>
-      <tr><td>Cảnh báo rủi ro</td><td>Hệ thống phát hiện được hóa đơn trùng, hóa đơn thiếu liên kết, sai lệch thuế hoặc nhà cung cấp rủi ro nếu có cấu hình theo dõi.</td></tr>
-      <tr><td>Xuất dữ liệu thuế</td><td>Tờ khai, bảng kê, giấy nộp tiền và báo cáo thuế xuất được ra định dạng phục vụ lưu trữ / nộp điện tử.</td></tr>
+      <tr><th>Phân hệ / Tiêu chí</th><th>Nội dung kiểm tra</th></tr>
+      <tr><td>Workflow tổng thể Phase 5</td><td>Luồng từ kết nối hóa đơn → kiểm tra hợp lệ → liên kết chứng từ → bảng kê → tờ khai → giấy nộp tiền → báo cáo được mô tả rõ và truy vết được giữa các phân hệ.</td></tr>
+      <tr><td>Kết nối hóa đơn điện tử</td><td>ACC nhận được dữ liệu hóa đơn từ nền tảng hóa đơn MISA, theo dõi được trạng thái kết nối, log đồng bộ, lỗi xác thực và cơ chế đồng bộ lại.</td></tr>
+      <tr><td>Hóa đơn đầu vào</td><td>Hóa đơn được tra cứu, lưu XML / PDF, kiểm tra trùng, liên kết đúng với chứng từ mua hàng / nhập kho / công nợ và có trạng thái rõ ràng để hạch toán / kê khai.</td></tr>
+      <tr><td>Hóa đơn đầu ra</td><td>Hóa đơn đầu ra liên kết được với chứng từ bán hàng, doanh thu, công nợ và thuế đầu ra; chứng từ bán chưa có hóa đơn được cảnh báo.</td></tr>
+      <tr><td>Kiểm tra hợp lệ & cảnh báo rủi ro</td><td>Hệ thống phát hiện được hóa đơn trùng, hóa đơn thiếu liên kết, sai lệch thuế, nhà cung cấp rủi ro và ghi nhận được kết quả xử lý / override theo quyền.</td></tr>
+      <tr><td>Xử lý hóa đơn sai sót</td><td>Hóa đơn điều chỉnh / thay thế / hủy được theo dõi đúng, có liên kết với hóa đơn gốc, hồ sơ xử lý đầy đủ và cập nhật được ảnh hưởng kế toán / thuế.</td></tr>
+      <tr><td>Bảng kê hóa đơn</td><td>Bảng kê hóa đơn mua vào / bán ra lập được theo kỳ, phát hiện được hóa đơn thiếu / thừa / sai lệch và chỉ chốt khi dữ liệu đủ điều kiện.</td></tr>
+      <tr><td>Kê khai thuế & tờ khai</td><td>Tờ khai thuế có workflow nháp / kiểm tra / chốt / xuất / nộp / điều chỉnh, lưu được phiên bản và đối chiếu được với bảng kê cùng sổ kế toán.</td></tr>
+      <tr><td>Giấy nộp tiền & báo cáo thuế</td><td>Giấy nộp tiền theo dõi được trạng thái nộp, liên kết được với nghĩa vụ thuế và chứng từ thanh toán; báo cáo thuế thể hiện được số phải nộp, đã nộp và còn phải nộp.</td></tr>
+      <tr><td>Định khoản, rule chung và truy vết</td><td>Bảng định khoản mẫu, business rules và nguyên tắc truy vết của Phase 5 đủ để kế toán/dev/tester sử dụng làm căn cứ review và kiểm thử.</td></tr>
     </table>
   </section>
 
