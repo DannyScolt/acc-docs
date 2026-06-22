@@ -2516,132 +2516,163 @@
     <div class="phase-header">
       <div class="chapter-label">Phase 4 / Chương kế toán tổng hợp</div>
       <h2>5. Giai đoạn 4 — Tổng hợp, kết chuyển, khóa kỳ & báo cáo tài chính</h2>
-      <p>Tập trung vào nghiệp vụ tổng hợp cuối kỳ: kiểm tra số liệu, kết chuyển, khóa kỳ và lập báo cáo tài chính.</p>
+      <p>Giai đoạn này mô tả đầy đủ lớp nghiệp vụ kế toán tổng hợp cuối kỳ: điều chỉnh, quyết toán, phân bổ, kết chuyển, đối chiếu, khóa kỳ và lập báo cáo tài chính trên nền dữ liệu đã ghi sổ.</p>
     </div>
     <div class="phase-intro-card">
       <div class="intro-grid">
-        <div class="intro-panel"><h4>Mục tiêu</h4><span>Đảm bảo dữ liệu từ các phân hệ được tổng hợp, đối chiếu và kết chuyển đúng để lập báo cáo tài chính.</span></div>
-        <div class="intro-panel"><h4>Phạm vi</h4><span>Bút toán tổng hợp, tạm ứng, phân bổ, điều chỉnh, kiểm tra đối chiếu, kết chuyển, khóa kỳ và báo cáo tài chính.</span></div>
-        <div class="intro-panel"><h4>Module chính</h4><ul><li>Chứng từ nghiệp vụ khác</li><li>Kết chuyển & khóa kỳ</li><li>Sổ sách & báo cáo tài chính</li></ul></div>
+        <div class="intro-panel"><h4>Mục tiêu</h4><span>Đảm bảo mọi bút toán điều chỉnh, kết chuyển và báo cáo tài chính đều truy vết được về chứng từ gốc, khớp sổ cái và tuân thủ kiểm soát khóa kỳ.</span></div>
+        <div class="intro-panel"><h4>Phạm vi</h4><span>Chứng từ nghiệp vụ khác, quyết toán tạm ứng, phân bổ chi phí, cấu hình bút toán kết chuyển, đối chiếu trước khóa kỳ, khóa/mở kỳ, sổ tổng hợp và báo cáo tài chính.</span></div>
+        <div class="intro-panel"><h4>Module chính</h4><ul><li>Điều chỉnh & kết chuyển cuối kỳ</li><li>Đối chiếu & khóa kỳ</li><li>Sổ sách & báo cáo tài chính</li></ul></div>
       </div>
     </div>
 
     <h3>5.1. Quy trình tổng hợp cuối kỳ</h3>
-    <div class="mini-flow">Chứng từ nghiệp vụ khác → Quyết toán tạm ứng / Phân bổ / Điều chỉnh → Kiểm tra đối chiếu → Kết chuyển doanh thu, chi phí → Xác định lãi / lỗ → Khóa kỳ → Lập báo cáo tài chính → Tra cứu / xuất báo cáo</div>
+    <div class="mini-flow">Chứng từ nghiệp vụ khác → Quyết toán tạm ứng / Phân bổ / Điều chỉnh → Kiểm tra đối chiếu → Cấu hình & chạy kết chuyển → Xác định lãi / lỗ → Khóa kỳ → Lập BCTC → Drill-down / xuất báo cáo</div>
+    <p>Nguyên tắc chung của Phase 4 là chỉ làm việc trên dữ liệu đã ghi sổ; mọi thao tác kết chuyển, khóa kỳ và phát hành báo cáo đều phải kiểm tra điều kiện đầu vào, lưu lịch sử thao tác và cho phép truy vết ngược về sổ sách / chứng từ nguồn.</p>
 
     <h3>5.2. Chứng từ nghiệp vụ khác & bút toán tổng hợp</h3>
-    <p>Module này dùng để ghi nhận các bút toán kế toán không thuộc trực tiếp các phân hệ Quỹ, Ngân hàng, Mua hàng, Bán hàng hoặc Kho.</p>
-    <table class="stt-table">
-      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
-      <tr><td>1</td><td>Lập chứng từ nghiệp vụ khác</td><td>Ghi nhận các nghiệp vụ kế toán tổng hợp phát sinh ngoài các phân hệ chuyên biệt.</td></tr>
-      <tr><td>2</td><td>Hạch toán nhiều dòng định khoản</td><td>Cho phép nhập nhiều dòng tài khoản Nợ / Có, đối tượng, khoản mục, diễn giải và số tiền.</td></tr>
-      <tr><td>3</td><td>Kiểm tra cân đối Nợ / Có</td><td>Không cho ghi sổ nếu tổng phát sinh Nợ không bằng tổng phát sinh Có.</td></tr>
-      <tr><td>4</td><td>Khai báo thuế / hóa đơn nếu có</td><td>Cho phép nhập thông tin thuế, hóa đơn liên quan nếu nghiệp vụ tổng hợp có phát sinh VAT.</td></tr>
-      <tr><td>5</td><td>Lập chứng từ từ hóa đơn điều chỉnh</td><td>Tạo nhanh bút toán tổng hợp từ hóa đơn điều chỉnh hoặc nguồn phát sinh liên quan.</td></tr>
-      <tr><td>6</td><td>Hạch toán gộp / hạch toán chi tiết</td><td>Cho phép gộp nhiều dòng thành một bút toán hoặc giữ từng dòng chi tiết theo nhu cầu kiểm soát.</td></tr>
-      <tr><td>7</td><td>Đính kèm hồ sơ chứng từ</td><td>Đính kèm biên bản, quyết định, bảng tính, file Excel, hóa đơn hoặc tài liệu liên quan.</td></tr>
-      <tr><td>8</td><td>Duyệt chứng từ tổng hợp</td><td>Người có quyền duyệt xác nhận chứng từ trước khi ghi sổ.</td></tr>
-      <tr><td>9</td><td>Ghi sổ chứng từ tổng hợp</td><td>Chứng từ đã duyệt được cập nhật vào sổ nhật ký chung, sổ cái và sổ chi tiết tài khoản.</td></tr>
-      <tr><td>10</td><td>Hủy / điều chỉnh chứng từ</td><td>Hủy hoặc lập chứng từ điều chỉnh khi phát hiện sai, bắt buộc ghi lý do và lưu nhật ký.</td></tr>
+    <p>Module này dùng để ghi nhận các nghiệp vụ kế toán không thuộc trực tiếp các phân hệ Quỹ, Ngân hàng, Mua hàng, Bán hàng hoặc Kho; đồng thời là điểm nhập cho các bút toán điều chỉnh cuối kỳ cần truy vết rõ chứng từ nguồn và điều kiện ghi sổ.</p>
+    <table class="rule3-table">
+      <tr><th>Use case / chức năng</th><th>Actor</th><th>Luồng nghiệp vụ & kiểm soát</th><th>Output</th></tr>
+      <tr><td>Lập chứng từ nghiệp vụ khác</td><td>Kế toán tổng hợp</td><td>Chọn loại nghiệp vụ, khai báo kỳ mở, nhập diễn giải, đối tượng, tài khoản Nợ/Có, số tiền và hồ sơ kèm theo; hệ thống kiểm tra số chứng từ không trùng, kỳ chưa khóa và bút toán cân đối.</td><td>Chứng từ nháp hoặc chờ duyệt.</td></tr>
+      <tr><td>Hạch toán nhiều dòng / gộp chi tiết</td><td>Kế toán tổng hợp</td><td>Cho phép nhập nhiều dòng định khoản, có thể gộp theo nhóm để tối ưu nhập liệu nhưng vẫn giữ được dòng chi tiết khi cần drill-down.</td><td>Bảng định khoản đầy đủ.</td></tr>
+      <tr><td>Ghi nhận VAT / hóa đơn liên quan</td><td>Kế toán tổng hợp, kế toán thuế</td><td>Liên kết hóa đơn điều chỉnh hoặc thông tin thuế nếu nghiệp vụ có phát sinh; không tự sinh thuế nếu chưa khai báo nguồn hợp lệ.</td><td>Thông tin VAT / hóa đơn gắn với chứng từ.</td></tr>
+      <tr><td>Duyệt và ghi sổ</td><td>Người duyệt, kế toán trưởng</td><td>Chứng từ chỉ được ghi sổ sau khi duyệt; hệ thống sinh bút toán vào sổ nhật ký chung, sổ cái, sổ chi tiết và lưu audit log.</td><td>Bút toán đã ghi sổ.</td></tr>
+      <tr><td>Hủy / điều chỉnh</td><td>Kế toán tổng hợp</td><td>Chỉ cho hủy hoặc điều chỉnh khi chứng từ chưa bị khóa kỳ; phải nhập lý do và giữ lịch sử phiên bản để đối chiếu.</td><td>Chứng từ hủy, chứng từ điều chỉnh, nhật ký thay đổi.</td></tr>
     </table>
+    <table class="rule-table">
+      <tr><th>Business rule</th><th>Nội dung</th></tr>
+      <tr><td>BR-5.2-01</td><td>Kỳ kế toán phải mở và người thao tác phải có quyền ghi nhận chứng từ tổng hợp.</td></tr>
+      <tr><td>BR-5.2-02</td><td>Tổng phát sinh Nợ phải bằng tổng phát sinh Có trước khi được phép ghi sổ.</td></tr>
+      <tr><td>BR-5.2-03</td><td>Số chứng từ không được trùng trong cùng đơn vị/kỳ theo quy ước đánh số.</td></tr>
+      <tr><td>BR-5.2-04</td><td>Chứng từ đã khóa kỳ không được sửa/xóa; mọi thay đổi phải đi qua chứng từ điều chỉnh hoặc mở lại kỳ có kiểm soát.</td></tr>
+    </table>
+    <p><strong>Liên kết phân hệ:</strong> kế toán tổng hợp lấy dữ liệu đối chiếu từ quỹ, ngân hàng, mua hàng, bán hàng, kho và thuế; đầu ra là sổ cái, sổ nhật ký chung và nguồn cho báo cáo tài chính.</p>
 
     <h3>5.3. Quyết toán tạm ứng & phân bổ chi phí</h3>
-    <p>Module này dùng để xử lý các khoản tạm ứng, chi phí chờ phân bổ và bút toán phân bổ định kỳ trước khi kết chuyển cuối kỳ.</p>
-    <table class="stt-table">
-      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
-      <tr><td>1</td><td>Quyết toán tạm ứng</td><td>Ghi nhận nhân viên hoàn ứng, chi thực tế, số còn phải thu hoặc phải trả thêm.</td></tr>
-      <tr><td>2</td><td>Đối chiếu tạm ứng nhân viên</td><td>Theo dõi số đã tạm ứng, đã quyết toán, còn tồn theo từng nhân viên.</td></tr>
-      <tr><td>3</td><td>Ghi nhận chi phí chờ phân bổ</td><td>Ghi nhận các khoản chi phí trả trước / chi phí chờ phân bổ nếu chưa tách sang phân hệ riêng.</td></tr>
-      <tr><td>4</td><td>Khai báo kỳ phân bổ</td><td>Thiết lập thời gian phân bổ, số kỳ, ngày bắt đầu và tài khoản chi phí nhận phân bổ.</td></tr>
-      <tr><td>5</td><td>Lập bút toán phân bổ định kỳ</td><td>Tự động hoặc thủ công lập bút toán phân bổ chi phí theo tháng / kỳ.</td></tr>
-      <tr><td>6</td><td>Kiểm tra phân bổ trùng kỳ</td><td>Cảnh báo khi một khoản chi phí đã được phân bổ trong kỳ.</td></tr>
-      <tr><td>7</td><td>Theo dõi giá trị còn lại</td><td>Theo dõi tổng giá trị ban đầu, đã phân bổ, còn lại của từng khoản.</td></tr>
+    <p>Module này dùng để xử lý các khoản tạm ứng, chi phí chờ phân bổ và bút toán phân bổ định kỳ trước khi kết chuyển cuối kỳ; mọi nghiệp vụ phải phản ánh đúng giá trị còn lại và tránh ghi nhận trùng kỳ.</p>
+    <table class="rule3-table">
+      <tr><th>Use case / chức năng</th><th>Actor</th><th>Luồng nghiệp vụ & kiểm soát</th><th>Output</th></tr>
+      <tr><td>Quyết toán tạm ứng</td><td>Kế toán công nợ / tổng hợp</td><td>Chọn nhân viên, đối chiếu số tạm ứng, nhập chứng từ chi thực tế; hệ thống tính số còn phải thu hoặc phải trả thêm và chặn trường hợp quyết toán vượt số tạm ứng.</td><td>Chứng từ quyết toán, số dư tạm ứng còn lại.</td></tr>
+      <tr><td>Đối chiếu tạm ứng nhân viên</td><td>Kế toán tổng hợp</td><td>Xem lịch sử tạm ứng/hoàn ứng theo nhân viên, trạng thái đã quyết toán và khoản còn treo; hỗ trợ drill-down về chứng từ nguồn.</td><td>Bảng đối chiếu tạm ứng.</td></tr>
+      <tr><td>Ghi nhận chi phí chờ phân bổ</td><td>Kế toán tổng hợp</td><td>Khởi tạo khoản chi phí trả trước/chờ phân bổ, khai báo nguyên giá, kỳ phân bổ, số kỳ, tài khoản nhận phân bổ và nguồn chứng từ.</td><td>Khoản phân bổ ban đầu.</td></tr>
+      <tr><td>Lập bút toán phân bổ định kỳ</td><td>Kế toán tổng hợp</td><td>Tự động sinh bút toán theo lịch; mỗi khoản chỉ được phân bổ một lần trong một kỳ, và hệ thống cập nhật giá trị còn lại sau phân bổ.</td><td>Bút toán phân bổ, lịch sử kỳ phân bổ.</td></tr>
+      <tr><td>Theo dõi trùng kỳ / giá trị còn lại</td><td>Kế toán tổng hợp</td><td>Cảnh báo khi khoản chi phí đã được phân bổ trong kỳ hoặc nếu phân bổ vượt giá trị còn lại; giá trị còn lại không được âm.</td><td>Danh sách cảnh báo, số dư còn lại.</td></tr>
     </table>
+    <table class="rule-table">
+      <tr><th>Business rule</th><th>Nội dung</th></tr>
+      <tr><td>BR-5.3-01</td><td>Không quyết toán vượt số tạm ứng đã cấp.</td></tr>
+      <tr><td>BR-5.3-02</td><td>Không phân bổ vượt giá trị còn lại của khoản chi phí.</td></tr>
+      <tr><td>BR-5.3-03</td><td>Không cho ghi nhận phân bổ trùng kỳ cho cùng một khoản.</td></tr>
+      <tr><td>BR-5.3-04</td><td>Giá trị còn lại phải được theo dõi xuyên suốt và không được âm.</td></tr>
+    </table>
+    <p><strong>Liên kết phân hệ:</strong> liên kết với công nợ nhân viên, chi phí trả trước và sổ cái; đầu ra là chứng từ quyết toán, chứng từ phân bổ và lịch sử còn lại của từng khoản.</p>
 
     <h3>5.4. Cấu hình bút toán kết chuyển</h3>
-    <p>Module này dùng để thiết lập các cặp tài khoản kết chuyển phục vụ tự động kết chuyển cuối kỳ.</p>
-    <table class="stt-table">
-      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
-      <tr><td>1</td><td>Danh mục tài khoản kết chuyển</td><td>Quản lý danh sách các cặp tài khoản dùng để kết chuyển doanh thu, chi phí và xác định kết quả kinh doanh.</td></tr>
-      <tr><td>2</td><td>Cặp kết chuyển mặc định</td><td>Hệ thống cung cấp sẵn các cặp tài khoản kết chuyển phổ biến theo chế độ kế toán.</td></tr>
-      <tr><td>3</td><td>Thêm cặp tài khoản kết chuyển</td><td>Cho phép doanh nghiệp bổ sung cặp tài khoản kết chuyển theo nhu cầu quản lý.</td></tr>
-      <tr><td>4</td><td>Sửa cặp tài khoản kết chuyển</td><td>Cập nhật tài khoản nguồn, tài khoản đích, diễn giải và thứ tự kết chuyển.</td></tr>
-      <tr><td>5</td><td>Ngừng sử dụng cặp kết chuyển</td><td>Không sử dụng cặp kết chuyển trong kỳ mới nhưng vẫn giữ lịch sử.</td></tr>
-      <tr><td>6</td><td>Kiểm tra cấu hình kết chuyển</td><td>Cảnh báo khi thiếu tài khoản kết chuyển hoặc cấu hình không hợp lệ.</td></tr>
+    <p>Module này dùng để thiết lập các cặp tài khoản kết chuyển phục vụ tự động kết chuyển cuối kỳ; cấu hình là điều kiện bắt buộc để hệ thống xác định đúng nguồn phát sinh và tài khoản đích.</p>
+    <table class="rule3-table">
+      <tr><th>Use case / chức năng</th><th>Actor</th><th>Luồng nghiệp vụ & kiểm soát</th><th>Output</th></tr>
+      <tr><td>Quản lý danh mục kết chuyển</td><td>Kế toán trưởng</td><td>Khai báo cặp tài khoản nguồn/đích, phạm vi áp dụng, thứ tự kết chuyển, diễn giải và điều kiện hiệu lực.</td><td>Bảng cấu hình kết chuyển.</td></tr>
+      <tr><td>Thêm / sửa cặp kết chuyển</td><td>Kế toán trưởng</td><td>Thêm cặp mới hoặc cập nhật cấu hình khi chưa bị khóa; nếu cặp đã dùng cho chứng từ thì chỉ cho ngừng sử dụng, không xóa lịch sử.</td><td>Cấu hình mới hoặc cấu hình đã hiệu chỉnh.</td></tr>
+      <tr><td>Ngừng sử dụng cặp kết chuyển</td><td>Kế toán trưởng</td><td>Đánh dấu ngừng dùng trong kỳ mới nhưng vẫn giữ lịch sử để truy vết chứng từ đã sinh.</td><td>Cặp kết chuyển inactive.</td></tr>
+      <tr><td>Kiểm tra cấu hình hợp lệ</td><td>Kế toán tổng hợp</td><td>Hệ thống kiểm tra thiếu cặp nguồn/đích, cặp trùng, tài khoản không hợp lệ hoặc cấu hình không đủ để kết chuyển.</td><td>Danh sách lỗi cấu hình.</td></tr>
     </table>
+    <table class="rule-table">
+      <tr><th>Business rule</th><th>Nội dung</th></tr>
+      <tr><td>BR-5.4-01</td><td>Không được có hai cấu hình active trùng nhau cho cùng phạm vi kết chuyển.</td></tr>
+      <tr><td>BR-5.4-02</td><td>Không xóa cấu hình đã sinh chứng từ; chỉ cho ngừng sử dụng.</td></tr>
+      <tr><td>BR-5.4-03</td><td>Không cho kết chuyển nếu chưa có cấu hình hợp lệ cho loại dữ liệu cần chạy.</td></tr>
+    </table>
+    <p><strong>Liên kết phân hệ:</strong> cấu hình này là đầu vào cho chứng từ kết chuyển cuối kỳ và ảnh hưởng trực tiếp đến sổ cái, báo cáo tài chính và drill-down từ báo cáo xuống bút toán nguồn.</p>
 
     <h3>5.5. Kết chuyển cuối kỳ & xác định kết quả kinh doanh</h3>
-    <p>Module này dùng để kết chuyển doanh thu, chi phí, xác định kết quả kinh doanh và ghi nhận lãi / lỗ cuối kỳ.</p>
-    <table class="stt-table">
-      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
-      <tr><td>1</td><td>Lập chứng từ kết chuyển cuối kỳ</td><td>Tạo chứng từ kết chuyển theo tháng, quý, năm hoặc đến một ngày bất kỳ.</td></tr>
-      <tr><td>2</td><td>Kết chuyển doanh thu</td><td>Kết chuyển các tài khoản doanh thu sang tài khoản xác định kết quả kinh doanh.</td></tr>
-      <tr><td>3</td><td>Kết chuyển chi phí</td><td>Kết chuyển các tài khoản chi phí sang tài khoản xác định kết quả kinh doanh.</td></tr>
-      <tr><td>4</td><td>Tự động tính số tiền kết chuyển</td><td>Hệ thống tổng hợp số phát sinh cần kết chuyển theo từng cặp tài khoản đã cấu hình.</td></tr>
-      <tr><td>5</td><td>Kết chuyển từ lần gần nhất</td><td>Số tiền kết chuyển được tính từ lần kết chuyển gần nhất đến thời điểm kết chuyển hiện tại.</td></tr>
-      <tr><td>6</td><td>Xác định kết quả kinh doanh</td><td>Tổng hợp doanh thu, chi phí để xác định lãi hoặc lỗ trong kỳ.</td></tr>
-      <tr><td>7</td><td>Kết chuyển lãi / lỗ</td><td>Ghi nhận bút toán kết chuyển kết quả kinh doanh sang tài khoản lợi nhuận.</td></tr>
-      <tr><td>8</td><td>Kiểm tra tài khoản doanh thu / chi phí còn số dư</td><td>Cảnh báo nếu tài khoản doanh thu, chi phí còn số dư sau kết chuyển.</td></tr>
-      <tr><td>9</td><td>Hủy / tính lại kết chuyển</td><td>Cho phép hủy chứng từ kết chuyển và lập lại khi số liệu nguồn thay đổi.</td></tr>
+    <p>Module này dùng để kết chuyển doanh thu, chi phí, xác định kết quả kinh doanh và ghi nhận lãi / lỗ cuối kỳ; chỉ được chạy khi kỳ kế toán đang mở và cấu hình kết chuyển đã hợp lệ.</p>
+    <table class="rule3-table">
+      <tr><th>Use case / chức năng</th><th>Actor</th><th>Luồng nghiệp vụ & kiểm soát</th><th>Output</th></tr>
+      <tr><td>Lập chứng từ kết chuyển</td><td>Kế toán tổng hợp</td><td>Chọn kỳ, loại kết chuyển và phạm vi dữ liệu; hệ thống lấy số phát sinh từ lần gần nhất đến thời điểm chạy hiện tại.</td><td>Chứng từ kết chuyển nháp/ghi sổ.</td></tr>
+      <tr><td>Kết chuyển doanh thu / chi phí</td><td>Kế toán tổng hợp</td><td>Tổng hợp phát sinh từ các tài khoản doanh thu, chi phí theo cấu hình; tự sinh dòng Nợ/Có sang tài khoản xác định kết quả kinh doanh.</td><td>Bút toán kết chuyển doanh thu, chi phí.</td></tr>
+      <tr><td>Xác định kết quả kinh doanh</td><td>Kế toán trưởng</td><td>Hệ thống tính lãi/lỗ dựa trên tổng doanh thu và chi phí đã kết chuyển; cảnh báo nếu còn số dư bất thường.</td><td>Kết quả kinh doanh kỳ.</td></tr>
+      <tr><td>Hủy / tính lại kết chuyển</td><td>Kế toán trưởng</td><td>Nếu số liệu nguồn thay đổi, cho phép hủy chứng từ cũ và chạy lại; mọi phiên bản đều được lưu trong lịch sử.</td><td>Phiên bản kết chuyển mới, audit log.</td></tr>
     </table>
+    <table class="rule-table">
+      <tr><th>Business rule</th><th>Nội dung</th></tr>
+      <tr><td>BR-5.5-01</td><td>Chỉ kết chuyển trong kỳ mở và khi cấu hình kết chuyển hợp lệ.</td></tr>
+      <tr><td>BR-5.5-02</td><td>Chỉ tính số phát sinh từ lần kết chuyển gần nhất để tránh ghi trùng.</td></tr>
+      <tr><td>BR-5.5-03</td><td>Doanh thu/chi phí còn số dư sau chạy phải được cảnh báo và xử lý trước khi khóa kỳ.</td></tr>
+      <tr><td>BR-5.5-04</td><td>Mọi lần hủy / chạy lại đều phải lưu lịch sử và lý do.</td></tr>
+    </table>
+    <p><strong>Liên kết phân hệ:</strong> module này nhận dữ liệu từ sổ cái, chứng từ tổng hợp, phân bổ chi phí và các phân hệ doanh thu / chi phí để tạo đầu vào trực tiếp cho BCTC.</p>
 
     <h3>5.6. Kiểm tra đối chiếu trước khóa kỳ</h3>
-    <p>Module này giúp kế toán kiểm tra chất lượng số liệu trước khi khóa kỳ và lập báo cáo tài chính.</p>
-    <table class="stt-table">
-      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
-      <tr><td>1</td><td>Kiểm tra chứng từ chưa ghi sổ</td><td>Liệt kê chứng từ nháp, chờ duyệt hoặc chưa ghi sổ trong kỳ.</td></tr>
-      <tr><td>2</td><td>Kiểm tra cân đối Nợ / Có</td><td>Đảm bảo toàn bộ bút toán trong kỳ cân đối Nợ / Có.</td></tr>
-      <tr><td>3</td><td>Kiểm tra kết chuyển lãi / lỗ</td><td>Phát hiện tài khoản doanh thu, chi phí còn số dư sau kết chuyển.</td></tr>
-      <tr><td>4</td><td>Đối chiếu quỹ tiền mặt</td><td>Kiểm tra sổ quỹ khớp tài khoản tiền mặt trên sổ cái.</td></tr>
-      <tr><td>5</td><td>Đối chiếu ngân hàng</td><td>Kiểm tra sổ tiền gửi khớp sao kê và tài khoản tiền gửi trên sổ cái.</td></tr>
-      <tr><td>6</td><td>Đối chiếu công nợ phải thu</td><td>Kiểm tra công nợ chi tiết khách hàng khớp tài khoản phải thu.</td></tr>
-      <tr><td>7</td><td>Đối chiếu công nợ phải trả</td><td>Kiểm tra công nợ chi tiết nhà cung cấp khớp tài khoản phải trả.</td></tr>
-      <tr><td>8</td><td>Đối chiếu tồn kho</td><td>Kiểm tra giá trị tồn kho trên báo cáo kho khớp tài khoản hàng tồn kho.</td></tr>
-      <tr><td>9</td><td>Đối chiếu thuế</td><td>Kiểm tra bảng kê hóa đơn và số liệu thuế khớp số phát sinh kế toán.</td></tr>
-      <tr><td>10</td><td>Cảnh báo số liệu bất thường</td><td>Cảnh báo tài khoản âm bất thường, công nợ âm, tồn kho âm, chứng từ sai kỳ hoặc thiếu đối tượng.</td></tr>
+    <p>Module này giúp kế toán kiểm tra chất lượng số liệu trước khi khóa kỳ và lập báo cáo tài chính; đây là bước chặn cuối để phát hiện lỗi trước khi dữ liệu được bảo vệ.</p>
+    <table class="rule3-table">
+      <tr><th>Use case / chức năng</th><th>Actor</th><th>Luồng nghiệp vụ & kiểm soát</th><th>Output</th></tr>
+      <tr><td>Kiểm tra chứng từ chưa ghi sổ</td><td>Kế toán tổng hợp</td><td>Liệt kê chứng từ nháp/chờ duyệt/chưa ghi sổ trong kỳ; kỳ chưa sạch thì không cho khóa.</td><td>Danh sách chứng từ treo.</td></tr>
+      <tr><td>Đối chiếu quỹ, ngân hàng, công nợ, tồn kho, thuế</td><td>Kế toán tổng hợp, kế toán phần hành</td><td>So sánh số chi tiết của từng phân hệ với sổ cái: quỹ tiền mặt, ngân hàng, phải thu, phải trả, tồn kho, thuế.</td><td>Biên bản đối chiếu / chênh lệch.</td></tr>
+      <tr><td>Kiểm tra cân đối Nợ/Có và kết chuyển</td><td>Kế toán trưởng</td><td>Xác nhận mọi bút toán cân đối và tài khoản doanh thu/chi phí đã được kết chuyển đầy đủ; nếu còn chênh lệch phải xử lý trước khóa kỳ.</td><td>Báo cáo kiểm tra cân đối.</td></tr>
+      <tr><td>Cảnh báo số liệu bất thường</td><td>Kế toán tổng hợp</td><td>Phát hiện số dư âm bất thường, chứng từ sai kỳ, thiếu đối tượng hoặc dữ liệu lệch lớn so với quy mô giao dịch.</td><td>Danh sách cảnh báo.</td></tr>
     </table>
+    <table class="rule-table">
+      <tr><th>Business rule</th><th>Nội dung</th></tr>
+      <tr><td>BR-5.6-01</td><td>Không cho khóa kỳ khi còn chứng từ chưa ghi sổ hoặc chênh lệch đối chiếu chưa xử lý.</td></tr>
+      <tr><td>BR-5.6-02</td><td>Các đối chiếu phải trace được về từng phân hệ nguồn và tài khoản sổ cái tương ứng.</td></tr>
+      <tr><td>BR-5.6-03</td><td>Cảnh báo chỉ là phát hiện; mọi xử lý cần theo luồng nghiệp vụ chính thức trước khi khóa.</td></tr>
+    </table>
+    <p><strong>Liên kết phân hệ:</strong> quỹ, ngân hàng, công nợ phải thu, công nợ phải trả, kho và thuế; đầu ra gồm danh sách lỗi, biên bản đối chiếu và readiness report cho khóa kỳ.</p>
 
     <h3>5.7. Khóa kỳ & mở lại kỳ</h3>
-    <p>Module này dùng để khóa dữ liệu kế toán sau khi đã kiểm tra, đồng thời kiểm soát việc mở lại kỳ khi cần điều chỉnh.</p>
-    <table class="stt-table">
-      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
-      <tr><td>1</td><td>Khóa kỳ kế toán</td><td>Khóa dữ liệu theo tháng, quý hoặc năm sau khi hoàn tất kiểm tra số liệu.</td></tr>
-      <tr><td>2</td><td>Chặn thêm / sửa / xóa chứng từ trong kỳ khóa</td><td>Không cho phát sinh thay đổi dữ liệu trong kỳ đã khóa nếu không có quyền mở khóa.</td></tr>
-      <tr><td>3</td><td>Kiểm tra điều kiện trước khóa kỳ</td><td>Yêu cầu xử lý chứng từ chưa ghi sổ, chênh lệch đối chiếu và bút toán kết chuyển trước khi khóa.</td></tr>
-      <tr><td>4</td><td>Mở lại kỳ kế toán</td><td>Người có quyền cao được mở lại kỳ để điều chỉnh khi có lý do hợp lệ.</td></tr>
-      <tr><td>5</td><td>Ghi nhận lý do mở kỳ</td><td>Bắt buộc nhập lý do mở kỳ và lưu nhật ký truy vết.</td></tr>
-      <tr><td>6</td><td>Lịch sử khóa / mở kỳ</td><td>Theo dõi người thực hiện, thời gian, kỳ kế toán, lý do và nội dung thay đổi.</td></tr>
-      <tr><td>7</td><td>Khóa lại kỳ sau điều chỉnh</td><td>Sau khi điều chỉnh xong, khóa lại kỳ để bảo vệ số liệu.</td></tr>
+    <p>Module này dùng để khóa dữ liệu kế toán sau khi đã kiểm tra, đồng thời kiểm soát việc mở lại kỳ khi cần điều chỉnh; mọi thao tác đều phải có phân quyền và audit log.</p>
+    <table class="rule3-table">
+      <tr><th>Use case / chức năng</th><th>Actor</th><th>Luồng nghiệp vụ & kiểm soát</th><th>Output</th></tr>
+      <tr><td>Khóa kỳ kế toán</td><td>Kế toán trưởng, người có quyền</td><td>Chỉ cho khóa khi các kiểm tra trước khóa đã đạt; hệ thống chặn thêm/sửa/xóa dữ liệu trong kỳ khóa.</td><td>Kỳ bị khóa.</td></tr>
+      <tr><td>Mở lại kỳ</td><td>Kế toán trưởng, quản trị</td><td>Người có quyền cao mở lại kỳ để điều chỉnh khi cần; phải nhập lý do, thời gian và phạm vi điều chỉnh.</td><td>Kỳ mở tạm thời, audit log.</td></tr>
+      <tr><td>Lưu lịch sử khóa / mở kỳ</td><td>Hệ thống</td><td>Ghi nhận người thao tác, thời điểm, lý do và trạng thái trước/sau; không cho xóa lịch sử.</td><td>Lịch sử khóa/mở kỳ.</td></tr>
+      <tr><td>Khóa lại sau điều chỉnh</td><td>Kế toán trưởng</td><td>Sau khi sửa xong phải khóa lại kỳ để bảo vệ số liệu và tránh phát sinh thay đổi ngoài kiểm soát.</td><td>Kỳ khóa lại.</td></tr>
     </table>
+    <table class="rule-table">
+      <tr><th>Business rule</th><th>Nội dung</th></tr>
+      <tr><td>BR-5.7-01</td><td>Chỉ người có quyền mới được khóa hoặc mở lại kỳ.</td></tr>
+      <tr><td>BR-5.7-02</td><td>Phải kiểm tra readiness trước khóa và không được bỏ qua các lỗi nghiêm trọng.</td></tr>
+      <tr><td>BR-5.7-03</td><td>Việc mở kỳ phải bắt buộc có lý do và không được xóa lịch sử.</td></tr>
+    </table>
+    <p><strong>Liên kết phân hệ:</strong> khóa kỳ tác động tới toàn bộ phân hệ phát sinh chứng từ; đầu ra là trạng thái kỳ và nhật ký audit phục vụ kiểm soát nội bộ.</p>
 
     <h3>5.8. Sổ sách kế toán tổng hợp</h3>
-    <p>Module này cung cấp hệ thống sổ kế toán phục vụ kiểm tra, tra cứu và đối chiếu số liệu tổng hợp.</p>
+    <p>Module này cung cấp hệ thống sổ kế toán phục vụ kiểm tra, tra cứu và đối chiếu số liệu tổng hợp; mọi sổ chỉ hiển thị dữ liệu đã ghi sổ và phải drill-down được về chứng từ gốc.</p>
     <table class="rule3-table">
-      <tr><th>STT</th><th>Sổ / Chức năng</th><th>Mô tả</th></tr>
-      <tr><td>1</td><td>Sổ nhật ký chung</td><td>Liệt kê toàn bộ bút toán kế toán theo trình tự thời gian.</td></tr>
-      <tr><td>2</td><td>Sổ cái</td><td>Theo dõi số dư và phát sinh Nợ / Có theo từng tài khoản kế toán.</td></tr>
-      <tr><td>3</td><td>Sổ chi tiết tài khoản</td><td>Theo dõi chi tiết phát sinh theo tài khoản, đối tượng, khoản mục, chứng từ.</td></tr>
-      <tr><td>4</td><td>Bảng cân đối phát sinh</td><td>Tổng hợp số dư đầu kỳ, phát sinh Nợ / Có, số dư cuối kỳ của các tài khoản.</td></tr>
-      <tr><td>5</td><td>Bảng cân đối tài khoản</td><td>Kiểm tra số dư và phát sinh để phát hiện tài khoản bất thường trước khi lập BCTC.</td></tr>
-      <tr><td>6</td><td>Lọc và tra cứu sổ sách</td><td>Lọc theo kỳ, tài khoản, đối tượng, loại chứng từ, phòng ban, khoản mục chi phí.</td></tr>
-      <tr><td>7</td><td>Drill-down về chứng từ gốc</td><td>Từ dòng sổ sách có thể mở chứng từ phát sinh ban đầu.</td></tr>
-      <tr><td>8</td><td>Xuất sổ sách</td><td>Xuất sổ sách ra PDF / Excel phục vụ kiểm tra, lưu trữ hoặc gửi kiểm toán.</td></tr>
+      <tr><th>Use case / chức năng</th><th>Actor</th><th>Luồng nghiệp vụ & kiểm soát</th><th>Output</th></tr>
+      <tr><td>Sổ nhật ký chung</td><td>Kế toán tổng hợp</td><td>Hiển thị toàn bộ bút toán theo thời gian, có thể lọc theo kỳ / tài khoản / chứng từ / đối tượng.</td><td>Sổ nhật ký chung.</td></tr>
+      <tr><td>Sổ cái / sổ chi tiết tài khoản</td><td>Kế toán tổng hợp</td><td>Theo dõi phát sinh Nợ/Có, số dư đầu kỳ / cuối kỳ theo tài khoản và chi tiết theo đối tượng, khoản mục, chứng từ.</td><td>Sổ cái, sổ chi tiết.</td></tr>
+      <tr><td>Bảng cân đối phát sinh / tài khoản</td><td>Kế toán trưởng</td><td>Tổng hợp để kiểm tra tổng Nợ = tổng Có và phát hiện tài khoản bất thường trước BCTC.</td><td>Bảng cân đối phát sinh, bảng cân đối tài khoản.</td></tr>
+      <tr><td>Lọc / tra cứu / drill-down</td><td>Kế toán, kiểm soát nội bộ</td><td>Lọc theo kỳ, tài khoản, đối tượng, phòng ban, khoản mục; từ dòng sổ nhảy về chứng từ gốc để kiểm chứng.</td><td>Kết quả tra cứu và đường dẫn chứng từ.</td></tr>
+      <tr><td>Xuất dữ liệu</td><td>Kế toán tổng hợp</td><td>Xuất PDF/Excel đồng nhất với số liệu hiển thị, phục vụ kiểm toán và lưu trữ.</td><td>File xuất sổ sách.</td></tr>
     </table>
+    <table class="rule-table">
+      <tr><th>Business rule</th><th>Nội dung</th></tr>
+      <tr><td>BR-5.8-01</td><td>Chỉ chứng từ đã ghi sổ mới xuất hiện trên sổ sách tổng hợp.</td></tr>
+      <tr><td>BR-5.8-02</td><td>Xuất dữ liệu phải khớp với dữ liệu đang hiển thị trên màn hình.</td></tr>
+      <tr><td>BR-5.8-03</td><td>Sổ chi tiết phải khớp sổ cái theo đúng tài khoản và kỳ kế toán.</td></tr>
+    </table>
+    <p><strong>Liên kết phân hệ:</strong> nhận dữ liệu từ tất cả phân hệ đã ghi sổ; đầu ra là sổ nhật ký chung, sổ cái, bảng cân đối phát sinh và nguồn tra cứu cho BCTC.</p>
 
     <h3>5.9. Báo cáo tài chính</h3>
-    <p>Module này dùng để lập bộ báo cáo tài chính theo mẫu đã thống nhất, lấy số liệu từ sổ cái và các phân hệ liên quan.</p>
+    <p>Module này dùng để lập bộ báo cáo tài chính theo mẫu đã thống nhất, lấy số liệu từ sổ cái và các phân hệ liên quan; báo cáo chỉ phát hành khi dữ liệu đã ghi sổ, đã kết chuyển và đã cân đối.</p>
     <table class="rule3-table">
-      <tr><th>STT</th><th>Báo cáo / Chức năng</th><th>Mô tả</th></tr>
-      <tr><td>1</td><td>Lập báo cáo tài chính</td><td>Tổng hợp số liệu kế toán để lập bộ báo cáo tài chính theo kỳ.</td></tr>
-      <tr><td>2</td><td>Bảng cân đối kế toán</td><td>Trình bày tài sản, nợ phải trả và vốn chủ sở hữu tại thời điểm báo cáo.</td></tr>
-      <tr><td>3</td><td>Báo cáo kết quả hoạt động kinh doanh</td><td>Trình bày doanh thu, chi phí và kết quả kinh doanh trong kỳ.</td></tr>
-      <tr><td>4</td><td>Báo cáo lưu chuyển tiền tệ</td><td>Tổng hợp dòng tiền từ hoạt động kinh doanh, đầu tư và tài chính nếu thuộc phạm vi triển khai.</td></tr>
-      <tr><td>5</td><td>Thuyết minh báo cáo tài chính</td><td>Cung cấp thông tin giải thích thêm cho các chỉ tiêu trên báo cáo tài chính.</td></tr>
-      <tr><td>6</td><td>Kiểm tra cân đối báo cáo</td><td>Cảnh báo khi báo cáo không cân, lệch chỉ tiêu hoặc số liệu không khớp sổ cái.</td></tr>
-      <tr><td>7</td><td>Drill-down từ báo cáo</td><td>Từ chỉ tiêu báo cáo có thể tra cứu về sổ cái, sổ chi tiết và chứng từ gốc.</td></tr>
-      <tr><td>8</td><td>Xuất báo cáo PDF / Excel</td><td>Xuất báo cáo tài chính ra file để lưu trữ, in ấn hoặc gửi cơ quan / kiểm toán.</td></tr>
-      <tr><td>9</td><td>Lưu phiên bản báo cáo</td><td>Lưu lại phiên bản báo cáo đã lập theo kỳ để đối chiếu khi có điều chỉnh.</td></tr>
+      <tr><th>Use case / chức năng</th><th>Actor</th><th>Luồng nghiệp vụ & kiểm soát</th><th>Output</th></tr>
+      <tr><td>Lập báo cáo tài chính</td><td>Kế toán trưởng</td><td>Chọn kỳ báo cáo, hệ thống lấy dữ liệu đã ghi sổ và đã kết chuyển từ sổ cái / sổ tổng hợp.</td><td>Bộ BCTC nháp.</td></tr>
+      <tr><td>Bảng cân đối kế toán</td><td>Kế toán trưởng</td><td>Trình bày tài sản, nợ phải trả và vốn chủ sở hữu tại thời điểm báo cáo; phải cân và khớp số liệu nguồn.</td><td>Bảng cân đối kế toán.</td></tr>
+      <tr><td>KQHĐKD, LCTT, thuyết minh BCTC</td><td>Kế toán trưởng</td><td>Tổng hợp doanh thu, chi phí, dòng tiền và thuyết minh; các chỉ tiêu phải liên kết được đến sổ sách và bút toán nguồn.</td><td>Các báo cáo thành phần của BCTC.</td></tr>
+      <tr><td>Kiểm tra cân đối / drill-down</td><td>Kế toán trưởng, kiểm soát nội bộ</td><td>Không cho phát hành nếu báo cáo lệch chỉ tiêu; từ bất kỳ chỉ tiêu nào có thể drill-down về sổ cái, sổ chi tiết và chứng từ gốc.</td><td>Danh sách lỗi hoặc đường drill-down.</td></tr>
+      <tr><td>Xuất và lưu phiên bản</td><td>Kế toán trưởng</td><td>Xuất PDF/Excel; mỗi lần phát hành lưu thành snapshot riêng, không ghi đè phiên bản đã phát hành.</td><td>File báo cáo và bản lưu phiên bản.</td></tr>
     </table>
+    <table class="rule-table">
+      <tr><th>Business rule</th><th>Nội dung</th></tr>
+      <tr><td>BR-5.9-01</td><td>Chỉ dùng dữ liệu đã ghi sổ và đã kết chuyển hợp lệ.</td></tr>
+      <tr><td>BR-5.9-02</td><td>Bảng cân đối kế toán phải cân giữa tài sản và nguồn vốn.</td></tr>
+      <tr><td>BR-5.9-03</td><td>KQHĐKD phải khớp với kết chuyển cuối kỳ; LCTT phải khớp với các tài khoản tiền.</td></tr>
+      <tr><td>BR-5.9-04</td><td>Không phát hành báo cáo khi còn lỗi cân đối; mọi phiên bản phát hành phải được lưu riêng.</td></tr>
+    </table>
+    <p><strong>Liên kết phân hệ:</strong> báo cáo tài chính lấy dữ liệu từ sổ cái, kết chuyển cuối kỳ, quỹ, ngân hàng, công nợ, kho và thuế; đầu ra là BCTC phát hành, file xuất và snapshot phiên bản.</p>
 
     <h3>Bảng định khoản mẫu — Giai đoạn 4</h3>
     <table class="entry-table">
@@ -2652,6 +2683,9 @@
       <tr><td>4</td><td>Kết chuyển chi phí quản lý doanh nghiệp</td><td>911</td><td>642</td><td></td></tr>
       <tr><td>5</td><td>Kết chuyển lãi (911 dư Có)</td><td>911</td><td>421</td><td></td></tr>
       <tr><td>6</td><td>Kết chuyển lỗ (911 dư Nợ)</td><td>421</td><td>911</td><td></td></tr>
+      <tr><td>7</td><td>Quyết toán tạm ứng nhân viên</td><td>141 / 334 / 642</td><td>111 / 112 / 141</td><td>Phụ thuộc số hoàn ứng và khoản phải thu / phải trả thêm.</td></tr>
+      <tr><td>8</td><td>Phân bổ chi phí trả trước</td><td>242 / 142</td><td>627 / 641 / 642</td><td>Phân bổ theo kỳ, kiểm soát giá trị còn lại.</td></tr>
+      <tr><td>9</td><td>Chứng từ nghiệp vụ khác</td><td>Tùy nghiệp vụ</td><td>Tùy nghiệp vụ</td><td>Phải cân đối Nợ/Có và có hồ sơ kèm theo.</td></tr>
     </table>
     <p><em>Kế toán vui lòng kiểm tra, bổ sung hoặc điều chỉnh tài khoản và nội dung hạch toán cho phù hợp thực tế doanh nghiệp.</em></p>
 
@@ -2666,6 +2700,7 @@
       <tr><td>6</td><td>Mở kỳ phải có lý do</td><td>Mọi thao tác mở lại kỳ phải có lý do và ghi nhật ký truy vết.</td></tr>
       <tr><td>7</td><td>Báo cáo truy vết được</td><td>Từ báo cáo tài chính phải tra cứu được về sổ cái, sổ chi tiết và chứng từ gốc.</td></tr>
       <tr><td>8</td><td>Lưu lịch sử thay đổi</td><td>Các thao tác kết chuyển, khóa kỳ, mở kỳ, lập lại báo cáo phải lưu lịch sử.</td></tr>
+      <tr><td>9</td><td>Nguồn dữ liệu chuẩn</td><td>BCTC chỉ được lấy từ dữ liệu đã ghi sổ và đã đối chiếu xong.</td></tr>
     </table>
 
     <h3>Kết quả bàn giao</h3>

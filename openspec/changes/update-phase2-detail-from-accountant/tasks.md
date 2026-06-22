@@ -1,3 +1,6 @@
+<!-- Nguồn nội dung: /Users/danny/Downloads/phase2.docx — dùng làm data source cho tất cả tasks bên dưới -->
+<!-- Format target: giống Phase 1 trong HTML — sub-sections, Actor & Quyền row, kv-table, stt-table, business rules có mã -->
+
 ## 1. Chi tiết hóa cụm mua hàng & công nợ phải trả
 
 - [ ] 1.1 Viết lại section 3.2 Đơn mua & yêu cầu mua hàng theo format chi tiết như Phase 1

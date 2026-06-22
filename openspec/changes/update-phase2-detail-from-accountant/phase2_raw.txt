@@ -1,0 +1,1295 @@
+Phase 2:
+3.2:BẢNG TỔNG QUAN PHÂN HỆ 3.2 - ĐƠN MUA & YÊU CẦU MUA HÀNG (KÈM BUSINESS RULES)
+
+Mã UC
+Chức năng
+Actor
+Luồng chính
+Business Rules
+Kết quả đầu ra
+UC-PUR-01
+Lập yêu cầu mua hàng
+Nhân viên, Trưởng bộ phận
+Tạo yêu cầu → Nhập hàng hóa/dịch vụ → Nhập SL → Chọn ngày cần → Gửi duyệt
+BR-01: Số lượng > 0.BR-02: Ngày cần hàng ≥ ngày hiện tại.BR-03: Bắt buộc chọn phòng ban.BR-04: Mã PR sinh tự động duy nhất.BR-05: Bắt buộc nhập lý do mua.
+Sinh Phiếu yêu cầu mua (PR)
+UC-PUR-02
+Duyệt yêu cầu mua hàng
+Trưởng phòng, BGĐ
+Xem PR → Kiểm tra → Duyệt/Từ chối → Cập nhật trạng thái
+BR-06: Chỉ người nằm trong luồng duyệt mới được duyệt.BR-07: Từ chối bắt buộc nhập lý do.BR-08: Lưu lịch sử duyệt.BR-09: Có thể cấu hình nhiều cấp duyệt.BR-10: Vượt hạn mức ngân sách phải chuyển cấp duyệt cao hơn.
+PR Đã duyệt/Từ chối
+UC-PUR-03
+Lập đơn mua hàng (PO)
+Nhân viên mua hàng
+Chọn PR → Tạo PO → Nhập giá → Lưu
+BR-11: Chỉ PR đã duyệt mới được tạo PO.BR-12: Một PR có thể tạo nhiều PO.BR-13: Không được tạo PO vượt số lượng PR.BR-14: PO phải có ít nhất 1 dòng hàng hóa/dịch vụ.BR-15: Mã PO sinh tự động duy nhất.
+Sinh Đơn mua hàng (PO)
+UC-PUR-04
+Chọn nhà cung cấp
+Nhân viên mua hàng
+Chọn NCC → Chọn điều khoản → Lưu
+BR-16: NCC phải ở trạng thái hoạt động.BR-17: NCC không bị khóa.BR-18: NCC phải thuộc danh mục NCC được phê duyệt.BR-19: Mỗi PO chỉ có 1 NCC.BR-20: Điều khoản thanh toán là bắt buộc.
+NCC được gắn vào PO
+UC-PUR-05
+So sánh báo giá
+Nhân viên mua hàng
+Nhập báo giá → So sánh → Chọn NCC
+BR-21: Một mặt hàng có thể có nhiều báo giá.BR-22: Lưu toàn bộ báo giá.BR-23: Lưu lịch sử NCC được chọn.BR-24: Không được xóa báo giá đã dùng để phê duyệt.BR-25: Báo giá phải có hiệu lực tại thời điểm lựa chọn.
+NCC được lựa chọn
+UC-PUR-06
+Duyệt đơn mua hàng
+Trưởng phòng, BGĐ
+Xem PO → Kiểm tra → Duyệt/Từ chối
+BR-26: PO phải được duyệt trước khi gửi NCC.BR-27: PO phải được duyệt trước khi nhận hàng.BR-28: PO vượt hạn mức phải trình BGĐ.BR-29: Từ chối phải nhập lý do.BR-30: Lưu lịch sử duyệt.
+PO Đã duyệt
+UC-PUR-07
+Theo dõi thực hiện đơn mua
+Mua hàng, Kế toán
+Theo dõi SL đặt → SL nhận → SL còn lại
+BR-31: Không nhận vượt số lượng PO.BR-32: Cho phép nhận nhiều lần.BR-33: Hệ thống tự tính số lượng còn nhận.BR-34: Nhận đủ tự động hoàn thành PO.BR-35: Hiển thị % hoàn thành PO.
+Theo dõi tiến độ PO
+UC-PUR-08
+Hủy đơn mua
+Mua hàng, Quản lý
+Chọn PO → Hủy → Nhập lý do
+BR-36: Bắt buộc nhập lý do hủy.BR-37: Không được hủy PO đã hoàn thành.BR-38: Không được hủy PO đã phát sinh hóa đơn đầu vào.BR-39: Lưu lịch sử hủy.BR-40: Chỉ người có quyền mới được hủy.
+PO Đã hủy
+UC-PUR-09
+Sửa đổi đơn mua
+Mua hàng
+Mở PO → Chỉnh sửa → Gửi duyệt lại
+BR-41: PO đã duyệt khi sửa phải duyệt lại.BR-42: Lưu version PO.BR-43: Lưu lịch sử thay đổi.BR-44: Không được sửa PO đã hoàn thành.BR-45: Không được giảm số lượng nhỏ hơn số đã nhận.
+PO phiên bản mới
+UC-PUR-10
+In/Xuất đơn mua
+Mua hàng, Kế toán
+Chọn PO → Xuất PDF/Excel
+BR-46: Chỉ PO hợp lệ mới được xuất.BR-47: Xuất theo mẫu chuẩn hệ thống.BR-48: Lưu lịch sử xuất chứng từ.BR-49: Người dùng phải có quyền in/xuất.BR-50: Nội dung file phải khớp dữ liệu PO hiện hành.
+File PDF/Excel
+
+BUSINESS RULES NGHIỆP VỤ TỔNG THỂ PHÂN HỆ MUA HÀNG
+
+Mã Rule
+Nội dung
+BR-G01
+Một yêu cầu mua hàng (PR) có thể phát sinh nhiều đơn mua hàng (PO).
+BR-G02
+Một đơn mua hàng (PO) chỉ thuộc về một nhà cung cấp.
+BR-G03
+Không cho phép nhận hàng khi PO chưa được duyệt.
+BR-G04
+Không cho phép nhập kho vượt số lượng PO.
+BR-G05
+Không cho phép ghi nhận hóa đơn vượt giá trị PO (trừ khi được cấu hình dung sai).
+BR-G06
+Khi nhận đủ hàng, PO tự động chuyển trạng thái Hoàn thành.
+BR-G07
+Khi PO đã hoàn thành thì không được sửa hoặc hủy.
+BR-G08
+Tất cả thao tác duyệt, sửa, hủy phải lưu Audit Log.
+BR-G09
+Mọi chứng từ phải được đánh số tự động theo quy tắc của doanh nghiệp.
+BR-G10
+Hệ thống phải hỗ trợ workflow duyệt động theo phòng ban, giá trị đơn hàng và chức danh.
+BR-G11
+Hệ thống phải kiểm tra ngân sách trước khi duyệt PR hoặc PO (nếu doanh nghiệp bật chức năng kiểm soát ngân sách).
+BR-G12
+Một nhà cung cấp có thể cung cấp nhiều mặt hàng, nhưng mỗi dòng PO chỉ được chọn một NCC.
+BR-G13
+Không được xóa PR hoặc PO khi đã phát sinh chứng từ nghiệp vụ liên quan.
+BR-G14
+Mọi thay đổi trên PO sau khi duyệt phải lưu lịch sử phiên bản (Version Control).
+BR-G15
+Hệ thống phải cảnh báo PO quá hạn giao hàng nhưng chưa nhận đủ hàng.
+  
+Bộ Trạng thái: 
+
+Đối tượng
+Trạng thái
+
+Yêu cầu mua (PR)
+Nháp → Chờ duyệt → Đã duyệt → Từ chối → Đã hủy
+
+Đơn mua (PO)
+Nháp → Chờ duyệt → Đã duyệt → Đang nhận hàng → Nhận một phần → Nhận đủ → Hoàn thành → Đã hủy
+
+Báo giá NCC
+Nháp → Đã gửi → Được chọn → Không được chọn
+
+Nhà cung cấp
+Hoạt động → Tạm khóa → Ngừng giao dịch
+
+3.3. HỢP ĐỒNG MUA
+
+Mã UC
+Chức năng
+Actor
+Luồng chính
+Business Rule
+Kết quả đầu ra
+UC-HD01
+Lập hợp đồng mua
+Nhân viên mua hàng
+Tạo mới hợp đồng → nhập thông tin → lưu
+Số hợp đồng không được trùng; NCC bắt buộc tồn tại; ngày hiệu lực ≥ ngày ký
+Hợp đồng trạng thái Chờ duyệt
+UC-HD02
+Lập hợp đồng từ đơn mua
+Nhân viên mua hàng
+Chọn đơn mua đã duyệt → sinh hợp đồng → bổ sung thông tin → lưu
+Chỉ đơn mua đã duyệt mới được tạo hợp đồng; 1 đơn mua có thể tạo nhiều hợp đồng nếu được cấu hình
+Hợp đồng mua được tạo
+UC-HD03
+Duyệt hợp đồng
+Trưởng phòng mua hàng, BGĐ
+Mở hợp đồng → kiểm tra → duyệt
+Chỉ người có quyền được duyệt; hợp đồng phải đầy đủ thông tin
+Hợp đồng chuyển trạng thái Hiệu lực
+UC-HD04
+Từ chối hợp đồng
+Trưởng phòng mua hàng, BGĐ
+Mở hợp đồng → nhập lý do từ chối → xác nhận
+Bắt buộc nhập lý do từ chối
+Hợp đồng trạng thái Từ chối
+UC-HD05
+Chỉnh sửa hợp đồng
+Nhân viên mua hàng
+Mở hợp đồng → sửa thông tin → lưu
+Chỉ được sửa khi chưa phát sinh giao dịch hoặc chưa duyệt
+Hợp đồng cập nhật
+UC-HD06
+Khai báo điều khoản thanh toán
+Nhân viên mua hàng
+Thêm các đợt thanh toán → nhập tỷ lệ/số tiền → lưu
+Tổng tỷ lệ thanh toán = 100%; hạn thanh toán thuộc thời gian hiệu lực hợp đồng
+Danh sách đợt thanh toán
+UC-HD07
+Khai báo điều khoản giao hàng
+Nhân viên mua hàng
+Khai báo lịch giao hàng → địa điểm giao → người nhận
+Ngày giao hàng thuộc thời hạn hợp đồng
+Kế hoạch giao hàng
+UC-HD08
+Đính kèm hồ sơ hợp đồng
+Nhân viên mua hàng
+Upload file hợp đồng, phụ lục, báo giá
+Chỉ chấp nhận định dạng được cấu hình
+Hồ sơ hợp đồng điện tử
+UC-HD09
+Lập phụ lục hợp đồng
+Nhân viên mua hàng
+Chọn hợp đồng → tạo phụ lục → nhập nội dung → gửi duyệt
+Không được sửa trực tiếp hợp đồng gốc
+Phụ lục hợp đồng
+UC-HD10
+Duyệt phụ lục hợp đồng
+Trưởng phòng/BGĐ
+Kiểm tra phụ lục → duyệt
+Phụ lục phải thuộc hợp đồng hiệu lực
+Phụ lục có hiệu lực
+UC-HD11
+Theo dõi thực hiện hợp đồng
+Nhân viên mua hàng, Kế toán
+Hệ thống tổng hợp nhận hàng, hóa đơn, thanh toán
+Dữ liệu lấy tự động từ các phân hệ liên quan
+Dashboard thực hiện hợp đồng
+UC-HD12
+Theo dõi giao hàng theo hợp đồng
+Nhân viên mua hàng, Kho
+Đối chiếu lịch giao và thực tế nhận hàng
+Giao vượt số lượng phải được cảnh báo
+Báo cáo tiến độ giao hàng
+UC-HD13
+Theo dõi hóa đơn theo hợp đồng
+Kế toán AP
+Đối chiếu hóa đơn với hợp đồng
+Giá trị hóa đơn không vượt giá trị hợp đồng
+Danh sách hóa đơn
+UC-HD14
+Theo dõi thanh toán theo hợp đồng
+Kế toán AP
+Theo dõi các khoản đã thanh toán
+Không thanh toán vượt giá trị còn lại
+Báo cáo thanh toán
+UC-HD15
+Theo dõi giá trị còn lại hợp đồng
+Nhân viên mua hàng
+Hệ thống tính giá trị đã thực hiện
+Giá trị thực hiện không vượt giá trị hợp đồng
+Giá trị còn lại
+UC-HD16
+Cảnh báo hợp đồng đến hạn
+Hệ thống
+Job tự động kiểm tra hạn hợp đồng
+Cảnh báo trước N ngày theo cấu hình
+Thông báo cảnh báo
+UC-HD17
+Cảnh báo thanh toán đến hạn
+Hệ thống
+Kiểm tra các đợt thanh toán sắp tới
+Cảnh báo trước N ngày
+Thông báo thanh toán
+UC-HD18
+Cảnh báo giao hàng đến hạn
+Hệ thống
+Kiểm tra lịch giao hàng
+Cảnh báo trước N ngày
+Thông báo giao hàng
+UC-HD19
+Thanh lý hợp đồng
+Nhân viên mua hàng
+Kiểm tra hoàn thành → lập biên bản → gửi duyệt
+Không còn công nợ và nghĩa vụ thực hiện
+Biên bản thanh lý
+UC-HD20
+Đóng hợp đồng
+Nhân viên mua hàng
+Chọn đóng hợp đồng → xác nhận
+Hợp đồng đã thanh lý hoặc hủy
+Trạng thái Đóng
+UC-HD21
+Hủy hợp đồng
+Nhân viên mua hàng, BGĐ
+Chọn hủy → nhập lý do → xác nhận
+Chưa phát sinh giao dịch hoặc có quyền đặc biệt
+Trạng thái Hủy
+UC-HD22
+Xem lịch sử thay đổi
+Kế toán, Mua hàng, Kiểm soát nội bộ
+Tra cứu log thay đổi
+Không được chỉnh sửa log
+Nhật ký thay đổi
+UC-HD23
+Tra cứu hợp đồng
+Tất cả người dùng có quyền
+Tìm kiếm theo số HĐ, NCC, thời gian
+Theo quyền dữ liệu
+Danh sách hợp đồng
+UC-HD24
+Báo cáo hợp đồng đang thực hiện
+Quản lý
+Chạy báo cáo
+Chỉ lấy hợp đồng hiệu lực
+Báo cáo thực hiện
+UC-HD25
+Báo cáo hợp đồng sắp hết hạn
+Quản lý
+Chạy báo cáo
+Theo thời gian cấu hình
+Danh sách hợp đồng sắp hết hạn
+UC-HD26
+Báo cáo giá trị thực hiện hợp đồng
+Quản lý
+Tổng hợp dữ liệu
+Theo từng NCC hoặc hợp đồng
+Báo cáo tiến độ
+UC-HD27
+Báo cáo công nợ theo hợp đồng
+Kế toán AP
+Tổng hợp công nợ
+Theo hợp đồng hoặc NCC
+Báo cáo công nợ
+UC-HD28
+Báo cáo thanh toán theo hợp đồng
+Kế toán AP
+Tổng hợp thanh toán
+Theo thời gian hoặc NCC
+Báo cáo thanh toán
+Business Rules tổng thể phân hệ
+
+Mã BR
+Business Rule
+BR-HD-01
+Số hợp đồng là duy nhất trong hệ thống
+BR-HD-02
+Chỉ hợp đồng đã duyệt mới có hiệu lực
+BR-HD-03
+Không được nhập hóa đơn vượt giá trị hợp đồng
+BR-HD-04
+Không được nhận hàng vượt hạn mức hợp đồng (nếu bật kiểm soát)
+BR-HD-05
+Tổng tỷ lệ các đợt thanh toán phải bằng 100%
+BR-HD-06
+Phụ lục là phương thức duy nhất để điều chỉnh hợp đồng đã hiệu lực
+BR-HD-07
+Không được thanh lý khi còn công nợ phải trả
+BR-HD-08
+Không được đóng hợp đồng khi chưa thanh lý
+BR-HD-09
+Hệ thống phải lưu lịch sử thay đổi hợp đồng
+BR-HD-10
+Cảnh báo trước hạn theo số ngày cấu hình hệ thống
+BR-HD-11
+Giá trị thực hiện hợp đồng được cập nhật tự động từ nhập kho, hóa đơn và thanh toán
+BR-HD-12
+Người dùng chỉ được xem hợp đồng thuộc phạm vi phân quyền
+
+3.4. PHÂN HỆ MUA HÀNG HÓA / DỊCH VỤ
+
+
+Use Case
+Chức năng
+Actor
+Luồng chính
+Business Rules
+Kết quả đầu ra
+UC-MH-01
+Mua hàng có nhập kho
+Nhân viên mua hàng, Kế toán mua hàng, Người duyệt
+1. Tạo chứng từ mua hàng → 2. Chọn NCC → 3. Chọn PO/Hợp đồng → 4. Nhập hàng hóa → 5. Khai báo thuế → 6. Lưu → 7. Gửi duyệt → 8. Duyệt → 9. Ghi sổ → 10. Sinh công nợ → 11. Chuyển nhập kho
+Chứng từ phải được duyệt trước khi ghi sổ; NCC bắt buộc tồn tại; SL > 0; Đơn giá ≥ 0; Thuế suất hợp lệ; Không sửa sau ghi sổ
+Chứng từ mua hàng, Công nợ phải trả, Dữ liệu chờ nhập kho, Bút toán kế toán
+UC-MH-02
+Mua dịch vụ không qua kho
+Kế toán mua hàng, Bộ phận sử dụng
+1. Tạo chứng từ dịch vụ → 2. Chọn NCC → 3. Nhập nội dung dịch vụ → 4. Khai báo chi phí → 5. Khai báo thuế → 6. Chọn đối tượng chi phí → 7. Duyệt → 8. Ghi sổ
+Không sinh phiếu nhập kho; Bắt buộc chọn đối tượng tập hợp chi phí; Phải khai báo tài khoản chi phí
+Chứng từ mua dịch vụ, Công nợ phải trả, Chi phí được ghi nhận
+UC-MH-03
+Mua hàng chưa có hóa đơn
+Kế toán mua hàng
+1. Tạo chứng từ mua → 2. Chọn trạng thái chưa có hóa đơn → 3. Nhập kho → 4. Theo dõi chờ hóa đơn → 5. Cập nhật khi nhận hóa đơn
+Chưa được kê khai VAT; Theo dõi công nợ tạm; Cảnh báo quá hạn nhận hóa đơn
+Hàng nhập kho, Công nợ tạm, Danh sách chờ hóa đơn
+UC-MH-04
+Mua hàng ngoại tệ
+Kế toán mua hàng, Kế toán công nợ
+1. Tạo chứng từ → 2. Chọn ngoại tệ → 3. Nhập tỷ giá → 4. Nhập hàng hóa → 5. Duyệt → 6. Ghi sổ
+Bắt buộc tỷ giá; Lưu nguyên tệ và quy đổi; Xử lý chênh lệch tỷ giá
+Công nợ ngoại tệ, Giá trị quy đổi VND, Bút toán chênh lệch tỷ giá
+UC-MH-05
+Mua hàng nhiều đợt giao
+Mua hàng, Kho
+1. Tạo PO → 2. Nhận hàng lần 1 → 3. Nhập kho → 4. Theo dõi còn lại → 5. Nhập các đợt tiếp theo → 6. Hoàn thành PO
+Tổng số lượng nhập ≤ số lượng đặt; Theo dõi số lượng còn giao; Tự động cập nhật trạng thái PO
+Lịch sử giao hàng, Trạng thái PO
+UC-MH-06
+Mua hàng có chiết khấu
+Kế toán mua hàng
+1. Tạo chứng từ → 2. Nhập hàng hóa → 3. Nhập chiết khấu → 4. Hệ thống tính lại giá trị → 5. Ghi sổ
+Chiết khấu không vượt giá trị hàng; VAT tính trên giá trị sau chiết khấu
+Giá trị mua thực tế, Thuế GTGT đầu vào, Công nợ phải trả
+UC-MH-07
+Phân bổ chi phí mua hàng
+Kế toán mua hàng
+1. Chọn chứng từ mua → 2. Khai báo chi phí vận chuyển/bốc xếp → 3. Chọn tiêu thức phân bổ → 4. Hệ thống phân bổ → 5. Ghi sổ
+Tổng chi phí phân bổ phải bằng tổng chi phí phát sinh; Không phân bổ cho hàng đã xuất hết
+Giá vốn nhập kho chính xác
+UC-MH-08
+Hủy chứng từ mua hàng
+Kế toán mua hàng, Người duyệt
+1. Chọn chứng từ → 2. Nhập lý do hủy → 3. Phê duyệt hủy → 4. Hệ thống đảo nghiệp vụ
+Không được hủy nếu đã thanh toán hoặc khóa kỳ; Bắt buộc lưu nhật ký hủy
+Chứng từ hủy, Audit Log
+
+3.5. PHÂN HỆ NHẬN HÀNG & NHẬP KHO MUA HÀNG
+
+
+Use Case
+Chức năng
+Actor
+Luồng chính
+Business Rules
+Kết quả đầu ra
+UC-NK-01
+Nhập kho từ chứng từ mua hàng
+Thủ kho
+1. Chọn chứng từ mua → 2. Hiển thị danh sách hàng → 3. Nhập số lượng thực nhận → 4. Lưu phiếu → 5. Duyệt → 6. Cập nhật tồn kho
+Chứng từ mua phải được duyệt; Kho nhận bắt buộc; Không nhập vượt số lượng cho phép
+Phiếu nhập kho, Tồn kho tăng
+UC-NK-02
+Nhập kho nhiều lần
+Thủ kho
+1. Chọn PO/Hợp đồng → 2. Nhập kho lần 1 → 3. Theo dõi còn lại → 4. Nhập tiếp các lần sau → 5. Hoàn thành
+Tổng nhập không vượt số lượng đặt; Theo dõi số lượng còn nhận
+Lịch sử nhập kho nhiều đợt, Trạng thái PO
+UC-NK-03
+Nhập kho có QC
+QC, Thủ kho
+1. Nhận hàng → 2. Kiểm tra chất lượng → 3. Đạt QC → 4. Nhập kho → 5. Không đạt chuyển xử lý
+Hàng lỗi không được nhập kho chính thức; Bắt buộc biên bản QC
+Biên bản QC, Phiếu nhập kho
+UC-NK-04
+Nhập kho theo Serial
+Thủ kho
+1. Nhập hàng → 2. Khai báo Serial → 3. Kiểm tra trùng → 4. Duyệt → 5. Nhập kho
+Serial không được trùng; Số lượng Serial = số lượng nhập
+Tồn kho theo Serial
+UC-NK-05
+Nhập kho theo Lot
+Thủ kho
+1. Nhập hàng → 2. Khai báo Lot → 3. Nhập NSX/HSD → 4. Duyệt → 5. Nhập kho
+Mã Lot bắt buộc; HSD hợp lệ; Theo dõi tuổi tồn kho
+Tồn kho theo Lot
+UC-NK-06
+Ghi nhận hàng thiếu/hàng lỗi
+Thủ kho, QC
+1. Nhận hàng → 2. Kiểm đếm → 3. Ghi nhận thiếu/lỗi → 4. Lập biên bản → 5. Chuyển xử lý NCC
+Bắt buộc ghi nhận nguyên nhân; Không nhập kho số lượng lỗi
+Biên bản thiếu hàng, Biên bản hàng lỗi
+UC-NK-07
+Trả hàng nhà cung cấp
+Thủ kho, Kế toán mua hàng
+1. Chọn phiếu nhập → 2. Chọn hàng trả → 3. Nhập số lượng → 4. Nhập lý do → 5. Duyệt → 6. Xuất trả NCC
+Không trả vượt số lượng nhập; Lý do trả hàng bắt buộc
+Phiếu trả hàng NCC, Giảm tồn kho
+UC-NK-08
+Nhập kho thủ công
+Thủ kho
+1. Tạo phiếu nhập → 2. Chọn kho → 3. Nhập hàng hóa → 4. Duyệt → 5. Cập nhật tồn kho
+Chỉ người có quyền mới được tạo; Bắt buộc chọn lý do nhập
+Phiếu nhập kho độc lập
+UC-NK-09
+Hủy phiếu nhập kho
+Thủ kho, Kế toán kho
+1. Chọn phiếu nhập → 2. Nhập lý do → 3. Duyệt hủy → 4. Đảo tồn kho
+Không được hủy khi đã xuất kho hoặc khóa kỳ; Bắt buộc Audit Log
+Phiếu nhập kho hủy, Điều chỉnh tồn kho
+UC-NK-10
+In phiếu nhập kho
+Thủ kho
+1. Chọn phiếu → 2. Chọn mẫu in → 3. In hoặc xuất PDF
+Chỉ in phiếu đã duyệt
+Phiếu nhập kho bản in/PDF
+UC-NK-11
+Cập nhật tồn kho
+Hệ thống
+1. Phiếu nhập được duyệt → 2. Hệ thống tăng số lượng tồn → 3. Cập nhật giá trị tồn kho → 4. Ghi nhận lịch sử kho
+Không cập nhật tồn kho khi phiếu chưa duyệt
+Tồn kho thực tế, Sổ kho, Nhật ký kho
+
+3.6. Hóa đơn mua vào
+
+
+Use Case
+Chức năng
+Actor
+Luồng chính
+Business Rules
+Kết quả đầu ra
+UC-HD01
+Nhập hóa đơn mua vào
+Kế toán mua hàng
+Chọn thêm mới → nhập thông tin hóa đơn → lưu
+BR-HD-01,02,05
+Hóa đơn đầu vào được tạo
+UC-HD02
+Lập chứng từ mua từ hóa đơn
+Kế toán mua hàng
+Chọn hóa đơn → tạo chứng từ mua → lưu
+Chỉ áp dụng hóa đơn hợp lệ
+Chứng từ mua hàng phát sinh
+UC-HD03
+Liên kết hóa đơn với chứng từ mua
+Kế toán mua hàng
+Chọn hóa đơn → chọn chứng từ liên quan → xác nhận
+Một hóa đơn chỉ liên kết đúng nghiệp vụ
+Liên kết được lưu
+UC-HD04
+Theo dõi hàng đã nhận chưa có hóa đơn
+Kế toán mua hàng
+Mở báo cáo → hệ thống lọc phiếu nhập chưa có hóa đơn
+Dựa trên trạng thái nhập kho
+Danh sách cần xử lý
+UC-HD05
+Theo dõi hóa đơn chưa nhận hàng
+Kế toán mua hàng
+Tra cứu hóa đơn → đối chiếu nhập kho
+Dựa trên liên kết chứng từ
+Danh sách hóa đơn treo
+UC-HD06
+Kiểm tra trùng hóa đơn
+Hệ thống
+Khi lưu hóa đơn → kiểm tra dữ liệu
+BR-HD-01
+Cảnh báo trùng
+UC-HD07
+Kiểm tra nhà cung cấp
+Hệ thống/Kế toán
+Nhập MST → kiểm tra thông tin
+MST phải hợp lệ
+Trả về thông tin NCC
+UC-HD08
+Quản lý trạng thái hóa đơn
+Kế toán thuế
+Chuyển trạng thái kiểm tra
+Theo workflow được cấu hình
+Trạng thái cập nhật
+UC-HD09
+Đính kèm file hóa đơn
+Kế toán mua hàng
+Upload XML/PDF/Image
+File đúng định dạng
+Hồ sơ hóa đơn đầy đủ
+UC-HD10
+Chuyển sang kê khai thuế
+Kế toán thuế
+Chọn kỳ kê khai → tổng hợp dữ liệu
+BR-HD-08
+Bảng kê thuế GTGT đầu vào
+
+Business Rules chung phân hệ:
+
+
+Mã
+Business Rule
+BR-HD-01
+Mỗi hóa đơn chỉ được tồn tại duy nhất theo tổ hợp MST NCC + Ký hiệu + Số hóa đơn.
+BR-HD-02
+Không được xóa hóa đơn đã kê khai thuế.
+BR-HD-03
+Hóa đơn điều chỉnh phải tham chiếu hóa đơn gốc.
+BR-HD-04
+Hóa đơn thay thế phải liên kết hóa đơn bị thay thế.
+BR-HD-05
+Thuế GTGT phải được tính đúng theo thuế suất khai báo.
+BR-HD-06
+Hóa đơn đã khóa kỳ chỉ được xem, không được sửa.
+BR-HD-07
+Tổng tiền hàng + thuế phải khớp tổng thanh toán.
+BR-HD-08
+Chỉ hóa đơn hợp lệ mới được đưa vào kê khai thuế.
+BR-HD-09
+Người dùng chỉ được sửa hóa đơn thuộc quyền hạn được phân công.
+BR-HD-10
+Hệ thống lưu lịch sử mọi lần chỉnh sửa hóa đơn.
+
+PHÂN HỆ 3.7. CÔNG NỢ PHẢI TRẢ NHÀ CUNG CẤP
+
+
+Use Case
+Chức năng
+Actor
+Luồng chính
+Business Rules
+Kết quả đầu ra
+UC-CN01
+Ghi nhận công nợ phải trả
+Kế toán công nợ
+Duyệt hóa đơn/chứng từ mua → phát sinh công nợ
+BR-CN-01
+Công nợ được tạo
+UC-CN02
+Theo dõi công nợ theo NCC
+Kế toán công nợ
+Chọn NCC → xem số dư
+BR-CN-02
+Sổ công nợ NCC
+UC-CN03
+Theo dõi công nợ theo hóa đơn
+Kế toán công nợ
+Chọn hóa đơn → xem chi tiết
+Theo dõi từng hóa đơn
+Chi tiết công nợ
+UC-CN04
+Theo dõi công nợ theo hợp đồng
+Kế toán công nợ
+Chọn hợp đồng → đối chiếu
+Giá trị hợp đồng phải khớp phát sinh
+Báo cáo hợp đồng
+UC-CN05
+Theo dõi hạn thanh toán
+Kế toán công nợ
+Hệ thống tính ngày đến hạn
+BR-CN-06
+Danh sách đến hạn
+UC-CN06
+Cảnh báo công nợ đến hạn
+Hệ thống
+Chạy lịch cảnh báo
+Theo cấu hình số ngày
+Thông báo cảnh báo
+UC-CN07
+Đối chiếu công nợ NCC
+Kế toán công nợ
+Chọn kỳ → lập biên bản đối chiếu
+Số liệu phải khớp
+Biên bản đối chiếu
+UC-CN08
+Điều chỉnh công nợ
+Kế toán trưởng
+Lập chứng từ điều chỉnh → duyệt
+BR-CN-04
+Công nợ cập nhật
+UC-CN09
+Theo dõi công nợ ngoại tệ
+Kế toán công nợ
+Ghi nhận nguyên tệ → quy đổi
+BR-CN-05
+Báo cáo ngoại tệ
+UC-CN10
+Đối chiếu công nợ với sổ cái
+Kế toán tổng hợp
+Chạy đối chiếu
+BR-CN-07
+Báo cáo chênh lệch hoặc khớp
+
+Business Rules chung phân hệ:
+
+
+Mã
+Business Rule
+BR-CN-01
+Công nợ chỉ phát sinh từ chứng từ mua hoặc hóa đơn đã duyệt.
+BR-CN-02
+Công nợ phải theo dõi chi tiết từng nhà cung cấp.
+BR-CN-03
+Không cho phép thanh toán vượt số dư công nợ.
+BR-CN-04
+Mọi điều chỉnh công nợ phải có chứng từ.
+BR-CN-05
+Công nợ ngoại tệ phải lưu nguyên tệ và tỷ giá.
+BR-CN-06
+Công nợ quá hạn được xác định theo ngày đến hạn thanh toán.
+BR-CN-07
+Tổng công nợ chi tiết phải khớp sổ cái tài khoản 331.
+BR-CN-08
+Không cho sửa công nợ đã khóa kỳ.
+BR-CN-09
+Thanh toán nhiều lần phải theo dõi số dư còn lại.
+BR-CN-10
+Hệ thống lưu vết mọi thay đổi công nợ.
+
+3.8. PHÂN HỆ THANH TOÁN NHÀ CUNG CẤP
+
+
+Use Case
+Chức năng
+Actor
+Luồng chính
+Business Rules
+Kết quả đầu ra
+UC-PAY-01
+Lập thanh toán nhà cung cấp
+Kế toán công nợ
+1. Chọn NCC → 2. Chọn hóa đơn công nợ → 3. Nhập số tiền thanh toán → 4. Kiểm tra số dư → 5. Lưu chứng từ
+BR-PAY-01,02,03,04
+Chứng từ thanh toán NCC
+UC-PAY-02
+Thanh toán tiền mặt
+Kế toán thanh toán
+1. Chọn phương thức tiền mặt → 2. Sinh phiếu chi → 3. Duyệt → 4. Giảm công nợ
+BR-PAY-03,06
+Phiếu chi + giảm công nợ
+UC-PAY-03
+Thanh toán ngân hàng
+Kế toán ngân hàng
+1. Chọn tài khoản NH → 2. Lập UNC → 3. Duyệt → 4. Hạch toán
+BR-PAY-03,06
+UNC/chứng từ ngân hàng
+UC-PAY-04
+Thanh toán theo hóa đơn
+Kế toán công nợ
+1. Chọn hóa đơn → 2. Phân bổ tiền → 3. Cập nhật số dư hóa đơn
+BR-PAY-03
+Công nợ hóa đơn giảm
+UC-PAY-05
+Thanh toán một phần
+Kế toán công nợ
+1. Chọn hóa đơn → 2. Nhập số tiền nhỏ hơn dư nợ → 3. Lưu
+BR-PAY-03
+Hóa đơn còn dư nợ
+UC-PAY-06
+Thanh toán nhiều hóa đơn
+Kế toán công nợ
+1. Chọn nhiều hóa đơn → 2. Phân bổ tiền → 3. Duyệt
+BR-PAY-05
+Nhiều hóa đơn được tất toán một phần/toàn bộ
+UC-PAY-07
+Ghi nhận chiết khấu thanh toán
+Kế toán công nợ
+1. Nhập số CKTT → 2. Xác định tài khoản → 3. Hạch toán
+BR-PAY-09
+Bút toán doanh thu tài chính
+UC-PAY-08
+Ghi nhận phí ngân hàng
+Kế toán ngân hàng
+1. Nhập phí → 2. Chọn TK chi phí → 3. Hạch toán
+BR-PAY-10
+Bút toán chi phí ngân hàng
+UC-PAY-09
+In phiếu chi/UNC
+Kế toán
+1. Chọn chứng từ → 2. Chọn mẫu → 3. In/PDF
+BR-PAY-06
+Phiếu chi/UNC
+UC-PAY-10
+Hủy thanh toán
+Kế toán trưởng
+1. Chọn chứng từ → 2. Nhập lý do → 3. Hủy → 4. Đảo công nợ
+BR-PAY-07,08
+Công nợ được khôi phục
+
+Business Rules chung phân hệ:
+
+
+Mã BR
+Business Rule
+BR-PAY-01
+Chỉ được thanh toán cho nhà cung cấp đang hoạt động
+BR-PAY-02
+Chỉ thanh toán các hóa đơn đã ghi nhận công nợ
+BR-PAY-03
+Không được thanh toán vượt số dư công nợ còn phải trả
+BR-PAY-04
+Một chứng từ thanh toán chỉ thuộc một nhà cung cấp
+BR-PAY-05
+Có thể phân bổ một khoản thanh toán cho nhiều hóa đơn
+BR-PAY-06
+Hệ thống tự động giảm công nợ sau khi chứng từ được duyệt
+BR-PAY-07
+Chứng từ đã hạch toán không được sửa trực tiếp
+BR-PAY-08
+Hủy thanh toán phải sinh bút toán đảo
+BR-PAY-09
+Chiết khấu thanh toán phải hạch toán riêng
+BR-PAY-10
+Phí ngân hàng phải ghi nhận riêng biệt với số tiền thanh toán
+
+3.9. PHÂN HỆ TRẢ LẠI HÀNG MUA & GIẢM GIÁ HÀNG MUA
+
+
+Use Case
+Chức năng
+Actor
+Luồng chính
+Business Rules
+Kết quả đầu ra
+UC-RET-01
+Lập chứng từ trả lại hàng mua
+Kế toán mua hàng
+1. Chọn NCC → 2. Chọn chứng từ mua → 3. Chọn hàng trả → 4. Lưu
+BR-RET-01,02,03
+Chứng từ trả hàng
+UC-RET-02
+Xuất kho trả lại
+Thủ kho
+1. Nhận yêu cầu trả → 2. Xuất kho → 3. Xác nhận
+BR-RET-04
+Phiếu xuất trả NCC
+UC-RET-03
+Trả lại theo chứng từ mua
+Kế toán kho
+1. Chọn phiếu mua → 2. Chọn dòng hàng → 3. Trả hàng
+BR-RET-03
+Liên kết chứng từ gốc
+UC-RET-04
+Giảm giá hàng mua
+Kế toán công nợ
+1. Nhập số tiền giảm giá → 2. Chọn lý do → 3. Duyệt
+BR-RET-05
+Chứng từ giảm giá
+UC-RET-05
+Điều chỉnh thuế GTGT đầu vào
+Kế toán thuế
+1. Tính lại VAT → 2. Hạch toán điều chỉnh
+BR-RET-06
+VAT đầu vào điều chỉnh
+UC-RET-06
+Điều chỉnh công nợ phải trả
+Kế toán công nợ
+1. Cập nhật giảm giá/trả hàng → 2. Giảm công nợ
+BR-RET-07
+Công nợ giảm
+UC-RET-07
+Quản lý hóa đơn điều chỉnh
+Kế toán thuế
+1. Nhập hóa đơn điều chỉnh → 2. Liên kết chứng từ
+BR-RET-08
+Hồ sơ hóa đơn đầy đủ
+UC-RET-08
+In biên bản trả lại
+Kế toán mua hàng
+1. Chọn chứng từ → 2. In/PDF
+BR-RET-03
+Biên bản trả hàng
+
+Business Rules chung phân hệ:
+
+
+Mã BR
+Business Rule
+BR-RET-01
+Chỉ được trả lại hàng đã mua và đã nhập kho
+BR-RET-02
+Số lượng trả không được vượt số lượng đã nhận
+BR-RET-03
+Chứng từ trả lại phải liên kết chứng từ mua gốc
+BR-RET-04
+Trả lại hàng phải làm giảm tồn kho
+BR-RET-05
+Giảm giá hàng mua không làm thay đổi số lượng tồn
+BR-RET-06
+Phải điều chỉnh thuế GTGT tương ứng
+BR-RET-07
+Phải điều chỉnh công nợ phải trả tương ứng
+BR-RET-08
+Hóa đơn điều chỉnh phải liên kết chứng từ trả hàng
+BR-RET-09
+Không được sửa chứng từ đã phát hành hóa đơn điều chỉnh
+
+3.10. PHÂN HỆ BÙ TRỪ & ĐỐI CHIẾU CÔNG NỢ
+
+
+Use Case
+Chức năng
+Actor
+Luồng chính
+Business Rules
+Kết quả đầu ra
+UC-OFF-01
+Bù trừ công nợ cùng đối tượng
+Kế toán công nợ
+1. Chọn đối tượng → 2. Hiển thị phải thu & phải trả → 3. Nhập số tiền bù trừ → 4. Duyệt
+BR-OFF-01,02
+Chứng từ bù trừ
+UC-OFF-02
+Bù trừ theo hóa đơn
+Kế toán công nợ
+1. Chọn hóa đơn AR/AP → 2. Chọn số tiền bù trừ → 3. Lưu
+BR-OFF-02
+Công nợ hóa đơn giảm
+UC-OFF-03
+Lập chứng từ bù trừ
+Kế toán tổng hợp
+1. Sinh chứng từ → 2. Hạch toán → 3. Duyệt
+BR-OFF-03,04
+Chứng từ bù trừ chính thức
+UC-OFF-04
+Lập biên bản đối chiếu công nợ
+Kế toán công nợ
+1. Chọn kỳ đối chiếu → 2. Tổng hợp số liệu → 3. In biên bản
+BR-OFF-05
+Biên bản đối chiếu
+UC-OFF-05
+Theo dõi xác nhận đối chiếu
+Kế toán công nợ
+1. Gửi đối chiếu → 2. Cập nhật phản hồi → 3. Ghi nhận trạng thái
+BR-OFF-05
+Danh sách xác nhận
+UC-OFF-06
+Xử lý chênh lệch công nợ
+Kế toán trưởng
+1. Xác định lệch → 2. Chọn nguyên nhân → 3. Lập điều chỉnh
+BR-OFF-06,07
+Chứng từ điều chỉnh
+UC-OFF-07
+Đối chiếu công nợ với sổ cái
+Kế toán tổng hợp
+1. Tổng hợp công nợ chi tiết → 2. So sánh TK 331 → 3. Báo lệch
+BR-OFF-08,09
+Báo cáo đối chiếu công nợ
+
+Business Rules chung phân hệ:
+
+
+Mã BR
+Business Rule
+BR-OFF-01
+Chỉ được bù trừ khi đối tượng vừa là khách hàng vừa là nhà cung cấp
+BR-OFF-02
+Số tiền bù trừ không được vượt dư nợ hai bên
+BR-OFF-03
+Chứng từ bù trừ phải được phê duyệt
+BR-OFF-04
+Sau bù trừ phải cập nhật đồng thời AR và AP
+BR-OFF-05
+Biên bản đối chiếu phải lấy số liệu tại thời điểm khóa
+BR-OFF-06
+Chênh lệch công nợ phải có nguyên nhân
+BR-OFF-07
+Điều chỉnh công nợ phải lưu vết kiểm toán
+BR-OFF-08
+Công nợ chi tiết phải khớp sổ cái tổng hợp
+BR-OFF-09
+Không cho khóa kỳ nếu công nợ và sổ cái lệch
+
+3.11
+
+3.11.1. NHẬP KHO:
+
+
+Use Case
+Chức năng
+Actor
+Luồng chính
+Business Rule
+Kết quả đầu ra
+UC-WH-01
+Lập chứng từ nhập kho
+Nhân viên kho, Thủ kho
+Tạo phiếu nhập → Chọn kho → Chọn hàng hóa → Nhập số lượng → Lưu phiếu
+Chỉ nhập vào kho hoạt động; số lượng > 0
+Phiếu nhập kho
+UC-WH-02
+Nhập kho từ mua hàng
+Nhân viên kho, Kế toán kho
+Chọn chứng từ mua hàng → Sinh phiếu nhập → Kiểm tra số lượng → Lưu
+Phiếu nhập phải liên kết đơn mua/nhận hàng
+Phiếu nhập kho từ mua hàng
+UC-WH-03
+Nhập kho khác
+Nhân viên kho
+Tạo phiếu nhập khác → Chọn lý do nhập → Nhập hàng hóa → Lưu
+Bắt buộc khai báo lý do nhập kho
+Phiếu nhập kho khác
+UC-WH-04
+Duyệt nhập kho
+Thủ kho, Quản lý kho
+Kiểm tra chứng từ → Duyệt → Xác nhận nhập kho
+Chỉ người có quyền được duyệt
+Phiếu nhập kho đã duyệt
+UC-WH-05
+Cập nhật thẻ kho
+Hệ thống
+Sau khi duyệt → Tăng tồn kho → Cập nhật thẻ kho
+Chỉ cập nhật khi phiếu đã duyệt
+Thẻ kho, tồn kho được cập nhật
+
+Business Rules toàn phân hệ Nhập kho
+
+
+Mã
+Quy tắc
+BR-WH-101
+Kho nhận phải đang hoạt động
+BR-WH-102
+Không cho nhập số lượng ≤ 0
+BR-WH-103
+Chứng từ duyệt mới cập nhật tồn kho
+BR-WH-104
+Phiếu đã duyệt không được sửa trực tiếp
+BR-WH-105
+Phiếu nhập từ mua hàng phải liên kết chứng từ nguồn
+BR-WH-106
+Tự động đánh số phiếu nhập kho
+
+3.11.2. CHUYỂN KHO:
+
+
+Use Case
+Chức năng
+Actor
+Luồng chính
+Business Rule
+Kết quả đầu ra
+UC-WH-06
+Lập phiếu chuyển kho
+Nhân viên kho, Thủ kho
+Chọn kho nguồn → Kho đích → Chọn hàng → Nhập số lượng → Lưu
+Kho nguồn khác kho đích
+Phiếu chuyển kho
+UC-WH-07
+Kiểm tra tồn kho nguồn
+Hệ thống
+Kiểm tra tồn khả dụng trước khi lưu
+Không cho phép chuyển vượt tồn
+Cảnh báo hoặc chặn chuyển
+UC-WH-08
+Duyệt chuyển kho
+Thủ kho, Quản lý kho
+Kiểm tra chứng từ → Duyệt → Cập nhật tồn
+Chỉ chứng từ duyệt mới cập nhật tồn
+Phiếu chuyển kho đã duyệt
+UC-WH-09
+Theo dõi hàng đang chuyển
+Thủ kho
+Xuất kho nguồn → Theo dõi vận chuyển → Nhập kho đích
+Cho phép theo dõi trạng thái vận chuyển
+Danh sách hàng đang chuyển
+UC-WH-10
+In phiếu chuyển kho
+Nhân viên kho
+Chọn phiếu → In
+Chỉ in phiếu hợp lệ
+Phiếu chuyển kho PDF/In giấy
+
+Business Rules toàn phân hệ Chuyển kho:
+
+
+Mã
+Quy tắc
+BR-WH-201
+Kho nguồn phải khác kho đích
+BR-WH-202
+Không chuyển vượt tồn khả dụng
+BR-WH-203
+Chỉ phiếu duyệt mới cập nhật tồn
+BR-WH-204
+Lưu lịch sử chuyển kho
+BR-WH-205
+Hỗ trợ trạng thái Đang vận chuyển
+BR-WH-206
+Không sửa chứng từ đã duyệt
+
+3.11.3. KIỂM KÊ & ĐIỀU CHỈNH TỒN KHO:
+
+
+Use Case
+Chức năng
+Actor
+Luồng chính
+Business Rule
+Kết quả đầu ra
+UC-WH-11
+Lập biên bản kiểm kê kho
+Ban kiểm kê, Thủ kho
+Tạo đợt kiểm kê → Chọn kho → Ghi nhận tồn thực tế
+Bắt buộc ghi nhận người kiểm kê
+Biên bản kiểm kê
+UC-WH-12
+So sánh tồn thực tế với tồn sổ
+Hệ thống
+Lấy tồn sổ → So sánh tồn thực tế → Tính chênh lệch
+Tự động xác định thừa thiếu
+Báo cáo chênh lệch
+UC-WH-13
+Xử lý chênh lệch kiểm kê
+Kế toán kho
+Xác nhận chênh lệch → Sinh chứng từ điều chỉnh
+Chênh lệch phải có nguyên nhân
+Phiếu điều chỉnh
+UC-WH-14
+Điều chỉnh tồn kho
+Kế toán kho, Quản lý kho
+Tạo phiếu điều chỉnh → Duyệt → Cập nhật tồn
+Chỉ người được phân quyền thực hiện
+Phiếu điều chỉnh tồn
+UC-WH-15
+Theo dõi lịch sử kiểm kê
+Kế toán kho
+Tra cứu đợt kiểm kê → Xem kết quả xử lý
+Không được xóa lịch sử
+Lịch sử kiểm kê
+UC-WH-16
+Kiểm soát tồn âm
+Hệ thống
+Kiểm tra tồn trước khi xuất/chuyển
+Cảnh báo hoặc chặn tồn âm theo cấu hình
+Cảnh báo tồn âm
+
+Business Rules toàn phân hệ Kiểm kê & Điều chỉnh
+
+
+Mã
+Quy tắc
+BR-WH-301
+Phải lưu người kiểm kê
+BR-WH-302
+Phải lưu ngày giờ kiểm kê
+BR-WH-303
+Chênh lệch thừa sinh phiếu nhập điều chỉnh
+BR-WH-304
+Chênh lệch thiếu sinh phiếu xuất điều chỉnh
+BR-WH-305
+Điều chỉnh tồn phải có lý do
+BR-WH-306
+Không sửa biên bản đã duyệt
+BR-WH-307
+Lưu toàn bộ lịch sử kiểm kê
+
+3.11.4. THẺ KHO & TỒN KHO:
+
+
+Use Case
+Chức năng
+Actor
+Luồng chính
+Business Rule
+Kết quả đầu ra
+UC-WH-17
+Xem thẻ kho
+Thủ kho, Kế toán kho
+Chọn kho → Chọn mặt hàng → Xem nhập xuất tồn
+Chỉ lấy dữ liệu đã duyệt
+Thẻ kho
+UC-WH-18
+Xem sổ chi tiết vật tư hàng hóa
+Kế toán kho
+Chọn vật tư → Chọn thời gian → Tra cứu
+Dữ liệu theo từng mặt hàng
+Sổ chi tiết vật tư
+UC-WH-19
+Xem tồn kho tức thời
+Thủ kho, Quản lý kho
+Chọn kho → Hệ thống tính tồn hiện tại
+Dữ liệu realtime
+Báo cáo tồn kho hiện tại
+UC-WH-20
+Lọc tồn kho theo kho/nhóm hàng
+Thủ kho, Kế toán kho
+Chọn bộ lọc → Hiển thị kết quả
+Theo phân quyền kho
+Danh sách tồn kho
+UC-WH-21
+Đối chiếu kho với sổ cái
+Kế toán kho, Kế toán tổng hợp
+Lấy dữ liệu kho → So sánh sổ cái → Hiển thị chênh lệch
+Chỉ đối chiếu kỳ đã khóa
+Báo cáo đối chiếu
+UC-WH-22
+Xuất dữ liệu kho
+Thủ kho, Kế toán kho
+Chọn báo cáo → Xuất Excel/PDF
+Chỉ người có quyền được xuất
+File Excel/PDF
+
+
+Business Rules toàn phân hệ Thẻ kho & Tồn kho
+
+
+Mã
+Quy tắc
+BR-WH-401
+Chỉ lấy dữ liệu từ chứng từ đã duyệt
+BR-WH-402
+Tồn kho tức thời cập nhật realtime
+BR-WH-403
+Dữ liệu được phân quyền theo kho
+BR-WH-404
+Giá trị tồn kho tính theo phương pháp giá xuất kho
+BR-WH-405
+Kho và sổ cái phải đối chiếu được
+BR-WH-406
+Hỗ trợ xuất Excel/PDF
+BR-WH-407
+Không cho phép chỉnh sửa dữ liệu thẻ kho
+
+3.12. Báo cáo mua hàng, công nợ phải trả & kho
+
+
+Use Case
+Chức năng
+Actor
+Luồng chính
+Business Rule
+Kết quả đầu ra
+UC-BC01
+Sổ chi tiết mua hàng
+Kế toán mua hàng, Kế toán trưởng, Quản lý
+1. Chọn kỳ báo cáo.2. Chọn NCC, mặt hàng hoặc tất cả.3. Hệ thống lấy dữ liệu chứng từ mua hàng.4. Tổng hợp và hiển thị chi tiết.5. Xuất Excel/PDF.
+- Chỉ lấy chứng từ đã ghi sổ.- Không hiển thị chứng từ hủy.- Cho phép lọc theo nhiều điều kiện.
+Báo cáo chi tiết mua hàng theo ngày, NCC, mặt hàng.
+UC-BC02
+Tổng hợp mua hàng theo nhà cung cấp
+Kế toán mua hàng, Quản lý mua hàng
+1. Chọn kỳ báo cáo.2. Hệ thống nhóm dữ liệu theo NCC.3. Tính tổng giá trị mua.4. Hiển thị kết quả.
+- Giá trị mua lấy từ chứng từ đã duyệt.- Có thể quy đổi về tiền tệ hạch toán.
+Báo cáo tổng giá trị mua theo từng NCC.
+UC-BC03
+Tổng hợp mua hàng theo mặt hàng
+Kế toán mua hàng, Quản lý kho
+1. Chọn kỳ báo cáo.2. Hệ thống tổng hợp theo mã hàng.3. Tính số lượng và giá trị mua.4. Hiển thị báo cáo.
+- Chỉ lấy hàng hóa phát sinh trong kỳ.- Loại trừ chứng từ hủy.
+Báo cáo tổng hợp số lượng và giá trị mua từng mặt hàng.
+UC-BC04
+Báo cáo đơn mua chưa hoàn thành
+Nhân viên mua hàng, Trưởng phòng mua hàng
+1. Chọn kỳ kiểm tra.2. Hệ thống so sánh PO với số lượng đã nhận.3. Xác định đơn còn thiếu.4. Hiển thị danh sách.
+- Đơn mua chưa nhận đủ hoặc chưa đóng PO được xem là chưa hoàn thành.- Đơn hủy không xuất hiện.
+Danh sách đơn mua chưa hoàn thành.
+UC-BC05
+Tổng hợp công nợ phải trả nhà cung cấp
+Kế toán công nợ, Kế toán trưởng
+1. Chọn kỳ báo cáo.2. Hệ thống lấy số dư đầu kỳ.3. Tổng hợp phát sinh tăng, giảm.4. Tính số dư cuối kỳ.5. Hiển thị báo cáo.
+- Số liệu lấy từ sổ công nợ đã khóa kỳ.- Công nợ = Đầu kỳ + Phát sinh tăng - Thanh toán.
+Báo cáo tổng hợp công nợ phải trả theo NCC.
+UC-BC06
+Chi tiết công nợ phải trả theo hóa đơn
+Kế toán công nợ
+1. Chọn NCC hoặc kỳ báo cáo.2. Hệ thống truy xuất hóa đơn mua vào.3. Tính số tiền còn phải trả từng hóa đơn.4. Hiển thị danh sách.
+- Một hóa đơn có thể thanh toán nhiều lần.- Công nợ còn lại không được âm.
+Báo cáo công nợ chi tiết đến từng hóa đơn.
+UC-BC07
+Báo cáo công nợ đến hạn / quá hạn
+Kế toán công nợ, Ban giám đốc
+1. Chọn ngày báo cáo.2. Hệ thống xác định ngày đến hạn.3. So sánh với ngày hiện tại.4. Phân loại đến hạn hoặc quá hạn.5. Hiển thị kết quả.
+- Căn cứ ngày đến hạn trên hóa đơn hoặc hợp đồng.- Quá hạn = Ngày hiện tại > Ngày đến hạn.
+Danh sách công nợ sắp đến hạn và quá hạn.
+UC-BC08
+Biên bản đối chiếu công nợ
+Kế toán công nợ, Kế toán trưởng
+1. Chọn nhà cung cấp.2. Chọn thời gian đối chiếu.3. Hệ thống tổng hợp công nợ.4. Sinh biên bản đối chiếu.5. Xuất PDF/Word.
+- Chỉ sử dụng dữ liệu đã ghi sổ.- Biên bản có thể khóa sau khi gửi xác nhận.
+Biên bản đối chiếu công nợ NCC.
+UC-BC09
+Thẻ kho
+Thủ kho, Kế toán kho
+1. Chọn kho và mặt hàng.2. Hệ thống lấy dữ liệu nhập xuất tồn.3. Sắp xếp theo thời gian.4. Hiển thị chi tiết từng giao dịch.
+- Tồn cuối giao dịch = Tồn trước + Nhập - Xuất.- Chỉ lấy chứng từ đã duyệt.
+Thẻ kho chi tiết từng mặt hàng.
+UC-BC10
+Sổ chi tiết vật tư hàng hóa
+Kế toán kho, Kế toán trưởng
+1. Chọn mặt hàng.2. Chọn kỳ báo cáo.3. Hệ thống tổng hợp phát sinh số lượng và giá trị.4. Hiển thị báo cáo.
+- Giá trị xuất kho theo phương pháp tính giá đã cấu hình.- Không sửa số liệu đã khóa kỳ.
+Sổ chi tiết vật tư hàng hóa.
+UC-BC11
+Báo cáo tổng hợp tồn kho
+Thủ kho, Quản lý kho, Ban giám đốc
+1. Chọn kỳ báo cáo.2. Hệ thống tính tồn đầu kỳ.3. Tổng hợp nhập và xuất.4. Tính tồn cuối kỳ.5. Hiển thị báo cáo.
+- Tồn cuối = Tồn đầu + Nhập - Xuất.- Dữ liệu phải khớp sổ kho.
+Báo cáo tồn kho tổng hợp theo kho và mặt hàng.
+UC-BC12
+Báo cáo nhập - xuất - tồn
+Thủ kho, Kế toán kho
+1. Chọn khoảng thời gian.2. Hệ thống tổng hợp nhập xuất tồn.3. Tính số lượng và giá trị.4. Hiển thị báo cáo.
+- Chứng từ phải ở trạng thái duyệt.- Không lấy chứng từ hủy.
+Báo cáo NXT theo kỳ.
+UC-BC13
+Báo cáo hàng tồn âm / lệch kho
+Kế toán kho, Kế toán trưởng, Kiểm soát nội bộ
+1. Chọn thời điểm kiểm tra.2. Hệ thống rà soát tồn kho.3. Đối chiếu giữa sổ kho và sổ kế toán.4. Xác định chênh lệch.5. Hiển thị cảnh báo.
+- Tồn kho không được âm.- Chênh lệch vượt ngưỡng phải cảnh báo.- Hệ thống ghi log kiểm tra.
+Danh sách hàng tồn âm và chênh lệch kho cần xử lý.
+
+Tổng quan Actor của phân hệ 3.12
+
+
+Actor
+Vai trò
+Kế toán mua hàng
+Theo dõi báo cáo mua hàng
+Kế toán công nợ
+Theo dõi và đối chiếu công nợ NCC
+Kế toán kho
+Kiểm tra báo cáo tồn kho, NXT
+Thủ kho
+Theo dõi thẻ kho và tồn kho
+Kế toán trưởng
+Kiểm soát và phê duyệt số liệu
+Trưởng phòng mua hàng
+Theo dõi tiến độ đơn mua
+Quản lý kho
+Quản lý tình hình tồn kho
+Ban giám đốc
+Xem báo cáo tổng hợp phục vụ điều hành
+Kiểm soát nội bộ
+Kiểm tra chênh lệch, sai lệch số liệu
+
+Business Rules tổng quát cho toàn bộ phân hệ báo cáo
+
+
+Mã BR
+Nội dung
+BR-01
+Báo cáo chỉ lấy dữ liệu từ chứng từ đã duyệt và ghi sổ.
+BR-02
+Chứng từ hủy hoặc xóa không được xuất hiện trên báo cáo.
+BR-03
+Người dùng chỉ được xem báo cáo thuộc phạm vi phân quyền.
+BR-04
+Số liệu báo cáo phải khớp với sổ kế toán và sổ kho tại thời điểm lập báo cáo.
+BR-05
+Báo cáo hỗ trợ xuất Excel, PDF và in trực tiếp.
+BR-06
+Dữ liệu kỳ đã khóa không được thay đổi trên báo cáo lịch sử.
+BR-07
+Tất cả báo cáo phải lưu lịch sử truy xuất và thời gian tạo báo cáo.
+BR-08
+Các báo cáo công nợ phải hỗ trợ lọc theo nhà cung cấp, hóa đơn và hạn thanh toán.
+BR-09
+Các báo cáo kho phải hỗ trợ lọc theo kho, nhóm hàng, mặt hàng và vị trí lưu kho.
+BR-10
+Hệ thống phải cảnh báo khi phát hiện tồn âm, lệch kho hoặc công nợ bất thường.
