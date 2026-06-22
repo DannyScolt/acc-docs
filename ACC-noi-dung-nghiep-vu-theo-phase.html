@@ -71,6 +71,8 @@
       font-size: 9.45pt;
       page-break-inside: avoid;
       break-inside: avoid;
+      table-layout: fixed;
+      word-wrap: break-word;
     }
     th {
       background: #eef2ff;
@@ -87,14 +89,36 @@
     }
     tr { page-break-inside: avoid; break-inside: avoid; }
     tr:nth-child(even) td { background: #f8fafc; }
-    table.kv-table { table-layout: fixed; }
+
+    /* 2-col: label 22% / content 78% */
     table.kv-table th:first-child,
     table.kv-table td:first-child { width: 22%; }
-    table.stt-table { table-layout: fixed; }
+
+    /* 3-col STT: STT 5% / Chức năng 35% / Mô tả 60% */
     table.stt-table th:first-child,
     table.stt-table td:first-child { width: 5%; }
     table.stt-table th:nth-child(2),
     table.stt-table td:nth-child(2) { width: 35%; }
+
+    /* 2-col generic (Mã/Quy tắc, Bước/Mô tả, Tiêu chí...) */
+    table.rule-table th:first-child,
+    table.rule-table td:first-child { width: 20%; }
+
+    /* 3-col generic (Mã rule/Quy tắc/Nội dung, Bước/Người/Mô tả...) */
+    table.rule3-table th:first-child,
+    table.rule3-table td:first-child { width: 12%; }
+    table.rule3-table th:nth-child(2),
+    table.rule3-table td:nth-child(2) { width: 28%; }
+
+    /* 5-col định khoản */
+    table.entry-table th:first-child,
+    table.entry-table td:first-child { width: 5%; }
+    table.entry-table th:nth-child(2),
+    table.entry-table td:nth-child(2) { width: 35%; }
+    table.entry-table th:nth-child(3),
+    table.entry-table td:nth-child(3) { width: 15%; }
+    table.entry-table th:nth-child(4),
+    table.entry-table td:nth-child(4) { width: 15%; }
 
     .cover {
       min-height: 297mm;
@@ -832,7 +856,7 @@
     </ul>
 
     <p><b>Business Rules:</b></p>
-    <table>
+    <table class="rule-table">
       <tr><th>Mã</th><th>Quy tắc</th></tr>
       <tr><td>BR-001</td><td>Chỉ người dùng có quyền mới được truy cập và thao tác trên chức năng Số dư đầu kỳ.</td></tr>
       <tr><td>BR-002</td><td>Chỉ người dùng có quyền mới được nhập, sửa, xóa, import, khóa hoặc mở khóa dữ liệu đầu kỳ.</td></tr>
@@ -880,7 +904,7 @@
     </table>
 
     <h4>Trạng thái chứng từ</h4>
-    <table>
+    <table class="rule-table">
       <tr><th>Trạng thái</th><th>Mô tả</th><th>Chuyển tiếp</th></tr>
       <tr><td>Nháp</td><td>Đang nhập liệu</td><td>→ Chờ duyệt, → Đã hủy</td></tr>
       <tr><td>Chờ duyệt</td><td>Đã gửi duyệt</td><td>→ Đã duyệt, → Từ chối, → Đã hủy</td></tr>
@@ -892,7 +916,7 @@
     </table>
 
     <h4>Thông tin chứng từ phiếu thu</h4>
-    <table>
+    <table class="rule-table">
       <tr><th>Nhóm</th><th>Trường dữ liệu</th></tr>
       <tr><td>Thông tin chung</td><td>Số chứng từ, Ngày chứng từ, Ngày hạch toán, Quỹ tiền mặt, Đối tượng, Diễn giải</td></tr>
       <tr><td>Thông tin hạch toán</td><td>Tài khoản Nợ, Tài khoản Có, Số tiền, Khoản mục chi phí, Phòng ban, Chi nhánh</td></tr>
@@ -903,7 +927,7 @@
     <p><em>[SỰ LÝ TỪ FORMAT PHIẾU CHI — CHỜ KẾ TOÁN XÁC NHẬN]</em></p>
 
     <h5>Actor</h5>
-    <table>
+    <table class="rule-table">
       <tr><th>Actor</th><th>Vai trò</th></tr>
       <tr><td>Kế toán quỹ</td><td>Tạo, nhập liệu</td></tr>
       <tr><td>Thủ quỹ</td><td>Kiểm tra, xác nhận</td></tr>
@@ -912,7 +936,7 @@
     </table>
 
     <h5>Luồng chính</h5>
-    <table>
+    <table class="rule-table">
       <tr><th>Bước</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Tạo phiếu thu.</td></tr>
       <tr><td>2</td><td>Chọn đối tượng nộp tiền.</td></tr>
@@ -955,7 +979,7 @@
     <h4>Use Case — Phiếu chi</h4>
 
     <h5>Actor</h5>
-    <table>
+    <table class="rule-table">
       <tr><th>Actor</th><th>Vai trò</th></tr>
       <tr><td>Kế toán quỹ</td><td>Tạo, nhập liệu</td></tr>
       <tr><td>Thủ quỹ</td><td>Kiểm tra, xác nhận</td></tr>
@@ -964,7 +988,7 @@
     </table>
 
     <h5>Luồng chính</h5>
-    <table>
+    <table class="rule-table">
       <tr><th>Bước</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Tạo phiếu chi.</td></tr>
       <tr><td>2</td><td>Chọn đối tượng nhận tiền.</td></tr>
@@ -980,7 +1004,7 @@
     </table>
 
     <h5>Business Rules — Phiếu thu / Phiếu chi</h5>
-    <table>
+    <table class="rule-table">
       <tr><th>Mã</th><th>Quy tắc</th></tr>
       <tr><td>BR-Q01</td><td>Chứng từ phải có số chứng từ duy nhất.</td></tr>
       <tr><td>BR-Q02</td><td>Không cho ghi sổ khi chưa duyệt.</td></tr>
@@ -1015,7 +1039,7 @@
     </table>
 
     <h4>Use Case — Sổ quỹ</h4>
-    <table>
+    <table class="rule3-table">
       <tr><th>Mã UC</th><th>Tên Use Case</th><th>Actor</th></tr>
       <tr><td>UC-Q01</td><td>Xem sổ quỹ tiền mặt</td><td>Thủ quỹ, Kế toán quỹ, Kế toán trưởng</td></tr>
       <tr><td>UC-Q02</td><td>Xem tồn quỹ tức thời</td><td>Thủ quỹ, Kế toán</td></tr>
@@ -1027,7 +1051,7 @@
     </table>
 
     <h5>UC-Q01 — Xem sổ quỹ tiền mặt</h5>
-    <table>
+    <table class="rule-table">
       <tr><th>Bước</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Người dùng mở màn hình Sổ quỹ.</td></tr>
       <tr><td>2</td><td>Chọn khoảng thời gian.</td></tr>
@@ -1045,7 +1069,7 @@
     <p><strong>Dữ liệu đầu vào (tùy chọn):</strong> Quỹ tiền mặt, Chi nhánh, Đơn vị hạch toán.</p>
 
     <p><strong>Luồng chính:</strong></p>
-    <table>
+    <table class="rule3-table">
       <tr><th>Bước</th><th>Người thực hiện</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Người dùng</td><td>Mở màn hình Dashboard Quỹ hoặc Tồn quỹ.</td></tr>
       <tr><td>2</td><td>Hệ thống</td><td>Xác định quỹ được phép truy cập.</td></tr>
@@ -1059,14 +1083,14 @@
     <p><strong>Công thức:</strong> Tồn hiện tại = Tồn đầu kỳ + Tổng thu − Tổng chi + Điều chỉnh tăng − Điều chỉnh giảm</p>
 
     <p><strong>Luồng ngoại lệ:</strong></p>
-    <table>
+    <table class="rule3-table">
       <tr><th>Mã</th><th>Điều kiện</th><th>Xử lý</th></tr>
       <tr><td>EX-01</td><td>Không tìm thấy dữ liệu quỹ</td><td>Hiển thị thông báo "Không tìm thấy dữ liệu quỹ." Người dùng chọn quỹ khác.</td></tr>
       <tr><td>EX-02</td><td>Người dùng không có quyền</td><td>Hiển thị thông báo "Bạn không có quyền xem quỹ này."</td></tr>
     </table>
 
     <p><strong>Business Rules riêng UC-Q02:</strong></p>
-    <table>
+    <table class="rule-table">
       <tr><th>Mã</th><th>Quy tắc</th></tr>
       <tr><td>BR-Q02-01</td><td>Chỉ tính các chứng từ đã ghi sổ.</td></tr>
       <tr><td>BR-Q02-02</td><td>Không tính chứng từ nháp.</td></tr>
@@ -1081,7 +1105,7 @@
     <p><strong>Điều kiện tiên quyết:</strong> Người dùng có quyền xem sổ quỹ.</p>
 
     <p><strong>Bộ lọc hỗ trợ:</strong></p>
-    <table>
+    <table class="rule-table">
       <tr><th>Nhóm lọc</th><th>Giá trị</th></tr>
       <tr><td>Thời gian</td><td>Hôm nay, Tuần này, Tháng này, Quý này, Năm nay, Tùy chọn</td></tr>
       <tr><td>Theo chứng từ</td><td>Số chứng từ, Loại chứng từ</td></tr>
@@ -1091,7 +1115,7 @@
     </table>
 
     <p><strong>Luồng chính:</strong></p>
-    <table>
+    <table class="rule3-table">
       <tr><th>Bước</th><th>Người thực hiện</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Người dùng</td><td>Mở màn hình Sổ quỹ.</td></tr>
       <tr><td>2</td><td>Người dùng</td><td>Nhập điều kiện lọc.</td></tr>
@@ -1103,14 +1127,14 @@
     </table>
 
     <p><strong>Luồng ngoại lệ:</strong></p>
-    <table>
+    <table class="rule3-table">
       <tr><th>Mã</th><th>Điều kiện</th><th>Xử lý</th></tr>
       <tr><td>EX-01</td><td>Không có dữ liệu</td><td>Hiển thị danh sách rỗng. Thông báo "Không có dữ liệu phù hợp."</td></tr>
       <tr><td>EX-02</td><td>Ngày bắt đầu lớn hơn ngày kết thúc</td><td>Thông báo "Ngày bắt đầu phải nhỏ hơn ngày kết thúc."</td></tr>
     </table>
 
     <p><strong>Business Rules riêng UC-Q03:</strong></p>
-    <table>
+    <table class="rule-table">
       <tr><th>Mã</th><th>Quy tắc</th></tr>
       <tr><td>BR-Q03-01</td><td>Có thể kết hợp nhiều điều kiện lọc.</td></tr>
       <tr><td>BR-Q03-02</td><td>Mặc định hiển thị tháng hiện tại.</td></tr>
@@ -1125,7 +1149,7 @@
     <p><strong>Điều kiện tiên quyết:</strong> Người dùng có quyền xem chứng từ.</p>
 
     <p><strong>Nguồn chứng từ có thể truy vết:</strong></p>
-    <table>
+    <table class="rule-table">
       <tr><th>Loại chứng từ</th></tr>
       <tr><td>Phiếu thu</td></tr>
       <tr><td>Phiếu chi</td></tr>
@@ -1136,7 +1160,7 @@
     </table>
 
     <p><strong>Luồng chính:</strong></p>
-    <table>
+    <table class="rule3-table">
       <tr><th>Bước</th><th>Người thực hiện</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Người dùng</td><td>Mở Sổ quỹ.</td></tr>
       <tr><td>2</td><td>Người dùng</td><td>Chọn một dòng phát sinh.</td></tr>
@@ -1148,7 +1172,7 @@
     </table>
 
     <h5>UC-Q05 — Đối chiếu sổ quỹ</h5>
-    <table>
+    <table class="rule-table">
       <tr><th>Bước</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Người dùng chọn kỳ đối chiếu.</td></tr>
       <tr><td>2</td><td>Hệ thống lấy số dư quỹ.</td></tr>
@@ -1158,7 +1182,7 @@
     </table>
 
     <h5>Business Rules — Sổ quỹ</h5>
-    <table>
+    <table class="rule-table">
       <tr><th>Mã</th><th>Quy tắc</th></tr>
       <tr><td>BR-Q01</td><td>Sổ quỹ chỉ phát sinh từ phiếu thu, phiếu chi và chứng từ điều chỉnh.</td></tr>
       <tr><td>BR-Q02</td><td>Không được nhập trực tiếp vào sổ quỹ.</td></tr>
@@ -1188,7 +1212,7 @@
     </table>
 
     <h4>Use Case — Kiểm kê quỹ</h4>
-    <table>
+    <table class="rule3-table">
       <tr><th>Mã UC</th><th>Tên Use Case</th><th>Actor</th></tr>
       <tr><td>UC-KQ01</td><td>Lập biên bản kiểm kê</td><td>Thủ quỹ</td></tr>
       <tr><td>UC-KQ02</td><td>Gửi duyệt kiểm kê</td><td>Thủ quỹ</td></tr>
@@ -1199,7 +1223,7 @@
     </table>
 
     <h5>UC-KQ01 — Lập biên bản kiểm kê</h5>
-    <table>
+    <table class="rule-table">
       <tr><th>Bước</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Tạo biên bản kiểm kê.</td></tr>
       <tr><td>2</td><td>Nhập thông tin kiểm kê.</td></tr>
@@ -1211,7 +1235,7 @@
     </table>
 
     <h5>UC-KQ04 — Điều chỉnh chênh lệch</h5>
-    <table>
+    <table class="rule-table">
       <tr><th>Bước</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Chọn biên bản đã duyệt.</td></tr>
       <tr><td>2</td><td>Chọn điều chỉnh.</td></tr>
@@ -1222,7 +1246,7 @@
     </table>
 
     <h5>Workflow — Kiểm kê quỹ</h5>
-    <table>
+    <table class="rule-table">
       <tr><th>Trạng thái</th><th>Mô tả</th></tr>
       <tr><td>Nháp</td><td>Đang nhập liệu</td></tr>
       <tr><td>Chờ duyệt</td><td>Đã gửi duyệt</td></tr>
@@ -1232,7 +1256,7 @@
     </table>
 
     <h5>Business Rules — Kiểm kê quỹ</h5>
-    <table>
+    <table class="rule-table">
       <tr><th>Mã</th><th>Quy tắc</th></tr>
       <tr><td>BR-KQ01</td><td>Số biên bản kiểm kê tự động tăng.</td></tr>
       <tr><td>BR-KQ02</td><td>Một quỹ chỉ có một biên bản nháp tại một thời điểm.</td></tr>
@@ -1264,7 +1288,7 @@
     </table>
 
     <h4>Use Case — Báo cáo quỹ</h4>
-    <table>
+    <table class="rule3-table">
       <tr><th>Mã UC</th><th>Tên Use Case</th><th>Actor</th></tr>
       <tr><td>UC-BC01</td><td>Xem sổ quỹ tiền mặt</td><td>Kế toán</td></tr>
       <tr><td>UC-BC02</td><td>Xem bảng kê phiếu thu</td><td>Kế toán</td></tr>
@@ -1275,7 +1299,7 @@
     </table>
 
     <h5>UC-BC05 — Báo cáo dòng tiền</h5>
-    <table>
+    <table class="rule-table">
       <tr><th>Bước</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Chọn kỳ báo cáo.</td></tr>
       <tr><td>2</td><td>Hệ thống tổng hợp thu tiền.</td></tr>
@@ -1286,7 +1310,7 @@
     </table>
 
     <h5>Business Rules — Báo cáo quỹ</h5>
-    <table>
+    <table class="rule-table">
       <tr><th>Mã</th><th>Quy tắc</th></tr>
       <tr><td>BR-BC01</td><td>Báo cáo chỉ lấy dữ liệu đã ghi sổ.</td></tr>
       <tr><td>BR-BC02</td><td>Báo cáo phải phản ánh đúng dữ liệu tại thời điểm chạy.</td></tr>
@@ -1299,7 +1323,7 @@
 
     <!-- ===== BUSINESS RULES TOÀN PHÂN HỆ QUỸ ===== -->
     <h3>Business Rules toàn phân hệ quỹ</h3>
-    <table>
+    <table class="rule-table">
       <tr><th>Mã</th><th>Quy tắc</th></tr>
       <tr><td>BR-G01</td><td>Không cho phép chi vượt tồn quỹ nếu bật cấu hình "Không cho âm quỹ".</td></tr>
       <tr><td>BR-G02</td><td>Mọi chứng từ quỹ phải sinh bút toán sổ cái tương ứng.</td></tr>
@@ -1323,7 +1347,7 @@
     <p><strong>Điều kiện:</strong> Đã khai báo tài khoản ngân hàng. Kỳ kế toán chưa khóa.</p>
 
     <p><strong>Dữ liệu nhập:</strong></p>
-    <table>
+    <table class="rule-table">
       <tr><th>Trường</th><th>Bắt buộc</th></tr>
       <tr><td>Số chứng từ</td><td>Auto/Manual</td></tr>
       <tr><td>Ngày chứng từ</td><td>✓</td></tr>
@@ -1338,7 +1362,7 @@
     </table>
 
     <p><strong>Luồng chính:</strong></p>
-    <table>
+    <table class="rule-table">
       <tr><th>Bước</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Người dùng chọn "Thu ngân hàng".</td></tr>
       <tr><td>2</td><td>Nhập thông tin chứng từ.</td></tr>
@@ -1348,7 +1372,7 @@
     </table>
 
     <p><strong>Business Rules:</strong></p>
-    <table>
+    <table class="rule-table">
       <tr><th>Mã</th><th>Quy tắc</th></tr>
       <tr><td>BR01</td><td>Số tiền > 0.</td></tr>
       <tr><td>BR02</td><td>Ngày hạch toán không nằm trong kỳ khóa.</td></tr>
@@ -1361,7 +1385,7 @@
     <p><strong>Actor:</strong> Kế toán công nợ, Kế toán ngân hàng</p>
 
     <p><strong>Luồng chính:</strong></p>
-    <table>
+    <table class="rule-table">
       <tr><th>Bước</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Chọn khách hàng.</td></tr>
       <tr><td>2</td><td>Hệ thống hiển thị công nợ chưa thanh toán.</td></tr>
@@ -1372,7 +1396,7 @@
     </table>
 
     <p><strong>Business Rules:</strong></p>
-    <table>
+    <table class="rule-table">
       <tr><th>Mã</th><th>Quy tắc</th></tr>
       <tr><td>BR05</td><td>Không thu vượt công nợ nếu không cho phép thu trước.</td></tr>
       <tr><td>BR06</td><td>Sau ghi sổ: Nợ 112 / Có 131.</td></tr>
@@ -1383,7 +1407,7 @@
     <p><strong>Mục đích:</strong> Ghi nhận các khoản thu không phải công nợ khách hàng (thu lãi tiền gửi, hoàn thuế, cổ tức, thanh lý).</p>
 
     <p><strong>Luồng chính:</strong></p>
-    <table>
+    <table class="rule-table">
       <tr><th>Bước</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Chọn loại thu khác.</td></tr>
       <tr><td>2</td><td>Chọn tài khoản đối ứng.</td></tr>
@@ -1392,7 +1416,7 @@
     </table>
 
     <p><strong>Business Rules:</strong></p>
-    <table>
+    <table class="rule-table">
       <tr><th>Mã</th><th>Quy tắc</th></tr>
       <tr><td>BR08</td><td>Bắt buộc tài khoản đối ứng.</td></tr>
       <tr><td>BR09</td><td>Tự sinh bút toán theo tài khoản chọn.</td></tr>
@@ -1402,7 +1426,7 @@
     <p><strong>Mục đích:</strong> Lưu giấy báo Có, sao kê, chứng từ điện tử.</p>
 
     <p><strong>Luồng chính:</strong></p>
-    <table>
+    <table class="rule-table">
       <tr><th>Bước</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Mở chứng từ.</td></tr>
       <tr><td>2</td><td>Upload file.</td></tr>
@@ -1410,7 +1434,7 @@
     </table>
 
     <p><strong>Business Rules:</strong></p>
-    <table>
+    <table class="rule-table">
       <tr><th>Mã</th><th>Quy tắc</th></tr>
       <tr><td>BR10</td><td>Chỉ cho phép PDF/JPG/PNG/XLSX.</td></tr>
       <tr><td>BR11</td><td>Kích thước file ≤ 20MB.</td></tr>
@@ -1421,7 +1445,7 @@
     <p><strong>Actor:</strong> Kế toán trưởng</p>
 
     <p><strong>Luồng chính:</strong></p>
-    <table>
+    <table class="rule-table">
       <tr><th>Bước</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Mở danh sách chờ duyệt.</td></tr>
       <tr><td>2</td><td>Kiểm tra chứng từ.</td></tr>
@@ -1430,7 +1454,7 @@
     </table>
 
     <p><strong>Business Rules:</strong></p>
-    <table>
+    <table class="rule-table">
       <tr><th>Mã</th><th>Quy tắc</th></tr>
       <tr><td>BR13</td><td>Người lập không được tự duyệt.</td></tr>
       <tr><td>BR14</td><td>Chứng từ đã duyệt không được sửa.</td></tr>
@@ -1439,7 +1463,7 @@
     <h4>UC-BK-06: Hủy chứng từ thu ngân hàng</h4>
 
     <p><strong>Luồng chính:</strong></p>
-    <table>
+    <table class="rule-table">
       <tr><th>Bước</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Chọn chứng từ.</td></tr>
       <tr><td>2</td><td>Chọn Hủy.</td></tr>
@@ -1448,7 +1472,7 @@
     </table>
 
     <p><strong>Business Rules:</strong></p>
-    <table>
+    <table class="rule-table">
       <tr><th>Mã</th><th>Quy tắc</th></tr>
       <tr><td>BR15</td><td>Bắt buộc nhập lý do.</td></tr>
       <tr><td>BR16</td><td>Không được hủy nếu đã khóa kỳ.</td></tr>
@@ -1457,7 +1481,7 @@
     <h4>UC-BK-07: Ghi sổ thu ngân hàng</h4>
 
     <p><strong>Luồng chính:</strong></p>
-    <table>
+    <table class="rule-table">
       <tr><th>Bước</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Chọn chứng từ đã duyệt.</td></tr>
       <tr><td>2</td><td>Chọn Ghi sổ.</td></tr>
@@ -1467,7 +1491,7 @@
     </table>
 
     <p><strong>Business Rules:</strong></p>
-    <table>
+    <table class="rule-table">
       <tr><th>Mã</th><th>Quy tắc</th></tr>
       <tr><td>BR17</td><td>Chỉ chứng từ đã duyệt mới được ghi sổ.</td></tr>
       <tr><td>BR18</td><td>Sau ghi sổ: Trạng thái = Đã ghi sổ.</td></tr>
@@ -1479,7 +1503,7 @@
     <h4>UC-BK-08: Lập chứng từ chi ngân hàng</h4>
 
     <p><strong>Luồng chính:</strong></p>
-    <table>
+    <table class="rule-table">
       <tr><th>Bước</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Chọn Chi ngân hàng.</td></tr>
       <tr><td>2</td><td>Nhập thông tin thanh toán.</td></tr>
@@ -1488,7 +1512,7 @@
     </table>
 
     <p><strong>Business Rules:</strong></p>
-    <table>
+    <table class="rule-table">
       <tr><th>Mã</th><th>Quy tắc</th></tr>
       <tr><td>BR19</td><td>Số tiền chi ≤ số dư khả dụng (nếu bật kiểm soát quỹ).</td></tr>
       <tr><td>BR20</td><td>Tài khoản ngân hàng phải hoạt động.</td></tr>
@@ -1497,7 +1521,7 @@
     <h4>UC-BK-09: Thanh toán nhà cung cấp qua ngân hàng</h4>
 
     <p><strong>Luồng chính:</strong></p>
-    <table>
+    <table class="rule-table">
       <tr><th>Bước</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Chọn nhà cung cấp.</td></tr>
       <tr><td>2</td><td>Hiển thị công nợ cần thanh toán.</td></tr>
@@ -1507,7 +1531,7 @@
     </table>
 
     <p><strong>Business Rules:</strong></p>
-    <table>
+    <table class="rule-table">
       <tr><th>Mã</th><th>Quy tắc</th></tr>
       <tr><td>BR21</td><td>Bút toán: Nợ 331 / Có 112.</td></tr>
       <tr><td>BR22</td><td>Công nợ phải trả giảm tương ứng.</td></tr>
@@ -1517,7 +1541,7 @@
     <p><strong>Ví dụ:</strong> Nộp thuế, Trả lương, Thanh toán chi phí.</p>
 
     <p><strong>Business Rules:</strong></p>
-    <table>
+    <table class="rule-table">
       <tr><th>Mã</th><th>Quy tắc</th></tr>
       <tr><td>BR23</td><td>Bắt buộc chọn tài khoản chi phí hoặc công nợ tương ứng.</td></tr>
     </table>
@@ -1526,7 +1550,7 @@
     <p><strong>Luồng:</strong> Nháp → Chờ duyệt → Đã duyệt → Ghi sổ</p>
 
     <p><strong>Business Rules:</strong></p>
-    <table>
+    <table class="rule-table">
       <tr><th>Mã</th><th>Quy tắc</th></tr>
       <tr><td>BR24</td><td>Áp dụng quy trình phê duyệt theo hạn mức: &lt;50 triệu → 1 cấp; ≥50 triệu → 2 cấp.</td></tr>
     </table>
@@ -1534,7 +1558,7 @@
     <h4>UC-BK-12: Hủy chứng từ chi</h4>
 
     <p><strong>Business Rules:</strong></p>
-    <table>
+    <table class="rule-table">
       <tr><th>Mã</th><th>Quy tắc</th></tr>
       <tr><td>BR25</td><td>Bắt buộc ghi lý do.</td></tr>
       <tr><td>BR26</td><td>Lưu audit log.</td></tr>
@@ -1543,7 +1567,7 @@
     <h4>UC-BK-13: Ghi sổ chi ngân hàng</h4>
 
     <p><strong>Business Rules:</strong></p>
-    <table>
+    <table class="rule-table">
       <tr><th>Mã</th><th>Quy tắc</th></tr>
       <tr><td>BR27</td><td>Sinh bút toán: Nợ TK liên quan / Có 112.</td></tr>
     </table>
@@ -1554,7 +1578,7 @@
     <h4>UC-BK-14: Chuyển tiền giữa các tài khoản ngân hàng</h4>
 
     <p><strong>Luồng chính:</strong></p>
-    <table>
+    <table class="rule-table">
       <tr><th>Bước</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Chọn TK nguồn.</td></tr>
       <tr><td>2</td><td>Chọn TK đích.</td></tr>
@@ -1566,7 +1590,7 @@
     <p><strong>Bút toán:</strong> Nợ 112-B / Có 112-A</p>
 
     <p><strong>Business Rules:</strong></p>
-    <table>
+    <table class="rule-table">
       <tr><th>Mã</th><th>Quy tắc</th></tr>
       <tr><td>BR28</td><td>Không được chuyển cùng một tài khoản.</td></tr>
       <tr><td>BR29</td><td>Tài khoản nguồn phải đủ số dư.</td></tr>
@@ -1575,7 +1599,7 @@
     <h4>UC-BK-15: Nộp tiền mặt vào ngân hàng</h4>
 
     <p><strong>Luồng chính:</strong></p>
-    <table>
+    <table class="rule-table">
       <tr><th>Bước</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Chọn quỹ tiền mặt.</td></tr>
       <tr><td>2</td><td>Chọn tài khoản ngân hàng.</td></tr>
@@ -1589,7 +1613,7 @@
     <p><strong>Bút toán:</strong> Nợ 111 / Có 112</p>
 
     <p><strong>Business Rules:</strong></p>
-    <table>
+    <table class="rule-table">
       <tr><th>Mã</th><th>Quy tắc</th></tr>
       <tr><td>BR30</td><td>Không cho phép âm quỹ ngân hàng.</td></tr>
     </table>
@@ -1597,7 +1621,7 @@
     <h4>UC-BK-17: Theo dõi phí chuyển tiền</h4>
 
     <p><strong>Luồng chính:</strong></p>
-    <table>
+    <table class="rule-table">
       <tr><th>Bước</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Nhập phí.</td></tr>
       <tr><td>2</td><td>Chọn tài khoản chi phí.</td></tr>
@@ -1613,7 +1637,7 @@
     <p><strong>Actor:</strong> Kế toán ngân hàng</p>
 
     <p><strong>Luồng chính:</strong></p>
-    <table>
+    <table class="rule-table">
       <tr><th>Bước</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Chọn tài khoản ngân hàng.</td></tr>
       <tr><td>2</td><td>Upload Excel/CSV.</td></tr>
@@ -1622,7 +1646,7 @@
     </table>
 
     <p><strong>Business Rules:</strong></p>
-    <table>
+    <table class="rule-table">
       <tr><th>Mã</th><th>Quy tắc</th></tr>
       <tr><td>BR31</td><td>Không import trùng giao dịch.</td></tr>
       <tr><td>BR32</td><td>Kiểm tra định dạng file.</td></tr>
@@ -1631,7 +1655,7 @@
     <h4>UC-BK-19: Kết nối lấy sao kê tự động</h4>
 
     <p><strong>Luồng chính:</strong></p>
-    <table>
+    <table class="rule-table">
       <tr><th>Bước</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Kết nối API ngân hàng.</td></tr>
       <tr><td>2</td><td>Chọn khoảng thời gian.</td></tr>
@@ -1639,7 +1663,7 @@
     </table>
 
     <p><strong>Business Rules:</strong></p>
-    <table>
+    <table class="rule-table">
       <tr><th>Mã</th><th>Quy tắc</th></tr>
       <tr><td>BR33</td><td>Chỉ lấy giao dịch chưa tồn tại.</td></tr>
       <tr><td>BR34</td><td>Lưu log đồng bộ.</td></tr>
@@ -1651,7 +1675,7 @@
     <h4>UC-BK-21: Tự động gợi ý đối chiếu</h4>
 
     <p><strong>Luồng chính:</strong></p>
-    <table>
+    <table class="rule-table">
       <tr><th>Bước</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Hệ thống đọc giao dịch sao kê.</td></tr>
       <tr><td>2</td><td>So sánh với chứng từ (Số tiền, Ngày, Nội dung, Mã tham chiếu).</td></tr>
@@ -1659,7 +1683,7 @@
     </table>
 
     <p><strong>Business Rules:</strong></p>
-    <table>
+    <table class="rule-table">
       <tr><th>Mã</th><th>Quy tắc</th></tr>
       <tr><td>BR35</td><td>Độ chính xác đối chiếu ≥ 80%.</td></tr>
     </table>
@@ -1667,14 +1691,14 @@
     <h4>UC-BK-22: Đánh dấu giao dịch đã khớp</h4>
 
     <p><strong>Luồng chính:</strong></p>
-    <table>
+    <table class="rule-table">
       <tr><th>Bước</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Người dùng xác nhận.</td></tr>
       <tr><td>2</td><td>Hệ thống liên kết giao dịch với chứng từ.</td></tr>
     </table>
 
     <p><strong>Business Rules:</strong></p>
-    <table>
+    <table class="rule-table">
       <tr><th>Mã</th><th>Quy tắc</th></tr>
       <tr><td>BR36</td><td>Một giao dịch sao kê chỉ được khớp một lần.</td></tr>
     </table>
@@ -1688,7 +1712,7 @@
     <h4>UC-BK-24: Đối chiếu sổ tiền gửi với sao kê</h4>
 
     <p><strong>Luồng chính:</strong></p>
-    <table>
+    <table class="rule-table">
       <tr><th>Bước</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Chọn tài khoản.</td></tr>
       <tr><td>2</td><td>Chọn kỳ đối chiếu.</td></tr>
@@ -1697,7 +1721,7 @@
     </table>
 
     <p><strong>Business Rules:</strong></p>
-    <table>
+    <table class="rule-table">
       <tr><th>Mã</th><th>Quy tắc</th></tr>
       <tr><td>BR37</td><td>Chỉ đối chiếu theo từng tài khoản.</td></tr>
     </table>
@@ -1705,7 +1729,7 @@
     <h4>UC-BK-25: Xử lý giao dịch lệch</h4>
 
     <p><strong>Luồng chính:</strong></p>
-    <table>
+    <table class="rule-table">
       <tr><th>Bước</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Chọn giao dịch lệch.</td></tr>
       <tr><td>2</td><td>Chọn phương án: Tạo chứng từ bổ sung / Điều chỉnh / Bỏ qua.</td></tr>
@@ -1713,7 +1737,7 @@
     </table>
 
     <p><strong>Business Rules:</strong></p>
-    <table>
+    <table class="rule-table">
       <tr><th>Mã</th><th>Quy tắc</th></tr>
       <tr><td>BR38</td><td>Phải lưu lý do xử lý.</td></tr>
     </table>
@@ -1725,7 +1749,7 @@
     <h4>UC-BK-27: Khóa kỳ đối chiếu</h4>
 
     <p><strong>Luồng chính:</strong></p>
-    <table>
+    <table class="rule-table">
       <tr><th>Bước</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Hoàn tất đối chiếu.</td></tr>
       <tr><td>2</td><td>Chọn Khóa kỳ.</td></tr>
@@ -1733,7 +1757,7 @@
     </table>
 
     <p><strong>Business Rules:</strong></p>
-    <table>
+    <table class="rule-table">
       <tr><th>Mã</th><th>Quy tắc</th></tr>
       <tr><td>BR39</td><td>Không sửa chứng từ thuộc kỳ đã khóa.</td></tr>
     </table>
@@ -1761,7 +1785,7 @@
 
     <!-- ===== WORKFLOW TỔNG THỂ ===== -->
     <h3>Workflow tổng thể phân hệ Tiền gửi ngân hàng</h3>
-    <table>
+    <table class="rule-table">
       <tr><th>Bước</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Lập chứng từ</td></tr>
       <tr><td>2</td><td>Nháp</td></tr>
@@ -1824,7 +1848,7 @@
     </table>
 
     <h3>Business Rules toàn phân hệ Sổ cái & hệ thống tài khoản</h3>
-    <table>
+    <table class="rule-table">
       <tr><th>Mã Rule</th><th>Nội dung</th></tr>
       <tr><td>BR-GLOBAL-01</td><td>Hệ thống sử dụng sơ đồ tài khoản theo TT200 hoặc TT133.</td></tr>
       <tr><td>BR-GLOBAL-02</td><td>Mọi bút toán phải cân bằng Nợ = Có.</td></tr>
@@ -1851,7 +1875,7 @@
     <p><em>Kế toán vui lòng rà soát thêm các rule và phạm vi chức năng để bảo đảm khớp với thực tế vận hành doanh nghiệp.</em></p>
 
     <h3>Bảng định khoản mẫu — Giai đoạn 1</h3>
-    <table>
+    <table class="entry-table">
       <tr><th>STT</th><th>Nghiệp vụ</th><th>Nợ (TK)</th><th>Có (TK)</th><th>Điều kiện</th><th>Ghi chú</th></tr>
       <tr><td>1</td><td>Thu tiền mặt bán hàng thu ngay</td><td>111</td><td>511</td><td>receipt_type = sale</td><td></td></tr>
       <tr><td>2</td><td>Thu tiền mặt từ công nợ KH</td><td>111</td><td>131</td><td>receipt_type = customer_payment</td><td>Giảm AR</td></tr>
@@ -1883,7 +1907,7 @@
     </table>
 
     <h3>Bảng định khoản mẫu — Giai đoạn 1</h3>
-    <table>
+    <table class="entry-table">
       <tr><th>STT</th><th>Nghiệp vụ</th><th>Nợ (TK)</th><th>Có (TK)</th><th>Điều kiện</th><th>Ghi chú</th></tr>
       <tr><td>1</td><td>Thu tiền mặt bán hàng thu ngay</td><td>111</td><td>511</td><td>receipt_type = sale</td><td></td></tr>
       <tr><td>2</td><td>Thu tiền mặt từ công nợ KH</td><td>111</td><td>131</td><td>receipt_type = customer_payment</td><td>Giảm AR</td></tr>
@@ -1916,7 +1940,7 @@
     <p><em>Kế toán vui lòng kiểm tra, bổ sung hoặc điều chỉnh tài khoản và nội dung hạch toán cho phù hợp thực tế doanh nghiệp.</em></p>
 
     <h3>Quy tắc nghiệp vụ chung của Giai đoạn 1</h3>
-    <table>
+    <table class="rule3-table">
       <tr><th>STT</th><th>Quy tắc</th><th>Nội dung</th></tr>
       <tr><td>1</td><td>Số chứng từ tự động</td><td>Mỗi loại chứng từ có quy tắc đánh số riêng, không trùng, không bỏ trống.</td></tr>
       <tr><td>2</td><td>Trạng thái chứng từ</td><td>Chứng từ có luồng: Nháp → Chờ duyệt → Đã duyệt → Đã hủy.</td></tr>
@@ -1941,7 +1965,7 @@
     </ul>
 
     <h3>Tiêu chí nghiệm thu</h3>
-    <table>
+    <table class="rule-table">
       <tr><th>Tiêu chí</th><th>Nội dung kiểm tra</th></tr>
       <tr><td>Phân quyền & cách ly dữ liệu</td><td>Người dùng của doanh nghiệp này không truy cập được dữ liệu doanh nghiệp khác; quyền xem / tạo / sửa / duyệt hoạt động đúng.</td></tr>
       <tr><td>Danh mục & số dư đầu kỳ</td><td>Không trùng mã; danh mục đã phát sinh không được xóa; tổng chi tiết khớp số dư tài khoản tương ứng.</td></tr>
@@ -2163,7 +2187,7 @@
 
     <h3>3.12. Báo cáo mua hàng, công nợ phải trả & kho</h3>
     <p>Module báo cáo giúp kế toán và quản lý theo dõi tình hình mua hàng, công nợ nhà cung cấp, nhập xuất tồn và các chênh lệch cần xử lý.</p>
-    <table>
+    <table class="rule3-table">
       <tr><th>Nhóm báo cáo</th><th>Báo cáo / Chức năng</th><th>Mô tả</th></tr>
       <tr><td>Mua hàng</td><td>Sổ chi tiết mua hàng</td><td>Theo dõi chi tiết chứng từ mua hàng theo ngày, nhà cung cấp, mặt hàng.</td></tr>
       <tr><td>Mua hàng</td><td>Tổng hợp mua hàng theo nhà cung cấp</td><td>Tổng hợp giá trị mua theo từng nhà cung cấp trong kỳ.</td></tr>
@@ -2181,7 +2205,7 @@
     </table>
 
     <h3>Bảng định khoản mẫu — Giai đoạn 2</h3>
-    <table>
+    <table class="entry-table">
       <tr><th>STT</th><th>Nghiệp vụ</th><th>Nợ (TK)</th><th>Có (TK)</th><th>Ghi chú</th></tr>
       <tr><td>1</td><td>Mua hàng hóa nhập kho</td><td>152, 156</td><td>331</td><td></td></tr>
       <tr><td>2</td><td>Thuế GTGT đầu vào được khấu trừ</td><td>133</td><td>331</td><td></td></tr>
@@ -2193,7 +2217,7 @@
     <p><em>Kế toán vui lòng kiểm tra, bổ sung hoặc điều chỉnh tài khoản và nội dung hạch toán cho phù hợp thực tế doanh nghiệp.</em></p>
 
     <h3>Quy tắc nghiệp vụ chung của Giai đoạn 2</h3>
-    <table>
+    <table class="rule3-table">
       <tr><th>STT</th><th>Quy tắc</th><th>Nội dung</th></tr>
       <tr><td>1</td><td>Chứng từ mua hàng có trạng thái</td><td>Đơn mua, chứng từ mua, phiếu nhập kho, thanh toán đều có trạng thái Nháp → Chờ duyệt → Đã duyệt → Đã hủy.</td></tr>
       <tr><td>2</td><td>Ghi sổ sau duyệt</td><td>Chỉ chứng từ đã duyệt mới được cập nhật kho, công nợ và sổ cái.</td></tr>
@@ -2218,7 +2242,7 @@
     </ul>
 
     <h3>Tiêu chí nghiệm thu</h3>
-    <table>
+    <table class="rule-table">
       <tr><th>Tiêu chí</th><th>Nội dung kiểm tra</th></tr>
       <tr><td>Đơn mua / hợp đồng</td><td>Đơn mua và hợp đồng theo dõi được số lượng / giá trị đã nhận, đã lập hóa đơn, đã thanh toán và còn lại.</td></tr>
       <tr><td>Mua hàng</td><td>Chứng từ mua hàng sau khi duyệt sinh đúng công nợ phải trả, thuế đầu vào và liên kết nhập kho nếu là hàng hóa.</td></tr>
@@ -2415,7 +2439,7 @@
 
     <h3>4.13. Báo cáo bán hàng, công nợ, giá vốn & kho</h3>
     <p>Module báo cáo giúp kế toán và quản lý theo dõi doanh thu, công nợ phải thu, thu tiền, giá vốn, lãi lỗ đơn hàng và tồn kho liên quan đến xuất bán.</p>
-    <table>
+    <table class="rule3-table">
       <tr><th>Nhóm báo cáo</th><th>Báo cáo / Chức năng</th><th>Mô tả</th></tr>
       <tr><td>Bán hàng</td><td>Sổ chi tiết bán hàng</td><td>Theo dõi chi tiết chứng từ bán hàng theo ngày, khách hàng, mặt hàng.</td></tr>
       <tr><td>Bán hàng</td><td>Tổng hợp bán hàng theo khách hàng</td><td>Tổng hợp doanh thu theo từng khách hàng trong kỳ.</td></tr>
@@ -2434,7 +2458,7 @@
     </table>
 
     <h3>Bảng định khoản mẫu — Giai đoạn 3</h3>
-    <table>
+    <table class="entry-table">
       <tr><th>STT</th><th>Nghiệp vụ</th><th>Nợ (TK)</th><th>Có (TK)</th><th>Ghi chú</th></tr>
       <tr><td>1</td><td>Bán hàng ghi nhận doanh thu</td><td>131</td><td>511</td><td></td></tr>
       <tr><td>2</td><td>Thuế GTGT đầu ra</td><td>131</td><td>3331</td><td></td></tr>
@@ -2446,7 +2470,7 @@
     <p><em>Kế toán vui lòng kiểm tra, bổ sung hoặc điều chỉnh tài khoản và nội dung hạch toán cho phù hợp thực tế doanh nghiệp.</em></p>
 
     <h3>Quy tắc nghiệp vụ chung của Giai đoạn 3</h3>
-    <table>
+    <table class="rule3-table">
       <tr><th>STT</th><th>Quy tắc</th><th>Nội dung</th></tr>
       <tr><td>1</td><td>Chứng từ bán hàng có trạng thái</td><td>Báo giá, đơn hàng, hợp đồng, chứng từ bán hàng, phiếu xuất kho, hóa đơn đều có trạng thái theo quy trình.</td></tr>
       <tr><td>2</td><td>Ghi sổ sau duyệt</td><td>Chỉ chứng từ đã duyệt mới cập nhật doanh thu, thuế, công nợ, kho và sổ cái.</td></tr>
@@ -2471,7 +2495,7 @@
     </ul>
 
     <h3>Tiêu chí nghiệm thu</h3>
-    <table>
+    <table class="rule-table">
       <tr><th>Tiêu chí</th><th>Nội dung kiểm tra</th></tr>
       <tr><td>Báo giá / đơn hàng / hợp đồng</td><td>Theo dõi được trạng thái, số lượng / giá trị đã bán, đã giao, đã xuất hóa đơn, đã thu tiền và còn lại.</td></tr>
       <tr><td>Bán hàng</td><td>Chứng từ bán hàng sau khi duyệt sinh đúng doanh thu, thuế đầu ra, công nợ hoặc tiền thu.</td></tr>
@@ -2592,7 +2616,7 @@
 
     <h3>5.8. Sổ sách kế toán tổng hợp</h3>
     <p>Module này cung cấp hệ thống sổ kế toán phục vụ kiểm tra, tra cứu và đối chiếu số liệu tổng hợp.</p>
-    <table>
+    <table class="rule3-table">
       <tr><th>STT</th><th>Sổ / Chức năng</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Sổ nhật ký chung</td><td>Liệt kê toàn bộ bút toán kế toán theo trình tự thời gian.</td></tr>
       <tr><td>2</td><td>Sổ cái</td><td>Theo dõi số dư và phát sinh Nợ / Có theo từng tài khoản kế toán.</td></tr>
@@ -2606,7 +2630,7 @@
 
     <h3>5.9. Báo cáo tài chính</h3>
     <p>Module này dùng để lập bộ báo cáo tài chính theo mẫu đã thống nhất, lấy số liệu từ sổ cái và các phân hệ liên quan.</p>
-    <table>
+    <table class="rule3-table">
       <tr><th>STT</th><th>Báo cáo / Chức năng</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Lập báo cáo tài chính</td><td>Tổng hợp số liệu kế toán để lập bộ báo cáo tài chính theo kỳ.</td></tr>
       <tr><td>2</td><td>Bảng cân đối kế toán</td><td>Trình bày tài sản, nợ phải trả và vốn chủ sở hữu tại thời điểm báo cáo.</td></tr>
@@ -2620,7 +2644,7 @@
     </table>
 
     <h3>Bảng định khoản mẫu — Giai đoạn 4</h3>
-    <table>
+    <table class="entry-table">
       <tr><th>STT</th><th>Nghiệp vụ</th><th>Nợ (TK)</th><th>Có (TK)</th><th>Ghi chú</th></tr>
       <tr><td>1</td><td>Kết chuyển doanh thu bán hàng</td><td>511</td><td>911</td><td></td></tr>
       <tr><td>2</td><td>Kết chuyển giá vốn hàng bán</td><td>911</td><td>632</td><td></td></tr>
@@ -2632,7 +2656,7 @@
     <p><em>Kế toán vui lòng kiểm tra, bổ sung hoặc điều chỉnh tài khoản và nội dung hạch toán cho phù hợp thực tế doanh nghiệp.</em></p>
 
     <h3>Quy tắc nghiệp vụ chung của Giai đoạn 4</h3>
-    <table>
+    <table class="rule3-table">
       <tr><th>STT</th><th>Quy tắc</th><th>Nội dung</th></tr>
       <tr><td>1</td><td>Bút toán phải cân đối</td><td>Mọi chứng từ tổng hợp và kết chuyển phải có tổng Nợ bằng tổng Có.</td></tr>
       <tr><td>2</td><td>Chỉ chứng từ đã duyệt mới ghi sổ</td><td>Chứng từ nháp hoặc chờ duyệt không được đưa vào sổ cái và báo cáo tài chính chính thức.</td></tr>
@@ -2655,7 +2679,7 @@
     </ul>
 
     <h3>Tiêu chí nghiệm thu</h3>
-    <table>
+    <table class="rule-table">
       <tr><th>Tiêu chí</th><th>Nội dung kiểm tra</th></tr>
       <tr><td>Chứng từ tổng hợp</td><td>Chứng từ nghiệp vụ khác ghi nhận đúng định khoản, cân đối Nợ / Có và truy vết được chứng từ đính kèm.</td></tr>
       <tr><td>Kết chuyển</td><td>Doanh thu và chi phí được kết chuyển đúng, tài khoản doanh thu / chi phí không còn số dư bất thường sau kết chuyển.</td></tr>
@@ -2946,7 +2970,7 @@
     </table>
 
     <h3>Bảng định khoản mẫu — Giai đoạn 5</h3>
-    <table>
+    <table class="entry-table">
       <tr><th>STT</th><th>Nghiệp vụ</th><th>Nợ (TK)</th><th>Có (TK)</th><th>Ghi chú</th></tr>
       <tr><td>1</td><td>Thuế GTGT đầu vào được khấu trừ khi mua hàng hóa / dịch vụ</td><td>133</td><td>111, 112, 331</td><td>Liên kết với hóa đơn đầu vào hợp lệ và chứng từ mua hàng tương ứng.</td></tr>
       <tr><td>2</td><td>Thuế GTGT đầu ra khi bán hàng hóa / dịch vụ</td><td>131</td><td>3331</td><td>Liên kết với hóa đơn đầu ra, doanh thu và công nợ phải thu tương ứng.</td></tr>
@@ -2962,7 +2986,7 @@
     <p><em>Kế toán vui lòng kiểm tra, bổ sung hoặc điều chỉnh tài khoản và nội dung hạch toán cho phù hợp thực tế doanh nghiệp.</em></p>
 
     <h3>Quy tắc nghiệp vụ chung của Giai đoạn 5</h3>
-    <table>
+    <table class="rule3-table">
       <tr><th>Mã rule</th><th>Quy tắc</th><th>Nội dung</th></tr>
       <tr><td>BR-P5-G-01</td><td>Hóa đơn phải có trạng thái rõ ràng</td><td>Mọi hóa đơn đầu vào / đầu ra phải theo dõi được trạng thái đồng bộ, kiểm tra, liên kết chứng từ, hạch toán, kê khai, điều chỉnh, thay thế hoặc hủy.</td></tr>
       <tr><td>BR-P5-G-02</td><td>Không sửa trực tiếp hóa đơn sai sót</td><td>Hóa đơn đã phát hành hoặc đã nhận hợp lệ không được sửa trực tiếp dữ liệu gốc; việc xử lý sai sót phải đi qua hồ sơ điều chỉnh, thay thế hoặc hủy.</td></tr>
@@ -2987,7 +3011,7 @@
     </ul>
 
     <h3>Tiêu chí nghiệm thu</h3>
-    <table>
+    <table class="rule-table">
       <tr><th>Phân hệ / Tiêu chí</th><th>Nội dung kiểm tra</th></tr>
       <tr><td>Workflow tổng thể Phase 5</td><td>Luồng từ cấu hình kết nối → đồng bộ → tiếp nhận → liên kết chứng từ → kiểm tra / cảnh báo → xử lý sai sót → bảng kê → tờ khai → giấy nộp tiền → báo cáo được mô tả rõ theo từng cụm (6.2.x–6.9.x) và truy vết được giữa các cụm.</td></tr>
       <tr><td>Kết nối hóa đơn điện tử (6.2)</td><td>Phân biệt được cụm cấu hình / xác thực (6.2.1), cụm đồng bộ (6.2.2) và cụm lịch sử / đồng bộ lại lỗi (6.2.3); mỗi cụm có quyền riêng và trạng thái rõ ràng.</td></tr>
@@ -3302,7 +3326,7 @@
     </table>
 
     <h3>Bảng định khoản mẫu — Giai đoạn 6</h3>
-    <table>
+    <table class="entry-table">
       <tr><th>STT</th><th>Nghiệp vụ</th><th>Nợ (TK)</th><th>Có (TK)</th><th>Ghi chú</th></tr>
       <tr><td>1</td><td>Ghi tăng tài sản cố định từ mua sắm hoàn tất</td><td>211</td><td>111, 112, 331, 241</td><td>Tài khoản Có phụ thuộc nguồn hình thành tài sản và giai đoạn đầu tư / thanh toán.</td></tr>
       <tr><td>2</td><td>Trích khấu hao tài sản cố định</td><td>627, 641, 642</td><td>214</td><td>Phân bổ theo bộ phận sử dụng hoặc đối tượng chi phí.</td></tr>
@@ -3322,7 +3346,7 @@
     <p><em>Kế toán cần rà soát tài khoản sử dụng thực tế theo hệ thống tài khoản của doanh nghiệp; bảng này là baseline để review phân hệ mở rộng nâng cao và đối chiếu với sổ cái.</em></p>
 
     <h3>Quy tắc nghiệp vụ chung của Giai đoạn 6</h3>
-    <table>
+    <table class="rule3-table">
       <tr><th>Mã rule</th><th>Quy tắc</th><th>Nội dung</th></tr>
       <tr><td>BR-P6-G-01</td><td>Chỉ triển khai khi dữ liệu lõi đã ổn định</td><td>Các module mở rộng chỉ nên triển khai khi các phase lõi đã vận hành ổn định và dữ liệu nguồn đủ tin cậy để làm cơ sở tính toán / quản trị.</td></tr>
       <tr><td>BR-P6-G-02</td><td>Mọi bút toán tự động phải truy vết được</td><td>Khấu hao, phân bổ, lương, giá thành, lãi vay hoặc chứng từ tạo từ e-banking phải truy được về dữ liệu nguồn và user / job thực hiện.</td></tr>
@@ -3347,7 +3371,7 @@
     </ul>
 
     <h3>Tiêu chí nghiệm thu</h3>
-    <table>
+    <table class="rule-table">
       <tr><th>Phân hệ / Tiêu chí</th><th>Nội dung kiểm tra</th></tr>
       <tr><td>Tài sản cố định (7.1.1–7.1.4)</td><td>Nguyên giá, khấu hao lũy kế, giá trị còn lại, các nghiệp vụ tăng / giảm / điều chuyển / đánh giá lại và kết quả kiểm kê đối chiếu được với số liệu kế toán. Mỗi cụm 7.1.1–7.1.4 có Actor & Quyền rõ ràng.</td></tr>
       <tr><td>Công cụ dụng cụ & CPTT (7.2.1–7.2.3)</td><td>Tổng đã phân bổ cộng giá trị còn lại bằng giá trị ban đầu sau điều chỉnh hợp lệ; không phân bổ trùng kỳ và có thể truy vết từng bút toán phân bổ về cụm 7.2.2.</td></tr>
@@ -3368,7 +3392,7 @@
   <section class="report-page" id="reconciliation">
     <h2>8. Bảng đối chiếu định kỳ</h2>
     <p>Bảng này dùng như phụ lục kiểm soát số liệu định kỳ sau khi các phase được đưa vào vận hành.</p>
-    <table>
+    <table class="rule3-table">
       <tr><th>Đối chiếu</th><th>Mục tiêu</th><th>Tần suất</th></tr>
       <tr><td>Quỹ tiền mặt</td><td>Sổ quỹ khớp sổ kế toán tiền mặt</td><td>Hằng tuần / cuối kỳ</td></tr>
       <tr><td>Ngân hàng</td><td>Sổ tiền gửi khớp sao kê và sổ kế toán</td><td>Hằng tuần / cuối kỳ</td></tr>
