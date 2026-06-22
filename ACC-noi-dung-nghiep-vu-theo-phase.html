@@ -3355,236 +3355,148 @@
   <section class="phase-chapter" id="phase-3">
     <div class="phase-header">
       <div class="chapter-label">Phase 3 / Chương bán hàng & doanh thu</div>
-      <h2>4. Giai đoạn 3 — Bán hàng, xuất kho, tính giá vốn & công nợ phải thu</h2>
-      <p>Hoàn thiện chu trình bán hàng từ báo giá đến xuất kho, hóa đơn, doanh thu, giá vốn, công nợ phải thu và thu tiền.</p>
+      <h2>4. Giai đoạn 3 — Bán hàng, hóa đơn, xuất kho, giá vốn & công nợ phải thu</h2>
+      <p>Giai đoạn này mô tả chu trình bán hàng từ báo giá đến thu tiền, đồng thời trace được hóa đơn, giá vốn, công nợ và giảm trừ doanh thu.</p>
     </div>
     <div class="phase-intro-card">
       <div class="intro-grid">
-        <div class="intro-panel"><h4>Mục tiêu</h4><span>Quản lý đầy đủ doanh thu, công nợ khách hàng, xuất kho bán hàng và tính giá vốn theo dữ liệu kho.</span></div>
-        <div class="intro-panel"><h4>Phạm vi</h4><span>Báo giá, đơn bán, hợp đồng bán, chính sách giá, hóa đơn bán ra, xuất kho, giá vốn, thu tiền và xử lý sau bán.</span></div>
-        <div class="intro-panel"><h4>Module chính</h4><ul><li>Bán hàng & chính sách giá</li><li>Xuất kho & tính giá vốn</li><li>Công nợ phải thu & thu tiền</li></ul></div>
+        <div class="intro-panel"><h4>Mục tiêu</h4><span>Quản lý đầy đủ doanh thu, thuế đầu ra, công nợ khách hàng, xuất kho, giá vốn và các xử lý sau bán.</span></div>
+        <div class="intro-panel"><h4>Phạm vi</h4><span>Báo giá, đơn đặt hàng, hợp đồng bán, chính sách giá, chứng từ bán hàng, hóa đơn bán ra, xuất kho, giá vốn, công nợ phải thu, thu tiền và báo cáo.</span></div>
+        <div class="intro-panel"><h4>Module chính</h4><ul><li>Bán hàng & chính sách giá</li><li>Hóa đơn, xuất kho & giá vốn</li><li>Phải thu, thu tiền & báo cáo</li></ul></div>
       </div>
     </div>
 
     <h3>4.1. Quy trình bán hàng & xuất kho</h3>
-    <div class="mini-flow">Báo giá → Đơn đặt hàng → Hợp đồng bán → Bán hàng hóa / dịch vụ → Xuất kho → Xuất hóa đơn → Ghi doanh thu / thuế / công nợ → Tính giá vốn → Thu tiền → Đối chiếu công nợ → Trả lại / Giảm giá / Chiết khấu (nếu có)</div>
+    <div class="mini-flow">Báo giá → Đơn đặt hàng → Hợp đồng bán → Chứng từ bán hàng → Xuất kho → Hóa đơn bán ra → Ghi doanh thu / thuế / công nợ → Tính giá vốn → Thu tiền → Đối chiếu công nợ → Trả lại / Giảm giá / Chiết khấu</div>
+    <p>Nguyên tắc chung: chỉ chứng từ đã duyệt mới ghi sổ; bán hàng hóa mới phát sinh xuất kho và giá vốn; bán chưa thu tiền phát sinh công nợ phải thu.</p>
 
     <h3>4.2. Báo giá</h3>
-    <p>Module này dùng để lập báo giá gửi khách hàng, theo dõi hiệu lực báo giá và chuyển báo giá thành đơn đặt hàng hoặc chứng từ bán hàng.</p>
-    <table class="stt-table">
-      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
-      <tr><td>1</td><td>Lập báo giá</td><td>Tạo báo giá theo khách hàng, mặt hàng / dịch vụ, số lượng, đơn giá, thuế, chiết khấu và thời hạn hiệu lực.</td></tr>
-      <tr><td>2</td><td>Áp dụng bảng giá / chính sách giá</td><td>Tự động gợi ý đơn giá theo bảng giá, nhóm khách hàng, kênh bán hoặc thời điểm hiệu lực.</td></tr>
-      <tr><td>3</td><td>Theo dõi trạng thái báo giá</td><td>Theo dõi Nháp, Đã gửi, Khách đồng ý, Khách từ chối, Hết hiệu lực, Đã chuyển đơn hàng.</td></tr>
-      <tr><td>4</td><td>Chuyển báo giá thành đơn đặt hàng</td><td>Kế thừa thông tin báo giá sang đơn đặt hàng khi khách hàng đồng ý.</td></tr>
-      <tr><td>5</td><td>Chuyển báo giá thành chứng từ bán hàng</td><td>Lập nhanh chứng từ bán hàng từ báo giá trong trường hợp bán trực tiếp.</td></tr>
-      <tr><td>6</td><td>In / gửi báo giá</td><td>In, xuất PDF / Excel hoặc gửi báo giá cho khách hàng.</td></tr>
-      <tr><td>7</td><td>Hủy báo giá</td><td>Hủy báo giá không còn hiệu lực, bắt buộc ghi lý do nếu đã gửi khách hàng.</td></tr>
+    <table class="rule3-table">
+      <tr><th>Use case</th><th>Actor</th><th>Luồng chính</th><th>Kết quả</th></tr>
+      <tr><td>Lập báo giá</td><td>Kế toán bán hàng / Kinh doanh</td><td>Chọn khách hàng, hàng hóa/dịch vụ, số lượng, đơn giá, chiết khấu, hiệu lực; hệ thống kiểm tra giá sàn và bảng giá.</td><td>Báo giá nháp / đã gửi.</td></tr>
+      <tr><td>Chuyển báo giá</td><td>Kế toán bán hàng</td><td>Chuyển sang đơn đặt hàng hoặc chứng từ bán hàng khi khách đồng ý.</td><td>Đơn hàng / chứng từ kế thừa.</td></tr>
+      <tr><td>Hủy / hết hiệu lực</td><td>Kế toán bán hàng</td><td>Hủy báo giá không còn giá trị, lưu lý do và lịch sử.</td><td>Trạng thái hủy / hết hiệu lực.</td></tr>
     </table>
+    <table class="rule-table"><tr><th>Business rule</th><th>Nội dung</th></tr><tr><td>BR-BG-01</td><td>Báo giá phải có thời hạn hiệu lực và giá không thấp hơn giá sàn.</td></tr><tr><td>BR-BG-02</td><td>Báo giá đã gửi không sửa trực tiếp nếu đã được khách phản hồi; phải tạo phiên bản điều chỉnh.</td></tr></table>
 
     <h3>4.3. Đơn đặt hàng bán</h3>
-    <p>Module này dùng để ghi nhận đơn hàng khách đã đặt, theo dõi giao hàng, xuất hóa đơn, thu tiền và tình trạng hoàn thành.</p>
-    <table class="stt-table">
-      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
-      <tr><td>1</td><td>Lập đơn đặt hàng</td><td>Ghi nhận đơn hàng theo khách hàng, hàng hóa / dịch vụ, số lượng, đơn giá, ngày giao dự kiến.</td></tr>
-      <tr><td>2</td><td>Lập đơn hàng từ báo giá</td><td>Kế thừa thông tin từ báo giá đã được khách hàng chấp nhận.</td></tr>
-      <tr><td>3</td><td>Duyệt đơn đặt hàng</td><td>Người có quyền duyệt xác nhận đơn hàng trước khi xuất kho / bán hàng.</td></tr>
-      <tr><td>4</td><td>Kiểm tra tồn khả dụng</td><td>Cảnh báo hàng không đủ tồn để giao theo đơn đặt hàng.</td></tr>
-      <tr><td>5</td><td>Theo dõi số lượng đã giao</td><td>So sánh số lượng đặt với số lượng đã xuất kho / giao hàng.</td></tr>
-      <tr><td>6</td><td>Theo dõi số lượng chưa giao</td><td>Liệt kê hàng còn phải giao cho khách.</td></tr>
-      <tr><td>7</td><td>Theo dõi trạng thái đơn hàng</td><td>Theo dõi Nháp, Chờ duyệt, Đã duyệt, Đang giao, Giao một phần, Hoàn thành, Đã hủy.</td></tr>
-      <tr><td>8</td><td>Chuyển đơn hàng thành chứng từ bán hàng</td><td>Lập chứng từ bán hàng kế thừa thông tin từ đơn đặt hàng.</td></tr>
-      <tr><td>9</td><td>Hủy đơn hàng</td><td>Hủy đơn hàng chưa hoàn thành, bắt buộc nhập lý do hủy.</td></tr>
+    <table class="rule3-table">
+      <tr><th>Use case</th><th>Actor</th><th>Luồng chính</th><th>Kết quả</th></tr>
+      <tr><td>Lập đơn đặt hàng</td><td>Kinh doanh / Kế toán bán hàng</td><td>Nhập khách hàng, hàng hóa/dịch vụ, số lượng, lịch giao và điều kiện giao hàng; kiểm tra tồn khả dụng.</td><td>Đơn hàng nháp / chờ duyệt.</td></tr>
+      <tr><td>Duyệt đơn</td><td>Người duyệt</td><td>Đơn được duyệt mới cho phép giao hàng / bán hàng.</td><td>Đơn đã duyệt.</td></tr>
+      <tr><td>Theo dõi giao hàng</td><td>Kinh doanh / kho</td><td>Theo dõi đã giao, còn phải giao, giao một phần và hoàn thành.</td><td>Trạng thái tiến độ.</td></tr>
     </table>
+    <table class="rule-table"><tr><th>Business rule</th><th>Nội dung</th></tr><tr><td>BR-DH-01</td><td>Đơn hàng phải ghi nhận trạng thái và không cho xuất hàng khi chưa duyệt (trừ cấu hình đặc biệt).</td></tr><tr><td>BR-DH-02</td><td>Số lượng giao không được vượt số lượng đặt trừ khi có điều chỉnh hợp lệ.</td></tr></table>
 
     <h3>4.4. Hợp đồng bán</h3>
-    <p>Module này dùng để quản lý hợp đồng bán hàng / dịch vụ, theo dõi giá trị thực hiện, hóa đơn, thu tiền và công nợ theo hợp đồng.</p>
-    <table class="stt-table">
-      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
-      <tr><td>1</td><td>Lập hợp đồng bán</td><td>Khai báo số hợp đồng, khách hàng, ngày ký, giá trị hợp đồng, thời hạn hiệu lực.</td></tr>
-      <tr><td>2</td><td>Lập hợp đồng từ báo giá / đơn hàng</td><td>Kế thừa thông tin hàng hóa, dịch vụ, giá bán và điều khoản từ chứng từ nguồn.</td></tr>
-      <tr><td>3</td><td>Khai báo điều khoản thanh toán</td><td>Theo dõi mốc thanh toán, tỷ lệ / số tiền, hạn thanh toán và điều kiện thanh toán.</td></tr>
-      <tr><td>4</td><td>Khai báo điều khoản giao hàng</td><td>Theo dõi thời gian giao hàng, địa điểm giao, người phụ trách giao nhận.</td></tr>
-      <tr><td>5</td><td>Đính kèm file hợp đồng</td><td>Lưu hợp đồng, phụ lục, biên bản nghiệm thu, tài liệu liên quan.</td></tr>
-      <tr><td>6</td><td>Theo dõi thực hiện hợp đồng</td><td>Theo dõi giá trị đã bán, đã xuất hóa đơn, đã thu tiền và còn phải thu.</td></tr>
-      <tr><td>7</td><td>Cảnh báo hợp đồng đến hạn</td><td>Cảnh báo hợp đồng sắp hết hạn, đến hạn giao hàng hoặc đến hạn thu tiền.</td></tr>
-      <tr><td>8</td><td>Thanh lý / đóng hợp đồng</td><td>Đánh dấu hợp đồng hoàn thành, thanh lý hoặc dừng thực hiện.</td></tr>
+    <table class="rule3-table">
+      <tr><th>Use case</th><th>Actor</th><th>Luồng chính</th><th>Kết quả</th></tr>
+      <tr><td>Lập hợp đồng</td><td>Kinh doanh / Kế toán bán hàng</td><td>Khai báo số hợp đồng, điều khoản thanh toán, điều khoản giao hàng, thời hạn và phụ lục.</td><td>Hợp đồng nháp / hiệu lực.</td></tr>
+      <tr><td>Theo dõi thực hiện</td><td>Kế toán bán hàng</td><td>Theo dõi giá trị đã bán, đã xuất hóa đơn, đã thu tiền và còn phải thu theo hợp đồng.</td><td>Bảng thực hiện hợp đồng.</td></tr>
+      <tr><td>Thanh lý / dừng thực hiện</td><td>Người có quyền</td><td>Đóng hợp đồng, lưu lý do và lịch sử.</td><td>Hợp đồng đã thanh lý.</td></tr>
     </table>
+    <table class="rule-table"><tr><th>Business rule</th><th>Nội dung</th></tr><tr><td>BR-HD-01</td><td>Hợp đồng phải liên kết được với báo giá/đơn hàng nguồn khi có.</td></tr><tr><td>BR-HD-02</td><td>Các mốc giao hàng và thanh toán phải theo dõi riêng để phục vụ cảnh báo trễ hạn.</td></tr></table>
 
     <h3>4.5. Chính sách giá, bảng giá & chiết khấu</h3>
-    <p>Module này dùng để thiết lập giá bán, chiết khấu và chính sách thương mại làm căn cứ cho báo giá, đơn hàng, hợp đồng và chứng từ bán hàng.</p>
-    <table class="stt-table">
-      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
-      <tr><td>1</td><td>Khai báo bảng giá</td><td>Thiết lập bảng giá theo mặt hàng, nhóm hàng, thời gian hiệu lực.</td></tr>
-      <tr><td>2</td><td>Giá bán theo nhóm khách hàng</td><td>Thiết lập giá riêng cho đại lý, khách lẻ, khách sỉ hoặc nhóm khách hàng.</td></tr>
-      <tr><td>3</td><td>Giá bán theo kênh bán</td><td>Thiết lập giá theo kênh bán, chi nhánh hoặc thị trường.</td></tr>
-      <tr><td>4</td><td>Chiết khấu thương mại</td><td>Khai báo chiết khấu theo mặt hàng, đơn hàng, khách hàng hoặc doanh số.</td></tr>
-      <tr><td>5</td><td>Kiểm soát giá bán tối thiểu</td><td>Cảnh báo hoặc chặn khi bán thấp hơn giá tối thiểu theo cấu hình.</td></tr>
-      <tr><td>6</td><td>Tính giá bán tự động</td><td>Gợi ý giá bán khi lập báo giá, đơn hàng hoặc chứng từ bán hàng.</td></tr>
+    <table class="rule3-table">
+      <tr><th>Use case</th><th>Actor</th><th>Luồng chính</th><th>Kết quả</th></tr>
+      <tr><td>Khai báo bảng giá</td><td>Kế toán bán hàng</td><td>Thiết lập giá theo hàng, nhóm hàng, khách hàng, kênh bán và hiệu lực.</td><td>Bảng giá active / inactive.</td></tr>
+      <tr><td>Áp dụng chiết khấu</td><td>Kế toán bán hàng</td><td>Áp dụng chiết khấu thương mại, khuyến mại, ngưỡng doanh số và kiểm soát giá sàn.</td><td>Đơn giá cuối cùng.</td></tr>
+      <tr><td>Gợi ý giá tự động</td><td>Hệ thống</td><td>Gợi ý giá theo thứ tự ưu tiên đã cấu hình.</td><td>Giá đề xuất / cảnh báo.</td></tr>
     </table>
+    <table class="rule-table"><tr><th>Business rule</th><th>Nội dung</th></tr><tr><td>BR-GIA-01</td><td>Thứ tự áp dụng giá phải được xác định rõ: bảng giá riêng → nhóm khách hàng → kênh bán → mặc định.</td></tr><tr><td>BR-GIA-02</td><td>Không cho lập chứng từ với giá thấp hơn giá sàn nếu chưa có quyền override.</td></tr></table>
 
     <h3>4.6. Bán hàng hóa / dịch vụ</h3>
-    <p>Module chứng từ bán hàng là trung tâm ghi nhận doanh thu, thuế đầu ra, công nợ / tiền thu, hóa đơn bán ra và xuất kho nếu bán hàng hóa.</p>
-    <table class="stt-table">
-      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
-      <tr><td>1</td><td>Lập chứng từ bán hàng hóa</td><td>Ghi nhận nghiệp vụ bán hàng hóa có thể phát sinh xuất kho và giá vốn.</td></tr>
-      <tr><td>2</td><td>Lập chứng từ bán dịch vụ</td><td>Ghi nhận bán dịch vụ không phát sinh xuất kho.</td></tr>
-      <tr><td>3</td><td>Lập chứng từ từ báo giá / đơn hàng / hợp đồng</td><td>Kế thừa thông tin khách hàng, hàng hóa, số lượng, đơn giá từ chứng từ nguồn.</td></tr>
-      <tr><td>4</td><td>Bán hàng thu tiền ngay</td><td>Ghi nhận doanh thu và tự sinh phiếu thu hoặc chứng từ thu ngân hàng.</td></tr>
-      <tr><td>5</td><td>Bán hàng chưa thu tiền</td><td>Ghi nhận doanh thu và phát sinh công nợ phải thu khách hàng.</td></tr>
-      <tr><td>6</td><td>Kiêm phiếu xuất kho</td><td>Khi bán hàng hóa, chứng từ bán hàng có thể tự sinh phiếu xuất kho.</td></tr>
-      <tr><td>7</td><td>Lập kèm hóa đơn bán ra</td><td>Lập hoặc liên kết hóa đơn bán ra ngay trên chứng từ bán hàng.</td></tr>
-      <tr><td>8</td><td>Khai báo thuế GTGT đầu ra</td><td>Ghi nhận thuế suất, tiền thuế và tài khoản thuế đầu ra nếu giao dịch chịu thuế.</td></tr>
-      <tr><td>9</td><td>Ghi nhận doanh thu</td><td>Chứng từ đã duyệt cập nhật doanh thu bán hàng / cung cấp dịch vụ.</td></tr>
-      <tr><td>10</td><td>Đính kèm chứng từ bán hàng</td><td>Đính kèm đơn hàng, hợp đồng, biên bản giao nhận, nghiệm thu, hóa đơn.</td></tr>
-      <tr><td>11</td><td>Duyệt chứng từ bán hàng</td><td>Người có quyền duyệt xác nhận chứng từ trước khi ghi sổ.</td></tr>
-      <tr><td>12</td><td>Ghi sổ chứng từ bán hàng</td><td>Chứng từ đã duyệt cập nhật doanh thu, thuế, tiền / công nợ, kho và sổ cái.</td></tr>
-      <tr><td>13</td><td>Hủy chứng từ bán hàng</td><td>Hủy chứng từ sai, bắt buộc nhập lý do và lưu nhật ký truy vết.</td></tr>
+    <table class="rule3-table">
+      <tr><th>Use case</th><th>Actor</th><th>Luồng chính</th><th>Kết quả</th></tr>
+      <tr><td>Bán hàng hóa</td><td>Kế toán bán hàng</td><td>Ghi nhận doanh thu, thuế đầu ra, công nợ/tiền thu; hàng hóa có thể sinh phiếu xuất kho.</td><td>Chứng từ bán hàng hóa.</td></tr>
+      <tr><td>Bán dịch vụ</td><td>Kế toán bán hàng</td><td>Ghi nhận doanh thu dịch vụ, không phát sinh phiếu xuất kho.</td><td>Chứng từ bán dịch vụ.</td></tr>
+      <tr><td>Ghi sổ / hủy</td><td>Người duyệt</td><td>Chứng từ đã duyệt mới cập nhật doanh thu, thuế, công nợ, kho và sổ cái.</td><td>Bút toán đã ghi sổ.</td></tr>
     </table>
+    <table class="rule-table"><tr><th>Business rule</th><th>Nội dung</th></tr><tr><td>BR-BH-01</td><td>Chỉ chứng từ đã duyệt mới ghi sổ và sinh ảnh hưởng kế toán.</td></tr><tr><td>BR-BH-02</td><td>Bán hàng hóa phải liên kết được với phiếu xuất kho hoặc workflow xuất kho tự động.</td></tr><tr><td>BR-BH-03</td><td>Chứng từ bán chưa thu tiền làm tăng công nợ phải thu.</td></tr></table>
 
     <h3>4.7. Hóa đơn bán ra</h3>
-    <p>Module này dùng để quản lý hóa đơn bán ra, liên kết hóa đơn với chứng từ bán hàng và phục vụ kê khai thuế.</p>
-    <table class="stt-table">
-      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
-      <tr><td>1</td><td>Lập hóa đơn bán ra</td><td>Ghi nhận thông tin hóa đơn: số hóa đơn, ngày hóa đơn, khách hàng, hàng hóa / dịch vụ, tiền hàng, thuế.</td></tr>
-      <tr><td>2</td><td>Lập hóa đơn từ chứng từ bán hàng</td><td>Kế thừa dữ liệu từ chứng từ bán hàng đã duyệt.</td></tr>
-      <tr><td>3</td><td>Liên kết hóa đơn với chứng từ bán hàng</td><td>Gắn hóa đơn với chứng từ bán hàng, phiếu xuất kho, hợp đồng hoặc đơn hàng.</td></tr>
-      <tr><td>4</td><td>Theo dõi bán hàng chưa xuất hóa đơn</td><td>Liệt kê chứng từ bán hàng đã ghi nhận nhưng chưa lập hóa đơn.</td></tr>
-      <tr><td>5</td><td>Theo dõi hóa đơn chưa ghi nhận bán hàng</td><td>Liệt kê hóa đơn đã có nhưng chưa liên kết chứng từ bán hàng nếu có phát sinh.</td></tr>
-      <tr><td>6</td><td>Quản lý trạng thái hóa đơn</td><td>Theo dõi hóa đơn mới lập, đã phát hành, điều chỉnh, thay thế, hủy.</td></tr>
-      <tr><td>7</td><td>Xử lý hóa đơn sai sót</td><td>Ghi nhận nghiệp vụ điều chỉnh, thay thế hoặc hủy hóa đơn theo quy định.</td></tr>
-      <tr><td>8</td><td>Chuyển dữ liệu hóa đơn sang thuế</td><td>Cập nhật hóa đơn bán ra vào bảng kê thuế GTGT khi đến kỳ kê khai.</td></tr>
+    <table class="rule3-table">
+      <tr><th>Use case</th><th>Actor</th><th>Luồng chính</th><th>Kết quả</th></tr>
+      <tr><td>Lập hóa đơn</td><td>Kế toán bán hàng / Kế toán thuế</td><td>Nhập số hóa đơn, ngày, khách hàng, tiền hàng, thuế; có thể kế thừa từ chứng từ bán hàng.</td><td>Hóa đơn nháp / phát hành.</td></tr>
+      <tr><td>Điều chỉnh / thay thế / hủy</td><td>Kế toán thuế</td><td>Xử lý sai sót theo quy trình và lưu lịch sử trạng thái.</td><td>Hóa đơn điều chỉnh / thay thế / hủy.</td></tr>
+      <tr><td>Đồng bộ thuế</td><td>Hệ thống</td><td>Chuyển dữ liệu sang bảng kê thuế GTGT đầu ra khi đến kỳ.</td><td>Dữ liệu kê khai thuế.</td></tr>
     </table>
+    <table class="rule-table"><tr><th>Business rule</th><th>Nội dung</th></tr><tr><td>BR-HDB-01</td><td>Hóa đơn phải liên kết được với chứng từ nguồn để trace doanh thu và công nợ.</td></tr><tr><td>BR-HDB-02</td><td>Hóa đơn đã phát hành không sửa trực tiếp; mọi chỉnh sửa phải qua nghiệp vụ điều chỉnh/thay thế/hủy.</td></tr></table>
 
     <h3>4.8. Xuất kho bán hàng</h3>
-    <p>Module này dùng để xuất kho hàng bán, cập nhật tồn kho, kiểm soát xuất âm và liên kết xuất kho với chứng từ bán hàng.</p>
-    <table class="stt-table">
-      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
-      <tr><td>1</td><td>Lập phiếu xuất kho bán hàng</td><td>Ghi nhận xuất kho hàng hóa bán cho khách hàng.</td></tr>
-      <tr><td>2</td><td>Tự sinh phiếu xuất từ chứng từ bán hàng</td><td>Chứng từ bán hàng có tích kiêm phiếu xuất kho tự động sinh phiếu xuất.</td></tr>
-      <tr><td>3</td><td>Xuất kho theo đơn hàng / hợp đồng</td><td>Đối chiếu số lượng xuất với số lượng đã đặt hoặc đã ký hợp đồng.</td></tr>
-      <tr><td>4</td><td>Xuất kho nhiều lần</td><td>Một đơn hàng / hợp đồng có thể xuất kho nhiều đợt.</td></tr>
-      <tr><td>5</td><td>Kiểm tra tồn kho trước xuất</td><td>Cảnh báo hoặc chặn khi số lượng xuất vượt tồn khả dụng.</td></tr>
-      <tr><td>6</td><td>Kiểm soát xuất âm kho</td><td>Cho phép cảnh báo hoặc chặn xuất âm theo cấu hình doanh nghiệp.</td></tr>
-      <tr><td>7</td><td>Cập nhật thẻ kho</td><td>Phiếu xuất kho đã duyệt làm giảm tồn kho và cập nhật thẻ kho.</td></tr>
-      <tr><td>8</td><td>In phiếu xuất kho</td><td>In phiếu xuất kho phục vụ giao hàng và lưu chứng từ.</td></tr>
-      <tr><td>9</td><td>Hủy phiếu xuất kho</td><td>Hủy phiếu xuất sai khi chưa khóa kỳ, bắt buộc nhập lý do.</td></tr>
-    </table>
-
-    <h3>4.9. Tính giá vốn hàng bán</h3>
-    <p>Module này dùng để tính giá xuất kho, ghi nhận giá vốn hàng bán và đối chiếu giá vốn với tồn kho / sổ cái.</p>
-    <table class="stt-table">
-      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
-      <tr><td>1</td><td>Tính giá xuất kho</td><td>Tính giá xuất kho theo phương pháp đã khai báo: bình quân, FIFO hoặc phương pháp được thống nhất.</td></tr>
-      <tr><td>2</td><td>Tự động ghi nhận giá vốn</td><td>Phiếu xuất bán được tính giá để ghi nhận giá vốn hàng bán.</td></tr>
-      <tr><td>3</td><td>Cập nhật giá vốn theo kỳ</td><td>Cho phép tính / cập nhật lại giá vốn cuối kỳ khi có thay đổi dữ liệu nhập xuất.</td></tr>
-      <tr><td>4</td><td>Đối chiếu giá vốn với xuất kho</td><td>Kiểm tra giá vốn khớp giá trị hàng xuất kho.</td></tr>
-      <tr><td>5</td><td>Đối chiếu giá vốn với sổ cái</td><td>Kiểm tra giá vốn đã ghi nhận khớp tài khoản giá vốn trên sổ cái.</td></tr>
-      <tr><td>6</td><td>Xem chi tiết giá vốn theo chứng từ</td><td>Tra cứu giá vốn theo phiếu xuất, chứng từ bán hàng, đơn hàng hoặc mặt hàng.</td></tr>
-      <tr><td>7</td><td>Cảnh báo chứng từ chưa tính giá vốn</td><td>Liệt kê phiếu xuất bán chưa có giá vốn hoặc cần tính lại giá vốn.</td></tr>
-    </table>
-
-    <h3>4.10. Công nợ phải thu & thu tiền khách hàng</h3>
-    <p>Module này dùng để theo dõi công nợ phải thu theo khách hàng / hóa đơn / hợp đồng, lập kế hoạch thu nợ, thu tiền và đối chiếu công nợ.</p>
-    <table class="stt-table">
-      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
-      <tr><td>1</td><td>Ghi nhận công nợ phải thu</td><td>Bán hàng chưa thu tiền làm phát sinh công nợ phải thu khách hàng.</td></tr>
-      <tr><td>2</td><td>Theo dõi công nợ theo khách hàng</td><td>Xem số dư đầu kỳ, phát sinh tăng, phát sinh giảm, số dư cuối kỳ theo từng khách hàng.</td></tr>
-      <tr><td>3</td><td>Theo dõi công nợ theo hóa đơn</td><td>Quản lý công nợ chi tiết đến từng hóa đơn bán ra.</td></tr>
-      <tr><td>4</td><td>Theo dõi công nợ theo hợp đồng</td><td>Đối chiếu giá trị phải thu, đã thu, còn phải thu theo hợp đồng bán.</td></tr>
-      <tr><td>5</td><td>Theo dõi hạn thanh toán</td><td>Quản lý ngày đến hạn, số ngày quá hạn, công nợ đến hạn và quá hạn.</td></tr>
-      <tr><td>6</td><td>Lập kế hoạch thu nợ</td><td>Lên lịch thu tiền theo khách hàng, hóa đơn, hợp đồng hoặc nhân viên phụ trách.</td></tr>
-      <tr><td>7</td><td>Nhắc nợ khách hàng</td><td>Cảnh báo khoản nợ đến hạn / quá hạn và hỗ trợ gửi thông tin nhắc nợ.</td></tr>
-      <tr><td>8</td><td>Thu tiền mặt</td><td>Lập phiếu thu và giảm công nợ phải thu tương ứng.</td></tr>
-      <tr><td>9</td><td>Thu tiền ngân hàng</td><td>Lập chứng từ thu ngân hàng và giảm công nợ phải thu tương ứng.</td></tr>
-      <tr><td>10</td><td>Thu tiền theo hóa đơn</td><td>Phân bổ số tiền thu cho từng hóa đơn bán ra.</td></tr>
-      <tr><td>11</td><td>Thu một phần / nhiều hóa đơn</td><td>Cho phép thu một phần hóa đơn hoặc một lần thu phân bổ cho nhiều hóa đơn.</td></tr>
-      <tr><td>12</td><td>Đối chiếu công nợ với khách hàng</td><td>Lập biên bản đối chiếu công nợ phải thu theo kỳ.</td></tr>
-      <tr><td>13</td><td>Đối chiếu công nợ với sổ cái</td><td>Kiểm tra tổng công nợ chi tiết khớp tài khoản phải thu trên sổ cái.</td></tr>
-    </table>
-
-    <h3>4.11. Bù trừ công nợ & đối trừ chứng từ</h3>
-    <p>Module này dùng để xử lý bù trừ công nợ, đối trừ chứng từ phải thu và điều chỉnh chênh lệch công nợ.</p>
-    <table class="stt-table">
-      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
-      <tr><td>1</td><td>Đối trừ chứng từ công nợ khách hàng</td><td>Đối trừ giữa các chứng từ phải thu, thu tiền, trả lại, giảm giá của cùng khách hàng.</td></tr>
-      <tr><td>2</td><td>Bù trừ công nợ cùng đối tượng</td><td>Bù trừ phải thu và phải trả khi một đối tượng vừa là khách hàng vừa là nhà cung cấp.</td></tr>
-      <tr><td>3</td><td>Lập chứng từ bù trừ công nợ</td><td>Ghi nhận nghiệp vụ bù trừ và cập nhật công nợ chi tiết.</td></tr>
-      <tr><td>4</td><td>Xử lý chênh lệch công nợ</td><td>Lập chứng từ điều chỉnh khi phát hiện sai lệch sau đối chiếu.</td></tr>
-      <tr><td>5</td><td>Theo dõi trạng thái xác nhận công nợ</td><td>Theo dõi đã gửi, đã xác nhận, còn lệch, cần điều chỉnh.</td></tr>
-    </table>
-
-    <h3>4.12. Trả lại hàng bán, giảm giá & chiết khấu sau bán</h3>
-    <p>Module này dùng để xử lý hàng bán bị trả lại, giảm giá sau bán, chiết khấu thương mại và điều chỉnh hóa đơn / công nợ / tồn kho.</p>
-    <table class="stt-table">
-      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
-      <tr><td>1</td><td>Lập chứng từ trả lại hàng bán</td><td>Ghi nhận hàng khách trả lại do lỗi, sai quy cách hoặc thỏa thuận khác.</td></tr>
-      <tr><td>2</td><td>Nhập kho hàng bán bị trả lại</td><td>Hàng trả lại được nhập kho, làm tăng tồn kho nếu hàng còn sử dụng được.</td></tr>
-      <tr><td>3</td><td>Trả lại theo chứng từ bán</td><td>Liên kết hàng trả lại với chứng từ bán hàng / hóa đơn bán ban đầu.</td></tr>
-      <tr><td>4</td><td>Lập chứng từ giảm giá hàng bán</td><td>Ghi nhận khoản giảm giá sau bán được chấp thuận cho khách hàng.</td></tr>
-      <tr><td>5</td><td>Lập chứng từ chiết khấu thương mại</td><td>Ghi nhận chiết khấu thương mại theo chính sách bán hàng nếu phát sinh sau bán.</td></tr>
-      <tr><td>6</td><td>Điều chỉnh doanh thu</td><td>Trả lại / giảm giá / chiết khấu làm giảm doanh thu ghi nhận.</td></tr>
-      <tr><td>7</td><td>Điều chỉnh thuế GTGT đầu ra</td><td>Điều chỉnh tiền thuế đầu ra theo hóa đơn điều chỉnh / thay thế nếu có.</td></tr>
-      <tr><td>8</td><td>Điều chỉnh công nợ phải thu</td><td>Làm giảm số tiền khách hàng còn phải thanh toán hoặc phát sinh khoản hoàn tiền.</td></tr>
-      <tr><td>9</td><td>Điều chỉnh giá vốn khi trả lại</td><td>Hàng bán bị trả lại làm đảo / giảm giá vốn tương ứng nếu có nhập lại kho.</td></tr>
-      <tr><td>10</td><td>Theo dõi hóa đơn điều chỉnh / thay thế</td><td>Liên kết chứng từ trả lại / giảm giá với hóa đơn điều chỉnh hoặc thay thế.</td></tr>
-    </table>
-
-    <h3>4.13. Báo cáo bán hàng, công nợ, giá vốn & kho</h3>
-    <p>Module báo cáo giúp kế toán và quản lý theo dõi doanh thu, công nợ phải thu, thu tiền, giá vốn, lãi lỗ đơn hàng và tồn kho liên quan đến xuất bán.</p>
     <table class="rule3-table">
-      <tr><th>Nhóm báo cáo</th><th>Báo cáo / Chức năng</th><th>Mô tả</th></tr>
-      <tr><td>Bán hàng</td><td>Sổ chi tiết bán hàng</td><td>Theo dõi chi tiết chứng từ bán hàng theo ngày, khách hàng, mặt hàng.</td></tr>
-      <tr><td>Bán hàng</td><td>Tổng hợp bán hàng theo khách hàng</td><td>Tổng hợp doanh thu theo từng khách hàng trong kỳ.</td></tr>
-      <tr><td>Bán hàng</td><td>Tổng hợp bán hàng theo mặt hàng</td><td>Tổng hợp số lượng và doanh thu theo từng hàng hóa / dịch vụ.</td></tr>
-      <tr><td>Bán hàng</td><td>Báo cáo đơn hàng chưa hoàn thành</td><td>Liệt kê đơn hàng còn chưa giao đủ hoặc chưa xuất hóa đơn.</td></tr>
-      <tr><td>Công nợ phải thu</td><td>Tổng hợp công nợ phải thu khách hàng</td><td>Tổng hợp số dư đầu kỳ, phát sinh, thu tiền, số dư cuối kỳ theo khách hàng.</td></tr>
-      <tr><td>Công nợ phải thu</td><td>Chi tiết công nợ phải thu theo hóa đơn</td><td>Theo dõi công nợ còn phải thu đến từng hóa đơn bán ra.</td></tr>
-      <tr><td>Công nợ phải thu</td><td>Báo cáo công nợ đến hạn / quá hạn</td><td>Liệt kê các khoản phải thu sắp đến hạn hoặc quá hạn.</td></tr>
-      <tr><td>Công nợ phải thu</td><td>Biên bản đối chiếu công nợ</td><td>Xuất số liệu đối chiếu công nợ gửi khách hàng xác nhận.</td></tr>
-      <tr><td>Giá vốn</td><td>Bảng tính giá vốn</td><td>Tổng hợp giá vốn hàng bán theo kỳ, mặt hàng, chứng từ hoặc đơn hàng.</td></tr>
-      <tr><td>Giá vốn</td><td>Sổ chi tiết giá vốn</td><td>Theo dõi giá vốn phát sinh theo từng chứng từ xuất bán.</td></tr>
-      <tr><td>Hiệu quả bán hàng</td><td>Lãi / lỗ theo đơn hàng</td><td>So sánh doanh thu, giảm trừ, giá vốn và chi phí liên quan để xác định lãi / lỗ.</td></tr>
-      <tr><td>Kho</td><td>Thẻ kho hàng xuất bán</td><td>Theo dõi xuất kho bán hàng và tồn kho sau bán.</td></tr>
-      <tr><td>Kho</td><td>Báo cáo xuất kho bán hàng</td><td>Tổng hợp số lượng, giá trị hàng xuất bán theo kho, mặt hàng, khách hàng.</td></tr>
-      <tr><td>Kho</td><td>Báo cáo hàng chưa tính giá vốn</td><td>Liệt kê phiếu xuất bán chưa có giá vốn hoặc cần tính lại giá vốn.</td></tr>
+      <tr><th>Use case</th><th>Actor</th><th>Luồng chính</th><th>Kết quả</th></tr>
+      <tr><td>Lập phiếu xuất</td><td>Thủ kho / Kế toán kho</td><td>Lập phiếu xuất theo đơn hàng/hợp đồng/chứng từ bán hàng, kiểm tra tồn khả dụng.</td><td>Phiếu xuất nháp / duyệt.</td></tr>
+      <tr><td>Xuất nhiều đợt</td><td>Kho</td><td>Cho phép giao nhiều lần theo đơn/hợp đồng.</td><td>Tiến độ giao hàng.</td></tr>
+      <tr><td>Hủy / đảo phiếu</td><td>Người có quyền</td><td>Hủy phiếu sai hoặc đảo phiếu khi cần, có lý do và audit log.</td><td>Phiếu hủy / đảo.</td></tr>
     </table>
+    <table class="rule-table"><tr><th>Business rule</th><th>Nội dung</th></tr><tr><td>BR-XK-01</td><td>Phiếu xuất phải giảm tồn kho và cập nhật thẻ kho sau duyệt.</td></tr><tr><td>BR-XK-02</td><td>Không cho xuất âm nếu cấu hình chặn xuất âm đang bật.</td></tr></table>
+
+    <h3>4.9. Hàng bán bị trả lại & giảm giá hàng bán</h3>
+    <table class="rule3-table">
+      <tr><th>Use case</th><th>Actor</th><th>Luồng chính</th><th>Kết quả</th></tr>
+      <tr><td>Trả lại hàng bán</td><td>Kế toán bán hàng / Kho</td><td>Ghi nhận hàng trả lại, nhập kho lại nếu đạt chất lượng, điều chỉnh doanh thu, thuế và công nợ.</td><td>Chứng từ trả lại.</td></tr>
+      <tr><td>Giảm giá / chiết khấu</td><td>Kế toán bán hàng</td><td>Ghi nhận giảm giá/chiết khấu sau bán theo phê duyệt.</td><td>Chứng từ giảm trừ doanh thu.</td></tr>
+      <tr><td>Hóa đơn điều chỉnh</td><td>Kế toán thuế</td><td>Liên kết chứng từ giảm trừ với hóa đơn điều chỉnh/thay thế khi cần.</td><td>Trạng thái giảm trừ hợp lệ.</td></tr>
+    </table>
+    <table class="rule-table"><tr><th>Business rule</th><th>Nội dung</th></tr><tr><td>BR-TRA-01</td><td>Hàng trả lại phải trace được tới hóa đơn / chứng từ bán ban đầu.</td></tr><tr><td>BR-TRA-02</td><td>Hàng nhập lại kho chỉ thực hiện khi chất lượng cho phép.</td></tr></table>
+
+    <h3>4.10. Công nợ phải thu khách hàng</h3>
+    <table class="rule3-table">
+      <tr><th>Use case</th><th>Actor</th><th>Luồng chính</th><th>Kết quả</th></tr>
+      <tr><td>Ghi nhận phải thu</td><td>Kế toán công nợ</td><td>Bán chưa thu tiền làm phát sinh công nợ theo khách hàng/hóa đơn/hợp đồng.</td><td>Sổ công nợ chi tiết.</td></tr>
+      <tr><td>Theo dõi hạn nợ / aging</td><td>Kế toán công nợ</td><td>Theo dõi đến hạn, quá hạn, nhắc nợ, tuổi nợ và đối chiếu khách hàng.</td><td>Báo cáo aging.</td></tr>
+      <tr><td>Tất toán / đánh giá ngoại tệ</td><td>Kế toán công nợ</td><td>Xử lý tất toán và đánh giá lại ngoại tệ nếu có.</td><td>Công nợ cập nhật.</td></tr>
+    </table>
+    <table class="rule-table"><tr><th>Business rule</th><th>Nội dung</th></tr><tr><td>BR-CN-01</td><td>Công nợ chi tiết phải khớp sổ cái TK phải thu.</td></tr><tr><td>BR-CN-02</td><td>Hạn mức tín dụng và nhắc nợ phải được kiểm soát theo cấu hình.</td></tr></table>
+
+    <h3>4.11. Thu tiền khách hàng</h3>
+    <table class="rule3-table">
+      <tr><th>Use case</th><th>Actor</th><th>Luồng chính</th><th>Kết quả</th></tr>
+      <tr><td>Thu tiền mặt / ngân hàng</td><td>Thủ quỹ / Kế toán ngân hàng</td><td>Thu tiền cho một hay nhiều hóa đơn; giảm công nợ tương ứng.</td><td>Phiếu thu / ủy nhiệm thu.</td></tr>
+      <tr><td>Thu đặt cọc / ngoại tệ</td><td>Kế toán công nợ</td><td>Ghi nhận đặt cọc và xử lý chênh lệch tỷ giá nếu có.</td><td>Công nợ giảm.</td></tr>
+      <tr><td>Đối chiếu sao kê</td><td>Kế toán ngân hàng</td><td>Đối chiếu giao dịch thu với sao kê để xác nhận đã thu.</td><td>Trạng thái đối chiếu.</td></tr>
+    </table>
+    <table class="rule-table"><tr><th>Business rule</th><th>Nội dung</th></tr><tr><td>BR-TT-01</td><td>Thu tiền phải liên kết được với hóa đơn / công nợ cụ thể.</td></tr><tr><td>BR-TT-02</td><td>Thu ngân hàng phải đối chiếu sao kê và không làm lệch công nợ chi tiết.</td></tr></table>
+
+    <h3>4.12. Báo cáo bán hàng, doanh thu & công nợ phải thu</h3>
+    <table class="rule3-table">
+      <tr><th>Nhóm báo cáo</th><th>Báo cáo</th><th>Mô tả</th></tr>
+      <tr><td>Bán hàng</td><td>Sổ chi tiết bán hàng / tổng hợp theo khách hàng / mặt hàng</td><td>Tra cứu doanh thu, số lượng, trạng thái đơn và hiệu quả bán hàng.</td></tr>
+      <tr><td>Công nợ</td><td>Tổng hợp phải thu / chi tiết theo hóa đơn / aging</td><td>Theo dõi công nợ, đến hạn, quá hạn và biên bản đối chiếu.</td></tr>
+      <tr><td>Kho & giá vốn</td><td>Thẻ kho / bảng tính giá vốn / lãi lỗ theo đơn</td><td>Đối chiếu tồn kho, giá vốn và hiệu quả bán.</td></tr>
+    </table>
+    <p><strong>Liên kết phân hệ:</strong> mọi báo cáo phải drill-down được từ báo cáo xuống chứng từ bán hàng, phiếu xuất, hóa đơn, thu tiền và bút toán sổ cái.</p>
 
     <h3>Bảng định khoản mẫu — Giai đoạn 3</h3>
     <table class="entry-table">
       <tr><th>STT</th><th>Nghiệp vụ</th><th>Nợ (TK)</th><th>Có (TK)</th><th>Ghi chú</th></tr>
-      <tr><td>1</td><td>Bán hàng ghi nhận doanh thu</td><td>131</td><td>511</td><td></td></tr>
-      <tr><td>2</td><td>Thuế GTGT đầu ra</td><td>131</td><td>3331</td><td></td></tr>
-      <tr><td>3</td><td>Thu tiền mặt từ khách hàng</td><td>111</td><td>131</td><td></td></tr>
-      <tr><td>4</td><td>Thu tiền gửi ngân hàng từ khách hàng</td><td>112</td><td>131</td><td></td></tr>
-      <tr><td>5</td><td>Xuất kho bán hàng — ghi nhận giá vốn</td><td>632</td><td>152, 156</td><td></td></tr>
-      <tr><td>6</td><td>Trả lại hàng bán — giảm doanh thu</td><td>531</td><td>131</td><td></td></tr>
+      <tr><td>1</td><td>Bán hàng ghi nhận doanh thu</td><td>131</td><td>511</td><td>Doanh thu phải thu</td></tr>
+      <tr><td>2</td><td>Thuế GTGT đầu ra</td><td>131</td><td>3331</td><td>Thuế đầu ra</td></tr>
+      <tr><td>3</td><td>Thu tiền khách hàng</td><td>111/112</td><td>131</td><td>Giảm phải thu</td></tr>
+      <tr><td>4</td><td>Xuất kho bán hàng — ghi nhận giá vốn</td><td>632</td><td>152, 156</td><td>Giá vốn hàng bán</td></tr>
+      <tr><td>5</td><td>Trả lại hàng bán — giảm doanh thu</td><td>531</td><td>131</td><td>Giảm trừ doanh thu</td></tr>
+      <tr><td>6</td><td>Giảm giá / chiết khấu sau bán</td><td>532, 521</td><td>131</td><td>Điều chỉnh công nợ</td></tr>
     </table>
-    <p><em>Kế toán vui lòng kiểm tra, bổ sung hoặc điều chỉnh tài khoản và nội dung hạch toán cho phù hợp thực tế doanh nghiệp.</em></p>
 
     <h3>Quy tắc nghiệp vụ chung của Giai đoạn 3</h3>
     <table class="rule3-table">
       <tr><th>STT</th><th>Quy tắc</th><th>Nội dung</th></tr>
-      <tr><td>1</td><td>Chứng từ bán hàng có trạng thái</td><td>Báo giá, đơn hàng, hợp đồng, chứng từ bán hàng, phiếu xuất kho, hóa đơn đều có trạng thái theo quy trình.</td></tr>
-      <tr><td>2</td><td>Ghi sổ sau duyệt</td><td>Chỉ chứng từ đã duyệt mới cập nhật doanh thu, thuế, công nợ, kho và sổ cái.</td></tr>
-      <tr><td>3</td><td>Bán dịch vụ không xuất kho</td><td>Chỉ bán hàng hóa / vật tư mới phát sinh phiếu xuất kho và giá vốn kho.</td></tr>
-      <tr><td>4</td><td>Bán chưa thu tiền làm tăng công nợ</td><td>Chứng từ bán hàng chưa thu tiền làm phát sinh công nợ phải thu khách hàng.</td></tr>
-      <tr><td>5</td><td>Thu tiền làm giảm công nợ</td><td>Phiếu thu / thu ngân hàng được duyệt làm giảm công nợ phải thu theo hóa đơn được phân bổ.</td></tr>
-      <tr><td>6</td><td>Xuất kho làm giảm tồn kho</td><td>Phiếu xuất kho đã duyệt làm giảm số lượng và giá trị tồn kho.</td></tr>
-      <tr><td>7</td><td>Giá vốn theo phương pháp khai báo</td><td>Giá vốn hàng bán được tính theo phương pháp tính giá xuất kho đã cấu hình.</td></tr>
-      <tr><td>8</td><td>Trả lại / giảm giá điều chỉnh số liệu</td><td>Trả lại, giảm giá, chiết khấu sau bán điều chỉnh doanh thu, thuế, công nợ, tồn kho và giá vốn nếu có.</td></tr>
-      <tr><td>9</td><td>Công nợ chi tiết khớp sổ cái</td><td>Tổng công nợ phải thu theo khách hàng phải khớp tài khoản phải thu trên sổ cái.</td></tr>
-      <tr><td>10</td><td>Kho và giá vốn khớp sổ cái</td><td>Giá trị xuất kho, tồn kho và giá vốn phải đối chiếu khớp với sổ cái.</td></tr>
+      <tr><td>1</td><td>Chứng từ có trạng thái</td><td>Báo giá, đơn hàng, hợp đồng, chứng từ bán, hóa đơn, phiếu xuất đều có trạng thái theo quy trình.</td></tr>
+      <tr><td>2</td><td>Ghi sổ sau duyệt</td><td>Chỉ chứng từ đã duyệt mới tạo ảnh hưởng doanh thu, thuế, công nợ, kho và sổ cái.</td></tr>
+      <tr><td>3</td><td>Giá vốn theo cấu hình</td><td>Giá vốn bán hàng phải theo phương pháp tính giá xuất kho đã khai báo.</td></tr>
+      <tr><td>4</td><td>Giảm trừ doanh thu</td><td>Trả lại / giảm giá / chiết khấu phải điều chỉnh đúng doanh thu, thuế, công nợ và giá vốn nếu có.</td></tr>
+      <tr><td>5</td><td>Công nợ khớp sổ cái</td><td>Tổng công nợ phải thu theo khách hàng phải khớp tài khoản phải thu trên sổ cái.</td></tr>
+      <tr><td>6</td><td>Kho và giá vốn khớp sổ cái</td><td>Giá trị xuất kho, tồn kho và giá vốn phải đối chiếu khớp với sổ cái.</td></tr>
     </table>
 
     <h3>Kết quả bàn giao</h3>
     <ul>
-      <li>Hoàn thành chu trình: báo giá → đơn hàng → hợp đồng → chứng từ bán hàng → xuất kho / hóa đơn → doanh thu, thuế, công nợ và giá vốn.</li>
-      <li>Thu tiền khách hàng qua quỹ hoặc ngân hàng, tự động giảm công nợ phải thu.</li>
-      <li>Trả lại hàng bán / giảm giá / chiết khấu sau bán điều chỉnh đúng doanh thu, thuế, công nợ, kho và giá vốn.</li>
-      <li>Giá vốn hàng bán được tính theo phương pháp đã cấu hình và có thể cập nhật theo kỳ.</li>
-      <li>Báo cáo bán hàng, công nợ phải thu, giá vốn, lãi / lỗ đơn hàng và kho tra cứu được theo kỳ, khách hàng, mặt hàng và chứng từ.</li>
-      <li>Sổ cái cập nhật đầy đủ nghiệp vụ doanh thu, thuế đầu ra, công nợ, tiền thu, giá vốn và kho.</li>
+      <li>Hoàn thành chu trình bán hàng từ báo giá đến công nợ và thu tiền.</li>
+      <li>Hóa đơn bán ra, xuất kho và giá vốn trace được về chứng từ nguồn.</li>
+      <li>Trả lại / giảm giá / chiết khấu điều chỉnh đúng doanh thu, thuế, công nợ và kho.</li>
+      <li>Báo cáo doanh thu, công nợ, giá vốn và kho đối chiếu khớp sổ cái.</li>
     </ul>
 
     <h3>Tiêu chí nghiệm thu</h3>
@@ -3596,15 +3508,13 @@
       <tr><td>Giá vốn</td><td>Giá vốn khớp giá trị xuất kho và tính đúng theo phương pháp đã chọn.</td></tr>
       <tr><td>Công nợ</td><td>Công nợ chi tiết theo khách hàng / hóa đơn khớp sổ tổng hợp phải thu.</td></tr>
       <tr><td>Thu tiền</td><td>Thu tiền mặt / ngân hàng làm giảm công nợ đúng số tiền, đúng hóa đơn.</td></tr>
-      <tr><td>Trả lại / giảm giá</td><td>Trả lại hàng bán làm tăng tồn kho và điều chỉnh doanh thu / giá vốn; giảm giá / chiết khấu điều chỉnh đúng công nợ và thuế.</td></tr>
       <tr><td>Đối chiếu</td><td>Báo cáo bán hàng, công nợ, kho và giá vốn đối chiếu khớp với sổ cái.</td></tr>
     </table>
   </section>
 
   </section>
   </div>
-
-  <div class="tab-panel" id="tab-phase-4">
+<div class="tab-panel" id="tab-phase-4">
   <section class="phase-chapter" id="phase-4">
     <div class="phase-header">
       <div class="chapter-label">Phase 4 / Chương kế toán tổng hợp</div>
