@@ -87,6 +87,9 @@
     }
     tr { page-break-inside: avoid; break-inside: avoid; }
     tr:nth-child(even) td { background: #f8fafc; }
+    table.kv-table { table-layout: fixed; }
+    table.kv-table th:first-child,
+    table.kv-table td:first-child { width: 22%; }
 
     .cover {
       min-height: 297mm;
@@ -1772,7 +1775,7 @@
     <p>Module này là trung tâm ghi nhận toàn bộ bút toán kế toán phát sinh từ các phân hệ.</p>
 
     <h3>2.5.1. Ghi sổ kế toán</h3>
-    <table>
+    <table class="kv-table">
       <tr><th>Nội dung</th><th>Chi tiết</th></tr>
       <tr><td>Mục tiêu</td><td>Ghi nhận toàn bộ bút toán phát sinh từ các phân hệ vào sổ kế toán.</td></tr>
       <tr><td>Actor</td><td>Hệ thống, Kế toán viên, Kế toán tổng hợp, Kế toán trưởng.</td></tr>
@@ -1783,7 +1786,7 @@
     </table>
 
     <h3>2.5.2. Sổ cái</h3>
-    <table>
+    <table class="kv-table">
       <tr><th>Nội dung</th><th>Chi tiết</th></tr>
       <tr><td>Mục tiêu</td><td>Theo dõi toàn bộ phát sinh và số dư của từng tài khoản kế toán.</td></tr>
       <tr><td>Actor</td><td>Kế toán tổng hợp, Kế toán trưởng, Giám đốc, Kiểm toán.</td></tr>
@@ -1794,7 +1797,7 @@
     </table>
 
     <h3>2.5.3. Sổ nhật ký chung</h3>
-    <table>
+    <table class="kv-table">
       <tr><th>Nội dung</th><th>Chi tiết</th></tr>
       <tr><td>Mục tiêu</td><td>Theo dõi toàn bộ bút toán phát sinh theo trình tự thời gian.</td></tr>
       <tr><td>Actor</td><td>Kế toán tổng hợp, Kế toán trưởng, Kiểm toán.</td></tr>
@@ -1805,7 +1808,7 @@
     </table>
 
     <h3>2.5.4. Bảng cân đối phát sinh</h3>
-    <table>
+    <table class="kv-table">
       <tr><th>Nội dung</th><th>Chi tiết</th></tr>
       <tr><td>Mục tiêu</td><td>Tổng hợp số dư và phát sinh của toàn bộ tài khoản kế toán.</td></tr>
       <tr><td>Actor</td><td>Kế toán tổng hợp, Kế toán trưởng, Giám đốc.</td></tr>
@@ -2678,7 +2681,7 @@
     </div>
 
     <h3>6.1. Quy trình hóa đơn điện tử & thuế</h3>
-    <table>
+    <table class="kv-table">
       <tr><th>Nội dung</th><th>Chi tiết</th></tr>
       <tr><td>Mục tiêu</td><td>Mô tả workflow tổng thể từ kết nối nền tảng hóa đơn điện tử, đồng bộ hóa đơn, kiểm tra hợp lệ, liên kết chứng từ kế toán, lập bảng kê, lập tờ khai, xác định nghĩa vụ thuế đến giấy nộp tiền và lưu hồ sơ thuế.</td></tr>
       <tr><td>Actor</td><td>Quản trị hệ thống, Kế toán thuế, Kế toán mua hàng, Kế toán bán hàng, Kế toán công nợ, Kế toán tổng hợp, Kế toán trưởng, Hệ thống ACC, Nền tảng hóa đơn điện tử, Hệ thống thuế điện tử.</td></tr>
@@ -2692,7 +2695,7 @@
     <p>Module này thiết lập và duy trì kết nối giữa ACC với nền tảng hóa đơn điện tử (MISA), bao gồm cấu hình, xác thực, đồng bộ định kỳ và kiểm soát lịch sử truyền nhận.</p>
 
     <h3>6.2.1. Cấu hình kết nối & xác thực</h3>
-    <table>
+    <table class="kv-table">
       <tr><th>Nội dung</th><th>Chi tiết</th></tr>
       <tr><td>Use Case</td><td>UC-EINV-CONN-01: Thiết lập kết nối nền tảng hóa đơn điện tử.<br>UC-EINV-CONN-02: Khai báo / cập nhật thông tin kết nối.<br>UC-EINV-CONN-03: Kiểm tra trạng thái kết nối.</td></tr>
       <tr><td>Actor & Quyền</td><td><strong>Quản trị hệ thống:</strong> toàn quyền cấu hình, thay đổi API/token, kích hoạt / tắt kết nối.<br><strong>Kế toán thuế:</strong> xem trạng thái kết nối, không được thay đổi cấu hình.</td></tr>
@@ -2702,7 +2705,7 @@
     </table>
 
     <h3>6.2.2. Đồng bộ hóa đơn</h3>
-    <table>
+    <table class="kv-table">
       <tr><th>Nội dung</th><th>Chi tiết</th></tr>
       <tr><td>Use Case</td><td>UC-EINV-CONN-04: Đồng bộ danh sách hóa đơn đầu vào / đầu ra.</td></tr>
       <tr><td>Actor & Quyền</td><td><strong>Kế toán thuế / Hệ thống (tự động theo lịch):</strong> có quyền kích hoạt đồng bộ.<br><strong>Quản trị:</strong> có thể override lịch đồng bộ hoặc đồng bộ thủ công.</td></tr>
@@ -2711,7 +2714,7 @@
     </table>
 
     <h3>6.2.3. Lịch sử truyền nhận & đồng bộ lại lỗi</h3>
-    <table>
+    <table class="kv-table">
       <tr><th>Nội dung</th><th>Chi tiết</th></tr>
       <tr><td>Use Case</td><td>UC-EINV-CONN-05: Xem lịch sử truyền nhận.<br>UC-EINV-CONN-06: Đồng bộ lại dữ liệu lỗi hoặc thiếu.<br>UC-EINV-CONN-07: Nhận cảnh báo lỗi kết nối và lỗi xác thực.</td></tr>
       <tr><td>Actor & Quyền</td><td><strong>Kế toán thuế:</strong> xem lịch sử, xem log lỗi, kích hoạt đồng bộ lại.<br><strong>Quản trị:</strong> xem và xóa log lỗi trong phạm vi được phép.</td></tr>
@@ -2723,7 +2726,7 @@
     <p>Module tiếp nhận, lưu trữ và kiểm soát toàn bộ vòng đời hóa đơn mua vào — từ đồng bộ ban đầu đến liên kết chứng từ, theo dõi trạng thái và lưu hồ sơ phục vụ kê khai thuế.</p>
 
     <h3>6.3.1. Tiếp nhận & lưu trữ hóa đơn đầu vào</h3>
-    <table>
+    <table class="kv-table">
       <tr><th>Nội dung</th><th>Chi tiết</th></tr>
       <tr><td>Use Case</td><td>UC-EINV-IN-01: Đồng bộ hóa đơn đầu vào.<br>UC-EINV-IN-07: Lưu trữ XML / PDF và hồ sơ liên quan.</td></tr>
       <tr><td>Actor & Quyền</td><td><strong>Hệ thống (tự động):</strong> nhận và lưu hóa đơn từ nền tảng điện tử.<br><strong>Kế toán mua hàng / Kế toán thuế:</strong> xem danh sách, tải file XML / PDF.</td></tr>
@@ -2732,7 +2735,7 @@
     </table>
 
     <h3>6.3.2. Tra cứu & xem chi tiết hóa đơn đầu vào</h3>
-    <table>
+    <table class="kv-table">
       <tr><th>Nội dung</th><th>Chi tiết</th></tr>
       <tr><td>Use Case</td><td>UC-EINV-IN-02: Tra cứu hóa đơn đầu vào.<br>UC-EINV-IN-03: Xem chi tiết hóa đơn đầu vào.<br>UC-EINV-IN-05: Theo dõi hóa đơn chưa hạch toán hoặc chưa kê khai.</td></tr>
       <tr><td>Actor & Quyền</td><td><strong>Kế toán mua hàng / Kế toán thuế / Kế toán công nợ:</strong> tra cứu và xem chi tiết.<br><strong>Kế toán trưởng:</strong> xem báo cáo hóa đơn chưa hạch toán / chưa kê khai.</td></tr>
@@ -2740,7 +2743,7 @@
     </table>
 
     <h3>6.3.3. Liên kết chứng từ & trạng thái xử lý</h3>
-    <table>
+    <table class="kv-table">
       <tr><th>Nội dung</th><th>Chi tiết</th></tr>
       <tr><td>Use Case</td><td>UC-EINV-IN-04: Liên kết hóa đơn với chứng từ mua hàng / nhập kho / công nợ.<br>UC-EINV-IN-08: Quản lý trạng thái hóa đơn đầu vào.<br>UC-EINV-IN-09: Theo dõi hóa đơn điều chỉnh / thay thế / hủy từ nhà cung cấp.</td></tr>
       <tr><td>Actor & Quyền</td><td><strong>Kế toán mua hàng:</strong> liên kết hóa đơn với chứng từ mua hàng / nhập kho.<br><strong>Kế toán công nợ:</strong> liên kết với công nợ và thanh toán.<br><strong>Kế toán trưởng:</strong> phê duyệt chuyển trạng thái trong trường hợp cần override.</td></tr>
@@ -2754,7 +2757,7 @@
     <p>Module theo dõi hóa đơn bán ra đã phát hành — tiếp nhận đồng bộ, liên kết chứng từ bán hàng / doanh thu / công nợ, cảnh báo bán chưa có hóa đơn và kiểm soát trạng thái xử lý.</p>
 
     <h3>6.4.1. Tiếp nhận & tra cứu hóa đơn đầu ra</h3>
-    <table>
+    <table class="kv-table">
       <tr><th>Nội dung</th><th>Chi tiết</th></tr>
       <tr><td>Use Case</td><td>UC-EINV-OUT-01: Đồng bộ hóa đơn đầu ra.<br>UC-EINV-OUT-02: Tra cứu hóa đơn đầu ra.<br>UC-EINV-OUT-05: Xem chi tiết hóa đơn đầu ra.<br>UC-EINV-OUT-06: Lưu trữ XML / PDF hóa đơn đầu ra.</td></tr>
       <tr><td>Actor & Quyền</td><td><strong>Hệ thống (tự động):</strong> nhận và lưu hóa đơn đầu ra từ nền tảng điện tử.<br><strong>Kế toán bán hàng / Kế toán thuế:</strong> tra cứu, xem chi tiết, tải XML / PDF.</td></tr>
@@ -2763,7 +2766,7 @@
     </table>
 
     <h3>6.4.2. Liên kết bán hàng / doanh thu / công nợ</h3>
-    <table>
+    <table class="kv-table">
       <tr><th>Nội dung</th><th>Chi tiết</th></tr>
       <tr><td>Use Case</td><td>UC-EINV-OUT-03: Liên kết hóa đơn với chứng từ bán hàng / doanh thu / công nợ.<br>UC-EINV-OUT-07: Quản lý trạng thái hóa đơn đầu ra.<br>UC-EINV-OUT-08: Theo dõi hóa đơn điều chỉnh / thay thế / hủy.</td></tr>
       <tr><td>Actor & Quyền</td><td><strong>Kế toán bán hàng:</strong> liên kết với chứng từ bán hàng và doanh thu.<br><strong>Kế toán công nợ:</strong> liên kết với công nợ phải thu.<br><strong>Kế toán thuế:</strong> xác nhận liên kết thuế đầu ra phục vụ kê khai.<br><strong>Kế toán trưởng:</strong> override trạng thái khi cần.</td></tr>
@@ -2773,7 +2776,7 @@
     </table>
 
     <h3>6.4.3. Cảnh báo bán chưa có hóa đơn</h3>
-    <table>
+    <table class="kv-table">
       <tr><th>Nội dung</th><th>Chi tiết</th></tr>
       <tr><td>Use Case</td><td>UC-EINV-OUT-04: Theo dõi chứng từ bán chưa có hóa đơn.</td></tr>
       <tr><td>Actor & Quyền</td><td><strong>Kế toán bán hàng / Kế toán thuế:</strong> xem danh sách và xử lý cảnh báo.<br><strong>Kế toán trưởng:</strong> xem báo cáo tổng hợp bán chưa có hóa đơn.</td></tr>
@@ -2786,7 +2789,7 @@
     <p>Module phân loại hóa đơn theo mức độ hợp lệ, gắn cờ rủi ro và kiểm soát trước khi hạch toán hoặc kê khai. Cảnh báo chia thành ba cấp: thông tin, kiểm soát và chặn.</p>
 
     <h3>6.5.1. Kiểm tra tính hợp lệ & sai lệch thuế</h3>
-    <table>
+    <table class="kv-table">
       <tr><th>Nội dung</th><th>Chi tiết</th></tr>
       <tr><td>Use Case</td><td>UC-EINV-CTRL-01: Kiểm tra tính hợp lệ hóa đơn.<br>UC-EINV-CTRL-05: Cảnh báo sai lệch thuế.</td></tr>
       <tr><td>Actor & Quyền</td><td><strong>Hệ thống (tự động):</strong> kiểm tra dữ liệu bắt buộc và so khớp chỉ tiêu thuế.<br><strong>Kế toán thuế:</strong> xem kết quả kiểm tra, rà soát sai lệch.</td></tr>
@@ -2796,7 +2799,7 @@
     </table>
 
     <h3>6.5.2. Kiểm tra nhà cung cấp rủi ro & hóa đơn chưa liên kết</h3>
-    <table>
+    <table class="kv-table">
       <tr><th>Nội dung</th><th>Chi tiết</th></tr>
       <tr><td>Use Case</td><td>UC-EINV-CTRL-03: Kiểm tra nhà cung cấp rủi ro.<br>UC-EINV-CTRL-04: Kiểm tra hóa đơn chưa liên kết chứng từ.</td></tr>
       <tr><td>Actor & Quyền</td><td><strong>Kế toán thuế / Kế toán mua hàng:</strong> xem danh sách hóa đơn rủi ro và hóa đơn chưa liên kết.<br><strong>Kế toán trưởng:</strong> xem báo cáo bất thường tổng hợp.</td></tr>
@@ -2805,7 +2808,7 @@
     </table>
 
     <h3>6.5.3. Xác nhận cảnh báo & override kiểm soát</h3>
-    <table>
+    <table class="kv-table">
       <tr><th>Nội dung</th><th>Chi tiết</th></tr>
       <tr><td>Use Case</td><td>UC-EINV-CTRL-02: Cảnh báo hóa đơn sai lệch.<br>UC-EINV-CTRL-06: Lập báo cáo hóa đơn bất thường.</td></tr>
       <tr><td>Actor & Quyền</td><td><strong>Kế toán thuế:</strong> rà soát cảnh báo thông tin, xác nhận nguyên nhân.<br><strong>Kế toán trưởng:</strong> xác nhận bỏ qua cảnh báo kiểm soát (override), ghi rõ lý do.<br><strong>Người dùng thông thường:</strong> không được override cảnh báo kiểm soát hoặc cảnh báo chặn.</td></tr>
@@ -2817,7 +2820,7 @@
     <p>Module quản lý hồ sơ xử lý hóa đơn sau khi phát hiện sai sót — từ lập hồ sơ, xác định phương án (điều chỉnh / thay thế / hủy), cập nhật kế toán đến lưu biên bản hoàn tất.</p>
 
     <h3>6.6.1. Lập hồ sơ & xác định phương án xử lý sai sót</h3>
-    <table>
+    <table class="kv-table">
       <tr><th>Nội dung</th><th>Chi tiết</th></tr>
       <tr><td>Use Case</td><td>UC-EINV-ERR-01: Lập hồ sơ xử lý sai sót.<br>UC-EINV-ERR-02: Xử lý hóa đơn điều chỉnh.<br>UC-EINV-ERR-03: Xử lý hóa đơn thay thế.<br>UC-EINV-ERR-04: Hủy hóa đơn.<br>UC-EINV-ERR-05: Liên kết hóa đơn gốc và hóa đơn xử lý.</td></tr>
       <tr><td>Actor & Quyền</td><td><strong>Kế toán thuế / Kế toán bán hàng / Kế toán mua hàng:</strong> lập hồ sơ và chọn phương án xử lý.<br><strong>Kế toán trưởng:</strong> phê duyệt xử lý sai sót ảnh hưởng kỳ kê khai đã nộp.</td></tr>
@@ -2827,7 +2830,7 @@
     </table>
 
     <h3>6.6.2. Cập nhật kế toán & lưu hồ sơ xử lý</h3>
-    <table>
+    <table class="kv-table">
       <tr><th>Nội dung</th><th>Chi tiết</th></tr>
       <tr><td>Use Case</td><td>UC-EINV-ERR-06: Điều chỉnh chứng từ kế toán liên quan.<br>UC-EINV-ERR-07: Lưu biên bản xử lý và hồ sơ giải trình.</td></tr>
       <tr><td>Actor & Quyền</td><td><strong>Kế toán tổng hợp:</strong> điều chỉnh chứng từ kế toán sau xử lý sai sót.<br><strong>Kế toán thuế:</strong> xác nhận cập nhật ảnh hưởng VAT.<br><strong>Kế toán trưởng:</strong> duyệt hồ sơ hoàn tất khi sai sót ảnh hưởng kỳ kê khai đã nộp.</td></tr>
@@ -2839,7 +2842,7 @@
     <p>Module tổng hợp hóa đơn theo kỳ kê khai, rà soát sai lệch, xử lý trước khi chốt và chuẩn bị dữ liệu đầu vào cho tờ khai thuế.</p>
 
     <h3>6.7.1. Lập & lọc bảng kê</h3>
-    <table>
+    <table class="kv-table">
       <tr><th>Nội dung</th><th>Chi tiết</th></tr>
       <tr><td>Use Case</td><td>UC-TAX-LIST-01: Lập bảng kê hóa đơn mua vào.<br>UC-TAX-LIST-02: Lập bảng kê hóa đơn bán ra.<br>UC-TAX-LIST-05: Lọc bảng kê theo kỳ / trạng thái / loại hóa đơn.</td></tr>
       <tr><td>Actor & Quyền</td><td><strong>Kế toán thuế:</strong> lập và lọc bảng kê theo kỳ.<br><strong>Kế toán tổng hợp:</strong> xem bảng kê phục vụ đối chiếu số phát sinh.</td></tr>
@@ -2848,7 +2851,7 @@
     </table>
 
     <h3>6.7.2. Rà soát sai lệch & đối chiếu chứng từ</h3>
-    <table>
+    <table class="kv-table">
       <tr><th>Nội dung</th><th>Chi tiết</th></tr>
       <tr><td>Use Case</td><td>UC-TAX-LIST-03: Đối chiếu bảng kê với chứng từ kế toán.<br>UC-TAX-LIST-04: Đối chiếu hóa đơn thiếu / thừa.</td></tr>
       <tr><td>Actor & Quyền</td><td><strong>Kế toán thuế:</strong> rà soát và báo cáo sai lệch.<br><strong>Kế toán trưởng:</strong> xem báo cáo tổng hợp sai lệch trước khi chốt.</td></tr>
@@ -2857,7 +2860,7 @@
     </table>
 
     <h3>6.7.3. Chốt & xuất bảng kê</h3>
-    <table>
+    <table class="kv-table">
       <tr><th>Nội dung</th><th>Chi tiết</th></tr>
       <tr><td>Use Case</td><td>UC-TAX-LIST-06: Xuất bảng kê.</td></tr>
       <tr><td>Actor & Quyền</td><td><strong>Kế toán thuế:</strong> chốt bảng kê khi dữ liệu đủ điều kiện.<br><strong>Kế toán trưởng:</strong> phê duyệt chốt bảng kê theo quy trình nội bộ.<br><strong>Người dùng thông thường:</strong> không được chốt hoặc mở lại bảng kê đã chốt.</td></tr>
@@ -2870,7 +2873,7 @@
     <p>Module lập, kiểm tra, chốt, lưu phiên bản và xuất tờ khai thuế — đảm bảo thống nhất với bảng kê hóa đơn và số phát sinh trên sổ kế toán.</p>
 
     <h3>6.8.1. Lập & kiểm tra số liệu tờ khai</h3>
-    <table>
+    <table class="kv-table">
       <tr><th>Nội dung</th><th>Chi tiết</th></tr>
       <tr><td>Use Case</td><td>UC-TAX-RET-01: Đăng ký tờ khai thuế.<br>UC-TAX-RET-02: Lập tờ khai thuế GTGT.<br>UC-TAX-RET-03: Lập các báo cáo / phụ lục thuế liên quan.<br>UC-TAX-RET-04: Kiểm tra số liệu tờ khai.<br>UC-TAX-RET-07: Tra cứu tờ khai đã lập.</td></tr>
       <tr><td>Actor & Quyền</td><td><strong>Kế toán thuế:</strong> đăng ký loại tờ khai, nhập liệu, kiểm tra số liệu.<br><strong>Kế toán tổng hợp:</strong> đối chiếu số phát sinh thuế từ sổ kế toán.<br><strong>Kế toán trưởng:</strong> xem kết quả kiểm tra trước khi chốt.</td></tr>
@@ -2879,7 +2882,7 @@
     </table>
 
     <h3>6.8.2. Chốt tờ khai & xuất dữ liệu nộp điện tử</h3>
-    <table>
+    <table class="kv-table">
       <tr><th>Nội dung</th><th>Chi tiết</th></tr>
       <tr><td>Use Case</td><td>UC-TAX-RET-05: Lưu phiên bản tờ khai.<br>UC-TAX-RET-06: Xuất dữ liệu nộp thuế điện tử.</td></tr>
       <tr><td>Actor & Quyền</td><td><strong>Kế toán thuế:</strong> lưu phiên bản nháp trong quá trình lập.<br><strong>Kế toán trưởng:</strong> chốt tờ khai và xuất dữ liệu nộp điện tử — chỉ kế toán trưởng mới được chốt.<br><strong>Người dùng thông thường:</strong> không được chốt tờ khai.</td></tr>
@@ -2889,7 +2892,7 @@
     </table>
 
     <h3>6.8.3. Điều chỉnh & bổ sung tờ khai</h3>
-    <table>
+    <table class="kv-table">
       <tr><th>Nội dung</th><th>Chi tiết</th></tr>
       <tr><td>Use Case</td><td>UC-TAX-RET-08: Điều chỉnh / bổ sung tờ khai khi phát sinh sai lệch sau chốt.</td></tr>
       <tr><td>Actor & Quyền</td><td><strong>Kế toán thuế:</strong> lập phiên bản điều chỉnh / bổ sung.<br><strong>Kế toán trưởng:</strong> phê duyệt điều chỉnh tờ khai đã nộp.</td></tr>
@@ -2901,7 +2904,7 @@
     <p>Module theo dõi nghĩa vụ thuế phải nộp, lập giấy nộp tiền, đối chiếu trạng thái đã nộp / chưa nộp và tổng hợp báo cáo thuế theo kỳ.</p>
 
     <h3>6.9.1. Xác định nghĩa vụ & lập giấy nộp tiền</h3>
-    <table>
+    <table class="kv-table">
       <tr><th>Nội dung</th><th>Chi tiết</th></tr>
       <tr><td>Use Case</td><td>UC-TAX-PAY-01: Lập giấy nộp tiền.<br>UC-TAX-PAY-04: Đối chiếu nghĩa vụ thuế.</td></tr>
       <tr><td>Actor & Quyền</td><td><strong>Kế toán thuế:</strong> xác định nghĩa vụ và lập giấy nộp tiền từ tờ khai đã chốt.<br><strong>Kế toán trưởng:</strong> phê duyệt giấy nộp tiền trước khi chuyển sang thực hiện thanh toán.<br><strong>Người dùng thông thường:</strong> không được lập hoặc chỉnh sửa giấy nộp tiền.</td></tr>
@@ -2910,7 +2913,7 @@
     </table>
 
     <h3>6.9.2. Theo dõi trạng thái nộp & liên kết thanh toán</h3>
-    <table>
+    <table class="kv-table">
       <tr><th>Nội dung</th><th>Chi tiết</th></tr>
       <tr><td>Use Case</td><td>UC-TAX-PAY-02: Theo dõi trạng thái nộp thuế.<br>UC-TAX-PAY-06: Liên kết giấy nộp tiền với chứng từ thanh toán thực tế.</td></tr>
       <tr><td>Actor & Quyền</td><td><strong>Kế toán thanh toán:</strong> liên kết giấy nộp tiền với giao dịch thanh toán thực tế.<br><strong>Kế toán thuế:</strong> theo dõi trạng thái và cập nhật số đã nộp / còn phải nộp.</td></tr>
@@ -2921,7 +2924,7 @@
     </table>
 
     <h3>6.9.3. Báo cáo thuế theo kỳ</h3>
-    <table>
+    <table class="kv-table">
       <tr><th>Nội dung</th><th>Chi tiết</th></tr>
       <tr><td>Use Case</td><td>UC-TAX-PAY-03: Báo cáo thuế theo kỳ.<br>UC-TAX-PAY-05: Xuất báo cáo thuế.</td></tr>
       <tr><td>Actor & Quyền</td><td><strong>Kế toán thuế / Kế toán tổng hợp:</strong> lập và xuất báo cáo thuế theo kỳ.<br><strong>Kế toán trưởng / Ban giám đốc:</strong> xem báo cáo tổng hợp nghĩa vụ thuế.</td></tr>
@@ -2929,7 +2932,7 @@
     </table>
 
     <h3>Workflow và quy tắc truy vết toàn Phase 5</h3>
-    <table>
+    <table class="kv-table">
       <tr><th>Nội dung</th><th>Chi tiết</th></tr>
       <tr><td>Luồng truy vết tổng thể</td><td>Cấu hình kết nối (6.2.1) → Đồng bộ hóa đơn (6.2.2) → Tiếp nhận & lưu trữ (6.3.1 / 6.4.1) → Tra cứu & chi tiết (6.3.2 / 6.4.2) → Liên kết chứng từ & trạng thái (6.3.3 / 6.4.3) → Kiểm tra hợp lệ & cảnh báo rủi ro (6.5.1–6.5.3) → Xử lý sai sót nếu có (6.6.1–6.6.2) → Lập & rà soát bảng kê (6.7.1–6.7.2) → Chốt bảng kê (6.7.3) → Lập & kiểm tra tờ khai (6.8.1) → Chốt tờ khai & xuất nộp (6.8.2) → Điều chỉnh tờ khai nếu cần (6.8.3) → Lập giấy nộp tiền (6.9.1) → Theo dõi & liên kết thanh toán (6.9.2) → Báo cáo thuế (6.9.3).</td></tr>
       <tr><td>Điểm kiểm soát bắt buộc theo cụm</td><td><strong>Cụm kết nối:</strong> không đồng bộ khi xác thực thất bại; log mọi phiên đồng bộ.<br><strong>Cụm hóa đơn:</strong> hóa đơn có cảnh báo chặn không được chốt vào bảng kê; hóa đơn chưa liên kết chứng từ không được xem là hoàn tất.<br><strong>Cụm kiểm tra:</strong> override cảnh báo kiểm soát phải có quyền kế toán trưởng và ghi lý do.<br><strong>Cụm bảng kê:</strong> bảng kê chưa xử lý sai lệch không được làm căn cứ chốt tờ khai; chỉ kế toán thuế / kế toán trưởng mới được chốt.<br><strong>Cụm tờ khai:</strong> chỉ kế toán trưởng được chốt tờ khai; tờ khai đã chốt không được sửa trực tiếp.<br><strong>Cụm giấy nộp tiền:</strong> phải liên kết được với chứng từ thanh toán; không lập trùng cho cùng nghĩa vụ thuế chưa xong.</td></tr>
@@ -3014,7 +3017,7 @@
 
     <h3>7.0. Workflow tổng thể Giai đoạn 6</h3>
     <p>Lớp workflow này mô tả mối liên hệ vận hành giữa các module nâng cao trước khi đi vào từng module chi tiết. Phase 6 triển khai theo nhu cầu thực tế và nghiệm thu độc lập từng module, nhưng các module chia sẻ chung nguyên tắc ghi sổ, khóa kỳ, phân quyền và đối chiếu sổ cái.</p>
-    <table>
+    <table class="kv-table">
       <tr><th>Nội dung</th><th>Chi tiết</th></tr>
       <tr><td>Luồng vận hành tổng thể</td><td><strong>Nhóm tài sản & phân bổ (7.1–7.2):</strong> Ghi tăng → Phân bổ / khấu hao định kỳ → Điều chỉnh / điều chuyển → Kiểm kê → Báo cáo → Đối chiếu sổ cái.<br><strong>Nhóm lương & giá thành (7.3–7.4):</strong> Khai báo → Nhập liệu / tập hợp chi phí → Phân bổ → Tính toán → Kết chuyển → Đối chiếu.<br><strong>Nhóm vay, hợp đồng & e-banking (7.5–7.7):</strong> Khai báo → Phê duyệt → Theo dõi thực hiện → Thanh toán → Đối chiếu → Log & audit.<br><strong>Nhóm quản trị nâng cao (7.8):</strong> Tổng hợp dữ liệu nguồn → Dashboard / phân tích → Dự báo → Ngân sách → Theo dõi thực hiện → Cảnh báo vượt ngân sách.</td></tr>
       <tr><td>Mối liên hệ giữa các module</td><td>Lương (7.3) cung cấp chi phí nhân công cho giá thành (7.4); tài sản (7.1) và CCDC (7.2) cung cấp khấu hao / phân bổ cho giá thành (7.4); ngân hàng điện tử (7.7) là kênh thanh toán cho vay nợ (7.5), hợp đồng (7.6) và lương (7.3); tất cả module cung cấp dữ liệu cho dashboard & ngân sách (7.8).</td></tr>
@@ -3026,7 +3029,7 @@
     <p>Module quản lý vòng đời tài sản cố định từ ghi tăng đến thanh lý — mỗi bước vận hành là một cụm review riêng có quyền, trạng thái và điểm kiểm soát độc lập.</p>
 
     <h3>7.1.1. Ghi tăng & khai báo tài sản</h3>
-    <table>
+    <table class="kv-table">
       <tr><th>Nội dung</th><th>Chi tiết</th></tr>
       <tr><td>Use Case</td><td>UC-FA-01: Khai báo danh mục tài sản cố định.<br>UC-FA-02: Ghi tăng tài sản từ mua mới / đầu tư hoàn thành / bàn giao.<br>UC-FA-03: Cập nhật thông tin và bộ phận sử dụng.</td></tr>
       <tr><td>Actor & Quyền</td><td><strong>Kế toán TSCĐ:</strong> khai báo, ghi tăng, cập nhật thông tin tài sản.<br><strong>Kế toán trưởng:</strong> phê duyệt ghi tăng tài sản có giá trị trọng yếu.<br><strong>Quản lý bộ phận:</strong> xác nhận bộ phận sử dụng; chỉ xem — không sửa dữ liệu tài sản.</td></tr>
@@ -3037,7 +3040,7 @@
     </table>
 
     <h3>7.1.2. Phân bổ khấu hao định kỳ</h3>
-    <table>
+    <table class="kv-table">
       <tr><th>Nội dung</th><th>Chi tiết</th></tr>
       <tr><td>Use Case</td><td>UC-FA-04: Tính khấu hao định kỳ.<br>UC-FA-05: Hạch toán chi phí khấu hao.</td></tr>
       <tr><td>Actor & Quyền</td><td><strong>Hệ thống (tự động theo kỳ):</strong> tính và tạo bút toán khấu hao.<br><strong>Kế toán TSCĐ:</strong> kiểm tra kết quả tính khấu hao, xác nhận trước khi ghi sổ.<br><strong>Kế toán trưởng:</strong> phê duyệt ghi sổ khấu hao kỳ.</td></tr>
@@ -3047,7 +3050,7 @@
     </table>
 
     <h3>7.1.3. Điều chỉnh, điều chuyển & đánh giá lại</h3>
-    <table>
+    <table class="kv-table">
       <tr><th>Nội dung</th><th>Chi tiết</th></tr>
       <tr><td>Use Case</td><td>UC-FA-06: Điều chuyển tài sản.<br>UC-FA-07: Đánh giá lại tài sản.</td></tr>
       <tr><td>Actor & Quyền</td><td><strong>Kế toán TSCĐ:</strong> lập hồ sơ điều chuyển / đánh giá lại.<br><strong>Kế toán trưởng:</strong> phê duyệt điều chuyển và đánh giá lại — bắt buộc trước khi ghi sổ.<br><strong>Quản lý bộ phận nhận:</strong> xác nhận tiếp nhận tài sản điều chuyển.</td></tr>
@@ -3056,7 +3059,7 @@
     </table>
 
     <h3>7.1.4. Ghi giảm, kiểm kê & báo cáo tài sản</h3>
-    <table>
+    <table class="kv-table">
       <tr><th>Nội dung</th><th>Chi tiết</th></tr>
       <tr><td>Use Case</td><td>UC-FA-08: Ghi giảm / thanh lý / nhượng bán.<br>UC-FA-09: Kiểm kê tài sản.<br>UC-FA-10: Tra cứu thẻ tài sản.<br>UC-FA-11: Lập báo cáo tài sản cố định.</td></tr>
       <tr><td>Actor & Quyền</td><td><strong>Kế toán TSCĐ:</strong> lập chứng từ ghi giảm, thực hiện kiểm kê, lập báo cáo.<br><strong>Ban kiểm kê:</strong> thực hiện kiểm kê thực tế và xác nhận biên bản.<br><strong>Kế toán trưởng:</strong> phê duyệt ghi giảm / thanh lý và xử lý chênh lệch kiểm kê.<br><strong>Quản lý bộ phận:</strong> xem thẻ tài sản thuộc bộ phận mình — chỉ xem.</td></tr>
@@ -3069,7 +3072,7 @@
     <p>Module quản lý CCDC và chi phí trả trước từ ghi tăng, khai báo phân bổ, thực hiện phân bổ định kỳ đến điều chỉnh, theo dõi giá trị còn lại và báo cáo đối chiếu sổ cái.</p>
 
     <h3>7.2.1. Ghi tăng & khai báo phân bổ</h3>
-    <table>
+    <table class="kv-table">
       <tr><th>Nội dung</th><th>Chi tiết</th></tr>
       <tr><td>Use Case</td><td>UC-ALLO-01: Khai báo danh mục công cụ dụng cụ.<br>UC-ALLO-02: Ghi tăng công cụ dụng cụ.<br>UC-ALLO-03: Ghi tăng chi phí trả trước.<br>UC-ALLO-04: Khai báo kỳ / phương pháp phân bổ.</td></tr>
       <tr><td>Actor & Quyền</td><td><strong>Kế toán CCDC / Kế toán tổng hợp:</strong> ghi tăng và khai báo phân bổ.<br><strong>Kế toán trưởng:</strong> phê duyệt ghi tăng khoản chi phí trả trước có giá trị trọng yếu.<br><strong>Quản lý bộ phận:</strong> xác nhận bộ phận sử dụng — chỉ xem.</td></tr>
@@ -3079,7 +3082,7 @@
     </table>
 
     <h3>7.2.2. Phân bổ định kỳ & theo dõi giá trị còn lại</h3>
-    <table>
+    <table class="kv-table">
       <tr><th>Nội dung</th><th>Chi tiết</th></tr>
       <tr><td>Use Case</td><td>UC-ALLO-05: Phân bổ công cụ dụng cụ định kỳ.<br>UC-ALLO-06: Phân bổ chi phí trả trước định kỳ.<br>UC-ALLO-09: Theo dõi giá trị còn lại.</td></tr>
       <tr><td>Actor & Quyền</td><td><strong>Hệ thống (tự động theo kỳ):</strong> tạo bút toán phân bổ.<br><strong>Kế toán CCDC / Kế toán tổng hợp:</strong> kiểm tra kết quả phân bổ, xác nhận trước khi ghi sổ.<br><strong>Kế toán trưởng:</strong> phê duyệt ghi sổ phân bổ kỳ.</td></tr>
@@ -3090,7 +3093,7 @@
     </table>
 
     <h3>7.2.3. Điều chỉnh, ngừng phân bổ & kiểm kê</h3>
-    <table>
+    <table class="kv-table">
       <tr><th>Nội dung</th><th>Chi tiết</th></tr>
       <tr><td>Use Case</td><td>UC-ALLO-07: Ngừng phân bổ.<br>UC-ALLO-08: Điều chỉnh giá trị hoặc số kỳ phân bổ.<br>UC-ALLO-10: Kiểm kê công cụ dụng cụ.<br>UC-ALLO-11: Lập báo cáo phân bổ.</td></tr>
       <tr><td>Actor & Quyền</td><td><strong>Kế toán CCDC:</strong> thực hiện điều chỉnh, ngừng phân bổ, lập báo cáo.<br><strong>Kế toán trưởng:</strong> phê duyệt điều chỉnh giá trị / số kỳ phân bổ.<br><strong>Ban kiểm kê:</strong> xác nhận biên bản kiểm kê CCDC thực tế.<br><strong>Quản lý bộ phận:</strong> xem báo cáo phân bổ theo bộ phận — chỉ xem.</td></tr>
@@ -3102,7 +3105,7 @@
     <p>Module phục vụ nghiệp vụ lương cơ bản cho kế toán — phạm vi chỉ bao gồm nhập bảng lương, phân bổ, hạch toán và trả lương; không đi sâu HRM (chấm công, bảo hiểm, thuế TNCN).</p>
 
     <h3>7.3.1. Khai báo & nhập liệu bảng lương</h3>
-    <table>
+    <table class="kv-table">
       <tr><th>Nội dung</th><th>Chi tiết</th></tr>
       <tr><td>Use Case</td><td>UC-PAY-01: Khai báo danh mục nhân viên tính lương.<br>UC-PAY-02: Nhập bảng lương theo kỳ.</td></tr>
       <tr><td>Actor & Quyền</td><td><strong>Kế toán tiền lương:</strong> khai báo danh mục và nhập bảng lương.<br><strong>Kế toán trưởng:</strong> phê duyệt bảng lương trước khi chốt — chỉ kế toán trưởng được chốt.<br><strong>Quản lý bộ phận:</strong> xác nhận danh sách nhân viên thuộc bộ phận — chỉ xem; không được xem mức lương cụ thể nếu không có quyền.</td></tr>
@@ -3112,7 +3115,7 @@
     </table>
 
     <h3>7.3.2. Phân bổ chi phí lương & hạch toán</h3>
-    <table>
+    <table class="kv-table">
       <tr><th>Nội dung</th><th>Chi tiết</th></tr>
       <tr><td>Use Case</td><td>UC-PAY-03: Phân bổ lương theo bộ phận / đối tượng chi phí.<br>UC-PAY-04: Hạch toán chi phí lương phải trả.</td></tr>
       <tr><td>Actor & Quyền</td><td><strong>Kế toán tiền lương / Kế toán tổng hợp:</strong> thực hiện phân bổ và hạch toán.<br><strong>Kế toán trưởng:</strong> phê duyệt hạch toán chi phí lương kỳ.</td></tr>
@@ -3122,7 +3125,7 @@
     </table>
 
     <h3>7.3.3. Trả lương & đối chiếu đã trả / chưa trả</h3>
-    <table>
+    <table class="kv-table">
       <tr><th>Nội dung</th><th>Chi tiết</th></tr>
       <tr><td>Use Case</td><td>UC-PAY-05: Lập chứng từ trả lương.<br>UC-PAY-06: Theo dõi lương đã trả / chưa trả.<br>UC-PAY-07: Lập báo cáo bảng lương và bảng phân bổ lương.</td></tr>
       <tr><td>Actor & Quyền</td><td><strong>Kế toán tiền lương / Thủ quỹ / Kế toán ngân hàng:</strong> lập chứng từ trả lương.<br><strong>Kế toán trưởng:</strong> phê duyệt chứng từ trả lương; xem báo cáo tổng hợp.<br><strong>Nhân viên:</strong> không có quyền xem báo cáo lương của người khác.</td></tr>
@@ -3135,7 +3138,7 @@
     <p>Module tập hợp chi phí và tính giá thành — mô tả baseline accounting workflow để phục vụ review và triển khai; có thể điều chỉnh sâu thêm theo từng ngành.</p>
 
     <h3>7.4.1. Khai báo đối tượng & tập hợp chi phí</h3>
-    <table>
+    <table class="kv-table">
       <tr><th>Nội dung</th><th>Chi tiết</th></tr>
       <tr><td>Use Case</td><td>UC-COST-01: Khai báo đối tượng tập hợp chi phí.<br>UC-COST-02: Tập hợp chi phí nguyên vật liệu trực tiếp.<br>UC-COST-03: Tập hợp chi phí nhân công trực tiếp.<br>UC-COST-04: Tập hợp chi phí sản xuất chung.</td></tr>
       <tr><td>Actor & Quyền</td><td><strong>Kế toán giá thành:</strong> khai báo đối tượng và tập hợp chi phí.<br><strong>Kế toán kho / Kế toán tiền lương:</strong> cung cấp dữ liệu xuất kho NVL và lương nhân công trực tiếp.<br><strong>Quản lý sản xuất / dự án:</strong> xem chi phí tập hợp theo đối tượng — chỉ xem.</td></tr>
@@ -3145,7 +3148,7 @@
     </table>
 
     <h3>7.4.2. Phân bổ chi phí chung & xác định dở dang</h3>
-    <table>
+    <table class="kv-table">
       <tr><th>Nội dung</th><th>Chi tiết</th></tr>
       <tr><td>Use Case</td><td>UC-COST-05: Khai báo tiêu thức phân bổ.<br>UC-COST-06: Phân bổ chi phí sản xuất chung.<br>UC-COST-09: Theo dõi chi phí dở dang.</td></tr>
       <tr><td>Actor & Quyền</td><td><strong>Kế toán giá thành:</strong> khai báo tiêu thức và thực hiện phân bổ.<br><strong>Kế toán trưởng:</strong> phê duyệt tiêu thức phân bổ và xác nhận dở dang cuối kỳ.<br><strong>Quản lý sản xuất:</strong> cung cấp thông tin dở dang thực tế — không sửa dữ liệu kế toán.</td></tr>
@@ -3154,7 +3157,7 @@
     </table>
 
     <h3>7.4.3. Tính giá thành, kết chuyển & báo cáo</h3>
-    <table>
+    <table class="kv-table">
       <tr><th>Nội dung</th><th>Chi tiết</th></tr>
       <tr><td>Use Case</td><td>UC-COST-07: Tính giá thành.<br>UC-COST-08: Kết chuyển giá thành / giá vốn.<br>UC-COST-10: Lập báo cáo giá thành.</td></tr>
       <tr><td>Actor & Quyền</td><td><strong>Kế toán giá thành:</strong> tính giá thành và lập báo cáo.<br><strong>Kế toán trưởng:</strong> phê duyệt kết chuyển giá thành / giá vốn — bắt buộc trước khi ghi sổ kết chuyển.<br><strong>Quản lý sản xuất / Ban giám đốc:</strong> xem báo cáo so sánh kế hoạch / thực tế — chỉ xem.</td></tr>
@@ -3168,7 +3171,7 @@
     <p>Module theo dõi khoản vay từ khai báo, giải ngân, tính lãi, lập lịch trả nợ đến tất toán — dữ liệu nhạy cảm, chỉ user có quyền mới được xem hoặc thao tác.</p>
 
     <h3>7.5.1. Khai báo khoản vay & lịch trả nợ</h3>
-    <table>
+    <table class="kv-table">
       <tr><th>Nội dung</th><th>Chi tiết</th></tr>
       <tr><td>Use Case</td><td>UC-LOAN-01: Khai báo khoản vay.<br>UC-LOAN-02: Khai báo lãi suất và phương pháp tính lãi.<br>UC-LOAN-03: Lập lịch trả nợ gốc / lãi.</td></tr>
       <tr><td>Actor & Quyền</td><td><strong>Kế toán vay nợ:</strong> khai báo khoản vay và lập lịch trả nợ.<br><strong>Kế toán trưởng:</strong> phê duyệt khai báo khoản vay — bắt buộc trước khi giải ngân.<br><strong>Ban giám đốc / Quản trị tài chính:</strong> xem tổng dư nợ và lịch trả nợ — chỉ xem; không sửa.</td></tr>
@@ -3178,7 +3181,7 @@
     </table>
 
     <h3>7.5.2. Giải ngân & theo dõi dư nợ</h3>
-    <table>
+    <table class="kv-table">
       <tr><th>Nội dung</th><th>Chi tiết</th></tr>
       <tr><td>Use Case</td><td>UC-LOAN-04: Ghi nhận giải ngân.<br>UC-LOAN-06: Theo dõi dư nợ.<br>UC-LOAN-07: Hạch toán chi phí lãi vay.</td></tr>
       <tr><td>Actor & Quyền</td><td><strong>Kế toán ngân hàng / Kế toán vay nợ:</strong> ghi nhận giải ngân và hạch toán lãi vay.<br><strong>Kế toán trưởng:</strong> phê duyệt hạch toán lãi vay định kỳ.<br><strong>Kế toán tổng hợp:</strong> xem dư nợ và đối chiếu sổ cái — chỉ xem.</td></tr>
@@ -3188,7 +3191,7 @@
     </table>
 
     <h3>7.5.3. Thanh toán gốc / lãi, cảnh báo & báo cáo</h3>
-    <table>
+    <table class="kv-table">
       <tr><th>Nội dung</th><th>Chi tiết</th></tr>
       <tr><td>Use Case</td><td>UC-LOAN-05: Ghi nhận thanh toán gốc / lãi.<br>UC-LOAN-08: Cảnh báo đến hạn trả nợ.<br>UC-LOAN-09: Lập báo cáo khế ước vay.</td></tr>
       <tr><td>Actor & Quyền</td><td><strong>Kế toán ngân hàng:</strong> ghi nhận thanh toán gốc / lãi.<br><strong>Kế toán trưởng / Ban giám đốc:</strong> nhận cảnh báo đến hạn và xem báo cáo dư nợ.<br><strong>Kế toán vay nợ:</strong> lập và xuất báo cáo khế ước vay.</td></tr>
@@ -3201,7 +3204,7 @@
     <p>Module quản lý hợp đồng theo góc độ tài chính: mốc thanh toán, liên kết hóa đơn, thu chi, công nợ, tiến độ thực hiện và cảnh báo đến hạn.</p>
 
     <h3>7.6.1. Khai báo hợp đồng & mốc thanh toán</h3>
-    <table>
+    <table class="kv-table">
       <tr><th>Nội dung</th><th>Chi tiết</th></tr>
       <tr><td>Use Case</td><td>UC-CONTRACT-01: Khai báo hợp đồng.<br>UC-CONTRACT-02: Khai báo mốc thanh toán.</td></tr>
       <tr><td>Actor & Quyền</td><td><strong>Kế toán công nợ / Quản trị hợp đồng:</strong> khai báo hợp đồng và mốc thanh toán.<br><strong>Kế toán trưởng:</strong> phê duyệt hợp đồng có giá trị trọng yếu trước khi hiệu lực.<br><strong>Quản lý kinh doanh / mua sắm:</strong> xem trạng thái hợp đồng — chỉ xem; không sửa điều kiện tài chính.</td></tr>
@@ -3211,7 +3214,7 @@
     </table>
 
     <h3>7.6.2. Liên kết chứng từ & theo dõi thực hiện</h3>
-    <table>
+    <table class="kv-table">
       <tr><th>Nội dung</th><th>Chi tiết</th></tr>
       <tr><td>Use Case</td><td>UC-CONTRACT-03: Liên kết hóa đơn với hợp đồng.<br>UC-CONTRACT-04: Liên kết thu / chi với hợp đồng.<br>UC-CONTRACT-05: Theo dõi thực hiện hợp đồng.</td></tr>
       <tr><td>Actor & Quyền</td><td><strong>Kế toán công nợ / Kế toán bán hàng / mua hàng:</strong> liên kết hóa đơn và thu chi với hợp đồng.<br><strong>Kế toán trưởng:</strong> xem tổng hợp giá trị thực hiện và công nợ theo hợp đồng.<br><strong>Quản lý kinh doanh:</strong> xem tiến độ — chỉ xem; không thay đổi liên kết tài chính.</td></tr>
@@ -3220,7 +3223,7 @@
     </table>
 
     <h3>7.6.3. Cảnh báo đến hạn & báo cáo hợp đồng</h3>
-    <table>
+    <table class="kv-table">
       <tr><th>Nội dung</th><th>Chi tiết</th></tr>
       <tr><td>Use Case</td><td>UC-CONTRACT-06: Cảnh báo hợp đồng đến hạn / quá hạn.<br>UC-CONTRACT-07: Lập báo cáo hợp đồng.</td></tr>
       <tr><td>Actor & Quyền</td><td><strong>Hệ thống:</strong> tự động cảnh báo mốc thanh toán tới hạn và hợp đồng sắp hết hiệu lực.<br><strong>Kế toán trưởng / Quản trị hợp đồng:</strong> nhận cảnh báo và xử lý tiếp theo.<br><strong>Kế toán công nợ:</strong> lập và xuất báo cáo hợp đồng.</td></tr>
@@ -3233,7 +3236,7 @@
     <p>Module kết nối trực tiếp với ngân hàng điện tử để nhận giao dịch, tạo chứng từ, đối chiếu sổ phụ và hỗ trợ chuyển tiền — toàn bộ thao tác phải lưu log và phân quyền chặt chẽ.</p>
 
     <h3>7.7.1. Kết nối & cấu hình tài khoản ngân hàng</h3>
-    <table>
+    <table class="kv-table">
       <tr><th>Nội dung</th><th>Chi tiết</th></tr>
       <tr><td>Use Case</td><td>UC-EBANK-01: Kết nối tài khoản ngân hàng điện tử.<br>UC-EBANK-02: Tra cứu số dư tài khoản.<br>UC-EBANK-09: Theo dõi log kết nối và lịch sử thao tác.</td></tr>
       <tr><td>Actor & Quyền</td><td><strong>Quản trị hệ thống tích hợp ngân hàng:</strong> thiết lập cấu hình kết nối và mapping tài khoản — toàn quyền cấu hình.<br><strong>Kế toán trưởng:</strong> phê duyệt cấu hình trước khi kích hoạt.<br><strong>Kế toán ngân hàng:</strong> tra cứu số dư và xem log — không được thay đổi cấu hình kết nối.</td></tr>
@@ -3243,7 +3246,7 @@
     </table>
 
     <h3>7.7.2. Nhận giao dịch, tạo chứng từ & đối chiếu sổ phụ</h3>
-    <table>
+    <table class="kv-table">
       <tr><th>Nội dung</th><th>Chi tiết</th></tr>
       <tr><td>Use Case</td><td>UC-EBANK-03: Tra cứu lịch sử giao dịch.<br>UC-EBANK-06: Tự động tạo chứng từ ngân hàng từ giao dịch.<br>UC-EBANK-07: Tự động đối chiếu sổ phụ.<br>UC-EBANK-08: Xử lý giao dịch lệch / chưa khớp.</td></tr>
       <tr><td>Actor & Quyền</td><td><strong>Kế toán ngân hàng:</strong> tra cứu giao dịch, xác nhận gợi ý chứng từ và xử lý lệch.<br><strong>Kế toán trưởng:</strong> phê duyệt xử lý giao dịch lệch khi cần xác nhận theo quyền.<br><strong>Hệ thống:</strong> tự động gợi ý và đối chiếu — không tự hạch toán giao dịch lệch.</td></tr>
@@ -3253,7 +3256,7 @@
     </table>
 
     <h3>7.7.3. Khởi tạo & phê duyệt chuyển tiền</h3>
-    <table>
+    <table class="kv-table">
       <tr><th>Nội dung</th><th>Chi tiết</th></tr>
       <tr><td>Use Case</td><td>UC-EBANK-04: Khởi tạo giao dịch chuyển tiền.<br>UC-EBANK-05: Duyệt / xác nhận giao dịch chuyển tiền.</td></tr>
       <tr><td>Actor & Quyền</td><td><strong>Kế toán thanh toán:</strong> khởi tạo lệnh chuyển tiền — không được tự duyệt lệnh mình tạo.<br><strong>Người duyệt thanh toán / Kế toán trưởng:</strong> phê duyệt lệnh chuyển tiền — bắt buộc tách biệt với người khởi tạo (4-eyes principle).<br><strong>Hệ thống:</strong> ghi log mọi thao tác và gửi ngân hàng sau khi được duyệt.</td></tr>
@@ -3266,7 +3269,7 @@
     <p>Cụm công cụ quản trị nâng cao khai thác dữ liệu kế toán lõi — không tạo bút toán trực tiếp nhưng mọi chỉ tiêu, dự báo và ngân sách phải truy vết được về dữ liệu nguồn.</p>
 
     <h3>7.8.1. Dashboard tổng quan & phân tích tài chính</h3>
-    <table>
+    <table class="kv-table">
       <tr><th>Nội dung</th><th>Chi tiết</th></tr>
       <tr><td>Use Case</td><td>UC-MGMT-01: Xem dashboard tổng quan.<br>UC-MGMT-02: Cấu hình dashboard theo vai trò.<br>UC-MGMT-03: Phân tích doanh thu / chi phí / lợi nhuận.<br>UC-MGMT-04: So sánh số liệu theo kỳ / năm / kế hoạch.</td></tr>
       <tr><td>Actor & Quyền</td><td><strong>Ban giám đốc:</strong> xem dashboard điều hành tổng hợp — chỉ xem; không cấu hình.<br><strong>Kế toán trưởng / Quản trị tài chính:</strong> cấu hình dashboard và xem phân tích chi tiết.<br><strong>Trưởng bộ phận:</strong> xem chỉ tiêu thuộc bộ phận mình — phạm vi giới hạn theo vai trò.</td></tr>
@@ -3275,7 +3278,7 @@
     </table>
 
     <h3>7.8.2. Dự báo dòng tiền</h3>
-    <table>
+    <table class="kv-table">
       <tr><th>Nội dung</th><th>Chi tiết</th></tr>
       <tr><td>Use Case</td><td>UC-MGMT-05: Dự báo dòng tiền vào / ra.</td></tr>
       <tr><td>Actor & Quyền</td><td><strong>Kế toán tổng hợp / Quản trị tài chính:</strong> lập và cập nhật dự báo dòng tiền.<br><strong>Kế toán trưởng / Ban giám đốc:</strong> xem và phê duyệt kịch bản dự báo trước khi phát hành.<br><strong>Trưởng bộ phận:</strong> cung cấp kế hoạch thu chi dự kiến — không được sửa dự báo tổng hợp.</td></tr>
@@ -3284,7 +3287,7 @@
     </table>
 
     <h3>7.8.3. Ngân sách, theo dõi thực hiện & cảnh báo vượt ngân sách</h3>
-    <table>
+    <table class="kv-table">
       <tr><th>Nội dung</th><th>Chi tiết</th></tr>
       <tr><td>Use Case</td><td>UC-MGMT-06: Khai báo ngân sách.<br>UC-MGMT-07: Theo dõi thực hiện ngân sách.<br>UC-MGMT-08: Cảnh báo vượt ngân sách.<br>UC-MGMT-09: Xuất báo cáo quản trị nâng cao.</td></tr>
       <tr><td>Actor & Quyền</td><td><strong>Người lập ngân sách / Kế toán tổng hợp:</strong> khai báo và cập nhật ngân sách theo kỳ.<br><strong>Kế toán trưởng / Ban giám đốc:</strong> phê duyệt ngân sách — bắt buộc trước khi theo dõi thực hiện.<br><strong>Trưởng bộ phận:</strong> xem ngân sách và mức thực hiện của bộ phận mình — chỉ xem; không phê duyệt.<br><strong>Hệ thống:</strong> tự động cảnh báo khi phát sinh thực tế vượt hạn mức đã phê duyệt.</td></tr>
