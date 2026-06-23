@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ACC — Đặc tả nghiệp vụ Phase 6 (Mở rộng nâng cao)</title>
+  <style>
+    @page { size: A4; margin: 14mm 12mm; }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: #e5e7eb;
+      color: #1f2937;
+      font-family: "Segoe UI", Arial, sans-serif;
+      font-size: 10.5pt;
+      line-height: 1.62;
+    }
+    .doc {
+      max-width: 1040px;
+      margin: 24px auto;
+      background: #ffffff;
+      border: 1px solid #d1d5db;
+      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
+    }
+    .report-page,
+    .phase-chapter {
+      padding: 40px 46px 48px;
+      background: #ffffff;
+    }
+    .page-break,
+    .section-break { page-break-before: always; break-before: page; }
+    h1, h2, h3, h4, p, ul { margin-top: 0; }
+    h1 {
+      font-size: 34pt;
+      line-height: 1.05;
+      letter-spacing: 2px;
+      color: #0f172a;
+      margin-bottom: 12px;
+    }
+    h2 {
+      font-size: 15.5pt;
+      color: #1d4ed8;
+      margin: 30px 0 12px;
+      padding: 0 0 8px;
+      border-bottom: 2px solid #dbeafe;
+      page-break-after: avoid;
+      break-after: avoid;
+    }
+    h3 {
+      font-size: 11.7pt;
+      color: #111827;
+      margin: 18px 0 8px;
+      page-break-after: avoid;
+      break-after: avoid;
+    }
+    h4 {
+      font-size: 10.4pt;
+      color: #0f172a;
+      margin: 0 0 5px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    p { margin-bottom: 9px; }
+    ul { margin: 6px 0 10px 20px; padding: 0; }
+    li { margin: 3px 0; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 10px 0 16px;
+      font-size: 9.45pt;
+      page-break-inside: avoid;
+      break-inside: avoid;
+      table-layout: fixed;
+      word-wrap: break-word;
+    }
+    th {
+      background: #eef2ff;
+      color: #111827;
+      text-align: left;
+      border: 1px solid #cbd5e1;
+      padding: 8px 9px;
+      font-weight: 700;
+    }
+    td {
+      border: 1px solid #e2e8f0;
+      padding: 8px 9px;
+      vertical-align: top;
+    }
+    tr { page-break-inside: avoid; break-inside: avoid; }
+    tr:nth-child(even) td { background: #f8fafc; }
+
+    /* 2-col: label 22% / content 78% */
+    table.kv-table th:first-child,
+    table.kv-table td:first-child { width: 22%; }
+
+    /* 3-col STT: STT 5% / Chức năng 35% / Mô tả 60% */
+    table.stt-table th:first-child,
+    table.stt-table td:first-child { width: 5%; }
+    table.stt-table th:nth-child(2),
+    table.stt-table td:nth-child(2) { width: 35%; }
+
+    /* 2-col generic (Mã/Quy tắc, Bước/Mô tả, Tiêu chí...) */
+    table.rule-table th:first-child,
+    table.rule-table td:first-child { width: 20%; }
+
+    /* 3-col generic (Mã rule/Quy tắc/Nội dung, Bước/Người/Mô tả...) */
+    table.rule3-table th:first-child,
+    table.rule3-table td:first-child { width: 12%; }
+    table.rule3-table th:nth-child(2),
+    table.rule3-table td:nth-child(2) { width: 28%; }
+
+    /* 5-col định khoản */
+    table.entry-table th:first-child,
+    table.entry-table td:first-child { width: 5%; }
+    table.entry-table th:nth-child(2),
+    table.entry-table td:nth-child(2) { width: 35%; }
+    table.entry-table th:nth-child(3),
+    table.entry-table td:nth-child(3) { width: 15%; }
+    table.entry-table th:nth-child(4),
+    table.entry-table td:nth-child(4) { width: 15%; }
+
+    .cover {
+      min-height: 297mm;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      page-break-after: always;
+      break-after: page;
+      background:
+        linear-gradient(135deg, rgba(29, 78, 216, 0.08), rgba(14, 165, 233, 0.03) 46%, #ffffff 46%),
+        #ffffff;
+      padding: 54px 54px 48px;
+      border: 0;
+    }
+    .cover-topline {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 24px;
+      color: #475569;
+      font-size: 9.4pt;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+    .brand-mark {
+      width: 70px;
+      height: 70px;
+      border: 2px solid #1d4ed8;
+      color: #1d4ed8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 18pt;
+      letter-spacing: 0.04em;
+    }
+    .cover-main { max-width: 840px; margin: 78px 0 44px; }
+    .cover-kicker {
+      color: #1d4ed8;
+      font-size: 10pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      margin-bottom: 18px;
+    }
+    .cover-title {
+      font-size: 29pt;
+      line-height: 1.18;
+      color: #0f172a;
+      margin-bottom: 18px;
+      letter-spacing: -0.02em;
+      max-width: 780px;
+    }
+    .cover-subtitle {
+      color: #475569;
+      font-size: 12.2pt;
+      max-width: 790px;
+      margin-bottom: 28px;
+    }
+    .cover-rule {
+      width: 135px;
+      height: 4px;
+      background: #1d4ed8;
+      margin: 24px 0 0;
+    }
+    .meta,
+    .summary-grid,
+    .toc-grid,
+    .intro-grid {
+      display: grid;
+      gap: 12px;
+    }
+    .meta { grid-template-columns: repeat(4, 1fr); margin-top: 34px; }
+    .meta-card,
+    .summary-card,
+    .toc-card,
+    .intro-panel {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      padding: 13px 14px;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+    .meta-card b,
+    .summary-card b,
+    .toc-card b,
+    .intro-panel b {
+      display: block;
+      color: #1d4ed8;
+      font-size: 16pt;
+      line-height: 1.1;
+      margin-bottom: 5px;
+    }
+    .meta-card span,
+    .summary-card span,
+    .toc-card span,
+    .intro-panel span { color: #475569; font-size: 9.2pt; }
+    .cover-footer {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      border-top: 1px solid #cbd5e1;
+      padding-top: 18px;
+      color: #475569;
+      font-size: 9.7pt;
+    }
+    .cover-footer strong { color: #0f172a; }
+
+    .exec-summary h2,
+    .toc-page h2,
+    .overview-page h2 {
+      margin-top: 0;
+    }
+    .summary-lead {
+      font-size: 11.2pt;
+      color: #334155;
+      border-left: 4px solid #1d4ed8;
+      padding: 10px 0 10px 14px;
+      margin-bottom: 18px;
+    }
+    .summary-grid { grid-template-columns: repeat(3, 1fr); margin: 16px 0 20px; }
+    .report-note {
+      background: #fff7ed;
+      border: 1px solid #fed7aa;
+      border-left: 4px solid #f97316;
+      padding: 12px 14px;
+      margin: 14px 0 18px;
+      color: #7c2d12;
+    }
+    .toc-grid { grid-template-columns: repeat(2, 1fr); margin-top: 14px; }
+    .toc-card {
+      text-decoration: none;
+      color: inherit;
+      min-height: 92px;
+      border-left: 4px solid #1d4ed8;
+    }
+    .toc-card:hover { background: #eff6ff; }
+    .toc-card small {
+      display: block;
+      color: #64748b;
+      margin-top: 6px;
+      line-height: 1.45;
+    }
+
+    .notice,
+    .callout {
+      border-left: 4px solid #2563eb;
+      background: #f8fafc;
+      padding: 12px 14px;
+      margin: 14px 0 18px;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+    .notice { border-left-color: #d97706; }
+    .notice strong { color: #92400e; }
+    .flow {
+      background: #f8fafc;
+      color: #1f2937;
+      border: 1px solid #dbeafe;
+      border-left: 4px solid #2563eb;
+      padding: 15px 16px;
+      margin: 14px 0 18px;
+      font-size: 10.4pt;
+      line-height: 1.75;
+      text-align: center;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+    .phase-summary {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin: 12px 0 18px;
+    }
+    .phase-card {
+      border: 1px solid #e5e7eb;
+      background: #ffffff;
+      padding: 11px 12px;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+    .phase-card b { color: #1d4ed8; display: block; margin-bottom: 4px; }
+    .phase-card span { color: #4b5563; }
+    .mini-flow {
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-left: 4px solid #60a5fa;
+      padding: 11px 13px;
+      margin: 9px 0 14px;
+      color: #1f2937;
+      font-weight: 600;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    .phase-chapter { min-height: 260mm; }
+    .phase-header {
+      background: linear-gradient(135deg, #0f172a, #1d4ed8);
+      color: #ffffff;
+      padding: 26px 28px;
+      margin: -40px -46px 24px;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+    .chapter-label {
+      font-size: 9pt;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: #bfdbfe;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .phase-header h2 {
+      color: #ffffff;
+      border-bottom: 0;
+      padding: 0;
+      margin: 0 0 10px;
+      font-size: 19pt;
+      line-height: 1.25;
+    }
+    .phase-header p {
+      color: #dbeafe;
+      max-width: 860px;
+      margin: 0;
+      font-size: 10.5pt;
+    }
+    .phase-intro-card {
+      border: 1px solid #cbd5e1;
+      border-top: 4px solid #1d4ed8;
+      background: #ffffff;
+      padding: 16px 18px;
+      margin: 0 0 20px;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+    .intro-grid { grid-template-columns: 1fr 1fr 1.2fr; }
+    .intro-panel { background: #f8fafc; }
+    .intro-panel ul { margin-bottom: 0; }
+
+    .footer {
+      padding: 18px 46px 24px;
+      border-top: 1px solid #e5e7eb;
+      text-align: center;
+      color: #6b7280;
+      font-size: 9pt;
+      background: #ffffff;
+    }
+    @media print {
+      body { background: #ffffff; }
+      .doc { border: 0; box-shadow: none; max-width: none; margin: 0; }
+      .report-page,
+      .phase-chapter { padding: 0; }
+      .cover { min-height: auto; padding: 0; }
+      .phase-header { margin: 0 0 18px; }
+      .cover, .report-page, .phase-chapter, .phase-card, .notice, .callout, .phase-intro-card, .summary-card, .toc-card, .intro-panel { page-break-inside: avoid; break-inside: avoid; }
+      a { color: inherit; text-decoration: none; }
+    }
+
+
+    /* TAB NAVIGATION */
+    .app-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: #ffffff;
+      border-bottom: 1px solid #cbd5e1;
+      padding: 16px 46px 0;
+      margin: 0;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
+    }
+    .app-title {
+      font-size: 14pt;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .app-title span {
+      background: #1d4ed8;
+      color: #ffffff;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 9.5pt;
+      letter-spacing: 0.05em;
+    }
+    .tab-nav {
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      gap: 4px;
+      padding-bottom: 0;
+      border-bottom: 0;
+      margin: 0;
+    }
+    .tab-nav::-webkit-scrollbar { display: none; }
+    .tab-btn {
+      background: #f8fafc;
+      color: #64748b;
+      border: 1px solid #cbd5e1;
+      border-bottom: none;
+      padding: 12px 20px;
+      font-size: 10.5pt;
+      font-weight: 600;
+      cursor: pointer;
+      border-radius: 6px 6px 0 0;
+      transition: all 0.2s;
+      white-space: nowrap;
+      position: relative;
+      top: 1px;
+    }
+    .tab-btn:hover { background: #f1f5f9; color: #334155; }
+    .tab-btn.active {
+      background: #ffffff;
+      color: #1d4ed8;
+      border-top: 3px solid #1d4ed8;
+      border-left: 1px solid #cbd5e1;
+      border-right: 1px solid #cbd5e1;
+      border-bottom: 1px solid #ffffff;
+      z-index: 2;
+    }
+    
+    
+    /* HIDE COVER IN WEB VIEW */
+    @media screen {
+      .cover, #doc-cover { display: none \!important; opacity: 0; visibility: hidden; position: absolute; }
+      body { background: #f1f5f9; }
+      .doc { margin: 0 auto; min-height: 100vh; max-width: 1140px; border-radius: 0; border-top: 0; box-shadow: 0 0 20px rgba(0,0,0,0.05); }
+      .tab-panel { padding-top: 30px; }
+      .phase-header { margin: -30px -46px 24px; border-radius: 0; }
+    }
+
+
+    /* TAB PANELS */
+    .tab-panel {
+      display: none;
+      animation: fadeIn 0.2s ease-out;
+    }
+    .tab-panel.active {
+      display: block;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media print {
+      .app-header { display: none \!important; }
+      .cover { display: flex \!important; }
+      .tab-nav { display: none \!important; }
+      .tab-panel { display: block \!important; page-break-before: always; break-before: page; padding-top: 0 \!important; }
+      .phase-header { margin: 0 0 24px \!important; }
+      .doc { box-shadow: none; border: 0; max-width: none; margin: 0; }
+    }
+
+    /* ===== Bản đặc tả Phase 1 — format đã duyệt ===== */
+    .doc-letterhead {
+      display: flex; justify-content: space-between; align-items: baseline;
+      border-bottom: 2px solid #1d4ed8; padding: 0 0 8px; margin: 0 0 4px;
+      font-weight: 700; letter-spacing: 0.03em;
+    }
+    .doc-letterhead .lh-left { color: #1f2937; font-size: 10.5pt; }
+    .doc-letterhead .lh-right { color: #047857; font-size: 10.5pt; }
+    .spec-cover { padding: 40px 46px 30px; }
+    .spec-cover h1 { font-size: 30pt; margin: 18px 0 6px; letter-spacing: 1px; }
+    .spec-cover .sub { color: #475569; font-size: 12pt; margin: 0 0 4px; }
+    .spec-cover .meta { color: #64748b; font-size: 9.5pt; }
+
+    /* Sơ đồ luồng nghiệp vụ (Hình 1) — dạng box HTML */
+    .biz-flow { margin: 14px 0 6px; }
+    .bf-node {
+      border-radius: 10px; padding: 12px 16px; margin: 0 auto;
+      max-width: 620px; border: 1px solid #cbd5e1;
+      box-shadow: 0 2px 6px rgba(15,23,42,0.06);
+    }
+    .bf-node .bf-title { font-weight: 700; font-size: 10.6pt; margin: 0 0 4px; }
+    .bf-node ul { margin: 4px 0 0 18px; font-size: 9.3pt; }
+    .bf-node ul li { margin: 1px 0; }
+    .bf-start { background: #1e3a8a; color: #fff; text-align: center; border-color: #1e3a8a; max-width: 540px; }
+    .bf-start .bf-title { color: #fff; }
+    .bf-start small { color: #c7d2fe; font-size: 9pt; display: block; margin-top: 3px; font-weight: 400; }
+    .bf-admin { background: #eef2ff; border-color: #c7d2fe; }
+    .bf-catalog { background: #ecfdf5; border-color: #a7f3d0; }
+    .bf-cash { background: #fffbeb; border-color: #fde68a; }
+    .bf-bank { background: #eff6ff; border-color: #bfdbfe; }
+    .bf-ledger { background: #f5f3ff; border-color: #ddd6fe; }
+    .bf-test { background: #f8fafc; border-color: #e2e8f0; text-align: center; max-width: 540px; }
+    .bf-accept { background: #166534; color: #fff; text-align: center; border-color: #166534; max-width: 540px; }
+    .bf-accept .bf-title { color: #fff; }
+    .bf-accept small { color: #bbf7d0; font-size: 9pt; display: block; margin-top: 3px; font-weight: 400; }
+    .bf-arrow { text-align: center; color: #94a3b8; font-size: 8.6pt; padding: 5px 0; }
+    .bf-arrow::before { content: "↓"; display: block; color: #64748b; font-size: 14pt; line-height: 1; }
+    .bf-split { display: flex; gap: 18px; margin: 0; }
+    .bf-split > div { flex: 1; }
+    .bf-split .bf-node { max-width: none; }
+    .bf-merge { text-align: center; color: #94a3b8; font-size: 8.6pt; padding: 5px 0; }
+    .bf-merge::before { content: "↓  ↓"; display: block; color: #64748b; font-size: 13pt; line-height: 1; letter-spacing: 10px; }
+    .bf-blabels { display: flex; gap: 18px; }
+    .bf-blabels > div { flex: 1; text-align: center; color: #94a3b8; font-size: 8.6pt; padding: 5px 0; }
+    .bf-blabels > div::before { content: "↓"; display: block; color: #64748b; font-size: 14pt; line-height: 1; }
+    .fig-caption { text-align: center; font-style: italic; color: #64748b; font-size: 9pt; margin: 8px 0 18px; }
+    .state-svg { width: 100%; height: auto; display: block; margin: 12px 0 4px; }
+    .scope-matrix th:nth-child(1), .scope-matrix td:nth-child(1) { width: 7%; }
+    .scope-matrix th:nth-child(2), .scope-matrix td:nth-child(2) { width: 20%; }
+    .scope-matrix th:nth-child(5), .scope-matrix td:nth-child(5) { width: 11%; text-align: center; }
+    .state-table th:nth-child(1), .state-table td:nth-child(1) { width: 15%; font-weight: 600; }
+    .state-table th:nth-child(2), .state-table td:nth-child(2) { width: 30%; }
+    /* ===== Bảng Use Case 8 cột ===== */
+    table.uc-table { font-size: 8.2pt; table-layout: fixed; }
+    table.uc-table th { background: #1e3a8a; color: #fff; text-align: center; border-color: #1e3a8a; padding: 6px 6px; }
+    table.uc-table td { vertical-align: top; padding: 6px 6px; }
+    table.uc-table ol { margin: 0 0 0 15px; padding: 0; }
+    table.uc-table ol li { margin: 1px 0; }
+    table.uc-table th:nth-child(1), table.uc-table td:nth-child(1) { width: 7%; }
+    table.uc-table th:nth-child(2), table.uc-table td:nth-child(2) { width: 12%; }
+    table.uc-table th:nth-child(3), table.uc-table td:nth-child(3) { width: 11%; }
+    table.uc-table th:nth-child(4), table.uc-table td:nth-child(4) { width: 13%; }
+    table.uc-table th:nth-child(5), table.uc-table td:nth-child(5) { width: 21%; }
+    table.uc-table th:nth-child(6), table.uc-table td:nth-child(6) { width: 16%; }
+    table.uc-table th:nth-child(7), table.uc-table td:nth-child(7) { width: 11%; }
+    table.uc-table th:nth-child(8), table.uc-table td:nth-child(8) { width: 9%; }
+  </style>
+</head>
+<body>
+  <div class="doc">
+  <section class="report-page spec-cover" id="doc-cover">
+    <div class="doc-letterhead">
+      <span class="lh-left">ACC | ĐẶC TẢ NGHIỆP VỤ PHASE 6</span>
+      <span class="lh-right">BẢN NHÁP — CHỜ DUYỆT</span>
+    </div>
+    <h1>Đặc tả nghiệp vụ Phase 6</h1>
+    <p class="sub">Mở rộng nâng cao — TSCĐ, CCDC, lương, giá thành, vay, hợp đồng, ngân hàng điện tử &amp; dashboard</p>
+    <p class="meta">Phần mềm kế toán ACC · Tài liệu dành cho bộ phận kế toán &amp; nghiệm thu nghiệp vụ</p>
+  </section>
+  <section class="report-page page-break" id="spec-flow">
+    <div class="doc-letterhead">
+      <span class="lh-left">ACC | ĐẶC TẢ NGHIỆP VỤ PHASE 6</span>
+      <span class="lh-right">BẢN NHÁP — CHỜ DUYỆT</span>
+    </div>
+    <h2>1. Sơ đồ đặc tả nghiệp vụ chi tiết Phase 6</h2>
+    <p>Phase 6 mở rộng các phân hệ nâng cao vận hành song song và hội tụ về sổ cái: tài sản cố định, công cụ dụng cụ &amp; chi phí trả trước, tiền lương, giá thành sản xuất, khế ước vay, hợp đồng, ngân hàng điện tử và dashboard quản trị. Phase 6 kế thừa toàn bộ danh mục &amp; số liệu của Phase 1–5.</p>
+    <div class="biz-flow">
+      <div class="bf-node bf-start"><div class="bf-title">BẮT ĐẦU PHASE 6</div><small>Tuần 1–2: thiết kế các phân hệ nâng cao, kế thừa danh mục TSCĐ/CCDC/công trình &amp; nền tảng Phase 1–5</small></div>
+      <div class="bf-arrow">các phân hệ nâng cao vận hành song song</div>
+      <div class="bf-split">
+        <div>      <div class="bf-node bf-admin"><div class="bf-title">7.1 – 7.2&nbsp;&nbsp;TÀI SẢN CỐ ĐỊNH · CCDC &amp; CHI PHÍ TRẢ TRƯỚC</div><ul><li>Ghi tăng, khấu hao/phân bổ định kỳ</li><li>Điều chỉnh, điều chuyển, đánh giá lại</li><li>Ghi giảm, kiểm kê &amp; báo cáo</li></ul></div></div>
+        <div>      <div class="bf-node bf-catalog"><div class="bf-title">7.3 – 7.4&nbsp;&nbsp;TIỀN LƯƠNG · GIÁ THÀNH SẢN XUẤT</div><ul><li>Bảng lương, phân bổ &amp; hạch toán chi phí lương</li><li>Tập hợp chi phí, phân bổ chi phí chung</li><li>Tính giá thành, kết chuyển &amp; báo cáo</li></ul></div></div>
+      </div>
+      <div class="bf-blabels"><div>bút toán khấu hao / phân bổ / lương / giá thành</div><div>dòng tiền vay &amp; hợp đồng</div></div>
+      <div class="bf-split">
+        <div>      <div class="bf-node bf-cash"><div class="bf-title">7.5 – 7.6&nbsp;&nbsp;KHẾ ƯỚC VAY · HỢP ĐỒNG</div><ul><li>Khai báo khoản vay, lịch trả nợ, giải ngân</li><li>Thanh toán gốc/lãi, cảnh báo &amp; báo cáo</li><li>Hợp đồng: mốc thanh toán, liên kết chứng từ, cảnh báo đến hạn</li></ul></div></div>
+        <div>      <div class="bf-node bf-bank"><div class="bf-title">7.7&nbsp;&nbsp;NGÂN HÀNG ĐIỆN TỬ</div><ul><li>Kết nối &amp; cấu hình tài khoản ngân hàng</li><li>Nhận giao dịch, tạo chứng từ, đối chiếu sổ phụ</li><li>Khởi tạo &amp; phê duyệt chuyển tiền</li></ul></div></div>
+      </div>
+      <div class="bf-arrow">số liệu hội tụ về sổ cái</div>
+            <div class="bf-node bf-ledger"><div class="bf-title">7.8&nbsp;&nbsp;DASHBOARD QUẢN TRỊ, PHÂN TÍCH &amp; NGÂN SÁCH</div><ul><li>Dashboard tổng quan &amp; phân tích tài chính</li><li>Dự báo dòng tiền</li><li>Ngân sách, theo dõi thực hiện &amp; cảnh báo vượt</li></ul></div>
+      <div class="bf-arrow"></div>
+      <div class="bf-node bf-accept"><div class="bf-title">TUẦN 10&nbsp;&nbsp;-&nbsp;&nbsp;TÍCH HỢP, KIỂM THỬ &amp; NGHIỆM THU PHASE 6</div><small>Đối chiếu các phân hệ nâng cao với sổ cái, kiểm thử dashboard &amp; nghiệm thu bàn giao Phase 6</small></div>
+    </div>
+    <p class="fig-caption">Hình 1 — Sơ đồ phạm vi và quan hệ nghiệp vụ Phase 6</p>
+
+    <h3 style="margin-top:26px;">1.1. Ma trận phạm vi theo module</h3>
+    <table class="scope-matrix">
+      <tr><th>Mã</th><th>Module</th><th>Nội dung trọng tâm</th><th>Kết quả đầu ra</th><th>Mốc</th></tr>
+      <tr><td><b>7.1</b></td><td>Tài sản cố định</td><td>Ghi tăng, khấu hao định kỳ, điều chỉnh/điều chuyển/đánh giá lại, ghi giảm, kiểm kê.</td><td>Sổ TSCĐ &amp; khấu hao khớp TK 211/214.</td><td>Tuần 2–3</td></tr>
+      <tr><td><b>7.2</b></td><td>Công cụ dụng cụ &amp; chi phí trả trước</td><td>Ghi tăng, phân bổ định kỳ, theo dõi giá trị còn lại, điều chỉnh, kiểm kê.</td><td>Phân bổ CCDC/CPTT đúng, khớp TK 242.</td><td>Tuần 3</td></tr>
+      <tr><td><b>7.3</b></td><td>Tiền lương (phục vụ hạch toán)</td><td>Bảng lương, phân bổ chi phí lương, hạch toán, trả lương &amp; đối chiếu.</td><td>Chi phí lương &amp; các khoản trích hạch toán đúng.</td><td>Tuần 4</td></tr>
+      <tr><td><b>7.4</b></td><td>Giá thành sản xuất</td><td>Tập hợp chi phí, phân bổ chi phí chung, dở dang, tính giá thành, kết chuyển.</td><td>Giá thành &amp; nhập kho thành phẩm chính xác.</td><td>Tuần 5–6</td></tr>
+      <tr><td><b>7.5</b></td><td>Khế ước vay</td><td>Khai báo khoản vay, lịch trả nợ, giải ngân, trả gốc/lãi, cảnh báo.</td><td>Dư nợ vay &amp; chi phí lãi theo dõi chính xác.</td><td>Tuần 6–7</td></tr>
+      <tr><td><b>7.6</b></td><td>Hợp đồng</td><td>Khai báo hợp đồng, mốc thanh toán, liên kết chứng từ, cảnh báo đến hạn.</td><td>Hợp đồng &amp; tiến độ thực hiện được theo dõi.</td><td>Tuần 7</td></tr>
+      <tr><td><b>7.7</b></td><td>Ngân hàng điện tử</td><td>Kết nối tài khoản, nhận giao dịch, đối chiếu sổ phụ, duyệt chuyển tiền.</td><td>Giao dịch ngân hàng tự động &amp; đối chiếu khớp.</td><td>Tuần 8</td></tr>
+      <tr><td><b>7.8</b></td><td>Dashboard quản trị, phân tích &amp; ngân sách</td><td>Dashboard, phân tích tài chính, dự báo dòng tiền, ngân sách &amp; cảnh báo.</td><td>Báo cáo quản trị &amp; dự báo phục vụ điều hành.</td><td>Tuần 9–10</td></tr>
+    </table>
+  </section>
+  <section class="report-page page-break" id="spec-state">
+    <div class="doc-letterhead">
+      <span class="lh-left">ACC | ĐẶC TẢ NGHIỆP VỤ PHASE 6</span>
+      <span class="lh-right">BẢN NHÁP — CHỜ DUYỆT</span>
+    </div>
+    <h2>2. Sơ đồ luồng trạng thái chứng từ Phase 6</h2>
+    <p>Chứng từ Phase 6 (ghi tăng/giảm TSCĐ, khấu hao, phân bổ CCDC, hạch toán lương, kết chuyển giá thành, vay, chuyển tiền điện tử…) dùng chung <strong>baseline luồng trạng thái Phase 1</strong>: Nháp → Chờ duyệt → Đã duyệt → Đã ghi sổ → Đã khóa kỳ. Riêng tài sản &amp; khoản phân bổ/vay có trạng thái quản lý theo vòng đời: Đang sử dụng → Đang khấu hao/phân bổ → Ngừng/Thanh lý/Tất toán.</p>
+    <svg class="state-svg" viewBox="0 0 900 360" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif">
+      <defs>
+        <marker id="ah" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto" markerUnits="strokeWidth">
+          <path d="M0,0 L7,3 L0,6 Z" fill="#64748b"/>
+        </marker>
+        <marker id="ahr" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto" markerUnits="strokeWidth">
+          <path d="M0,0 L7,3 L0,6 Z" fill="#dc2626"/>
+        </marker>
+      </defs>
+
+      <!-- main chain edges -->
+      <g stroke="#64748b" stroke-width="1.6" fill="none">
+        <path d="M152,188 L188,188" marker-end="url(#ah)"/>
+        <path d="M322,188 L358,188" marker-end="url(#ah)"/>
+        <path d="M492,188 L528,188" marker-end="url(#ah)"/>
+        <path d="M662,188 L698,188" marker-end="url(#ah)"/>
+        <!-- chờ duyệt -> đã hủy -->
+        <path d="M257,216 C257,255 330,262 360,284" marker-end="url(#ah)"/>
+        <!-- nháp -> đã hủy -->
+        <path d="M87,216 C87,295 200,312 298,306" marker-end="url(#ah)"/>
+      </g>
+      <!-- reject edges (red) -->
+      <g stroke="#dc2626" stroke-width="1.6" fill="none">
+        <path d="M300,160 C320,120 350,108 370,96" marker-end="url(#ahr)"/>
+        <path d="M300,70 C180,70 70,110 70,158" marker-end="url(#ahr)"/>
+      </g>
+
+      <!-- edge labels -->
+      <g fill="#475569" font-size="11" text-anchor="middle">
+        <text x="172" y="150">Gửi duyệt</text>
+        <text x="340" y="180">Duyệt</text>
+        <text x="510" y="180">Ghi sổ</text>
+        <text x="680" y="180">Khóa kỳ</text>
+        <text x="305" y="248">Hủy</text>
+        <text x="150" y="268">Hủy</text>
+      </g>
+      <g fill="#dc2626" font-size="11" text-anchor="middle">
+        <text x="350" y="135">Từ chối</text>
+        <text x="150" y="103">Sửa và gửi lại</text>
+      </g>
+
+      <!-- nodes -->
+      <g font-size="11.5" text-anchor="middle">
+        <!-- NHÁP -->
+        <rect x="22" y="160" width="130" height="56" rx="10" fill="#f1f5f9" stroke="#94a3b8"/>
+        <text x="87" y="184" font-weight="700" fill="#0f172a">NHÁP</text>
+        <text x="87" y="200" font-size="9.5" fill="#475569">Được nhập và chỉnh sửa</text>
+        <!-- CHỜ DUYỆT -->
+        <rect x="192" y="160" width="130" height="56" rx="10" fill="#fffbeb" stroke="#f59e0b"/>
+        <text x="257" y="184" font-weight="700" fill="#0f172a">CHỜ DUYỆT</text>
+        <text x="257" y="200" font-size="9.5" fill="#475569">Đã gửi phê duyệt</text>
+        <!-- ĐÃ DUYỆT -->
+        <rect x="362" y="160" width="130" height="56" rx="10" fill="#ecfdf5" stroke="#10b981"/>
+        <text x="427" y="184" font-weight="700" fill="#0f172a">ĐÃ DUYỆT</text>
+        <text x="427" y="200" font-size="9.5" fill="#475569">Đủ điều kiện ghi sổ</text>
+        <!-- ĐÃ GHI SỔ -->
+        <rect x="532" y="160" width="130" height="56" rx="10" fill="#eff6ff" stroke="#3b82f6"/>
+        <text x="597" y="184" font-weight="700" fill="#0f172a">ĐÃ GHI SỔ</text>
+        <text x="597" y="200" font-size="9.5" fill="#475569">Đã sinh bút toán</text>
+        <!-- ĐÃ KHÓA KỲ -->
+        <rect x="702" y="160" width="150" height="56" rx="10" fill="#1e3a8a" stroke="#1e3a8a"/>
+        <text x="777" y="184" font-weight="700" fill="#ffffff">ĐÃ KHÓA KỲ</text>
+        <text x="777" y="200" font-size="9.5" fill="#c7d2fe">Không sửa/xóa trực tiếp</text>
+        <!-- TỪ CHỐI -->
+        <rect x="300" y="40" width="140" height="52" rx="10" fill="#fef2f2" stroke="#dc2626"/>
+        <text x="370" y="62" font-weight="700" fill="#b91c1c">TỪ CHỐI</text>
+        <text x="370" y="78" font-size="9.5" fill="#ef4444">Có lý do trả lại</text>
+        <!-- ĐÃ HỦY -->
+        <rect x="300" y="284" width="140" height="52" rx="10" fill="#f1f5f9" stroke="#94a3b8"/>
+        <text x="370" y="306" font-weight="700" fill="#475569">ĐÃ HỦY</text>
+        <text x="370" y="322" font-size="9.5" fill="#64748b">Không tính phát sinh</text>
+      </g>
+    </svg>
+    <p class="fig-caption">Hình 2 — Luồng trạng thái chứng từ dùng chung (baseline Phase 1)</p>
+
+    <h3 style="margin-top:22px;">2.1. Chú thích trạng thái</h3>
+    <table class="state-table">
+      <tr><th>Trạng thái</th><th>Ý nghĩa</th><th>Chuyển tiếp cho phép</th><th>Kiểm soát chính</th></tr>
+      <tr><td>Nháp</td><td>Đang nhập liệu, chưa ảnh hưởng sổ.</td><td>Sửa; Gửi duyệt; Hủy.</td><td>Người lập hoặc người có quyền tạo/sửa.</td></tr>
+      <tr><td>Chờ duyệt</td><td>Đã gửi phê duyệt.</td><td>Duyệt; Từ chối; Hủy.</td><td>Chỉ người nằm trong phạm vi duyệt được cấu hình.</td></tr>
+      <tr><td>Đã duyệt</td><td>Được phê duyệt và đủ điều kiện ghi sổ.</td><td>Ghi sổ.</td><td>Không sửa trực tiếp; chỉ chứng từ đã duyệt mới được ghi sổ.</td></tr>
+      <tr><td>Đã ghi sổ</td><td>Đã sinh bút toán và cập nhật sổ liên quan.</td><td>Khóa kỳ.</td><td>Không sửa bút toán trực tiếp; điều chỉnh theo cơ chế được phê duyệt.</td></tr>
+      <tr><td>Đã khóa kỳ</td><td>Kỳ kế toán hoặc kỳ đối chiếu đã đóng.</td><td>Không chuyển tiếp thông thường.</td><td>Không sửa/xóa nếu chưa mở khóa bằng quyền phù hợp.</td></tr>
+      <tr><td>Từ chối</td><td>Người duyệt trả lại và nêu lý do.</td><td>Sửa và gửi lại về Chờ duyệt.</td><td>Bắt buộc lưu lý do và lịch sử duyệt.</td></tr>
+      <tr><td>Đã hủy</td><td>Chứng từ kết thúc, không tính vào phát sinh.</td><td>Không chuyển tiếp.</td><td>Bắt buộc lưu người hủy, thời điểm và lý do khi áp dụng.</td></tr>
+    </table>
+
+  </section>
+  <section class="phase-chapter page-break" id="phase-6-detail">
+    <div class="doc-letterhead">
+      <span class="lh-left">ACC | ĐẶC TẢ NGHIỆP VỤ PHASE 6</span>
+      <span class="lh-right">BẢN NHÁP — CHỜ DUYỆT</span>
+    </div>
+    <h2>3. Đặc tả chức năng chi tiết theo module</h2>
+    <p style="font-size:9pt;color:#475569;"><em>Mỗi module mô tả theo bảng Use Case 8 cột. Danh mục Loại TSCĐ/CCDC/công trình, đối tượng tập hợp chi phí đã khai ở Phase 1; số liệu hội tụ về sổ cái (Phase 4).</em></p>
+
+    <h3>7.1. Tài sản cố định</h3>
+    <table class="uc-table">
+      <tr><th>Use Case ID</th><th>Chức năng</th><th>Actor</th><th>Luồng nghiệp vụ</th><th>Luồng chính</th><th>Business Rule</th><th>Liên kết với phân hệ khác</th><th>Kết quả đầu ra</th></tr>
+      <tr><td>UC-FA-A</td><td>Ghi tăng &amp; khai báo tài sản cố định</td><td>Kế toán TSCĐ; Kế toán trưởng</td><td>Ghi nhận TSCĐ mới và khai báo thông tin khấu hao.</td><td><ol><li>Khai báo TSCĐ: nguyên giá, loại TSCĐ, ngày sử dụng, thời gian &amp; phương pháp khấu hao, bộ phận sử dụng.</li><li>Ghi tăng từ mua sắm / đầu tư.</li></ol></td><td>Loại TSCĐ &amp;amp; TK theo danh mục (Phase 1); nguyên giá > tiêu chuẩn ghi nhận TSCĐ.</td><td>Mua hàng (Phase 2); danh mục Loại TSCĐ (Phase 1).</td><td>Bút toán Nợ 211 / Có 112, 331; thẻ TSCĐ được tạo.</td></tr>
+      <tr><td>UC-FA-B</td><td>Khấu hao, điều chỉnh &amp; ghi giảm</td><td>Kế toán TSCĐ</td><td>Phân bổ khấu hao định kỳ và xử lý biến động TSCĐ.</td><td><ol><li>Sinh bút toán khấu hao định kỳ theo bộ phận sử dụng.</li><li>Điều chỉnh, điều chuyển, đánh giá lại.</li><li>Ghi giảm (thanh lý/nhượng bán), kiểm kê &amp; báo cáo.</li></ol></td><td>Mỗi kỳ khấu hao một lần; không khấu hao quá nguyên giá; ghi giảm phải xử lý hao mòn lũy kế.</td><td>Sổ cái 211/214; chi phí (627/641/642).</td><td>Khấu hao: Nợ 627,641,642 / Có 214; sổ TSCĐ khớp TK 211/214.</td></tr>
+    </table>
+
+    <h3>7.2. Công cụ dụng cụ & chi phí trả trước</h3>
+    <table class="uc-table">
+      <tr><th>Use Case ID</th><th>Chức năng</th><th>Actor</th><th>Luồng nghiệp vụ</th><th>Luồng chính</th><th>Business Rule</th><th>Liên kết với phân hệ khác</th><th>Kết quả đầu ra</th></tr>
+      <tr><td>UC-CC-A</td><td>Ghi tăng &amp; khai báo phân bổ CCDC / CPTT</td><td>Kế toán tổng hợp</td><td>Ghi nhận CCDC, chi phí trả trước và thiết lập phân bổ.</td><td><ol><li>Khai báo nguyên giá, kỳ phân bổ, số kỳ, TK nhận phân bổ.</li><li>Ghi tăng từ mua sắm / xuất dùng.</li></ol></td><td>Loại CCDC theo danh mục (Phase 1); giá trị phân bổ theo số kỳ đã khai.</td><td>Mua hàng (Phase 2); danh mục Loại CCDC (Phase 1).</td><td>Bút toán Nợ 242 / Có 153, 331; khoản phân bổ được tạo.</td></tr>
+      <tr><td>UC-CC-B</td><td>Phân bổ định kỳ &amp; điều chỉnh</td><td>Kế toán tổng hợp</td><td>Phân bổ định kỳ và theo dõi giá trị còn lại.</td><td><ol><li>Sinh bút toán phân bổ định kỳ theo bộ phận.</li><li>Theo dõi giá trị còn lại; điều chỉnh / ngừng phân bổ; kiểm kê.</li></ol></td><td>Mỗi kỳ phân bổ một lần; không phân bổ vượt giá trị còn lại; giá trị còn lại không âm.</td><td>Sổ cái 242; chi phí (627/641/642).</td><td>Phân bổ: Nợ 627,641,642 / Có 242; giá trị còn lại chính xác.</td></tr>
+    </table>
+
+    <h3>7.3. Tiền lương cơ bản phục vụ hạch toán</h3>
+    <table class="uc-table">
+      <tr><th>Use Case ID</th><th>Chức năng</th><th>Actor</th><th>Luồng nghiệp vụ</th><th>Luồng chính</th><th>Business Rule</th><th>Liên kết với phân hệ khác</th><th>Kết quả đầu ra</th></tr>
+      <tr><td>UC-PR-A</td><td>Nhập bảng lương &amp; hạch toán chi phí lương</td><td>Kế toán lương; Kế toán trưởng</td><td>Ghi nhận và phân bổ chi phí lương vào các bộ phận.</td><td><ol><li>Khai báo &amp; nhập liệu bảng lương kỳ.</li><li>Phân bổ chi phí lương theo bộ phận sử dụng.</li><li>Hạch toán lương &amp; các khoản trích theo lương.</li></ol></td><td>Bảng lương duyệt mới hạch toán; các khoản trích theo tỷ lệ quy định.</td><td>Cơ cấu tổ chức &amp; nhân sự (Phase 1); sổ cái.</td><td>Bút toán Nợ 622,627,641,642 / Có 334; trích theo lương Có 338.</td></tr>
+      <tr><td>UC-PR-B</td><td>Trả lương &amp; đối chiếu</td><td>Kế toán lương; Thủ quỹ / Kế toán NH</td><td>Chi trả lương và theo dõi đã trả / chưa trả.</td><td><ol><li>Lập chứng từ trả lương (tiền mặt / ngân hàng).</li><li>Đối chiếu đã trả / chưa trả theo nhân viên.</li></ol></td><td>Trả lương liên kết bảng lương đã hạch toán; không trả vượt số phải trả.</td><td>Quỹ/ngân hàng (Phase 1); công nợ lương.</td><td>Bút toán Nợ 334 / Có 111, 112; số phải trả lương giảm.</td></tr>
+    </table>
+
+    <h3>7.4. Giá thành sản xuất</h3>
+    <table class="uc-table">
+      <tr><th>Use Case ID</th><th>Chức năng</th><th>Actor</th><th>Luồng nghiệp vụ</th><th>Luồng chính</th><th>Business Rule</th><th>Liên kết với phân hệ khác</th><th>Kết quả đầu ra</th></tr>
+      <tr><td>UC-CO-A</td><td>Tập hợp chi phí &amp; phân bổ</td><td>Kế toán giá thành</td><td>Tập hợp chi phí sản xuất theo đối tượng tính giá thành.</td><td><ol><li>Khai báo đối tượng tính giá thành; tập hợp chi phí NVL, nhân công, sản xuất chung.</li><li>Phân bổ chi phí chung; xác định dở dang cuối kỳ.</li></ol></td><td>Đối tượng tập hợp chi phí theo danh mục (Phase 1); chi phí tập hợp đúng đối tượng.</td><td>Mua hàng/kho (Phase 2); lương (7.3); chi phí (Phase 1).</td><td>Chi phí tập hợp Nợ 154 / Có 621, 622, 627.</td></tr>
+      <tr><td>UC-CO-B</td><td>Tính giá thành &amp; nhập kho thành phẩm</td><td>Kế toán giá thành; Kế toán trưởng</td><td>Tính giá thành và kết chuyển nhập kho thành phẩm.</td><td><ol><li>Tính giá thành theo phương pháp đã chọn.</li><li>Kết chuyển, nhập kho thành phẩm; lập báo cáo giá thành.</li></ol></td><td>Giá thành = chi phí dở dang đầu kỳ + phát sinh − dở dang cuối kỳ; nhập kho theo giá thành thực tế.</td><td>Kho thành phẩm (Phase 2); sổ cái; bán hàng (Phase 3 – giá vốn).</td><td>Nhập kho TP: Nợ 155 / Có 154; báo cáo giá thành.</td></tr>
+    </table>
+
+    <h3>7.5. Khế ước vay</h3>
+    <table class="uc-table">
+      <tr><th>Use Case ID</th><th>Chức năng</th><th>Actor</th><th>Luồng nghiệp vụ</th><th>Luồng chính</th><th>Business Rule</th><th>Liên kết với phân hệ khác</th><th>Kết quả đầu ra</th></tr>
+      <tr><td>UC-LN-A</td><td>Khai báo, giải ngân &amp; theo dõi khoản vay</td><td>Kế toán; Kế toán trưởng</td><td>Quản lý khoản vay, lịch trả nợ và dư nợ.</td><td><ol><li>Khai báo khoản vay, lãi suất, lịch trả nợ.</li><li>Ghi nhận giải ngân; theo dõi dư nợ gốc.</li></ol></td><td>Lịch trả nợ rõ ràng; dư nợ theo dõi theo từng khế ước.</td><td>Ngân hàng (Phase 1); sổ cái.</td><td>Giải ngân: Nợ 112 / Có 341; dư nợ vay theo dõi.</td></tr>
+      <tr><td>UC-LN-B</td><td>Thanh toán gốc / lãi &amp; cảnh báo</td><td>Kế toán</td><td>Trả nợ và ghi nhận chi phí lãi vay.</td><td><ol><li>Lập chứng từ trả gốc / lãi theo lịch.</li><li>Cảnh báo kỳ trả đến hạn; lập báo cáo vay.</li></ol></td><td>Lãi tính theo dư nợ &amp; lãi suất; cảnh báo trước hạn; không trả vượt dư nợ.</td><td>Chi ngân hàng/quỹ (Phase 1); chi phí tài chính.</td><td>Trả gốc Nợ 341 / Có 112; lãi Nợ 635 / Có 111,112,335.</td></tr>
+    </table>
+
+    <h3>7.6. Hợp đồng</h3>
+    <table class="uc-table">
+      <tr><th>Use Case ID</th><th>Chức năng</th><th>Actor</th><th>Luồng nghiệp vụ</th><th>Luồng chính</th><th>Business Rule</th><th>Liên kết với phân hệ khác</th><th>Kết quả đầu ra</th></tr>
+      <tr><td>UC-CT-A</td><td>Khai báo &amp; theo dõi thực hiện hợp đồng</td><td>Kế toán; Kinh doanh</td><td>Quản lý hợp đồng (mua/bán/khác) và tiến độ.</td><td><ol><li>Khai báo hợp đồng, mốc thanh toán, điều khoản.</li><li>Liên kết chứng từ phát sinh; theo dõi thực hiện.</li><li>Cảnh báo đến hạn; lập báo cáo hợp đồng.</li></ol></td><td>Hợp đồng liên kết chứng từ nguồn; theo dõi mốc thanh toán để cảnh báo.</td><td>Mua hàng (Phase 2 – 3.3); bán hàng (Phase 3 – 4.4); công nợ.</td><td>Hợp đồng &amp;amp; tiến độ thực hiện, cảnh báo đến hạn.</td></tr>
+    </table>
+
+    <h3>7.7. Ngân hàng điện tử</h3>
+    <table class="uc-table">
+      <tr><th>Use Case ID</th><th>Chức năng</th><th>Actor</th><th>Luồng nghiệp vụ</th><th>Luồng chính</th><th>Business Rule</th><th>Liên kết với phân hệ khác</th><th>Kết quả đầu ra</th></tr>
+      <tr><td>UC-EB-A</td><td>Kết nối, nhận giao dịch &amp; đối chiếu sổ phụ</td><td>Kế toán ngân hàng; Quản trị</td><td>Tích hợp ngân hàng điện tử và tự động hóa giao dịch.</td><td><ol><li>Kết nối &amp;amp; cấu hình tài khoản ngân hàng.</li><li>Nhận giao dịch, tạo chứng từ tự động, đối chiếu sổ phụ.</li></ol></td><td>Thông tin kết nối bảo mật; mỗi giao dịch tạo chứng từ duy nhất; đối chiếu khớp sổ phụ.</td><td>Tiền gửi ngân hàng (Phase 1 – 2.4); sao kê &amp; đối chiếu.</td><td>Giao dịch ngân hàng tự động, chứng từ &amp;amp; đối chiếu khớp.</td></tr>
+      <tr><td>UC-EB-B</td><td>Khởi tạo &amp; phê duyệt chuyển tiền</td><td>Kế toán ngân hàng; Kế toán trưởng / BGĐ</td><td>Lập lệnh chuyển tiền và phê duyệt theo phân quyền.</td><td><ol><li>Khởi tạo lệnh chuyển tiền từ chứng từ chi.</li><li>Phê duyệt theo phân quyền → gửi ngân hàng.</li></ol></td><td>Người tạo ≠ người duyệt; lệnh chuyển phải duyệt mới gửi; ghi Audit Log.</td><td>Chi ngân hàng (Phase 1 – 2.4); thanh toán NCC (Phase 2 – 3.8).</td><td>Lệnh chuyển tiền đã duyệt &amp;amp; thực hiện, đồng bộ sổ.</td></tr>
+    </table>
+
+    <h3>7.8. Dashboard quản trị, phân tích tài chính, dự báo dòng tiền & ngân sách</h3>
+    <table class="uc-table">
+      <tr><th>Use Case ID</th><th>Chức năng</th><th>Actor</th><th>Luồng nghiệp vụ</th><th>Luồng chính</th><th>Business Rule</th><th>Liên kết với phân hệ khác</th><th>Kết quả đầu ra</th></tr>
+      <tr><td>UC-DB-A</td><td>Dashboard &amp; phân tích tài chính</td><td>Kế toán trưởng; Ban giám đốc</td><td>Tổng hợp số liệu phục vụ điều hành.</td><td><ol><li>Hiển thị dashboard tổng quan (doanh thu, chi phí, công nợ, tiền, tồn kho).</li><li>Phân tích tài chính theo chỉ tiêu &amp; xu hướng.</li></ol></td><td>Chỉ lấy dữ liệu đã ghi sổ; chỉ tiêu drill-down về sổ cái/chứng từ.</td><td>Toàn bộ phân hệ Phase 1–6; sổ cái &amp; BCTC (Phase 4).</td><td>Dashboard &amp;amp; báo cáo phân tích tài chính realtime.</td></tr>
+      <tr><td>UC-DB-B</td><td>Dự báo dòng tiền &amp; ngân sách</td><td>Kế toán trưởng; Ban giám đốc</td><td>Lập dự báo dòng tiền và quản lý ngân sách.</td><td><ol><li>Dự báo dòng tiền theo công nợ, hợp đồng, lịch trả nợ.</li><li>Lập ngân sách, theo dõi thực hiện, cảnh báo vượt ngân sách.</li></ol></td><td>Dự báo dựa trên dữ liệu thực tế &amp;amp; cam kết; cảnh báo khi thực hiện vượt ngân sách.</td><td>Công nợ (Phase 2–3); vay &amp; hợp đồng (7.5, 7.6).</td><td>Báo cáo dự báo dòng tiền &amp;amp; theo dõi ngân sách.</td></tr>
+    </table>
+
+  </section>
+  </div>
+</body>
+</html>
