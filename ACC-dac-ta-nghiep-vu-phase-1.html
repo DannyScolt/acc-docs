@@ -572,10 +572,12 @@
       <div class="bf-node bf-catalog">
         <div class="bf-title">2.2&nbsp;&nbsp;DANH MỤC &amp; DỮ LIỆU ĐẦU KỲ</div>
         <ul>
-          <li>Hệ thống tài khoản và tài khoản mặc định</li>
-          <li>Khách hàng, nhà cung cấp, nhân viên</li>
-          <li>Hàng hóa/vật tư/dịch vụ, kho, tài khoản ngân hàng</li>
-          <li>Khoản mục chi phí và loại chứng từ</li>
+          <li>Thiết lập chung: loại tiền, cơ cấu tổ chức, chi nhánh – phòng ban</li>
+          <li>Hệ thống tài khoản, tài khoản kết chuyển, tài khoản ngầm định</li>
+          <li>Đối tượng: khách hàng, nhà cung cấp (và nhóm tương ứng)</li>
+          <li>Đơn vị tính, nhóm vật tư hàng hóa, kho, hàng hóa</li>
+          <li>Ngân hàng, tài khoản ngân hàng, điều khoản thanh toán</li>
+          <li>Khoản mục chi phí, mục thu chi, mã thống kê, loại chứng từ</li>
           <li>Nhập/import số dư tài khoản, công nợ, tồn kho, quỹ, ngân hàng</li>
           <li>Đối chiếu chi tiết với TK 111/112/131/331 và khóa số dư đầu kỳ</li>
         </ul>
@@ -868,7 +870,37 @@
     <h3>2.2. Danh mục & dữ liệu đầu kỳ</h3>
     <p>Module này dùng để khai báo dữ liệu nền tảng trước khi phát sinh chứng từ kế toán. Các phân hệ Quỹ, Ngân hàng, Mua hàng, Bán hàng, Kho, Công nợ, Tài sản và Báo cáo đều sử dụng chung các danh mục này.</p>
 
-    <h3>2.2.1. Hệ thống tài khoản</h3>
+    <h3>2.2.1. Loại tiền</h3>
+    <table class="stt-table">
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Thêm loại tiền</td><td>Khai báo mã tiền tệ (VND, USD…), tên, ký hiệu, số chữ số thập phân.</td></tr>
+      <tr><td>2</td><td>Sửa loại tiền</td><td>Cập nhật thông tin loại tiền.</td></tr>
+      <tr><td>3</td><td>Thiết lập tiền hạch toán</td><td>Chọn đồng tiền hạch toán chính của doanh nghiệp.</td></tr>
+      <tr><td>4</td><td>Khai báo tỷ giá</td><td>Nhập tỷ giá quy đổi ngoại tệ theo ngày / kỳ.</td></tr>
+      <tr><td>5</td><td>Ngừng sử dụng</td><td>Ẩn loại tiền khỏi danh sách chọn nhưng giữ lịch sử.</td></tr>
+    </table>
+
+    <h3>2.2.2. Cơ cấu tổ chức</h3>
+    <table class="stt-table">
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Thêm đơn vị / bộ phận</td><td>Khai báo cây cơ cấu tổ chức: công ty, khối, phòng, bộ phận.</td></tr>
+      <tr><td>2</td><td>Sửa cơ cấu</td><td>Cập nhật tên, cấp bậc, đơn vị cha.</td></tr>
+      <tr><td>3</td><td>Thiết lập phân cấp</td><td>Gán quan hệ cha – con giữa các đơn vị.</td></tr>
+      <tr><td>4</td><td>Gắn người phụ trách</td><td>Chỉ định người quản lý cho từng đơn vị.</td></tr>
+      <tr><td>5</td><td>Ngừng sử dụng</td><td>Vô hiệu đơn vị không còn hoạt động.</td></tr>
+    </table>
+
+    <h3>2.2.3. Chi nhánh – Phòng ban</h3>
+    <table class="stt-table">
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Thêm chi nhánh</td><td>Khai báo mã, tên, địa chỉ, mã số thuế của chi nhánh / đơn vị phụ thuộc.</td></tr>
+      <tr><td>2</td><td>Thêm phòng ban</td><td>Khai báo phòng ban trực thuộc chi nhánh.</td></tr>
+      <tr><td>3</td><td>Sửa chi nhánh / phòng ban</td><td>Cập nhật thông tin.</td></tr>
+      <tr><td>4</td><td>Phân quyền theo chi nhánh / phòng ban</td><td>Giới hạn dữ liệu người dùng được xem / thao tác.</td></tr>
+      <tr><td>5</td><td>Ngừng sử dụng</td><td>Ngừng phát sinh với chi nhánh / phòng ban đã đóng.</td></tr>
+    </table>
+
+    <h3>2.2.4. Hệ thống tài khoản</h3>
     <table class="stt-table">
       <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Khai báo hệ thống tài khoản</td><td>Tạo danh mục tài khoản kế toán theo chế độ kế toán áp dụng.</td></tr>
@@ -881,7 +913,34 @@
       <tr><td>8</td><td>Export hệ thống tài khoản</td><td>Xuất danh mục tài khoản ra Excel để kiểm tra hoặc lưu trữ.</td></tr>
     </table>
 
-    <h3>2.2.2. Danh mục khách hàng</h3>
+    <h3>2.2.5. Tài khoản kết chuyển</h3>
+    <table class="stt-table">
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Khai báo cặp tài khoản kết chuyển</td><td>Thiết lập tài khoản nguồn → tài khoản đích cho bút toán kết chuyển cuối kỳ.</td></tr>
+      <tr><td>2</td><td>Sửa cấu hình kết chuyển</td><td>Cập nhật cặp tài khoản, điều kiện kết chuyển.</td></tr>
+      <tr><td>3</td><td>Thiết lập thứ tự kết chuyển</td><td>Quy định trình tự thực hiện các bút toán kết chuyển.</td></tr>
+      <tr><td>4</td><td>Ngừng sử dụng</td><td>Vô hiệu cấu hình không còn áp dụng.</td></tr>
+    </table>
+
+    <h3>2.2.6. Tài khoản ngầm định</h3>
+    <table class="stt-table">
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Thiết lập tài khoản ngầm định theo nghiệp vụ</td><td>Gán tài khoản mặc định cho thu, chi, công nợ, kho, doanh thu, chi phí.</td></tr>
+      <tr><td>2</td><td>Thiết lập theo loại chứng từ</td><td>Khai báo tài khoản mặc định cho từng loại chứng từ.</td></tr>
+      <tr><td>3</td><td>Thiết lập theo đối tượng</td><td>Khai báo tài khoản công nợ mặc định theo khách hàng / nhà cung cấp.</td></tr>
+      <tr><td>4</td><td>Sửa tài khoản ngầm định</td><td>Cập nhật cấu hình tài khoản mặc định.</td></tr>
+    </table>
+
+    <h3>2.2.7. Nhóm khách hàng</h3>
+    <table class="stt-table">
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Thêm nhóm khách hàng</td><td>Phân loại khách hàng theo nhóm phục vụ quản lý và báo cáo.</td></tr>
+      <tr><td>2</td><td>Sửa nhóm khách hàng</td><td>Cập nhật thông tin nhóm.</td></tr>
+      <tr><td>3</td><td>Thiết lập tài khoản công nợ mặc định</td><td>Gán TK 131 mặc định theo nhóm khách hàng.</td></tr>
+      <tr><td>4</td><td>Ngừng sử dụng</td><td>Ẩn nhóm khỏi danh sách chọn.</td></tr>
+    </table>
+
+    <h3>2.2.8. Khách hàng</h3>
     <table class="stt-table">
       <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Thêm khách hàng</td><td>Khai báo mã khách hàng, tên, mã số thuế, địa chỉ, người liên hệ.</td></tr>
@@ -895,7 +954,16 @@
       <tr><td>9</td><td>Export khách hàng</td><td>Xuất danh sách khách hàng ra Excel.</td></tr>
     </table>
 
-    <h3>2.2.3. Danh mục nhà cung cấp</h3>
+    <h3>2.2.9. Nhóm nhà cung cấp</h3>
+    <table class="stt-table">
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Thêm nhóm nhà cung cấp</td><td>Phân loại nhà cung cấp theo nhóm.</td></tr>
+      <tr><td>2</td><td>Sửa nhóm nhà cung cấp</td><td>Cập nhật thông tin nhóm.</td></tr>
+      <tr><td>3</td><td>Thiết lập tài khoản công nợ mặc định</td><td>Gán TK 331 mặc định theo nhóm nhà cung cấp.</td></tr>
+      <tr><td>4</td><td>Ngừng sử dụng</td><td>Ẩn nhóm khỏi danh sách chọn.</td></tr>
+    </table>
+
+    <h3>2.2.10. Nhà cung cấp</h3>
     <table class="stt-table">
       <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Thêm nhà cung cấp</td><td>Khai báo mã nhà cung cấp, tên, mã số thuế, địa chỉ, người liên hệ.</td></tr>
@@ -908,19 +976,25 @@
       <tr><td>8</td><td>Export nhà cung cấp</td><td>Xuất danh sách nhà cung cấp ra Excel.</td></tr>
     </table>
 
-    <h3>2.2.4. Danh mục nhân viên</h3>
+    <h3>2.2.11. Đơn vị tính</h3>
     <table class="stt-table">
       <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
-      <tr><td>1</td><td>Thêm nhân viên</td><td>Khai báo mã nhân viên, họ tên, phòng ban, chức vụ, thông tin liên hệ.</td></tr>
-      <tr><td>2</td><td>Sửa nhân viên</td><td>Cập nhật thông tin nhân viên.</td></tr>
-      <tr><td>3</td><td>Ngừng theo dõi nhân viên</td><td>Không sử dụng nhân viên trong chứng từ mới nhưng vẫn giữ lịch sử.</td></tr>
-      <tr><td>4</td><td>Phân nhóm nhân viên</td><td>Phân loại theo phòng ban, bộ phận, chức danh.</td></tr>
-      <tr><td>5</td><td>Liên kết nhân viên với người dùng</td><td>Gắn nhân viên với tài khoản đăng nhập nếu nhân viên có sử dụng phần mềm.</td></tr>
-      <tr><td>6</td><td>Import nhân viên</td><td>Nhập danh sách nhân viên từ Excel.</td></tr>
-      <tr><td>7</td><td>Export nhân viên</td><td>Xuất danh sách nhân viên ra Excel.</td></tr>
+      <tr><td>1</td><td>Thêm đơn vị tính</td><td>Khai báo đơn vị tính (cái, hộp, kg, m…).</td></tr>
+      <tr><td>2</td><td>Sửa đơn vị tính</td><td>Cập nhật thông tin đơn vị tính.</td></tr>
+      <tr><td>3</td><td>Thiết lập quy đổi đơn vị tính</td><td>Khai báo hệ số quy đổi giữa đơn vị chính và đơn vị phụ.</td></tr>
+      <tr><td>4</td><td>Ngừng sử dụng</td><td>Ẩn đơn vị tính khỏi danh sách chọn.</td></tr>
     </table>
 
-    <h3>2.2.5. Danh mục kho</h3>
+    <h3>2.2.12. Nhóm vật tư hàng hóa</h3>
+    <table class="stt-table">
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Thêm nhóm vật tư hàng hóa</td><td>Phân loại vật tư, hàng hóa theo nhóm / ngành hàng.</td></tr>
+      <tr><td>2</td><td>Sửa nhóm vật tư hàng hóa</td><td>Cập nhật thông tin nhóm.</td></tr>
+      <tr><td>3</td><td>Thiết lập tài khoản mặc định theo nhóm</td><td>Gán tài khoản kho, giá vốn, doanh thu mặc định cho nhóm.</td></tr>
+      <tr><td>4</td><td>Ngừng sử dụng</td><td>Ẩn nhóm khỏi danh sách chọn.</td></tr>
+    </table>
+
+    <h3>2.2.13. Kho</h3>
     <table class="stt-table">
       <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Thêm kho</td><td>Khai báo mã kho, tên kho, địa chỉ kho, người phụ trách.</td></tr>
@@ -930,7 +1004,7 @@
       <tr><td>5</td><td>Thiết lập kho mặc định</td><td>Khai báo kho mặc định cho nhập / xuất hàng.</td></tr>
     </table>
 
-    <h3>2.2.6. Danh mục hàng hóa, vật tư, dịch vụ</h3>
+    <h3>2.2.14. Hàng hóa</h3>
     <table class="stt-table">
       <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Thêm hàng hóa / vật tư / dịch vụ</td><td>Khai báo mã, tên, loại, đơn vị tính, nhóm hàng, tài khoản kho / doanh thu / chi phí.</td></tr>
@@ -946,7 +1020,16 @@
       <tr><td>11</td><td>Export hàng hóa</td><td>Xuất danh mục hàng hóa ra Excel.</td></tr>
     </table>
 
-    <h3>2.2.7. Danh mục tài khoản ngân hàng</h3>
+    <h3>2.2.15. Ngân hàng</h3>
+    <table class="stt-table">
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Thêm ngân hàng</td><td>Khai báo mã, tên ngân hàng, mã BIN / mã ngân hàng.</td></tr>
+      <tr><td>2</td><td>Quản lý chi nhánh ngân hàng</td><td>Khai báo các chi nhánh của ngân hàng.</td></tr>
+      <tr><td>3</td><td>Sửa ngân hàng</td><td>Cập nhật thông tin ngân hàng.</td></tr>
+      <tr><td>4</td><td>Ngừng sử dụng</td><td>Ẩn ngân hàng khỏi danh sách chọn.</td></tr>
+    </table>
+
+    <h3>2.2.16. Tài khoản ngân hàng</h3>
     <table class="stt-table">
       <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Thêm tài khoản ngân hàng</td><td>Khai báo số tài khoản, ngân hàng, chi nhánh, chủ tài khoản, loại tiền.</td></tr>
@@ -956,7 +1039,16 @@
       <tr><td>5</td><td>Thiết lập tài khoản ngân hàng mặc định</td><td>Chọn tài khoản ngân hàng mặc định khi thu / chi ngân hàng.</td></tr>
     </table>
 
-    <h3>2.2.8. Danh mục khoản mục chi phí</h3>
+    <h3>2.2.17. Điều khoản thanh toán</h3>
+    <table class="stt-table">
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Thêm điều khoản thanh toán</td><td>Khai báo số ngày được nợ, hạn thanh toán, chiết khấu thanh toán sớm.</td></tr>
+      <tr><td>2</td><td>Sửa điều khoản thanh toán</td><td>Cập nhật thông tin điều khoản.</td></tr>
+      <tr><td>3</td><td>Gán điều khoản mặc định</td><td>Gắn điều khoản thanh toán mặc định cho khách hàng / nhà cung cấp.</td></tr>
+      <tr><td>4</td><td>Ngừng sử dụng</td><td>Ẩn điều khoản khỏi danh sách chọn.</td></tr>
+    </table>
+
+    <h3>2.2.18. Khoản mục chi phí</h3>
     <table class="stt-table">
       <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Thêm khoản mục chi phí</td><td>Khai báo khoản mục phục vụ tập hợp và phân tích chi phí.</td></tr>
@@ -965,7 +1057,69 @@
       <tr><td>4</td><td>Ngừng sử dụng khoản mục chi phí</td><td>Không cho chọn trong chứng từ mới nhưng giữ lịch sử.</td></tr>
     </table>
 
-    <h3>2.2.9. Danh mục loại chứng từ</h3>
+    <h3>2.2.19. Đối tượng tập hợp chi phí</h3>
+    <table class="stt-table">
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Thêm đối tượng tập hợp chi phí</td><td>Khai báo đối tượng (công trình, đơn hàng, bộ phận…) để tập hợp chi phí.</td></tr>
+      <tr><td>2</td><td>Sửa đối tượng tập hợp chi phí</td><td>Cập nhật thông tin đối tượng.</td></tr>
+      <tr><td>3</td><td>Phân nhóm đối tượng</td><td>Phân loại đối tượng tập hợp chi phí theo nhóm.</td></tr>
+      <tr><td>4</td><td>Ngừng sử dụng</td><td>Ẩn đối tượng khỏi danh sách chọn.</td></tr>
+    </table>
+
+    <h3>2.2.20. Loại công trình</h3>
+    <table class="stt-table">
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Thêm loại công trình</td><td>Khai báo loại công trình phục vụ phân loại và báo cáo.</td></tr>
+      <tr><td>2</td><td>Sửa loại công trình</td><td>Cập nhật thông tin loại công trình.</td></tr>
+      <tr><td>3</td><td>Ngừng sử dụng</td><td>Ẩn loại công trình khỏi danh sách chọn.</td></tr>
+    </table>
+
+    <h3>2.2.21. Công trình</h3>
+    <table class="stt-table">
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Thêm công trình</td><td>Khai báo mã, tên, loại công trình, thời gian, chủ đầu tư.</td></tr>
+      <tr><td>2</td><td>Sửa công trình</td><td>Cập nhật thông tin công trình.</td></tr>
+      <tr><td>3</td><td>Gán đối tượng tập hợp chi phí</td><td>Liên kết công trình với đối tượng tập hợp chi phí.</td></tr>
+      <tr><td>4</td><td>Ngừng sử dụng</td><td>Ngừng phát sinh với công trình đã kết thúc.</td></tr>
+    </table>
+
+    <h3>2.2.22. Loại công cụ dụng cụ</h3>
+    <table class="stt-table">
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Thêm loại công cụ dụng cụ</td><td>Khai báo loại CCDC phục vụ phân loại.</td></tr>
+      <tr><td>2</td><td>Sửa loại công cụ dụng cụ</td><td>Cập nhật thông tin loại CCDC.</td></tr>
+      <tr><td>3</td><td>Thiết lập mặc định</td><td>Gán tài khoản và thời gian phân bổ mặc định cho loại CCDC.</td></tr>
+      <tr><td>4</td><td>Ngừng sử dụng</td><td>Ẩn loại CCDC khỏi danh sách chọn.</td></tr>
+    </table>
+
+    <h3>2.2.23. Loại tài sản cố định</h3>
+    <table class="stt-table">
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Thêm loại tài sản cố định</td><td>Khai báo loại TSCĐ phục vụ phân loại.</td></tr>
+      <tr><td>2</td><td>Sửa loại tài sản cố định</td><td>Cập nhật thông tin loại TSCĐ.</td></tr>
+      <tr><td>3</td><td>Thiết lập mặc định</td><td>Gán tài khoản nguyên giá / hao mòn và thời gian khấu hao mặc định.</td></tr>
+      <tr><td>4</td><td>Ngừng sử dụng</td><td>Ẩn loại TSCĐ khỏi danh sách chọn.</td></tr>
+    </table>
+
+    <h3>2.2.24. Mục thu chi</h3>
+    <table class="stt-table">
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Thêm mục thu chi</td><td>Phân loại nội dung thu / chi cho phiếu thu, phiếu chi.</td></tr>
+      <tr><td>2</td><td>Sửa mục thu chi</td><td>Cập nhật thông tin mục thu chi.</td></tr>
+      <tr><td>3</td><td>Gắn tài khoản mặc định</td><td>Gán tài khoản hạch toán mặc định cho mục thu chi.</td></tr>
+      <tr><td>4</td><td>Ngừng sử dụng</td><td>Ẩn mục thu chi khỏi danh sách chọn.</td></tr>
+    </table>
+
+    <h3>2.2.25. Mã thống kê</h3>
+    <table class="stt-table">
+      <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
+      <tr><td>1</td><td>Thêm mã thống kê</td><td>Khai báo mã thống kê phục vụ báo cáo quản trị đa chiều.</td></tr>
+      <tr><td>2</td><td>Sửa mã thống kê</td><td>Cập nhật thông tin mã thống kê.</td></tr>
+      <tr><td>3</td><td>Gán mã thống kê</td><td>Gắn mã thống kê cho chứng từ, đối tượng hoặc danh mục.</td></tr>
+      <tr><td>4</td><td>Ngừng sử dụng</td><td>Ẩn mã thống kê khỏi danh sách chọn.</td></tr>
+    </table>
+
+    <h3>2.2.26. Loại chứng từ</h3>
     <table class="stt-table">
       <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Khai báo loại chứng từ</td><td>Khai báo các loại chứng từ như phiếu thu, phiếu chi, thu ngân hàng, chi ngân hàng, nhập kho, xuất kho.</td></tr>
@@ -974,7 +1128,7 @@
       <tr><td>4</td><td>Thiết lập quyền duyệt theo loại chứng từ</td><td>Xác định ai được duyệt từng loại chứng từ.</td></tr>
     </table>
 
-    <h3>2.2.10. Số dư đầu kỳ</h3>
+    <h3>2.2.27. Số dư đầu kỳ</h3>
     <table class="stt-table">
       <tr><th>STT</th><th>Chức năng</th><th>Mô tả</th></tr>
       <tr><td>1</td><td>Xem danh sách số dư đầu kỳ</td><td>Xem dữ liệu số dư đầu kỳ theo năm tài chính, trạng thái khóa và loại dữ liệu.</td></tr>
