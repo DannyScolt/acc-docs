@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ACC — Hướng dẫn học đặc tả nghiệp vụ</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f1f5f9;color:#1a1a2e;line-height:1.6}
+.w{max-width:760px;margin:0 auto;padding:20px 16px}
+h1{font-size:22px;font-weight:800;margin-bottom:4px}
+.subtitle{font-size:13px;color:#64748b;margin-bottom:18px}
+.nav{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:14px;position:sticky;top:0;background:#f1f5f9;padding:10px 0;z-index:10}
+.nb{padding:8px 14px;border-radius:8px;font-size:12.5px;font-weight:600;cursor:pointer;border:1.5px solid #e2e8f0;background:#fff;color:#64748b;transition:all .12s}
+.nb.a{background:#6366f1;color:#fff;border-color:#6366f1}
+.nb:hover:not(.a){border-color:#6366f1;color:#6366f1}
+.p{display:none}.p.a{display:block}
+h3{font-size:17px;font-weight:700;color:#1a1a2e;margin:0 0 6px}
+.desc{font-size:13.5px;color:#64748b;margin-bottom:14px;line-height:1.5}
+.toc{font-size:12.5px;color:#64748b;margin-bottom:12px}
+.card{border:1.5px solid #e2e8f0;border-radius:10px;margin-bottom:10px;overflow:hidden;background:#fff}
+.ch{padding:14px 16px;cursor:pointer;display:flex;align-items:center;gap:10px;user-select:none}
+.ch:hover{background:#f8fafc}
+.ci{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0}
+.ct{flex:1}
+.cn{font-size:14px;font-weight:600;color:#1a1a2e}
+.cs{font-size:12px;color:#94a3b8;margin-top:2px}
+.ca{font-size:18px;color:#94a3b8;transition:transform .15s}
+.card.o .ca{transform:rotate(90deg)}
+.cb{display:none;padding:0 16px 16px;font-size:13.5px;line-height:1.65;color:#1a1a2e}
+.card.o .cb{display:block}
+.ex{background:#f1f5f9;border-radius:8px;padding:12px 14px;margin:8px 0;font-size:13px}
+.ex strong{color:#1a1a2e}
+.ex .e{font-family:'SF Mono',Menlo,monospace;color:#6366f1;font-size:12px;margin-top:4px;display:block}
+.q{background:#fef3c7;border-radius:8px;padding:12px 14px;margin:10px 0;font-size:13px;color:#92400e}
+.q strong{color:#78350f}
+.hl{background:#dbeafe;border-radius:4px;padding:1px 5px;font-size:12.5px}
+.sep{height:1px;background:#e2e8f0;margin:8px 0}
+</style>
+</head>
+<body>
+<div class="w">
+<h1>ACC — Hướng dẫn học đặc tả nghiệp vụ</h1>
+<p class="subtitle">Bấm vào từng tab để chuyển phase. Bấm vào từng mục để mở chi tiết, ví dụ và câu hỏi tự kiểm tra.</p>
+
+<div class="nav">
+  <div class="nb a" onclick="go(0)">P1: Nền tảng</div>
+  <div class="nb" onclick="go(1)">P2: Mua hàng</div>
+  <div class="nb" onclick="go(2)">P3: Bán hàng</div>
+  <div class="nb" onclick="go(3)">P4: Đóng sổ</div>
+  <div class="nb" onclick="go(4)">P5: Thuế</div>
+  <div class="nb" onclick="go(5)">P6: Nâng cao</div>
+</div>
+
+<!-- ========== PHASE 1 ========== -->
+<div class="p a" id="p0">
+<h3>Phase 1 — Nền tảng hệ thống, danh mục, tiền mặt &amp; tiền gửi</h3>
+<div class="desc">Phase này dựng xương sống cho toàn bộ phần mềm. Không có Phase 1 thì không có phase nào khác chạy được.</div>
+<div class="toc">5 module · 16 Use Case · 10 tuần · <strong>BẢN ĐÃ DUYỆT</strong></div>
+
+<div class="card" onclick="tog(this)">
+  <div class="ch"><div class="ci" style="background:#6366f1">1</div><div class="ct"><div class="cn">Quản trị hệ thống &amp; người dùng</div><div class="cs">Module 3.1 — Tuần 3</div></div><div class="ca">›</div></div>
+  <div class="cb">
+    <strong>Làm gì:</strong> Tạo công ty trên phần mềm, tạo tài khoản cho nhân viên, phân quyền ai được làm gì.
+    <div class="ex">
+      <strong>Ví dụ thực tế:</strong> Tạo công ty "ABC Corp" → tạo tài khoản cho chị Lan (kế toán quỹ), anh Minh (kế toán trưởng), giám đốc Hùng.<br>
+      Chị Lan chỉ được tạo phiếu thu/chi. Anh Minh được duyệt phiếu. GĐ Hùng xem được tất cả nhưng không sửa.
+    </div>
+    <strong>Gồm 5 phần:</strong><br>
+    • <strong>Quản lý doanh nghiệp</strong> (10 chức năng): tên, MST, chế độ kế toán, năm tài chính, cấu hình tiền tệ, phương pháp tính giá, mẫu số chứng từ<br>
+    • <strong>Quản lý người dùng</strong> (11): tạo/sửa/khóa tài khoản, đăng nhập/xuất, đổi mật khẩu, quản lý phiên<br>
+    • <strong>Phân quyền</strong> (10): tạo vai trò, phân quyền theo chức năng/phân hệ/dữ liệu, ma trận phân quyền<br>
+    • <strong>Nhật ký truy vết</strong> (8): ghi log mọi thao tác — ai sửa gì lúc nào, không ai xóa được log<br>
+    • <strong>Cách ly &amp; bảo mật</strong> (6): dữ liệu công ty A không thấy công ty B, sao lưu/khôi phục
+    <div class="q"><strong>Câu hỏi tự kiểm tra:</strong> Tại sao phải phân quyền "người tạo phiếu ≠ người duyệt phiếu"?<br>→ Vì kiểm soát nội bộ: tránh 1 người tự tạo phiếu chi rồi tự duyệt để rút tiền.</div>
+  </div>
+</div>
+
+<div class="card" onclick="tog(this)">
+  <div class="ch"><div class="ci" style="background:#6366f1">2</div><div class="ct"><div class="cn">Danh mục &amp; dữ liệu đầu kỳ</div><div class="cs">Module 3.2 — Tuần 4-5 — 27 danh mục</div></div><div class="ca">›</div></div>
+  <div class="cb">
+    <strong>Làm gì:</strong> Nhập tất cả dữ liệu nền trước khi bắt đầu ghi sổ kế toán.
+    <div class="ex">
+      <strong>Ví dụ thực tế:</strong> Giống bạn mới mua điện thoại — phải cài đặt ban đầu: ngôn ngữ, tài khoản, danh bạ… rồi mới dùng được. Ở đây kế toán phải nhập: hệ thống tài khoản, danh sách KH, NCC, hàng hóa, kho, ngân hàng…
+    </div>
+    <strong>27 danh mục theo thứ tự (cái sau cần cái trước):</strong><br>
+    Loại tiền → Cơ cấu tổ chức → Chi nhánh → <span class="hl">Hệ thống TK</span> → TK kết chuyển → TK ngầm định → Nhóm KH → KH → Nhóm NCC → NCC → Đơn vị tính → Nhóm VTHH → Kho → Hàng hóa → Ngân hàng → TK ngân hàng → Điều khoản TT → Khoản mục CP → ĐT tập hợp CP → Loại công trình → Công trình → Loại CCDC → Loại TSCĐ → Mục thu chi → Mã thống kê → Loại chứng từ → <span class="hl">Số dư đầu kỳ</span>
+    <div class="sep"></div>
+    <strong>Quan trọng nhất: Số dư đầu kỳ (3.2.27)</strong><br>
+    Nếu công ty đã hoạt động trước khi dùng phần mềm → phải nhập: hiện có bao nhiêu tiền mặt (TK 111), bao nhiêu tiền bank (TK 112), ai nợ mình bao nhiêu (TK 131), mình nợ ai bao nhiêu (TK 331), trong kho còn gì (TK 156)…<br>
+    → Đối chiếu: tổng chi tiết phải khớp tổng TK → Tổng Nợ = Tổng Có → <strong>Khóa số dư đầu kỳ</strong> (không ai sửa được nữa).
+    <div class="q"><strong>Câu hỏi tự kiểm tra:</strong> Tại sao phải nhập danh mục theo thứ tự?<br>→ Vì phụ thuộc: muốn tạo "Khách hàng" phải có "Nhóm KH" trước. Muốn tạo "Hàng hóa" phải có "Kho" và "Đơn vị tính" trước.</div>
+  </div>
+</div>
+
+<div class="card" onclick="tog(this)">
+  <div class="ch"><div class="ci" style="background:#6366f1">3</div><div class="ct"><div class="cn">Tiền mặt / Quỹ</div><div class="cs">Module 3.3 — Tuần 6 — TK 111</div></div><div class="ca">›</div></div>
+  <div class="cb">
+    <strong>Làm gì:</strong> Quản lý két tiền mặt — thu tiền vào, chi tiền ra, kiểm kê xem két còn bao nhiêu.
+    <div class="ex">
+      <strong>Ví dụ: Khách hàng Minh Long trả tiền mặt 10 triệu</strong><br>
+      1. Chị Lan (KT quỹ) tạo <strong>Phiếu thu</strong>: KH Minh Long, 10tr, loại "Thu công nợ KH"<br>
+      2. Lưu nháp → Gửi duyệt<br>
+      3. Anh Minh (KT trưởng) kiểm tra → bấm <strong>Duyệt</strong><br>
+      4. Chị Lan bấm <strong>Ghi sổ</strong> → phần mềm tự sinh bút toán:<br>
+      <span class="e">Nợ 111 (Tiền mặt +10tr) / Có 131 (KH Minh Long hết nợ 10tr)</span>
+      5. Sổ quỹ: tồn quỹ tăng 10tr. Công nợ KH Minh Long: giảm 10tr.
+    </div>
+    <strong>5 phần:</strong><br>
+    • <strong>Phiếu thu</strong>: thu tiền KH, hoàn ứng, thu khác → Nợ 111 / Có 131,141,711<br>
+    • <strong>Phiếu chi</strong>: trả NCC, tạm ứng, chi phí → Nợ 331,141,642 / Có 111<br>
+    • <strong>Sổ quỹ</strong>: xem phát sinh thu/chi, tồn quỹ, drill-down về phiếu gốc<br>
+    • <strong>Kiểm kê quỹ</strong>: đếm tiền thật trong két → so với sổ → thừa/thiếu thì điều chỉnh<br>
+    • <strong>Báo cáo quỹ</strong>: sổ quỹ, bảng kê phiếu thu/chi, dashboard dòng tiền
+    <div class="q"><strong>Câu hỏi tự kiểm tra:</strong> Nếu tồn quỹ chỉ còn 5 triệu, có cho lập phiếu chi 8 triệu không?<br>→ Tùy cấu hình. Nếu bật "Không cho âm quỹ" (BR-G01) thì không cho. Nếu tắt thì vẫn cho nhưng quỹ sẽ âm.</div>
+  </div>
+</div>
+
+<div class="card" onclick="tog(this)">
+  <div class="ch"><div class="ci" style="background:#6366f1">4</div><div class="ct"><div class="cn">Tiền gửi ngân hàng</div><div class="cs">Module 3.4 — Tuần 7-8 — TK 112</div></div><div class="ca">›</div></div>
+  <div class="cb">
+    <strong>Làm gì:</strong> Giống module Quỹ nhưng cho ngân hàng. Thêm: import sao kê và đối chiếu bank.
+    <div class="ex">
+      <strong>Ví dụ: Chuyển khoản trả NCC Hòa Phát 50 triệu</strong><br>
+      1. KT tạo <strong>Chứng từ chi ngân hàng</strong>: NCC Hòa Phát, 50tr, TK VCB<br>
+      2. Duyệt → Ghi sổ:<br>
+      <span class="e">Nợ 331 (Hết nợ NCC 50tr) / Có 112 (Bank giảm 50tr)</span>
+    </div>
+    <strong>Điểm khác so với Quỹ:</strong><br>
+    • <strong>Chuyển tiền nội bộ</strong>: quỹ ↔ bank, bank ↔ bank<br>
+    • <strong>Sao kê ngân hàng</strong>: import file từ VCB/BIDV → hệ thống <strong>gợi ý khớp</strong> với chứng từ trên sổ<br>
+    • <strong>Đối chiếu</strong>: so sánh số dư sổ KT vs sao kê → tìm chênh lệch → xử lý → khóa kỳ đối chiếu
+    <div class="q"><strong>Câu hỏi tự kiểm tra:</strong> Sao kê bank ghi 1 giao dịch nhưng sổ kế toán không có — xử lý thế nào?<br>→ Kế toán phải tạo chứng từ bổ sung cho giao dịch đó, hoặc ghi chú "bỏ qua" kèm lý do vào biên bản đối chiếu.</div>
+  </div>
+</div>
+
+<div class="card" onclick="tog(this)">
+  <div class="ch"><div class="ci" style="background:#6366f1">5</div><div class="ct"><div class="cn">Sổ cái &amp; hệ thống tài khoản</div><div class="cs">Module 3.5 — Tuần 8-9 — Trung tâm hệ thống</div></div><div class="ca">›</div></div>
+  <div class="cb">
+    <strong>Làm gì:</strong> Đây là "cuốn sổ tổng" — mọi bút toán từ Quỹ và Bank đều đổ về đây. Mọi báo cáo đều lấy từ đây.
+    <div class="ex">
+      <strong>Ví dụ:</strong> Mở sổ cái TK 111 → thấy tất cả phiếu thu/chi tiền mặt trong kỳ.<br>
+      Mở sổ cái TK 131 → thấy tất cả công nợ KH: ai nợ bao nhiêu, đã trả bao nhiêu.<br>
+      Mở <strong>Bảng cân đối phát sinh</strong> → thấy toàn bộ TK, kiểm tra Tổng Nợ = Tổng Có.
+    </div>
+    <strong>4 phần:</strong><br>
+    • <strong>Ghi sổ kế toán</strong>: chứng từ duyệt xong → sinh bút toán Nợ/Có → ghi Journal Entry<br>
+    • <strong>Sổ cái</strong>: xem phát sinh &amp; số dư từng TK, drill-down về chứng từ gốc<br>
+    • <strong>Sổ nhật ký chung</strong>: toàn bộ bút toán theo thời gian<br>
+    • <strong>Bảng cân đối phát sinh</strong>: tổng hợp tất cả TK → Tổng PS Nợ phải = Tổng PS Có
+    <div class="q"><strong>Câu hỏi tự kiểm tra:</strong> Đã ghi sổ rồi phát hiện sai — sửa thế nào?<br>→ KHÔNG sửa trực tiếp bút toán. Phải lập <strong>bút toán điều chỉnh</strong> hoặc <strong>đảo bút toán</strong> (ghi ngược lại) để giữ dấu vết.</div>
+  </div>
+</div>
+</div>
+
+<!-- ========== PHASE 2 ========== -->
+<div class="p" id="p1">
+<h3>Phase 2 — Mua hàng, nhập kho &amp; công nợ phải trả</h3>
+<div class="desc">Toàn bộ quy trình: cần mua → đặt hàng → nhận hàng → nhập kho → hóa đơn → trả tiền NCC.</div>
+<div class="toc">11 module · 11 Use Case · 10 tuần · BẢN NHÁP</div>
+
+<div class="card" onclick="tog(this)">
+  <div class="ch"><div class="ci" style="background:#f59e0b">1</div><div class="ct"><div class="cn">Yêu cầu mua &amp; Đơn mua (PR/PO)</div><div class="cs">Module 3.2 — "Cần mua gì, từ ai?"</div></div><div class="ca">›</div></div>
+  <div class="cb">
+    <strong>PR (Purchase Request)</strong> = yêu cầu mua: "Kho hết bàn, cần mua 100 cái"<br>
+    <strong>PO (Purchase Order)</strong> = đơn mua: so sánh báo giá NCC → chọn NCC → tạo PO "100 bàn × 1tr = 100tr"<br>
+    <div class="ex">PR → duyệt → PO → duyệt → gửi NCC<br><em>Chưa phát sinh tiền — chỉ là cam kết sẽ mua.</em></div>
+  </div>
+</div>
+
+<div class="card" onclick="tog(this)">
+  <div class="ch"><div class="ci" style="background:#f59e0b">2</div><div class="ct"><div class="cn">Nhận hàng &amp; Nhập kho</div><div class="cs">Module 3.4-3.5 — "Hàng về, kiểm tra, cho vào kho"</div></div><div class="ca">›</div></div>
+  <div class="cb">
+    NCC giao hàng → Thủ kho kiểm: đúng số lượng? đúng chất lượng? → Lập phiếu nhập kho → đối chiếu với PO.
+    <div class="ex"><strong>Bút toán:</strong><span class="e">Nợ 156 (Kho tăng 100tr) / Có 331 (Nợ NCC tăng 100tr)</span>Ý nghĩa: hàng vào kho → mình nợ NCC số tiền tương ứng.</div>
+  </div>
+</div>
+
+<div class="card" onclick="tog(this)">
+  <div class="ch"><div class="ci" style="background:#f59e0b">3</div><div class="ct"><div class="cn">Hóa đơn mua &amp; Công nợ phải trả</div><div class="cs">Module 3.6-3.7 — "NCC gửi bill, mình ghi nợ"</div></div><div class="ca">›</div></div>
+  <div class="cb">
+    NCC gửi hóa đơn → KT nhập vào → kiểm tra (có trùng HĐ? đúng số tiền?) → ghi nhận công nợ chính thức.<br>
+    Theo dõi: NCC nào nợ bao nhiêu, quá hạn bao lâu (aging), đối chiếu TK 331.
+    <div class="q"><strong>Tự kiểm tra:</strong> TK 331 tăng khi nào, giảm khi nào?<br>→ Tăng khi nhận hàng/HĐ (nợ NCC thêm). Giảm khi trả tiền hoặc trả hàng.</div>
+  </div>
+</div>
+
+<div class="card" onclick="tog(this)">
+  <div class="ch"><div class="ci" style="background:#f59e0b">4</div><div class="ct"><div class="cn">Thanh toán NCC</div><div class="cs">Module 3.8 — "Trả tiền cho NCC"</div></div><div class="ca">›</div></div>
+  <div class="cb">
+    Đến hạn → chi tiền mặt hoặc chuyển khoản → phân bổ thanh toán theo từng hóa đơn → công nợ giảm.
+    <div class="ex"><span class="e">Nợ 331 (Hết nợ NCC) / Có 112 (Bank giảm)</span>Dùng luồng thu/chi từ Phase 1 — không code lại.</div>
+  </div>
+</div>
+
+<div class="card" onclick="tog(this)">
+  <div class="ch"><div class="ci" style="background:#f59e0b">5</div><div class="ct"><div class="cn">Trả hàng &amp; Quản lý kho &amp; Báo cáo</div><div class="cs">Module 3.9-3.12 — "Xử lý ngoại lệ &amp; kiểm soát"</div></div><div class="ca">›</div></div>
+  <div class="cb">
+    • <strong>Trả hàng:</strong> hàng lỗi → xuất trả NCC → kho giảm, công nợ giảm<br>
+    • <strong>Bù trừ công nợ:</strong> NCC A vừa là KH → bù trừ cho gọn<br>
+    • <strong>Quản lý kho:</strong> nhập/xuất/chuyển kho, kiểm kê, thẻ kho<br>
+    • <strong>Báo cáo:</strong> mua hàng, công nợ NCC, tồn kho
+  </div>
+</div>
+</div>
+
+<!-- ========== PHASE 3 ========== -->
+<div class="p" id="p2">
+<h3>Phase 3 — Bán hàng, xuất kho &amp; công nợ phải thu</h3>
+<div class="desc">Đối xứng với Phase 2. Quy trình: khách hỏi → báo giá → bán → xuất kho → hóa đơn → thu tiền.</div>
+<div class="toc">11 module · 11 Use Case · 10 tuần · BẢN NHÁP</div>
+
+<div class="card" onclick="tog(this)">
+  <div class="ch"><div class="ci" style="background:#10b981">1</div><div class="ct"><div class="cn">Báo giá → Đơn bán → Hợp đồng</div><div class="cs">Module 4.2-4.4 — "Khách muốn mua"</div></div><div class="ca">›</div></div>
+  <div class="cb">
+    KH hỏi giá → lập Báo giá → KH OK → tạo Đơn bán (kiểm tồn kho đủ không?) → hoặc ký Hợp đồng bán.<br>
+    <div class="ex">Báo giá 50 bàn × 2tr = 100tr → KH đồng ý → Đơn bán đã duyệt → sẵn sàng xuất hàng.</div>
+  </div>
+</div>
+
+<div class="card" onclick="tog(this)">
+  <div class="ch"><div class="ci" style="background:#10b981">2</div><div class="ct"><div class="cn">Bán hàng &amp; Xuất kho</div><div class="cs">Module 4.5-4.8 — "Giao hàng, ghi doanh thu &amp; giá vốn"</div></div><div class="ca">›</div></div>
+  <div class="cb">
+    Đây là bước quan trọng nhất — phát sinh <strong>2 bút toán đồng thời</strong>:
+    <div class="ex">
+      <strong>1. Ghi doanh thu &amp; công nợ KH:</strong>
+      <span class="e">Nợ 131 (KH nợ mình 100tr) / Có 511 (Doanh thu 100tr)</span>
+      <strong>2. Ghi giá vốn &amp; giảm kho:</strong>
+      <span class="e">Nợ 632 (Giá vốn 50tr) / Có 156 (Kho giảm 50tr)</span>
+      <strong>Lãi gộp = Doanh thu 100tr − Giá vốn 50tr = 50tr</strong>
+    </div>
+    <div class="q"><strong>Tự kiểm tra:</strong> Giá vốn là gì?<br>→ Là giá gốc của hàng mà mình đã mua (1tr/bàn). Giá bán là 2tr/bàn. Chênh lệch = lãi gộp.</div>
+  </div>
+</div>
+
+<div class="card" onclick="tog(this)">
+  <div class="ch"><div class="ci" style="background:#10b981">3</div><div class="ct"><div class="cn">Hóa đơn bán &amp; Thu tiền KH</div><div class="cs">Module 4.7, 4.10-4.11 — "Xuất bill, đòi tiền"</div></div><div class="ca">›</div></div>
+  <div class="cb">
+    Xuất hóa đơn điện tử cho KH → theo dõi công nợ TK 131 (ai nợ bao nhiêu, quá hạn chưa) → KH trả tiền → công nợ giảm.
+    <div class="ex"><strong>KH trả 100tr qua bank:</strong><span class="e">Nợ 112 (Bank +100tr) / Có 131 (KH hết nợ 100tr)</span></div>
+  </div>
+</div>
+
+<div class="card" onclick="tog(this)">
+  <div class="ch"><div class="ci" style="background:#10b981">4</div><div class="ct"><div class="cn">Trả hàng &amp; Báo cáo</div><div class="cs">Module 4.9, 4.12 — "Xử lý ngoại lệ"</div></div><div class="ca">›</div></div>
+  <div class="cb">
+    KH trả hàng lỗi → nhập kho lại + giảm doanh thu + giảm công nợ + HĐ điều chỉnh.<br>
+    Báo cáo: bán hàng, doanh thu, giá vốn, lãi lỗ, aging công nợ.
+  </div>
+</div>
+</div>
+
+<!-- ========== PHASE 4 ========== -->
+<div class="p" id="p3">
+<h3>Phase 4 — Tổng hợp, kết chuyển, khóa kỳ &amp; BCTC</h3>
+<div class="desc">Cuối tháng/quý/năm: dồn doanh thu &amp; chi phí lại, tính lãi lỗ, khóa sổ, xuất báo cáo tài chính.</div>
+<div class="toc">8 module · 8 Use Case · 6 tuần · BẢN NHÁP</div>
+
+<div class="card" onclick="tog(this)">
+  <div class="ch"><div class="ci" style="background:#3b82f6">1</div><div class="ct"><div class="cn">Bút toán điều chỉnh &amp; Phân bổ</div><div class="cs">Module 5.2-5.3</div></div><div class="ca">›</div></div>
+  <div class="cb">
+    Ghi những khoản cuối kỳ mà chưa có chứng từ riêng:<br>
+    • Quyết toán tạm ứng: nhân viên ứng 20tr, chi 18tr → hoàn 2tr<br>
+    • Phân bổ chi phí trả trước: thuê VP 12 tháng 120tr → mỗi tháng ghi 10tr
+    <div class="ex"><strong>Phân bổ tiền thuê:</strong><span class="e">Nợ 642 (Chi phí quản lý +10tr) / Có 242 (Chi phí trả trước giảm 10tr)</span></div>
+  </div>
+</div>
+
+<div class="card" onclick="tog(this)">
+  <div class="ch"><div class="ci" style="background:#3b82f6">2</div><div class="ct"><div class="cn">Kết chuyển cuối kỳ — TK 911</div><div class="cs">Module 5.4-5.5 — BƯỚC QUAN TRỌNG NHẤT</div></div><div class="ca">›</div></div>
+  <div class="cb">
+    <strong>Kết chuyển = dồn hết doanh thu &amp; chi phí về TK 911 để tính lãi lỗ.</strong>
+    <div class="ex">
+      <strong>Ví dụ Quý 2:</strong> Doanh thu 500tr, Giá vốn 300tr, Chi phí 100tr<br><br>
+      Bước 1 — Chuyển doanh thu:<span class="e">Nợ 511 = 500tr / Có 911 = 500tr</span>
+      Bước 2 — Chuyển chi phí:<span class="e">Nợ 911 = 300tr / Có 632 = 300tr (giá vốn)</span><span class="e">Nợ 911 = 100tr / Có 642 = 100tr (chi phí QL)</span>
+      Bước 3 — TK 911: Có 500tr − Nợ 400tr = <strong>Lãi 100tr</strong><span class="e">Nợ 911 = 100tr / Có 421 = 100tr (lợi nhuận)</span>
+    </div>
+    <div class="q"><strong>Tự kiểm tra:</strong> Sau kết chuyển, TK 511, 632, 642 số dư bao nhiêu?<br>→ Tất cả về 0. Vì đã "đổ hết" sang 911. Đầu kỳ sau bắt đầu lại từ 0.</div>
+  </div>
+</div>
+
+<div class="card" onclick="tog(this)">
+  <div class="ch"><div class="ci" style="background:#3b82f6">3</div><div class="ct"><div class="cn">Kiểm tra → Khóa kỳ → BCTC</div><div class="cs">Module 5.6-5.9</div></div><div class="ca">›</div></div>
+  <div class="cb">
+    • <strong>Kiểm tra:</strong> quỹ khớp TK 111? bank khớp TK 112? kho khớp TK 156? còn chứng từ treo không?<br>
+    • <strong>Khóa kỳ:</strong> đóng băng toàn bộ dữ liệu kỳ đó<br>
+    • <strong>BCTC gồm 4 báo cáo:</strong><br>
+    1. <strong>Bảng cân đối kế toán</strong> = "công ty CÓ GÌ" (tài sản, nợ, vốn)<br>
+    2. <strong>Kết quả HĐKD</strong> = "KIẾM BAO NHIÊU" (doanh thu − chi phí = lãi/lỗ)<br>
+    3. <strong>Lưu chuyển tiền tệ</strong> = "TIỀN ĐI ĐÂU" (tiền vào/ra từ KD, đầu tư, tài chính)<br>
+    4. <strong>Thuyết minh</strong> = giải thích chi tiết các khoản mục
+  </div>
+</div>
+</div>
+
+<!-- ========== PHASE 5 ========== -->
+<div class="p" id="p4">
+<h3>Phase 5 — Thuế &amp; hóa đơn điện tử</h3>
+<div class="desc">Kết nối HĐĐT, kiểm tra hóa đơn, kê khai thuế GTGT, nộp thuế.</div>
+<div class="toc">8 module · 8 Use Case · 6 tuần · BẢN NHÁP</div>
+
+<div class="card" onclick="tog(this)">
+  <div class="ch"><div class="ci" style="background:#ef4444">1</div><div class="ct"><div class="cn">Kết nối &amp; Quản lý hóa đơn</div><div class="cs">Module 6.2-6.4 — "Gom tất cả HĐ về 1 chỗ"</div></div><div class="ca">›</div></div>
+  <div class="cb">
+    Kết nối nền tảng HĐĐT (VNPT, Viettel…) → tự kéo về HĐ mua vào (từ NCC) + HĐ bán ra (cho KH).<br>
+    Liên kết từng HĐ với chứng từ kế toán tương ứng (HĐ mua ↔ phiếu nhập kho, HĐ bán ↔ chứng từ bán).
+    <div class="q"><strong>Tự kiểm tra:</strong> HĐ đầu vào từ đâu? HĐ đầu ra từ đâu?<br>→ Đầu vào = HĐ mua hàng (Phase 2). Đầu ra = HĐ bán hàng (Phase 3). Phase 5 gom cả 2 lại.</div>
+  </div>
+</div>
+
+<div class="card" onclick="tog(this)">
+  <div class="ch"><div class="ci" style="background:#ef4444">2</div><div class="ct"><div class="cn">Kiểm tra rủi ro &amp; Xử lý sai sót</div><div class="cs">Module 6.5-6.6 — "Lọc HĐ có vấn đề"</div></div><div class="ca">›</div></div>
+  <div class="cb">
+    Phần mềm tự kiểm tra: HĐ có hợp lệ? NCC còn hoạt động? Có trùng HĐ? Sai thuế suất?<br>
+    HĐ sai → xử lý: điều chỉnh / thay thế / hủy theo quy định.
+  </div>
+</div>
+
+<div class="card" onclick="tog(this)">
+  <div class="ch"><div class="ci" style="background:#ef4444">3</div><div class="ct"><div class="cn">Bảng kê → Tờ khai → Nộp thuế</div><div class="cs">Module 6.7-6.9 — "Kê khai &amp; nộp cho nhà nước"</div></div><div class="ca">›</div></div>
+  <div class="cb">
+    <div class="ex">
+      <strong>Ví dụ tháng 6:</strong><br>
+      Bảng kê mua vào: 50 HĐ, tổng 200tr, <strong>VAT đầu vào = 20tr</strong><br>
+      Bảng kê bán ra: 30 HĐ, tổng 500tr, <strong>VAT đầu ra = 50tr</strong><br><br>
+      Tờ khai thuế GTGT: <strong>Phải nộp = 50tr − 20tr = 30tr</strong><br>
+      → Lập giấy nộp tiền 30tr → nộp qua bank/kho bạc → theo dõi đã nộp chưa.
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ========== PHASE 6 ========== -->
+<div class="p" id="p5">
+<h3>Phase 6 — Mở rộng nâng cao</h3>
+<div class="desc">Các phân hệ chuyên biệt cho doanh nghiệp vừa &amp; lớn. Mỗi module độc lập, đều đổ về sổ cái.</div>
+<div class="toc">8 module · 8 Use Case · 10 tuần · BẢN NHÁP</div>
+
+<div class="card" onclick="tog(this)">
+  <div class="ch"><div class="ci" style="background:#8b5cf6">1</div><div class="ct"><div class="cn">TSCĐ &amp; CCDC</div><div class="cs">Module 7.1-7.2 — "Tài sản lớn &amp; dụng cụ nhỏ"</div></div><div class="ca">›</div></div>
+  <div class="cb">
+    <strong>TSCĐ</strong> (xe, máy móc): mua → ghi tăng → mỗi tháng trích khấu hao → hết đời thì thanh lý.<br>
+    <strong>CCDC</strong> (bàn ghế, dụng cụ): mua → phân bổ chi phí dần theo thời gian.
+    <div class="ex">Mua xe 500tr, khấu hao 5 năm → mỗi tháng:<span class="e">Nợ 642 (Chi phí +8.3tr) / Có 214 (Hao mòn +8.3tr)</span></div>
+  </div>
+</div>
+
+<div class="card" onclick="tog(this)">
+  <div class="ch"><div class="ci" style="background:#8b5cf6">2</div><div class="ct"><div class="cn">Lương &amp; Giá thành</div><div class="cs">Module 7.3-7.4 — "Chi phí nhân công &amp; sản xuất"</div></div><div class="ca">›</div></div>
+  <div class="cb">
+    <strong>Lương:</strong> tính lương → phân bổ vào chi phí (bán hàng 641, quản lý 642, sản xuất 622).<br>
+    <strong>Giá thành:</strong> tập hợp chi phí (NVL + lương + điện…) → tính giá thành 1 sản phẩm.
+    <div class="ex">SX 100 ghế: NVL 30tr + lương 20tr + điện 5tr = 55tr<br>→ Giá thành 1 ghế = 55tr ÷ 100 = <strong>550k</strong></div>
+  </div>
+</div>
+
+<div class="card" onclick="tog(this)">
+  <div class="ch"><div class="ci" style="background:#8b5cf6">3</div><div class="ct"><div class="cn">Vay, Hợp đồng, Bank API, Dashboard</div><div class="cs">Module 7.5-7.8</div></div><div class="ca">›</div></div>
+  <div class="cb">
+    • <strong>Vay:</strong> khai báo khoản vay, lịch trả nợ gốc + lãi, cảnh báo đến hạn<br>
+    • <strong>Hợp đồng:</strong> theo dõi HĐ kinh tế, mốc thanh toán, gia hạn, thanh lý<br>
+    • <strong>Bank API:</strong> kết nối ngân hàng online — chuyển tiền, nhận giao dịch tự động<br>
+    • <strong>Dashboard:</strong> biểu đồ tổng quan cho giám đốc — doanh thu, chi phí, lãi lỗ, dòng tiền, ngân sách
+  </div>
+</div>
+</div>
+
+</div>
+
+<script>
+function go(i){
+  document.querySelectorAll('.p').forEach(p=>p.classList.remove('a'));
+  document.querySelectorAll('.nb').forEach(n=>n.classList.remove('a'));
+  document.getElementById('p'+i).classList.add('a');
+  document.querySelectorAll('.nb')[i].classList.add('a');
+}
+function tog(el){
+  el.classList.toggle('o');
+}
+</script>
+</body>
+</html>
